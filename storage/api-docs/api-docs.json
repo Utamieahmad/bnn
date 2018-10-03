@@ -1,0 +1,385 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API Documentation BNN",
+        "version": "1.0.0"
+    },
+    "basePath": "/bnn/public/api",
+    "paths": {
+        "/listjejaring": {
+            "post": {
+                "tags": [
+                    "List Jejaring"
+                ],
+                "summary": "List Jejaring",
+                "operationId": "getList",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "Pagination",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/advojejaring": {
+            "get": {
+                "tags": [
+                    "List Jejaring"
+                ],
+                "summary": "Get List Jejaring",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "List Jejaring"
+                ],
+                "summary": "Store Jejaring",
+                "operationId": "Store Data Jejaring",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_pelaksanaan",
+                        "in": "formData",
+                        "description": "Tanggal Pelaksanaan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jenis_kegiatan",
+                        "in": "formData",
+                        "description": "jenis_kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "idpelaksana",
+                        "in": "formData",
+                        "description": "id pelaksana",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kodesasaran",
+                        "in": "formData",
+                        "description": "kode sasaran",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_instansi",
+                        "in": "formData",
+                        "description": "jumlah instansi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_instansi",
+                        "in": "formData",
+                        "description": "meta instansi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_peserta",
+                        "in": "formData",
+                        "description": "jumlah peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lokasi_kegiatan",
+                        "in": "formData",
+                        "description": "lokasi kegiatan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lokasi_kegiatan_idprovinsi",
+                        "in": "formData",
+                        "description": "lokasi kegiatan idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lokasi_kegiatan_idkabkota",
+                        "in": "formData",
+                        "description": "lokasi kegiatan idkabkota",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "narasumber",
+                        "in": "formData",
+                        "description": "nara sumber",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "panitia_monev",
+                        "in": "formData",
+                        "description": "panitia monev",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "materi",
+                        "in": "formData",
+                        "description": "materi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kodesumberanggaran",
+                        "in": "formData",
+                        "description": "kode sumber anggaran",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_upload",
+                        "in": "formData",
+                        "description": "file upload",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "status aktif",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "periode",
+                        "in": "formData",
+                        "description": "periode",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "periode_tahun",
+                        "in": "formData",
+                        "description": "periode tahun",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "periode_bulan",
+                        "in": "formData",
+                        "description": "periode bulan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "periode_tanggal",
+                        "in": "formData",
+                        "description": "periode tanggal",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "anggaran_id",
+                        "in": "formData",
+                        "description": "anggaran id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_peserta",
+                        "in": "formData",
+                        "description": "asal peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uraian_singkat",
+                        "in": "formData",
+                        "description": "uraian singkat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "koordinat",
+                        "in": "formData",
+                        "description": "koordinat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto1",
+                        "in": "formData",
+                        "description": "foto1",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto2",
+                        "in": "formData",
+                        "description": "foto2",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto3",
+                        "in": "formData",
+                        "description": "foto3",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_nasum_materi",
+                        "in": "formData",
+                        "description": "meta nasum materi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "bentuk_kegiatan",
+                        "in": "formData",
+                        "description": "bentuk kegiatan",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/advojejaring/{id}": {
+            "get": {
+                "tags": [
+                    "List Jejaring"
+                ],
+                "summary": "Get Jejaring by id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Login user",
+                "operationId": "getToken",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Password user.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
