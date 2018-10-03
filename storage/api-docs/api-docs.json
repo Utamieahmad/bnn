@@ -6,6 +6,42 @@
     },
     "basePath": "/bnn/public/api",
     "paths": {
+        "/pemusnahanmobile": {
+            "post": {
+                "tags": [
+                    "List Pemusnahan Mobile"
+                ],
+                "summary": "Post Pemusnahan Mobile",
+                "operationId": "getList",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "Pagination",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
         "/listjejaring": {
             "post": {
                 "tags": [
