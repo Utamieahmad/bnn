@@ -1,0 +1,2751 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Auth;
+use App\MainModel;
+use App\Tr_BrgBukti;
+use App\Models\BrgBukti;
+use URL;
+use DateTime;
+use Carbon\Carbon;
+use App\Models\Dayamas\AltdevLahanganjaPetani;
+use App\Models\Dayamas\AltdevProfesiPeserta;
+use App\Models\Dayamas\MonevKawasanrawanPeserta;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+
+class CaseController extends Controller
+{
+    public $data;
+    public $messages;
+    public $limit;
+    public $form_params = [];
+
+    public function inputNihil(Request $request){
+      $user = $request->session()->get('user_data');
+      $client = new Client();
+      $baseUrl = URL::to('/');
+      $token = $request->session()->get('token');
+      $requestNihil = $client->request('POST', $baseUrl.'/api/monitoringnihil',
+          [
+              'headers' =>
+              [
+                  'Authorization' => 'Bearer '.$token
+              ],
+              'form_params' =>
+              [
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'created_by' => $user['id'],
+                'created_by_username' => $user['name'],
+                'nama_kegiatan' => $request->input('uri_module'),
+                'tgl_pelaksanaan' => Carbon::now()->format('Y-m-d'),
+                'keterangan' => $request->input('keterangan_nihil'),
+                'status_entri' => 'nihil',
+                'idpelaksana' => $request->input('idpelaksana_nihil')
+              ]
+          ]
+      );
+
+      return redirect($request->input('uri_module'));
+    }
+
+    public function inputTersangka(Request $request){
+        $id = $request->input('id');
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        // dd($request->all());
+
+        $client = new Client();
+
+        $request = $client->request('POST', $baseUrl.'/api/tersangka',
+                [
+                    'headers' =>
+                    [
+                        'Authorization' => 'Bearer '.$token
+                    ],
+                    'form_params' => [
+                        "kasus_id" => $request->input('id'),
+                        "pasal" => $request->input('pasal'),
+                        "tersangka_nama" => $request->input('tersangka_nama'),
+                        "kode_jenisidentitas" => $request->input('kode_jenisidentitas'),
+                        "no_identitas" => $request->input('no_identitas'),
+                        "tersangka_alamat" => $request->input('tersangka_alamat'),
+                        "alamatktp_idkabkota" => $request->input('alamatktp_idkabkota'),
+                        "alamatktp_kodepos" => $request->input('alamatktp_kodepos'),
+                        "alamatdomisili" => $request->input('alamatdomisili'),
+                        "alamatdomisili_idkabkota" => $request->input('alamatdomisili_idkabkota'),
+                        "alamatdomisili_kodepos" => $request->input('alamatdomisili_kodepos'),
+                        "alamatlainnya" => $request->input('alamatlainnya'),
+                        "alamatlainnya_idkabkota" => $request->input('alamatlainnya_idkabkota'),
+                        "alamatlainnya_kodepos" => $request->input('alamatlainnya_kodepos'),
+                        "kode_jenis_kelamin" => $request->input('kode_jenis_kelamin'),
+                        "tersangka_tanggal_lahir" => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tersangka_tanggal_lahir')))),
+                        "tersangka_usia" => $request->input('tersangka_usia'),
+                        "kode_pendidikan_akhir" => $request->input('kode_pendidikan_akhir'),
+                        "kode_pekerjaan" => $request->input('kode_pekerjaan'),
+                        "kode_warga_negara" => $request->input('kode_warga_negara'),
+                        "kode_negara" => $request->input('kode_negara'),
+                        "kode_peran_tersangka" => $request->input('kode_peran_tersangka')
+                    ]
+                ]
+            );
+
+        return redirect('pemberantasan/dir_narkotika/edit_pendataan_lkn/'.$id);
+    }
+
+    public function inputBrgBukti(Request $request){
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+        $id = $request->input('id');
+
+        // dd($request->all());
+
+        $client = new Client();
+
+        $request = $client->request('POST', $baseUrl.'/api/kasusbrgbukti',
+                [
+                    'headers' =>
+                    [
+                        'Authorization' => 'Bearer '.$token
+                    ],
+                    'form_params' => [
+                      "kasus_id" => $request->input('id'),
+                      "id_brgbukti" => $request->input('jenisKasus'),
+                      "jumlah_barang_bukti" => $request->input('jumlah_barang_bukti'),
+                      "kode_satuan_barang_bukti" => $request->input('kode_satuan_barang_bukti'),
+                    ]
+                ]
+            );
+
+            // dd(json_decode($request->getBody()->getContents(), true));
+
+        return redirect('pemberantasan/dir_narkotika/edit_pendataan_lkn/'.$id);
+    }
+
+    public function inputBrgBuktiPrekursor(Request $request){
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+        $id = $request->input('id');
+
+        // dd($request->all());
+
+        $client = new Client();
+
+        $request = $client->request('POST', $baseUrl.'/api/buktiprekursor',
+                [
+                    'headers' =>
+                    [
+                        'Authorization' => 'Bearer '.$token
+                    ],
+                    'form_params' => [
+                      "kasus_id" => $request->input('id'),
+                      "id_brgbukti" => $request->input('jenisKasus'),
+                      // "id_brgbukti" => 63,
+                      "jumlah_barang_bukti" => $request->input('jumlah_barang_bukti'),
+                      "kode_satuan_barang_bukti" => $request->input('kode_satuan_barang_bukti'),
+                    ]
+                ]
+            );
+
+            // dd(json_decode($request->getBody()->getContents(), true));
+
+        return redirect('pemberantasan/dir_narkotika/edit_pendataan_lkn/'.$id);
+    }
+
+    public function inputBrgBuktiNonNar(Request $request){
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+        $id = $request->input('id');
+
+        // dd($request->all());
+
+        $client = new Client();
+
+        $request = $client->request('POST', $baseUrl.'/api/kasusbrgbukti',
+                [
+                    'headers' =>
+                    [
+                        'Authorization' => 'Bearer '.$token
+                    ],
+                    'form_params' => [
+                      "kasus_id" => $request->input('id'),
+                      "keterangan" => $request->input('keterangan'),
+                      // "id_brgbukti" => 63,
+                      "jumlah_barang_bukti" => $request->input('jumlah_barang_bukti'),
+                      "kode_satuan_barang_bukti" => $request->input('kode_satuan_barang_bukti'),
+                    ]
+                ]
+            );
+
+            // dd(json_decode($request->getBody()->getContents(), true));
+
+        return redirect('pemberantasan/dir_narkotika/edit_pendataan_lkn/'.$id);
+    }
+
+    public function inputBrgBuktiAset(Request $request){
+      $baseUrl = URL::to('/');
+      $token = $request->session()->get('token');
+      $id = $request->input('id');
+      $nilai_aset = str_replace(",", "", $request->input('nilai_aset'));
+      // dd($request->all());
+
+      $client = new Client();
+
+      $request = $client->request('POST', $baseUrl.'/api/buktinonnarkotika',
+              [
+                  'headers' =>
+                  [
+                      'Authorization' => 'Bearer '.$token
+                  ],
+                  'form_params' => [
+                    "kasus_id" => $request->input('id'),
+                    "nama_aset" => $request->input('nama_aset'),
+                    // "id_brgbukti" => 63,
+                    "jumlah_barang_bukti_aset" => $request->input('jumlah_barang_bukti_aset'),
+                    "kode_satuan_barang_bukti_aset" => $request->input('kode_satuan_barang_bukti_aset'),
+                    "nilai_aset" => $nilai_aset,
+                    "keterangan" => $request->input('keterangan'),
+                    "kode_isaset" => $request->input('kode_isaset'),
+                    "kode_jenisaset" => $request->input('kode_jenisaset'),
+                    "kode_kelompokaset" => $request->input('kode_kelompokaset')
+                  ]
+              ]
+          );
+
+          // dd(json_decode($request->getBody()->getContents(), true));
+
+      return redirect('pemberantasan/dir_narkotika/edit_pendataan_lkn/'.$id);
+    }
+
+    // public function pendataanDpo(){
+//
+//     public function inputTersangka(Request $request){
+//         $id = $request->input('id');
+//         $baseUrl = URL::to('/');
+//         $token = $request->session()->get('token');
+
+//         // dd($request->all());
+
+//         $client = new Client();
+
+//         $request = $client->request('POST', $baseUrl.'/api/tersangka',
+//                 [
+//                     'headers' =>
+//                     [
+//                         'Authorization' => 'Bearer '.$token
+//                     ],
+//                     'form_params' => [
+//                         "kasus_id" => $request->input('id'),
+//                         "pasal" => $request->input('pasal'),
+//                         "tersangka_nama" => $request->input('tersangka_nama'),
+//                         "kode_jenisidentitas" => $request->input('kode_jenisidentitas'),
+//                         "no_identitas" => $request->input('no_identitas'),
+//                         "tersangka_alamat" => $request->input('tersangka_alamat'),
+//                         "alamatktp_idkabkota" => $request->input('alamatktp_idkabkota'),
+//                         "alamatktp_kodepos" => $request->input('alamatktp_kodepos'),
+//                         "alamatdomisili" => $request->input('alamatdomisili'),
+//                         "alamatdomisili_idkabkota" => $request->input('alamatdomisili_idkabkota'),
+//                         "alamatdomisili_kodepos" => $request->input('alamatdomisili_kodepos'),
+//                         "alamatlainnya" => $request->input('alamatlainnya'),
+//                         "alamatlainnya_idkabkota" => $request->input('alamatlainnya_idkabkota'),
+//                         "alamatlainnya_kodepos" => $request->input('alamatlainnya_kodepos'),
+//                         "kode_jenis_kelamin" => $request->input('kode_jenis_kelamin'),
+//                         "tersangka_tanggal_lahir" => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tersangka_tanggal_lahir')))),
+//                         "tersangka_usia" => $request->input('tersangka_usia'),
+//                         "kode_pendidikan_akhir" => $request->input('kode_pendidikan_akhir'),
+//                         "kode_pekerjaan" => $request->input('kode_pekerjaan'),
+//                         "kode_warga_negara" => $request->input('kode_warga_negara'),
+//                         "kode_negara" => $request->input('kode_negara'),
+//                         "kode_peran_tersangka" => $request->input('kode_peran_tersangka')
+//                     ]
+//                 ]
+//             );
+
+//         return redirect('pemberantasan/dir_narkotika/edit_pendataan_lkn/'.$id);
+     // }
+
+    public function pendataanKoordinasi(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvorakor = $client->request('GET', $baseUrl.'/api/advorakor?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $advorakor = json_decode($requestAdvorakor->getBody()->getContents(), true);
+
+        $this->data['data_advorakor'] = $advorakor['data'];
+        $page = $advorakor['paginate'];
+
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.koordinasi.index_pendataanKoordinasi',$this->data);
+    }
+
+     public function editPendataanKoordinasi(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advorakor/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.koordinasi.edit_pendataanKoordinasi',$this->data);
+    }
+
+    public function addpendataanKoordinasi(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.koordinasi.add_pendataanKoordinasi',$this->data);
+    }
+
+    public function pendataanJejaring(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvojejaring = $client->request('GET', $baseUrl.'/api/advojejaring?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $advojejaring = json_decode($requestAdvojejaring->getBody()->getContents(), true);
+
+        $this->data['data_advojejaring'] = $advojejaring['data'];
+        $page = $advojejaring['paginate'];
+
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.jejaring.index_pendataanJejaring',$this->data);
+    }
+
+     public function editPendataanJejaring(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advojejaring/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.jejaring.edit_pendataanJejaring',$this->data);
+    }
+
+    public function addpendataanJejaring(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.jejaring.add_pendataanJejaring',$this->data);
+    }
+
+     public function pendataanAsistensi(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvoasistensi = $client->request('GET', $baseUrl.'/api/advoasistensi?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $advoasistensi = json_decode($requestAdvoasistensi->getBody()->getContents(), true);
+
+        $this->data['data_advoasistensi'] = $advoasistensi['data'];
+        $page = $advoasistensi['paginate'];
+
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.asistensi.index_pendataanAsistensi',$this->data);
+    }
+
+     public function editPendataanAsistensi(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advoasistensi/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.asistensi.edit_pendataanAsistensi',$this->data);
+    }
+
+    public function addpendataanAsistensi(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.asistensi.add_pendataanAsistensi',$this->data);
+    }
+
+    public function penguatanAsistensi(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvoasistensipenguatan = $client->request('GET', $baseUrl.'/api/advoasistensipenguatan?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $advoasistensipenguatan = json_decode($requestAdvoasistensipenguatan->getBody()->getContents(), true);
+
+        $this->data['data_advoasistensipenguatan'] = $advoasistensipenguatan['data'];
+        $page = $advoasistensipenguatan['paginate'];
+
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.penguatan.index_penguatanAsistensi',$this->data);
+    }
+
+     public function editpenguatanAsistensi(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advoasistensipenguatan/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.penguatan.edit_penguatanAsistensi',$this->data);
+    }
+
+    public function addpenguatanAsistensi(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.penguatan.add_penguatanAsistensi',$this->data);
+    }
+
+    public function pendataanIntervensi(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvointervensi = $client->request('GET', $baseUrl.'/api/advointervensi?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $advointervensi = json_decode($requestAdvointervensi->getBody()->getContents(), true);
+
+        $this->data['data_advointervensi'] = $advointervensi['data'];
+        $page = $advointervensi['paginate'];
+
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.intervensi.index_pendataanIntervensi',$this->data);
+    }
+
+     public function editpendataanIntervensi(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advointervensi/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.intervensi.edit_pendataanIntervensi',$this->data);
+    }
+
+    public function addpendataanIntervensi(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.intervensi.add_pendataanIntervensi',$this->data);
+    }
+
+    public function pendataanSupervisi(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvosupervisi = $client->request('GET', $baseUrl.'/api/advosupervisi?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $advosupervisi = json_decode($requestAdvosupervisi->getBody()->getContents(), true);
+
+        $this->data['data_advosupervisi'] = $advosupervisi['data'];
+        $page = $advosupervisi['paginate'];
+
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.supervisi.index_pendataanSupervisi',$this->data);
+    }
+
+     public function editpendataanSupervisi(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advosupervisi/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.supervisi.edit_pendataanSupervisi',$this->data);
+    }
+
+    public function addpendataanSupervisi(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.supervisi.add_pendataanSupervisi',$this->data);
+    }
+
+    public function pendataanMonitoring(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvomonev = $client->request('GET', $baseUrl.'/api/advomonev?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $advomonev = json_decode($requestAdvomonev->getBody()->getContents(), true);
+
+        $this->data['data_advomonev'] = $advomonev['data'];
+        $page = $advomonev['paginate'];
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.monitoring.index_pendataanMonitoring',$this->data);
+    }
+
+     public function editpendataanMonitoring(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advosupervisi/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.monitoring.edit_pendataanMonitoring',$this->data);
+    }
+
+    public function addpendataanMonitoring(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.monitoring.add_pendataanMonitoring',$this->data);
+    }
+
+    public function pendataanBimbingan(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvobimtek = $client->request('GET', $baseUrl.'/api/advobimtek?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $advobimtek = json_decode($requestAdvobimtek->getBody()->getContents(), true);
+
+        $this->data['data_advobimtek'] = $advobimtek['data'];
+        $page = $advobimtek['paginate'];
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.Bimbingan.index_pendataanBimbingan',$this->data);
+    }
+
+     public function editpendataanBimbingan(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advobimtek/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.bimbingan.edit_pendataanBimbingan',$this->data);
+    }
+
+    public function addpendataanBimbingan(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.bimbingan.add_pendataanBimbingan',$this->data);
+    }
+
+    public function pendataanSosialisasi(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestAdvososialisasi = $client->request('GET', $baseUrl.'/api/disemsosialisasi?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $disemsosialisasi = json_decode($requestAdvososialisasi->getBody()->getContents(), true);
+
+        $this->data['data_disemsosialisasi'] = $disemsosialisasi['data'];
+
+        $page = $disemsosialisasi['paginate'];
+        $this->data['title'] = "Pemberantasan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+
+        $this->data['page'] = $page;
+        return view('pencegahan.advokasi.sosialisasi.index_pendataanSosialisasi',$this->data);
+    }
+
+     public function editpendataanSosialisasi(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemsosialisasi/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.advokasi.sosialisasi.edit_pendataanSosialisasi',$this->data);
+    }
+
+    public function addpendataanSosialisasi(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.advokasi.sosialisasi.add_pendataanSosialisasi',$this->data);
+    }
+
+    public function pendataanOnline(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDisemonline = $client->request('GET', $baseUrl.'/api/disemonline?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $disemonline = json_decode($requestDisemonline->getBody()->getContents(), true);
+
+        $this->data['data_disemonline'] = $disemonline['data'];
+
+        $page = $disemonline['paginate'];
+        $this->data['title'] = "Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.diseminasi.online.index_pendataanOnline',$this->data);
+    }
+
+     public function editpendataanOnline(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemonline/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.diseminasi.online.edit_pendataanOnline',$this->data);
+    }
+
+    public function addpendataanOnline(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.diseminasi.online.add_pendataanOnline',$this->data);
+    }
+
+    public function pendataanPenyiaran(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDisempenyiaran = $client->request('GET', $baseUrl.'/api/disempenyiaran?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $disemonline = json_decode($requestDisempenyiaran->getBody()->getContents(), true);
+
+        $this->data['data_disempenyiaran'] = $disemonline['data'];
+
+        $page = $disemonline['paginate'];
+        $this->data['title'] = "Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+
+        return view('pencegahan.diseminasi.penyiaran.index_pendataanPenyiaran',$this->data);
+    }
+
+     public function editpendataanPenyiaran(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/disempenyiaran/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.diseminasi.penyiaran.edit_pendataanPenyiaran',$this->data);
+    }
+
+    public function addpendataanPenyiaran(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.diseminasi.penyiaran.add_pendataanPenyiaran',$this->data);
+    }
+
+    public function pendataanCetak(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDisemcetak = $client->request('GET', $baseUrl.'/api/disemcetak?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $disemcetak = json_decode($requestDisemcetak->getBody()->getContents(), true);
+
+        $this->data['data_disemcetak'] = $disemcetak['data'];
+
+        $page = $disemcetak['paginate'];
+        $this->data['title'] = "Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.diseminasi.cetak.index_pendataanCetak',$this->data);
+    }
+
+     public function editpendataanCetak(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemcetak/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.diseminasi.cetak.edit_pendataanCetak',$this->data);
+    }
+
+    public function addpendataanCetak(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.diseminasi.cetak.add_pendataanCetak',$this->data);
+    }
+
+    public function pendataanKonvensional(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDisemkonven = $client->request('GET', $baseUrl.'/api/disemkonven?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $disemkonven = json_decode($requestDisemkonven->getBody()->getContents(), true);
+
+        $this->data['data_disemkonven'] = $disemkonven['data'];
+
+        $page = $disemkonven['paginate'];
+        $this->data['title'] = "Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.diseminasi.konvensional.index_pendataanKonvensional',$this->data);
+    }
+
+     public function editpendataanKonvensional(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemkonven/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.diseminasi.konvensional.edit_pendataanKonvensional',$this->data);
+    }
+
+    public function addpendataanKonvensional(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.diseminasi.konvensional.add_pendataanKonvensional',$this->data);
+    }
+
+    public function pendataanVideotron(Request $request){
+        $client = new Client();
+        if ($request->input('page')) {
+          $page = $request->input('page');
+        } else {
+          $page = 1;
+        }
+
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDisemvideotron = $client->request('GET', $baseUrl.'/api/disemvideotron?page='.$page,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+        $disemvideotron = json_decode($requestDisemvideotron->getBody()->getContents(), true);
+
+        $this->data['data_disemvideotron'] = $disemvideotron['data'];
+        $page = $disemvideotron['paginate'];
+        $this->data['title'] = "Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $this->data['token'] = $token;
+
+
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $this->data['data_detail'] = $detail;
+        $this->data['path'] = $request->path();
+        $this->data['page'] = $page;
+        return view('pencegahan.diseminasi.videotron.index_pendataanVideotron',$this->data);
+    }
+
+     public function editpendataanVideotron(Request $request){
+        $id = $request->id;
+        // $id = '68950';
+        $query =  DB::table('v_berantas_kasus')->join('berantas_kasus','berantas_kasus.kasus_id','=','v_berantas_kasus.kasus_id')->where('v_berantas_kasus.kasus_id',$id)->first();
+
+        $prefix = explode('/',$request->route()->getPrefix());
+        $route = $prefix[0];
+        $client = new Client();
+        $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
+        $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemvideotron/'.$id,
+            [
+                'headers' =>
+                [
+                    'Authorization' => 'Bearer '.$token
+                ]
+            ]
+        );
+
+        $dataDetail = json_decode($requestDataDetail->getBody()->getContents(), true);
+
+        if ($dataDetail['data']['anggaran_id'] != '') {
+           $this->data['data_anggaran'] = $this->globalGetAnggaran($token, $dataDetail['data']['anggaran_id']);
+        }
+
+        $this->data['data_detail'] = $dataDetail;
+
+        return view('pencegahan.diseminasi.videotron.edit_pendataanVideotron',$this->data);
+    }
+
+    public function addpendataanVideotron(Request $request){
+        $this->data['title']="Pencegahan";
+        $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('pencegahan.diseminasi.videotron.add_pendataanVideotron',$this->data);
+    }
+    public function altdevLahanGanja(Request $request){
+        $kondisi = '';
+        if($request->limit) {
+          $this->limit = $request->limit;
+        } else {
+          $this->limit = config('app.limit');
+        }
+        if($request->page){
+            $current_page = $request->page;
+            $start_number = ($this->limit * ($request->page -1 )) + 1;
+        }else{
+            $current_page = 1;
+            $start_number = $current_page;
+        }
+        if($request->isMethod('post')){
+          $post = $request->except(['_token','tgl_from','tgl_to']);
+          $tipe = $request->tipe;
+          $tgl_from = $request->tgl_from;
+          $tgl_from = $request->tgl_from;
+          $tgl_to = $request->tgl_to;
+          if($tipe){
+            $kondisi .= '&tipe='.$tipe;
+            $this->selected['tipe'] = $tipe;
+          }
+          if($tipe == 'periode'){
+            if($tgl_from){
+              $date = date('Y-m-d',strtotime(str_replace('/', '-', $tgl_from)));
+              $kondisi .= '&tgl_from='.$date;
+              $this->selected['tgl_from'] = $tgl_from;
+            }else if(!$tgl_from){
+                $kondisi .='';
+            }
+            if($tgl_to){
+              $date = date('Y-m-d',strtotime(str_replace('/', '-', $tgl_to)));
+              $kondisi .= '&tgl_to='.$date;
+              $this->selected['tgl_to'] = $tgl_to;
+            }else if(!$tgl_to){
+              $kondisi .='';
+            }
+          }elseif($tipe == 'pelaksana'){
+            $kondisi .= '&pelaksana='.$request->kata_kunci;
+            $this->selected['pelaksana'] = $request->kata_kunci;
+          }else {
+            $kondisi .= '&'.$tipe.'='.$post[$tipe];
+            $this->selected[$tipe] = $post[$tipe];
+          }
+          if($request->order){
+            $kondisi .= '&order='.$request->order;
+          }elseif(!$request->order){
+            $kondisi .= '&order=desc';
+          }
+          $this->selected['order'] = $request->order;
+          $this->selected['limit'] = $request->limit;
+          $this->data['filter'] = $this->selected;
+        }else{
+          $get = $request->except(['page','tgl_from','tgl_to']);
+          $tipe = $request->tipe;
+          if(count($get)>0){
+            if($tipe){
+              $this->selected['tipe']  = $tipe;
+            }
+            foreach ($get as $key => $value) {
+              $kondisi .= "&".$key.'='.$value;
+              if($tipe == 'periode'){
+                if($request->tgl_from){
+                    $this->selected['tgl_from'] = date('d/m/Y',strtotime($request->tgl_from));
+                    $kondisi .= "&tgl_from".'='.$request->tgl_from;
+                }
+                if($request->tgl_to){
+                  $this->selected['tgl_to'] = date('d/m/Y',strtotime($request->tgl_to));
+                  $kondisi .= "&tgl_to".'='.$request->tgl_to;
+                }
+              }else {
+                $this->selected[$key] = $value;
+              }
+            }
+            $this->selected['order'] = $request->order;
+            $this->selected['limit'] = $request->limit;
+            $this->data['filter'] = $this->selected;
+          }
+        }
+        $limit = 'limit='.$this->limit;
+        $offset = 'page='.$current_page;
+        $datas = execute_api_json('api/altdevlahan?'.$limit.'&'.$offset.$kondisi,'get');
+
+        if($datas->code == 200 && $datas->status != 'error'){
+            $this->data['data'] = $datas->data;
+            $total_item = $datas->paginate->totalpage * $this->limit;
+        }else{
+            $this->data['data'] = [];  
+            $total_item = 0; 
+        }
+
+        $filtering = false;
+        if($kondisi){
+          $filter = '&'.$limit.$kondisi;
+          $filtering = true;
+          $this->data['kondisi'] = '?'.$offset.$kondisi;
+        }else{
+          $filter = '/';
+          $filtering = false;
+          $this->data['kondisi'] = $current_page;
+        }
+
+        $this->data['route'] = $request->route()->getName();
+        $this->data['title'] = "Alih Fungsi Lahan Ganja";
+        $penyelenggara = execute_api('api/lookup/jenis_penyelenggara_kegiatan_alihfungsi_lahan','get');
+        if($penyelenggara['code'] == 200 && $penyelenggara['status'] != 'error') {
+            $this->data['penyelenggara'] = $penyelenggara['data'];
+        }else{
+            $this->data['penyelenggara'] = [];
+        }
+        $this->data['lahan_komoditi'] = config('lookup.lahan_komoditi');
+        $this->data['path'] = $request->path();
+        $this->data['start_number'] = $start_number;
+        $this->data['current_page'] = $current_page;
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        $total_item = $datas->paginate->totalpage * $this->limit;
+        $this->data['pagination'] = paginations($current_page,$total_item, $this->limit, config('app.page_ellipsis'), config('app.url')."/".$request->route()->getPrefix()."/".$request->route()->getName(),$filtering,$filter );
+        return view('pemberdayaan.alternative_development.altdev_lahanganja.index_altdevLahanganja',$this->data);
+    }
+
+     public function editaltdevLahanGanja(Request $request){
+        $id = $request->id;
+        $datas = execute_api('api/lookup/jenis_penyelenggara_kegiatan_alihfungsi_lahan','get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['penyelenggara'] = $datas->data;
+        }else{
+            $this->data['penyelenggara'] = [];
+        }
+        $data_request = execute_api_json('api/altdevlahan/'.$id ,'GET');
+        if($data_request->code == 200){
+            $this->data['data'] = $data_request->data;
+        }else{
+            $this->data['data'] = [];
+        }
+        $this->data['status_tanah'] = config('lookup.kepemilikan_tanah');
+        $this->data['lahan_komoditi'] = config('lookup.lahan_komoditi');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        return view('pemberdayaan.alternative_development.altdev_lahanganja.edit_altdevLahanganja',$this->data);
+    }
+
+    public function addaltdevLahanGanja(Request $request){
+      if($request->isMethod('post')){
+        $this->form_params = $request->except(['_token','lokasi_lahan','kodepenyelenggara','kodekomoditi']);
+
+        if($request->tgl_kegiatan){
+          $date = str_replace('/', '-', $request->tgl_kegiatan);
+          $this->form_params['tgl_kegiatan'] = date('Y-m-d',strtotime($date));
+        }
+        if(count($request->kodepenyelenggara)>0){
+          $this->form_params['meta_kode_penyelenggara'] = json_encode($request->kodepenyelenggara);
+        }
+        if(count($request->kodekomoditi) > 0 ){
+          $this->form_params['meta_kode_komoditi'] = json_encode($request->kodekomoditi);
+        }
+        $lokasi_lahan = $request->lokasi_lahan;
+        $json_lokasi_lahan = "";
+        $array_lokasi_lahan = [];
+        if(count($lokasi_lahan) > 0 ){
+          for($i = 0 ; $i < count($lokasi_lahan) ; $i++){
+            if( $lokasi_lahan[$i]['lokasilahan_idkabkota'] || $lokasi_lahan[$i]['luas_lahan']|| $lokasi_lahan[$i]['kodestatustanah'] ){
+              $array_lokasi_lahan[] = array('lokasilahan_idkabkota'=> $lokasi_lahan[$i]['lokasilahan_idkabkota'] , 'luas_lahan' => str_replace(',', '', $lokasi_lahan[$i]['luas_lahan']),'kodestatustanah'=>$lokasi_lahan[$i]['kodestatustanah']);
+            }
+          }
+        }
+        if(count($array_lokasi_lahan)>0){
+          $json_lokasi_lahan = json_encode($array_lokasi_lahan);
+        }else{
+          $json_lokasi_lahan = "";
+        }
+        $this->form_params['meta_lokasi_lahan'] =  $json_lokasi_lahan;
+        $data_request = execute_api_json('api/altdevlahan/','POST',$this->form_params);
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $id = $data_request->data->eventID;
+            $this->kelengkapan_altlahanganja($id );
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Alih Fungsi Lahan Ganja Berhasil Ditambahkan';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Alih Fungsi Lahan Ganja Gagal Ditambahkan';
+        }
+        return redirect(route('altdev_lahan_ganja'))->with('status', $this->messages);
+      }else{
+        $datas = execute_api('api/lookup/jenis_penyelenggara_kegiatan_alihfungsi_lahan','get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['penyelenggara'] = $datas->data;
+        }else{
+            $this->data['penyelenggara'] = [];
+        }
+        $this->data['status_tanah'] = config('lookup.kepemilikan_tanah');
+        $this->data['lahan_komoditi'] = config('lookup.lahan_komoditi');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        return view('pemberdayaan.alternative_development.altdev_lahanganja.add_altdevLahanganja',$this->data);
+      }
+    }
+
+    public function updateAltdevLahanGanja(Request $request){
+        $id = $request->id;
+        $this->form_params = $request->except(['id','_token','lokasi_lahan','kodepenyelenggara','kodekomoditi']);
+        if($request->tgl_kegiatan){
+          $date = str_replace('/', '-', $request->tgl_kegiatan);
+          $this->form_params['tgl_kegiatan'] = date('Y-m-d',strtotime($date));
+        }
+        if(count($request->kodepenyelenggara)>0){
+          $this->form_params['meta_kode_penyelenggara'] = json_encode($request->kodepenyelenggara);
+        }
+        if(count($request->kodekomoditi) > 0 ){
+          $this->form_params['meta_kode_komoditi'] = json_encode($request->kodekomoditi);
+        }
+        $lokasi_lahan = $request->lokasi_lahan;
+        $json_lokasi_lahan = "";
+        $array_lokasi_lahan = [];
+        if(count($lokasi_lahan) > 0 ){
+          for($i = 0 ; $i < count($lokasi_lahan) ; $i++){
+            if( $lokasi_lahan[$i]['lokasilahan_idkabkota'] || $lokasi_lahan[$i]['luas_lahan']|| $lokasi_lahan[$i]['kodestatustanah'] ){
+              $array_lokasi_lahan[] = array('lokasilahan_idkabkota'=> $lokasi_lahan[$i]['lokasilahan_idkabkota'] , 'luas_lahan' => str_replace(',', '', $lokasi_lahan[$i]['luas_lahan']),'kodestatustanah'=>$lokasi_lahan[$i]['kodestatustanah']);
+            }
+          }
+        }
+
+        if(count($array_lokasi_lahan)>0){
+          $json_lokasi_lahan = json_encode($array_lokasi_lahan);
+        }else{
+          $json_lokasi_lahan = "";
+        }
+        $this->form_params['meta_lokasi_lahan'] =  $json_lokasi_lahan;
+        $data_request = execute_api_json('api/altdevlahan/'.$id,'PUT',$this->form_params);
+      
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->kelengkapan_altlahanganja($id );
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Alih Fungsi Lahan Ganja Berhasil Diperbarui';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Alih Fungsi Lahan Ganja Gagal Diperbarui';
+        }
+        return back()->with('status', $this->messages);
+    }
+    public function deleteAltdevLahanGanja(Request $request){
+        $id = $request->input('id');
+        if ($request->ajax()) {
+            $id = $request->id;
+            $data_request = execute_api('api/altdevlahan/'.$id,'DELETE');
+            return $data_request;
+        }
+    }
+
+    public function altdevAlihprofesi(Request $request){
+        $this->limit = config('app.limit');
+        $this->data['title'] = "Alih Jenis Profesi/Usaha";
+        if($request->page){
+            $current_page = $request->page;
+            $start_number = ($this->limit * ($request->page -1 )) + 1;
+        }else{
+            $current_page = 1;
+            $start_number = $current_page;
+        }
+
+
+        
+        $limit = 'limit='.$this->limit;
+        $offset = 'page='.$current_page;
+        $datas = execute_api('api/altdevprofesi?'.$limit.'&'.$offset,'get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['data'] = $datas->data;
+        }else{
+            $this->data['data'] = [];   
+        }
+        
+        $this->data['penyelenggara'] = config('lookup.penyelenggara');
+        $this->data['path'] = $request->path();
+        $this->data['start_number'] = $start_number;
+        $this->data['current_page'] = $current_page;
+        $this->data['breadcrumps'] = breadcrump_litbang($request->route()->getName());
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        $total_item = $datas->paginate->totalpage * $this->limit;
+        $this->data['pagination'] = pagination($current_page,$total_item, $this->limit, config('app.page_ellipsis'), "/".$request->route()->getPrefix()."/".$request->route()->getName()."/%d");
+        return view('pemberdayaan.alternative_development.altdev_alihprofesi.index_altdevAlihprofesi',$this->data);
+    }
+    public function updatealtdevAlihProfesi(Request $request){
+      $id = $request->input('id');
+      $token = $request->session()->get('token');
+
+      $this->form_params = $request->except(['_token', 'id']);
+      $date = explode('/', $request->tgl_kegiatan);
+      $this->form_params['tgl_kegiatan'] = $date[2].'-'.$date[1].'-'.$date[0];
+      $data_request = execute_api('api/altdevprofesi/'.$id,'PUT',$this->form_params);
+      $data_request = json_decode(json_encode($data_request), FALSE);
+      if(($data_request->code == 200)&& ($data_request->status != "error") ){
+          $this->messages['status'] = 'success';
+          $this->messages['message'] = 'Data Alih Fungsi Lahan Ganja Berhasil Diperbarui';
+      }else{
+          $this->messages['status'] = 'error';
+          $this->messages['message'] = 'Data Alih Fungsi Lahan Ganja BNN Gagal Diperbarui';
+      }
+      return back()->with('status', $this->messages);
+
+    }
+     public function editaltdevAlihprofesi(Request $request){
+        $id = $request->id;
+        $this->data['title'] = "Form Edit Alih Jenis Profesi/Usaha";
+        $datas = execute_api('api/altdevprofesi/'.$id,'get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['data'] = $datas->data;
+        }else{
+            $this->data['data'] = [];   
+        }
+        $datas = execute_api('api/altdevprofesipeserta/'.$id,'get');
+        $datas = AltdevProfesiPeserta::where('idparent',$id);
+        if($datas->count()){
+          $this->data['peserta'] = $datas->get();
+        }else{
+          $this->data['peserta']  = [];
+        }
+        if($request->page){
+            $current_page = $request->page;
+            $start_number = ($this->limit * ($request->page -1 )) + 1;
+        }else{
+            $current_page = 1;
+            $start_number = $current_page;
+        }
+        $this->data['start_number']  = $start_number;
+        $this->data['penyelenggara'] = config('lookup.penyelenggara');
+        $this->data['penghasilan_kotor'] = config('lookup.penghasilan_kotor');
+        $this->data['profesi_pelatihan'] = config('lookup.profesi_pelatihan');
+        $this->data['path'] = $request->path();
+        $this->data['lahan_profesi'] = config('lookup.lahan_profesi');
+        $datas = execute_api('api/lookup/jenis_identitas','get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['jenis_identitas'] = $datas->data;
+        }else{
+            $this->data['jenis_identitas'] = [];
+        }
+        $datas = execute_api('api/lookup/pendidikan','get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['pendidikan'] = $datas->data;
+        }else{
+            $this->data['pendidikan'] = [];
+        }
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        return view('pemberdayaan.alternative_development.altdev_alihprofesi.edit_altdevAlihprofesi',$this->data);
+    }
+
+    public function addaltdevAlihprofesi(Request $request){
+      if($request->isMethod('post')){
+        $token = $request->session()->get('token');
+        $this->form_params = $request->except(['_token','kode_pelatihan']);
+        if($request->tgl_kegiatan){
+          $date = explode('/', $request->tgl_kegiatan);
+          $this->form_params['tgl_kegiatan'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        if($request->kode_pelatihan){
+          $this->form_params['meta_kode_pelatihan'] = json_encode($request->kode_pelatihan);
+        }
+       
+        $data_request = execute_api_json('api/altdevprofesi/','POST',$this->form_params);
+        
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Alih Fungsi Profesi Berhasil Ditambahkan';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Alih Fungsi Profesi Gagal Ditambahkan';
+        }
+        return redirect(route('altdev_alih_profesi'))->with('status', $this->messages);
+      }else{
+        $this->data['profesi_pelatihan'] =config('lookup.profesi_pelatihan');
+        $this->data['penyelenggara'] = config('lookup.penyelenggara');
+        $this->data['title'] = "Form Tambah Alih Jenis Profesi/Usaha";
+        $this->data['path'] = $request->path();
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        return view('pemberdayaan.alternative_development.altdev_alihprofesi.add_altdevAlihprofesi',$this->data);
+      }
+    }
+    public function deletealtdevAlihProfesi(Request $request){
+      $id = $request->input('id');
+      if ($request->ajax()) {
+          $id = $request->id;
+          $data_request = execute_api('api/altdevprofesi/'.$id,'DELETE');
+          return $data_request;
+      }
+    }
+    public function altdevKawasanrawan(Request $request){
+        $this->limit = config('app.limit');
+        $this->data['title'] = "Data Kegiatan Pemetaan Kawasan Rawan Narkoba";
+        if($request->page){
+            $current_page = $request->page;
+            $start_number = ($this->limit * ($request->page -1 )) + 1;
+        }else{
+            $current_page = 1;
+            $start_number = $current_page;
+        }
+        $limit = 'limit='.$this->limit;
+        $offset = 'page='.$current_page;
+        $datas = execute_api('api/altdevkawasan?'.$limit.'&'.$offset,'get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['data'] = $datas->data;
+        }else{
+            $this->data['data'] = [];   
+        }
+        $this->data['jenis_geografis'] = config('lookup.jenis_geografis');
+        $this->data['path'] = $request->path();
+        $this->data['start_number'] = $start_number;
+        $this->data['current_page'] = $current_page;
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        $total_item = $datas->paginate->totalpage * $this->limit;
+        $this->data['pagination'] = pagination($current_page,$total_item, $this->limit, config('app.page_ellipsis'), "/".$request->route()->getPrefix()."/".$request->route()->getName()."/%d");
+        return view('pemberdayaan.alternative_development.altdev_kawasanrawan.index_altdevKawasanrawan',$this->data);
+    }
+
+     public function editaltdevKawasanrawan(Request $request){
+        $this->data['title'] = "Ubah Data Kegiatan Pemetaan Kawasan Rawan Narkoba";
+        $id = $request->id;
+        $datas = execute_api('api/altdevkawasan/'.$id,'get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['data'] = $datas->data;
+        }else{
+            $this->data['data'] = [];   
+        }
+        $this->data['jenis_geografis'] = config('lookup.jenis_geografis');
+        $this->data['kriminalitas'] = config('lookup.kriminalitas');
+        $this->data['jumlah_tersangka'] = config('lookup.jumlah_tersangka');
+       
+        $this->data['path'] = $request->path();
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        return view('pemberdayaan.alternative_development.altdev_kawasanrawan.edit_altdevKawasanrawan',$this->data);
+    }
+     public function updatealtdevKawasanRawan(Request $request){
+      $id = $request->input('id');
+      $token = $request->session()->get('token');
+
+      $this->form_params = $request->except(['_token', 'id']);
+      $date = explode('/', $request->tgl_pelaksanaan);
+      $this->form_params['tgl_pelaksanaan'] = $date[2].'-'.$date[1].'-'.$date[0];
+      if(count($request->meta_kriminalitas)>= 1){
+        $this->form_params['meta_kriminalitas'] = implode(',',$request->meta_kriminalitas);
+      }
+      $data_request = execute_api('api/altdevkawasan/'.$id,'PUT',$this->form_params);
+      $data_request = json_decode(json_encode($data_request), FALSE);
+      if(($data_request->code == 200)&& ($data_request->status != "error") ){
+          $this->messages['status'] = 'success';
+          $this->messages['message'] = 'Data Alih Fungsi Lahan Ganja Berhasil Diperbarui';
+      }else{
+          $this->messages['status'] = 'error';
+          $this->messages['message'] = 'Data Alih Fungsi Lahan Ganja BNN Gagal Diperbarui';
+      }
+      return back()->with('status', $this->messages);
+    }
+
+    public function addaltdevKawasanrawan(Request $request){
+      if($request->isMethod('post')){
+        $user = Auth::user();
+        $id = $request->input('id');
+        $token = $request->session()->get('token');
+
+        $this->form_params = $request->except(['_token', 'id']);
+        $date = explode('/', $request->tgl_pelaksanaan);
+        $this->form_params['tgl_pelaksanaan'] = $date[2].'-'.$date[1].'-'.$date[0];
+        $this->form_params['created_by'] = $user->user_id;
+        if(count($request->meta_kriminalitas)>= 1){
+          $this->form_params['meta_kriminalitas'] = implode(',',$request->meta_kriminalitas);
+        }
+        $data_request = execute_api('api/altdevkawasan/','POST',$this->form_params);
+        $data_request = json_decode(json_encode($data_request), FALSE);
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Kegiatan Pemetaan Kawasan Rawan Narkoba Berhasil Ditambahkan';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Kegiatan Pemetaan Kawasan Rawan Narkoba Gagal Ditambahkan';
+        }
+        return redirect(route('altdev_kawasan_rawan'))->with('status', $this->messages);
+      }else{
+        $this->data['title'] = "Tambah Data Kegiatan Pemetaan Kawasan Rawan Narkoba";
+        
+        $this->data['jenis_geografis'] = config('lookup.jenis_geografis');
+        $this->data['kriminalitas'] = config('lookup.kriminalitas');
+        $this->data['jumlah_tersangka'] = config('lookup.jumlah_tersangka');
+       
+        $this->data['path'] = $request->path();
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        return view('pemberdayaan.alternative_development.altdev_kawasanrawan.add_altdevKawasanrawan',$this->data);
+      }
+    }
+
+    public function deletealtdevKawasanRawan(Request $request){
+       $id = $request->input('id');
+        if ($request->ajax()) {
+            $id = $request->id;
+            $data_request = execute_api('api/altdevkawasan/'.$id,'DELETE');
+            return $data_request;
+        }
+    }
+
+
+    public function altdevMonitoring(Request $request){
+        $this->limit = config('app.limit');
+        $this->data['title'] = "Data Monev Kawasan Rawan Narkotika";
+        if($request->page){
+            $current_page = $request->page;
+            $start_number = ($this->limit * ($request->page -1 )) + 1;
+        }else{
+            $current_page = 1;
+            $start_number = $current_page;
+        }
+        $limit = 'limit='.$this->limit;
+        $offset = 'page='.$current_page;
+        $datas = execute_api('api/monevkawasan?'.$limit.'&'.$offset,'get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['data'] = $datas->data;
+        }else{
+            $this->data['data'] = [];   
+        }
+        $this->data['path'] = $request->path();
+        $this->data['start_number'] = $start_number;
+        $this->data['current_page'] = $current_page;
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        $total_item = $datas->paginate->totalpage * $this->limit;
+        $this->data['pagination'] = pagination($current_page,$total_item, $this->limit, config('app.page_ellipsis'), "/".$request->route()->getPrefix()."/".$request->route()->getName()."/%d");
+        return view('pemberdayaan.alternative_development.altdev_monitoring.index_altdevMonitoring',$this->data);
+    }
+
+     public function editaltdevMonitoring(Request $request){
+        $this->data['title'] = "Data Monev Kawasan Rawan Narkotika";
+        $id = $request->id;
+        $datas = execute_api('api/monevkawasan/'.$id,'GET');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['data'] = $datas->data;
+        }else{
+            $this->data['data'] = [];   
+        }
+        $datas = MonevKawasanrawanPeserta::where('idparent',$id);
+        if($datas->count()){
+          $this->data['peserta'] = $datas->get();
+        }else{
+          $this->data['peserta']  = [];
+        }
+        if($request->page){
+            $current_page = $request->page;
+            $start_number = ($this->limit * ($request->page -1 )) + 1;
+        }else{
+            $current_page = 1;
+            $start_number = $current_page;
+        }
+        $this->data['start_number']  = $start_number;
+        $this->data['jenis_identitas']  = config('lookup.jenis_identitas');
+        $this->data['penyelenggara'] =config('lookup.penyelenggara');
+        $this->data['profesi_pelatihan'] =config('lookup.profesi_pelatihan');
+        $this->data['monev_profesi'] =config('lookup.monev_profesi');
+        $datas = execute_api('api/lookup/pendidikan','get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['pendidikan'] = $datas->data;
+        }else{
+            $this->data['pendidikan'] = [];
+        }
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        return view('pemberdayaan.alternative_development.altdev_monitoring.edit_altdevMonitoring',$this->data);
+    }
+
+    public function addaltdevMonitoring(Request $request){
+        if($request->isMethod('post')){
+          $token = $request->session()->get('token');
+          $this->form_params = $request->except(['_token','id']);
+          if($request->tgl_kegiatan){
+            $date = explode('/', $request->tgl_kegiatan);
+            $this->form_params['tgl_kegiatan'] = $date[2].'-'.$date[1].'-'.$date[0];
+          }
+          $data_request = execute_api('api/monevkawasan','POST',$this->form_params);
+          $data_request = json_decode(json_encode($data_request), FALSE);
+          if(($data_request->code == 200)&& ($data_request->status != "error") ){
+              $this->messages['status'] = 'success';
+              $this->messages['message'] = 'Data Monev Kawasan Rawan Narkotika Berhasil Ditambahkan';
+          }else{
+              $this->messages['status'] = 'error';
+              $this->messages['message'] = 'Data Monev Kawasan Rawan Narkotika Gagal Ditambahkan';
+          }
+          return back()->with('status', $this->messages);
+        }else{
+          $this->data['title'] = "Tambah Data Monev Kawasan Rawan Narkotika";
+          $this->data['penyelenggara'] =config('lookup.penyelenggara');
+          $this->data['token'] = $request->session()->get('token');
+          $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+          return view('pemberdayaan.alternative_development.altdev_monitoring.add_altdevMonitoring',$this->data);
+        }
+    }
+
+    public function deletealtdevMonitoring(Request $request){
+      $id = $request->input('id');
+      if ($request->ajax()) {
+          $id = $request->id;
+          $data_request = execute_api('api/monevkawasan/'.$id,'DELETE');
+          return $data_request;
+      }
+    }
+    public function updatealtdevMonitoring(Request $request){
+      $id = $request->input('id');
+      $token = $request->session()->get('token');
+
+      $this->form_params = $request->except(['_token', 'id']);
+      $date = explode('/', $request->tgl_kegiatan);
+      $this->form_params['tgl_kegiatan'] = $date[2].'-'.$date[1].'-'.$date[0];
+      $data_request = execute_api('api/monevkawasan/'.$id,'PUT',$this->form_params);
+      $data_request = json_decode(json_encode($data_request), FALSE);
+      if(($data_request->code == 200)&& ($data_request->status != "error") ){
+          $this->messages['status'] = 'success';
+          $this->messages['message'] = 'Data Monev Kawasan Rawan Narkotika Berhasil Diperbarui';
+      }else{
+          $this->messages['status'] = 'error';
+          $this->messages['message'] = 'Data Monev Kawasan Rawan Narkotika Gagal Diperbarui';
+      }
+      return back()->with('status', $this->messages);
+    }
+    public function altdevSinergitas(Request $request){
+        $this->limit = config('app.limit');
+        $this->data['title'] = "Data Sinergi";
+        if($request->page){
+            $current_page = $request->page;
+            $start_number = ($this->limit * ($request->page -1 )) + 1;
+        }else{
+            $current_page = 1;
+            $start_number = $current_page;
+        }
+        $limit = 'limit='.$this->limit;
+        $offset = 'page='.$current_page;
+        $datas = execute_api('api/psmsinergitas?'.$limit.'&'.$offset,'get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['data'] = $datas->data;
+        }else{
+            $this->data['data'] = [];   
+        }
+        $this->data['bentuk_kegiatan'] = config('lookup.bentuk_kegiatan');
+        $this->data['path'] = $request->path();
+        $this->data['start_number'] = $start_number;
+        $this->data['current_page'] = $current_page;
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        $total_item = $datas->paginate->totalpage * $this->limit;
+        $this->data['pagination'] = pagination($current_page,$total_item, $this->limit, config('app.page_ellipsis'), "/".$request->route()->getPrefix()."/".$request->route()->getName()."/%d");
+        return view('pemberdayaan.alternative_development.altdev_sinergitas.index_altdevSinergitas',$this->data);
+    }
+
+     public function editaltdevSinergitas(Request $request){
+        $this->data['title'] = "Edit Data Sinergi";
+        if($request->page){
+            $current_page = $request->page;
+            $start_number = ($this->limit * ($request->page -1 )) + 1;
+        }else{
+            $current_page = 1;
+            $start_number = $current_page;
+        }
+        $id = $request->id;
+        $datas = execute_api('api/psmsinergitas/'.$id,'get');
+        $datas = json_decode(json_encode($datas), FALSE);
+        if($datas->code == 200){
+            $this->data['data'] = $datas->data;
+        }else{
+            $this->data['data'] = [];   
+        }
+        $this->data['instansi'] = config('lookup.instansi');
+        $this->data['bentuk_kegiatan'] = config('lookup.bentuk_kegiatan');
+        $this->data['path'] = $request->path();
+        $this->data['start_number'] = $start_number;
+        $this->data['current_page'] = $current_page;
+        $this->data['token'] = $request->session()->get('token');
+        $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        return view('pemberdayaan.alternative_development.altdev_sinergitas.edit_altdevSinergitas',$this->data);
+    }
+
+    public function updatealtdevSinergitas(Request $request){
+      $id = $request->input('id');
+      $token = $request->session()->get('token');
+      $this->form_params = $request->except(['_token', 'id']);
+      $date = explode('/', $request->tgl_pelaksanaan);
+      $this->form_params['tgl_pelaksanaan'] = $date[2].'-'.$date[1].'-'.$date[0];
+      $data_request = execute_api('api/psmsinergitas/'.$id,'PUT',$this->form_params);
+      $data_request = json_decode(json_encode($data_request), FALSE);
+      if(($data_request->code == 200)&& ($data_request->status != "error") ){
+          $this->messages['status'] = 'success';
+          $this->messages['message'] = 'Data Sinergi Berhasil Diperbarui';
+      }else{
+          $this->messages['status'] = 'error';
+          $this->messages['message'] = 'Data Sinergi Gagal Diperbarui';
+      }
+      return back()->with('status', $this->messages);
+    }
+
+    public function deletealtdevSinergitas(Request $request){
+      $id = $request->input('id');
+      if ($request->ajax()) {
+          $id = $request->id;
+          $data_request = execute_api('api/psmsinergitas/'.$id,'DELETE');
+          return $data_request;
+      }
+    }
+    public function addaltdevSinergitas(Request $request){
+        if($request->isMethod('post')){
+          $token = $request->session()->get('token');
+          $this->form_params = $request->except(['_token', 'id']);
+          $date = explode('/', $request->tgl_pelaksanaan);
+          $this->form_params['tgl_pelaksanaan'] = $date[2].'-'.$date[1].'-'.$date[0];
+          $data_request = execute_api('api/psmsinergitas/','POST',$this->form_params);
+          $data_request = json_decode(json_encode($data_request), FALSE);
+          if(($data_request->code == 200)&& ($data_request->status != "error") ){
+              $this->messages['status'] = 'success';
+              $this->messages['message'] = 'Data Sinergi Berhasil Diperbarui';
+          }else{
+              $this->messages['status'] = 'error';
+              $this->messages['message'] = 'Data Sinergi Gagal Diperbarui';
+          }
+          return redirect(route('altdev_sinergitas'))->with('status', $this->messages);
+        }else{
+          $this->data['instansi'] = config('lookup.instansi');
+          $this->data['bentuk_kegiatan'] = config('lookup.bentuk_kegiatan');
+          $this->data['path'] = $request->path();
+          $this->data['token'] = $request->session()->get('token');
+          $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+          return view('pemberdayaan.alternative_development.altdev_sinergitas.add_altdevSinergitas',$this->data);
+        }
+    }
+
+    public function CallCenter(){
+        $this->data['title']="Puslitdatin";
+        $query = DB::table('soa_callcenter_disposisi')->limit(5)->orderBy('rid', 'desc')->get();
+        $this->data['data_call_center'] = $query ;
+        $user_id = Auth::user()->user_id;
+        $detail = MainModel::getUserDetail($user_id);
+        $data['data_detail'] = $detail;
+        return view('puslitdatin.call_center',$this->data);
+    }
+
+    public function pesertaAlihFungsi(Request $request){
+        // $this->limit = config('app.limit');
+        // $this->data['title'] = "Peserta Alih Fungsi Lahan Ganja";
+        // if($request->page){
+        //     $current_page = $request->page;
+        //     $start_number = ($this->limit * ($request->page -1 )) + 1;
+        // }else{
+        //     $current_page = 1;
+        //     $start_number = $current_page;
+        // }
+        // $limit = 'limit='.$this->limit;
+        // $offset = 'page='.$current_page;
+        // $datas = execute_api('api/altdevpetani?'.$limit.'&'.$offset,'get');
+        // $datas = json_decode(json_encode($datas), FALSE);
+        // if($datas->code == 200){
+        //     $this->data['data'] = $datas->data;
+        // }else{
+        //     $this->data['data'] = [];   
+        // }
+        // $this->data['path'] = $request->path();
+        // $this->data['start_number'] = $start_number;
+        // $this->data['current_page'] = $current_page;
+        // $this->data['breadcrumps'] = breadcrump_litbang($request->route()->getName());
+        // $this->data['token'] = $request->session()->get('token');
+        // $this->data['breadcrumps'] = breadcrumps_dir_alternative($request->route()->getName());
+        // return view('pemberdayaan.alternative_development.altdev_lahanganja.index_altdevLahanganja',$this->data);
+    }
+
+    public function editPesertaAlihFngsi(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $id = $request->id;
+        $this->form_params = $request->except(['_token','id']);
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/altdevpetani/'.$id,'GET');
+        $data_request = json_decode(json_encode($data_request), FALSE);
+
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $result_data = $data_request->data;
+            if($result_data->tgl_lahir){
+               $result_data->tgl_lahir = date('d/m/Y',strtotime($data_request->data->tgl_lahir));
+            }
+            $this->messages['data'] = $result_data;
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['data'] = [];
+        }
+        return response()->json($this->messages);
+
+      }
+    }
+    public function addPesertaAlihFngsi(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $this->form_params = $request->except(['_token']);
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/altdevpetani/','POST',$this->form_params);
+        $data_request = json_decode(json_encode($data_request), FALSE);
+
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Alih Peserta Fungsi Lahan Ganja Berhasil Ditambahkan';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Alih Peserta Fungsi Lahan Ganja Gagal Ditambahkan';
+        }
+        return response()->json($this->messages);
+
+      }
+    }
+    public function updatePesertaAlihFngsi(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $id = $request->id;
+        $this->form_params = $request->except(['_token','id']);
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/altdevpetani/'.$id,'PUT',$this->form_params);
+        $data_request = json_decode(json_encode($data_request), FALSE);
+
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Peserta Alih Fungsi Lahan Ganja Berhasil Diperbarui';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Peserta Alih Fungsi Lahan Ganja Gagal Diperbarui';
+        }
+        return response()->json($this->messages);
+
+      }
+    }
+    public function deletePesertaAlihFngsi(Request $request){
+      $id = $request->input('id');
+        if ($request->ajax()) {
+            $id = $request->id;
+            $data_request = execute_api('api/altdevpetani/'.$id,'DELETE');
+            return $data_request;
+        }
+    }
+    
+    public function pesertaAlihProfesi(Request $request){}
+    public function editPesertaAlihProfesi(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $id = $request->id;
+        $this->form_params = $request->except(['_token','id']);
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/altdevprofesipeserta/'.$id,'GET');
+        $data_request = json_decode(json_encode($data_request), FALSE);
+
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $result_data = $data_request->data;
+            if($result_data->tgl_lahir){
+               $result_data->tgl_lahir = date('d/m/Y',strtotime($data_request->data->tgl_lahir));
+            }
+            $this->messages['data'] = $result_data;
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['data'] = [];
+        }
+        return response()->json($this->messages);
+
+      }
+    }
+    public function addPesertaAlihProfesi(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $this->form_params = $request->except(['_token']);
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/altdevprofesipeserta/','POST',$this->form_params);
+        $data_request = json_decode(json_encode($data_request), FALSE);
+
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Alih Peserta Fungsi Lahan Ganja Berhasil Ditambahkan';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Alih Peserta Fungsi Lahan Ganja Gagal Ditambahkan';
+        }
+        return response()->json($this->messages);
+      }
+    }
+    public function updatePesertaAlihProfesi(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $this->form_params = $request->except(['_token']);
+        $id = $request->id;
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/altdevprofesipeserta/'.$id,'PUT',$this->form_params);
+        $data_request = json_decode(json_encode($data_request), FALSE);
+        if(($data_request->code == 200) && ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Alih Peserta Alih Profesi Berhasil Ditambahkan';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Alih Peserta Alih Profesi Gagal Ditambahkan';
+        }
+        return response()->json($this->messages);
+      }
+    }
+    public function deletePesertaAlihProfesi(Request $request){
+      $id = $request->input('id');
+      if ($request->ajax()) {
+          $id = $request->id;
+          $data_request = execute_api('api/altdevprofesipeserta/'.$id,'DELETE');
+          return $data_request;
+      }
+    }
+
+    public function pesertaMonev(Request $request){}
+    public function editPesertaMonev(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $id = $request->id;
+        $this->form_params = $request->except(['_token','id']);
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/monevkawasanpeserta/'.$id,'GET');
+        $data_request = json_decode(json_encode($data_request), FALSE);
+
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $result_data = $data_request->data;
+            if($result_data->tgl_lahir){
+               $result_data->tgl_lahir = date('d/m/Y',strtotime($data_request->data->tgl_lahir));
+            }
+            $this->messages['data'] = $result_data;
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['data'] = [];
+        }
+        return response()->json($this->messages);
+
+      }
+    }
+    public function addPesertaMonev(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $this->form_params = $request->except(['_token']);
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/monevkawasanpeserta/','POST',$this->form_params);
+        $data_request = json_decode(json_encode($data_request), FALSE);
+
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Monev Kawasan Rawan Narkotika Berhasil Ditambahkan';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Monev Kawasan Rawan Narkotika Gagal Ditambahkan';
+        }
+        return response()->json($data_request);
+      }
+    }
+    public function updatePesertaMonev(Request $request){
+      if($request->ajax()){
+        $token = $request->session()->get('token');
+        $id = $request->id;
+        $this->form_params = $request->except(['_token']);
+        if($request->tgl_lahir){
+          $date = explode('/', $request->tgl_lahir);
+          $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
+        }
+        $data_request = execute_api('api/monevkawasanpeserta/'.$id,'PUT',$this->form_params);
+        $data_request = json_decode(json_encode($data_request), FALSE);
+
+        if(($data_request->code == 200)&& ($data_request->status != "error") ){
+            $this->messages['status'] = 'success';
+            $this->messages['message'] = 'Data Monev Kawasan Rawan Narkotika Berhasil Diperbarui';
+        }else{
+            $this->messages['status'] = 'error';
+            $this->messages['message'] = 'Data Monev Kawasan Rawan Narkotika Gagal Diperbarui';
+        }
+        return response()->json($this->messages);
+      }
+    }
+    public function deletePesertaMonev(Request $request){
+      $id = $request->input('id');
+      if ($request->ajax()) {
+          $id = $request->id;
+          $data_request = execute_api('api/monevkawasanpeserta/'.$id,'DELETE');
+          return $data_request;
+      }
+    }
+    public function printPage(Request $request){
+      $array_segments = [
+          'altdev_lahan_ganja'=>'altdevlahan',
+          'pendataan_pelatihan'=>'psmpelatihan',
+          'psm_supervisi'=>'psmsupervisi',
+          'rapat_kerja_pemetaan'=>'rapatKerjaPemetaan',
+      ];
+
+      $array_titles=[
+          'altdev_lahan_ganja'=>'Alih Fungsi Lahan Ganja',
+          'pendataan_pelatihan'=>'Data Bimbingan Teknis',
+          'psm_supervisi'=>'Data Kegiatan Monitoring dan Evaluasi',
+          'rapat_kerja_pemetaan'=>'Data Rapat Kerja Pemetaan Peran Serta Masyarakat',
+      ];
+
+      $get = $request->all();
+      $kondisi = "";
+      if(count($get)>0){
+        foreach($get as $key=>$val){
+          $kondisi .= $key.'='.$val.'&';
+        }
+        $kondisi = rtrim($kondisi,'&');
+        $kondisi = '?'.$kondisi;
+      }else{
+        $kondisi = '?page='.$request->page;
+      }
+      
+      if($request->limit){
+        $limit = $request->limit;
+      }else{
+        $limit = config('app.limit');
+      }
+      $page = $request->page;
+      if($page){
+        $start_number = ($limit * ($request->page -1 )) + 1;
+      }else{
+        $start_number = 1;
+      }
+      $segment = $request->segment;
+      $url = 'api/'.$array_segments[$segment].$kondisi;
+      $data_request = execute_api_json($url,'GET');
+
+      $result= [];
+      $i = $page;
+      if ($segment == 'altdev_lahan_ganja') {
+        if($data_request->code == 200 && $data_request->status != 'error'){
+          $data = $data_request->data;
+          $i = $start_number;
+          $penyelenggara = execute_api('api/lookup/jenis_penyelenggara_kegiatan_alihfungsi_lahan','get');
+          if($penyelenggara['code'] == 200 && $penyelenggara['status'] != 'error') {
+              $this->data['penyelenggara'] = $penyelenggara['data'];
+          }else{
+              $this->data['penyelenggara'] = [];
+          }
+          $this->data['lahan_komoditi'] = config('lookup.lahan_komoditi');
+
+          foreach($data as $key=>$d){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Kegiatan'] = ($d->tgl_kegiatan ? date('d/m/Y',strtotime($d->tgl_kegiatan))  : '' ) ;
+            $result[$key]['Pelaksana'] = $d->idpelaksana ;
+            $meta_penyelenggara = "";
+              if($d->meta_kode_penyelenggara){
+                $json = json_decode($d->meta_kode_penyelenggara);
+                foreach($json as $j => $jval){
+                  $meta_penyelenggara .= ( isset($penyelenggara[$jval]) ? $penyelenggara[$jval] : $jval )."\n";
+                }
+              }else{
+                $meta_penyelenggara = "";
+              }
+            $result[$key]['Penyelenggara'] = $meta_penyelenggara;
+            
+            $meta_komoditi = "";
+            if($d->meta_kode_komoditi){
+              $json = json_decode($d->meta_kode_komoditi);
+              foreach($json as $k => $kval){
+                $meta_komoditi .= ( isset($lahan_komoditi[$kval]) ? $lahan_komoditi[$kval] : $kval )."\n";
+              }
+            }else{
+              $meta_komoditi = "";
+            }
+            $result[$key]['Komoditi']  = $meta_komoditi ;
+            $result[$key]['Status'] = ( ($d->status == 'Y') ? 'Lengkap' : 'Belum Lengkap');
+            
+            $i = $i+1;
+          }
+          $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+          $this->printData($result, $name);
+        }else{
+          echo 'tidak ada';
+        }
+      }else if($segment == 'pendataan_pelatihan'){
+       if($data_request->code == 200 && $data_request->status != 'error'){
+          $data = $data_request->data;
+          $i = $start_number;
+          $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+          if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
+            $this->data['sasaran'] = $requestSasaran['data'];
+          }else{
+            $this->data['sasaran'] = [];
+          }
+          $this->data['kode_anggaran'] = config('lookup.kode_anggaran');
+          foreach($data as $key=>$d){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal'] = ($d->tgl_pelaksanaan ? date('d/m/Y',strtotime($d->tgl_pelaksanaan)) : '');
+            $result[$key]['Pelaksana'] =$d->nm_instansi;
+            $result[$key]['Sasaran'] = isset( $sasaran[$d->kodesasaran]) ? $sasaran[$d->kodesasaran] : $d->kodesasaran;
+            $meta = json_decode($d->meta_instansi);
+            $json_meta = "";
+            if(count($meta)){
+              for($j = 0 ; $j < count($meta); $j++){
+                $json_meta  .= $meta[$j]->list_nama_instansi.' / '.$meta[$j]->list_jumlah_peserta."\\n";
+              }
+            }
+            $result[$key]['Instansi / Peserta'] = $json_meta;
+            $result[$key]['Sumber Anggaran '] = ( isset($kode_anggaran[$d->kodesumberanggaran])? $kode_anggaran[$d->kodesumberanggaran] : $d->kodesumberanggaran );
+            $result[$key]['Status'] = ($d->status == 'Y' ? 'Lengkap' : ($d->status == 'N' ? 'Tidak lengkap' : 'Tidak lengkap' ) );
+            $i = $i+1;
+          }
+          $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+          $this->printData($result, $name);
+        }
+      }else if($segment == 'psm_supervisi'){
+         if($data_request->code == 200 && $data_request->status != 'error'){
+            $data = $data_request->data;
+            $i = $start_number;
+            $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+            if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
+              $this->data['sasaran'] = $requestSasaran['data'];
+            }else{
+              $this->data['sasaran'] = [];
+            }
+            $this->data['kode_anggaran'] = config('lookup.kode_anggaran');
+            foreach($data as $key=>$d){
+              $result[$key]['No'] = $i;
+              $result[$key]['Tanggal'] = ($d->tgl_pelaksanaan ? date('d/m/Y',strtotime($d->tgl_pelaksanaan)) : '');
+              $result[$key]['Pelaksana'] =$d->nm_instansi;
+              $result[$key]['Sasaran'] = isset( $sasaran[$d->kodesasaran]) ? $sasaran[$d->kodesasaran] : $d->kodesasaran;
+              $meta = json_decode($d->meta_instansi);
+              $json_meta = "";
+              if(count($meta)){
+                for($j = 0 ; $j < count($meta); $j++){
+                  $json_meta  .= $meta[$j]->list_nama_instansi.' / '.$meta[$j]->list_jumlah_peserta."\\n";
+                }
+              }
+              $result[$key]['Instansi / Peserta'] = $json_meta;
+              $result[$key]['Sumber Anggaran '] = ( isset($kode_anggaran[$d->kodesumberanggaran])? $kode_anggaran[$d->kodesumberanggaran] : $d->kodesumberanggaran );
+              $result[$key]['Status'] = ($d->status == 'Y' ? 'Lengkap' : ($d->status == 'N' ? 'Tidak lengkap' : 'Tidak lengkap' ) );
+              $i = $i+1;
+            }
+            $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+            $this->printData($result, $name);
+          }
+      }else if($segment == 'rapat_kerja_pemetaan'){
+          if($data_request->code == 200 && $data_request->status != 'error'){ 
+            $data = $data_request->data;
+            $i = $start_number;
+            $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+            if( ($requestSasaran['code'] == 200) && ( $requestSasaran ['status'] != 'error')){
+              $this->data['sasaran']=$requestSasaran['data'];
+            }else{
+              $this->data['sasaran']= [];
+            }
+            $kd_jnswilayah = config('lookup.kd_jnswilayah');
+            foreach($data as $key=>$d){
+              $result[$key]['No'] = $i;
+              $result[$key]['Tanggal Pelaksanaan'] = ($d->tanggal_pemetaan ? date('d/m/Y',strtotime($d->tanggal_pemetaan)) : '');
+              $result[$key]['Pelaksana'] = (isset($kd_jnswilayah[$d->kd_jnswilayah]) ? $kd_jnswilayah[$d->kd_jnswilayah] :'' ).' '.$d->wilayah_pelaksana.' '.$d->nm_wilayah_pelaksana;
+              $result[$key]['Lokasi Kegiatan'] = $d->nm_jnswilayah .' '.$d->nm_wilayah;
+              $result[$key]['Jumlah Peserta'] = $d->jumlah_peserta;
+              $result[$key]['Sasaran'] = isset( $sasaran[$d->kode_sasaran]) ? $sasaran[$d->kode_sasaran] : $d->kode_sasaran;
+              $result[$key]['Status'] = ($d->status == 'Y' ? 'Lengkap' : ($d->status == 'N' ? 'Tidak lengkap' : 'Tidak lengkap' ) );
+              $i = $i+1;
+            }
+            $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+            $this->printData($result, $name);
+          }
+      }else{
+        echo 'data tidak ada ';
+      }
+
+    }
+  //   public function printPage(Request $request,$segment,$page){
+  //     $array_segments = [
+  //           'altdev_lahan_ganja'=>'altdevlahan',
+  //           'altdev_alih_profesi'=>'altdevprofesi',
+  //           'altdev_kawasan_rawan'=>'altdevkawasan',
+  //           'altdev_monitoring'=>'monevkawasan',
+  //           'altdev_sinergitas'=>'psmsinergitas' 
+  //       ];
+  //       $array_titles=[
+  //           'altdev_lahan_ganja'=>'Alih Fungsi Lahan Ganja',
+  //           'altdev_alih_profesi'=>'Alih Fungsi Alih Profesi',
+  //           'altdev_kawasan_rawan'=>'Kegiatan Pemetaan Kawasan Rawan Narkoba',
+  //           'altdev_monitoring'=>'Monitoring dan Evaluasi Kawasan Rawan Narkotika',
+  //           'altdev_sinergitas'=>'Data Sinergi' 
+  //       ];
+  //       $url = 'api/'.$array_segments[$segment].'?page='.$page;
+  //       $data_request = execute_api($url,'GET');
+  //       $result= [];
+  //       $i = 1;
+  //       if($segment == 'altdev_lahan_ganja'){ 
+  //           if(count($data_request)>=1){
+  //               $data = $data_request['data'];
+  //               $kode = "";
+  //               foreach($data as $key=>$value){
+  //                   $array_peserta = [];
+  //                   $data_peserta = [];
+  //                   if($value['kodepenyelenggara']){
+  //                     $where = json_encode(['lookup_value'=>$value['kodepenyelenggara']]);
+  //                     $datas = execute_api('api/singleLookupValues/'.$where,'get');
+  //                     if(isset($datas['data'])){
+  //                       $kode = $datas['data'][$value['kodepenyelenggara']];
+  //                     }else{
+  //                       $kode ="";
+  //                     }
+  //                   }else{
+  //                     $kode ="";
+  //                   }
+  //                   $peserta = execute_api('api/singlePesertaLahan/'.$value['id'],'get');
+  //                   if(isset($peserta['data'])){
+  //                     $p =$peserta['data'];
+  //                     if(count($p)) {
+  //                       for($j = 0 ; $j < count($p); $j++) {
+  //                         $data_peserta['No'] = $j;
+  //                         $data_peserta['Nama'] = $p[$j]['nama'];
+  //                         $data_peserta['No Identitas'] = $p[$j]['no_identitas'];
+  //                         $data_peserta['Asal Profesi'] = $p[$j]['kodeasalprofesi'];
+  //                         $data_peserta['Tanggal Lahir'] =date('d/m/Y',strtotime($p[$j]['tgl_lahir']));
+  //                         $array_peserta[] = $data_peserta;
+  //                       }
+  //                     }else{
+  //                       $array_peserta=[];
+  //                     }
+  //                   }else{
+  //                     $array_peserta = [];
+  //                   }
+  //                   $result[$key]['No'] = $i;
+  //                   $result[$key]['Tanggal Kegiatan'] = date('d/m/Y',strtotime($value['tgl_kegiatan'])) ;
+  //                   $result[$key]['Pelaksana'] = $value['nm_instansi'];
+  //                   $result[$key]['Nama Kegiatan'] = $value['nama_kegiatan'];
+  //                   $result[$key]['Penyelenggara'] = $kode;
+  //                   $result[$key]['Luas Lahan'] = $value['luas_lahan'];
+  //                   $result[$key]['Peserta'] = $array_peserta;
+  //                   $i = $i + 1;
+  //               }
+  //               $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+  //               $this->printData($result, $name);
+  //           }else{
+  //               return false;
+  //           }
+  //       }else if($segment == 'altdev_alih_profesi'){
+  //         if(count($data_request)>=1){
+  //             $data = $data_request['data'];
+  //             $kode = "";
+  //             $array_peserta = [];
+  //             foreach($data as $key=>$value){
+  //               $data_peserta = [];
+  //               $peserta = execute_api('api/singlePesertaProfesi/'.$value['id'],'get');
+  //               if(isset($peserta['data'])){
+  //                 $p =$peserta['data'];
+  //                 if(count($p)){
+  //                   for($j = 0 ; $j < count($p); $j++) {
+  //                     $data_peserta['No'] = $j;
+  //                     $data_peserta['Nama'] = $p[$j]['nama'];
+  //                     $data_peserta['No Identitas'] = $p[$j]['no_identitas'];
+  //                     $data_peserta['Asal Profesi'] = $p[$j]['kode_profesi'];
+  //                     $data_peserta['Tanggal Lahir'] =date('d/m/Y',strtotime($p[$j]['tgl_lahir']));
+  //                     $array_peserta[] = $data_peserta;
+  //                   }
+  //                 }else{
+  //                   $array_peserta = [];
+  //                 }
+
+  //               }else{
+  //                 $array_peserta = [];
+  //               }
+  //               $result[$key]['No'] = $i;
+  //               $result[$key]['Tanggal Kegiatan'] = date('d/m/Y',strtotime($value['tgl_kegiatan']));
+  //               $result[$key]['Pelaksana'] = $value['nm_instansi'];
+  //               $result[$key]['Lokasi Kawasan Rawan'] = $value['nama_kegiatan'];
+  //               $result[$key]['Peserta'] = $array_peserta;
+  //             }
+  //             $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+  //             $this->printData($result, $name);
+  //         }else{
+  //             return false;
+  //         }
+  //       }else if($segment == 'altdev_kawasan_rawan'){
+  //         if(count($data_request)>=1){
+  //           $data = $data_request['data'];
+  //             foreach($data as $key=>$value){
+  //               $result[$key]['No'] = $i;
+  //               $result[$key]['Tanggal Kegiatan'] = date('d/m/Y',strtotime($value['tgl_pelaksanaan']));
+  //               $result[$key]['Pelaksana'] = $value['nm_instansi'];
+  //               $result[$key]['Lokasi Kawasan Rawan'] = $value['lokasi_kawasan_rawan'];
+  //               $result[$key]['Jenis Geografis'] = isset($jenis_geografis[$value['kode_geografis']]) ? $jenis_geografis[$value['kode_geografis']] :$value['kode_geografis'];
+  //               $result[$key]['Luas Kawasan (m2)'] = $value['luas_kawasan'];
+  //               $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+                
+  //             }
+  //             $this->printData($result, $name);
+  //           }else{
+  //               return false;
+  //           }
+  //       }else if($segment == 'altdev_monitoring'){
+  //         if(count($data_request)>=1){
+  //           $data = $data_request['data'];
+  //             $array_peserta = [];
+  //             foreach($data as $key=>$value){
+  //               $data_peserta = [];
+  //               $peserta = execute_api('api/singlePesertaMonev/','get');
+  //               print_r($peserta);
+  //               if(isset($peserta['data'])){
+  //                 $p =$peserta['data'];
+  //                 if(count($p)>0){
+  //                   for($j = 0 ; $j < count($p); $j++) {
+  //                     $data_peserta['No'] = $j;
+  //                     $data_peserta['Nama'] = $p[$j]['nama'];
+  //                     $data_peserta['No Identitas'] = $p[$j]['no_identitas'];
+  //                     $data_peserta['Asal Profesi'] = $p[$j]['kode_profesi'];
+  //                     $data_peserta['Tanggal Lahir'] =date('d/m/Y',strtotime($p[$j]['tgl_lahir']));
+  //                     $array_peserta[] = $data_peserta;
+  //                   }
+  //                 }else{
+  //                   $array_peserta = [];
+  //                 }
+  //               }else{
+  //                 $array_peserta = [];
+  //               }
+  //               $result[$key]['No'] = $i;
+  //               $result[$key]['Tanggal Kegiatan'] = date('d/m/Y',strtotime($value['tgl_kegiatan']));
+  //               $result[$key]['Pelaksana'] = $value['nm_instansi'];
+  //               $result[$key]['Lokasi Kawasan Rawan'] = $value['nama_kegiatan'];
+  //               $result[$key]['Peserta'] = $array_peserta;
+  //             }
+  //           $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+  //           $this->printData($result, $name);
+  //         }else{
+  //             return false;
+  //         }
+  //     }else if($segment == 'altdev_sinergitas'){
+  //       if(count($data_request)>=1){
+  //         $data = $data_request['data'];
+  //         foreach($data as $key=>$value){
+  //           $result[$key]['No'] = $i;
+  //           $result[$key]['Tanggal Pelaksanaan'] = date('d/m/Y',strtotime($value['tgl_pelaksanaan']));
+  //           $result[$key]['Pelaksana'] = $value['nm_instansi'];
+  //           $result[$key]['Jenis Kegiatan'] = (isset($bentuk_kegiatan[$value['jenis_kegiatan']]) ?  $bentuk_kegiatan[$value['jenis_kegiatan']] : $value['jenis_kegiatan']);
+  //           $result[$key]['Nama Instansi'] = $value['materi'];
+  //           $result[$key]['Jumlah Peserta'] = $value['materi'];
+  //         }
+  //         $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');
+  //         $this->printData($result, $name);
+  //       }else{
+  //         return false;
+  //       }
+  //     }
+  // }
+
+  private function kelengkapan_altlahanganja($id){
+      $status_kelengkapan = true;
+      try{
+        $query = DB::table('dayamas_altdev_alihfungsilahanganja')->where('id',$id)
+                  ->select('tgl_kegiatan', 'meta_kode_penyelenggara', 'meta_kode_komoditi', 'bulan_tanam','meta_lokasi_lahan','idpelaksana');
+
+        if($query->count() > 0 ){
+          $result = $query->first();
+          foreach($result as $key=>$val){
+              if(!$val){
+                $status_kelengkapan=false;
+                break;
+              }else{
+                continue;
+              }
+            }
+        }
+        if($status_kelengkapan== true){
+           $kelengkapan = execute_api_json('api/altdevlahan/'.$id,'PUT',['status'=>'Y']);
+        }else{
+           $kelengkapan = execute_api_json('api/altdevlahan/'.$id,'PUT',['status'=>'N']);
+        }
+      }catch(\Exception $e){
+        $status_kelengkapan=false;
+      }
+  }
+}

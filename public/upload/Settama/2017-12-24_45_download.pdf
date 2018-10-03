@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub:Help" />
+  <title>
+  
+    
+      Setting your commit email address in Git - User Documentation
+    
+  
+  </title>
+  
+<link rel="icon" type="image/x-icon" href="/assets/images/site/favicon.ico">
+<link rel="stylesheet" href="/assets/stylesheets/application.css">
+<script src="/assets/javascripts/application.js"></script>
+
+<meta name="Description" content=" GitHub uses the email address set in your local Git configuration to associate commits pushed from the command line with your GitHub account.  You can use the git config command to change the email ad…">
+
+<script type="text/javascript">
+  $(function() {
+    $('#quicksearch-query').lunrSearch({
+      
+      indexUrl: '/search/search.json',
+      
+      quickSearchResults:  '.autocomplete-results',
+      quickSearchEntries:  '.result-group',
+      quickSearchTemplate: '#quicksearch-results-template',
+
+      searchResults: '.search-container',
+      searchEntries: '.search-results',
+      searchTemplate: '#search-results-template'
+    });
+  });
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3769691-27']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+</head>
+
+<body id="com">
+
+<div id="not-footer">
+  
+
+
+  <div id="header">
+    <div class="clearfix">
+      <h1 class="site-logo"><a href="/">GitHub Help</a></h1>
+
+      <ul class="top-nav">
+        
+<li>
+  <button class="js-dropdown-button dropdown-button">Version <div class="dropdown-caret"></div></button>
+  <div class="dropdown-menu js-dropdown-menu">
+    <a href="/">GitHub.com</a>
+    
+    <a href="/enterprise/2.11/">GitHub Enterprise 2.11</a>
+    
+    <a href="/enterprise/2.10/">GitHub Enterprise 2.10</a>
+    
+    <a href="/enterprise/2.9/">GitHub Enterprise 2.9</a>
+    
+  </div>
+</li>
+
+
+        
+        <li><a href="https://github.com/contact">Contact Support</a></li>
+        <li><a href="https://github.com/">Return to GitHub</a></li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <div id="content-wrapper">
+
+    <div class="site">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="content-header small">
+        <h6 class="breadcrumbs">
+          
+          <a href="/categories/setup">Setup</a>
+          /
+          
+          Setting your commit email address in Git
+        </h6>
+        <div class="search-form small right">
+          
+  
+
+
+<script id="quicksearch-results-template" type="text/mustache">
+  <div class="header">
+    <a class="initial quicksearch-seemore" href="/search?q=">See more results</a>
+  </div>
+  [[#entries]]
+    <tr class="article">
+      <td class="info">
+        <a href="[[url]]" class="js-articles-quicksearch-link">[[title]]</a>
+      </td>
+    </tr>
+  [[/entries]]
+</script>
+
+<form accept-charset="UTF-8" action="/search" id="articles-search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+  <div class="outer">
+    <div class="inner fade-label">
+      <input type="text" name="q" id="quicksearch-query" class="js-articles-quicksearch"
+      placeholder="How can we help?" />
+      <div class="search-form-btn">
+        <button><span class="octicon octicon-search"></span></button>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="autocomplete-results" style="display: none;">
+  <table class="result-group" border="0" cellpadding="0" cellspacing="0">
+  </table>
+</div>
+
+        </div>
+      </div>
+
+      <div class="article js-hide-during-search">
+
+        <h2>Setting your commit email address in Git</h2>
+
+        <div id="article-platform-nav">
+  <ul>
+    <li class="platform-mac">
+      <a href="#platform-mac" data-platform="mac">
+        mac
+      </a>
+    </li>
+    <li class="platform-windows">
+      <a href="#platform-windows" data-platform="windows">
+        windows
+      </a>
+    </li>
+    <li class="platform-linux">
+      <a href="#platform-linux" data-platform="linux">
+        linux
+      </a>
+    </li>
+    <li class="platform-all">
+      <a href="#platform-all" data-platform="all">
+        all
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+        <div class="article-body content-body wikistyle markdown-format">
+          <div class='intro'>
+
+          
+
+          </div>
+
+          <div class="intro">
+
+<p>GitHub uses the email address set in your local Git configuration to associate commits pushed from the command line with your GitHub account.</p>
+
+</div>
+
+<p>You can use the <code>git config</code> command to change the email address you associate with your Git commits. The new email address you set will be visible in any future commits you push to GitHub from the command line. Any commits you made prior to changing your commit email address are still associated with your previous email address.</p>
+
+<p>For more information on commit email addresses, including your GitHub-provided <code>noreply</code> email address, see "<a href="/articles/about-commit-email-addresses">About commit email addresses</a>."</p>
+
+<h3>
+<a id="setting-your-email-address-for-every-repository-on-your-computer" class="anchor" href="#setting-your-email-address-for-every-repository-on-your-computer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting your email address for <em>every</em> repository on your computer</h3>
+
+<ol>
+<li><p>Open <span class="platform-mac">Terminal</span><span class="platform-linux">Terminal</span><span class="platform-windows">Git Bash</span>.</p></li>
+<li>
+<p>Set an email address in Git. You can use your <a href="/articles/about-commit-email-addresses">GitHub-provided <code>no-reply</code> email address</a> or any email address.</p>
+
+<pre class="command-line">
+$ git config --global user.email "<em>email@example.com</em>"
+</pre>
+</li>
+<li>
+<p>Confirm that you have set the email address correctly in Git:</p>
+
+<pre class="command-line">
+$ git config --global user.email
+<span class="output">email@example.com</span>
+</pre>
+</li>
+<li><p>Add the email address to your GitHub account by <a href="/articles/setting-your-commit-email-address-on-github">setting your commit email address on GitHub</a>, so that your commits are attributed to you and appear in your contributions graph.</p></li>
+</ol>
+
+<h3>
+<a id="setting-your-email-address-for-a-single-repository" class="anchor" href="#setting-your-email-address-for-a-single-repository" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting your email address for a single repository</h3>
+
+<p>You can change the email address associated with commits you make in a single repository. This will override your global Git config settings in this one repository, but will not affect any other repositories.</p>
+
+<ol>
+<li><p>Open <span class="platform-mac">Terminal</span><span class="platform-linux">Terminal</span><span class="platform-windows">Git Bash</span>.</p></li>
+<li><p>Change the current working directory to the local repository where you want to configure the email address that you associate with your Git commits.</p></li>
+<li>
+<p>Set an email address in Git. You can use your <a href="/articles/about-commit-email-addresses">GitHub-provided <code>no-reply</code> email address</a> or any email address.</p>
+
+<pre class="command-line">
+$ git config user.email "<em>email@example.com</em>"
+</pre>
+</li>
+<li>
+<p>Confirm that you have set the email address correctly in Git:</p>
+
+<pre class="command-line">
+$ git config user.email
+<span class="output">email@example.com</span>
+</pre>
+</li>
+<li><p>Add the email address to your GitHub account by <a href="/articles/setting-your-commit-email-address-on-github">setting your commit email address on GitHub</a>, so that your commits are attributed to you and appear in your contributions graph.</p></li>
+</ol>
+
+<h3>
+<a id="further-reading" class="anchor" href="#further-reading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Further reading</h3>
+
+<ul>
+<li>"<a href="/articles/about-commit-email-addresses">About commit email addresses</a>"</li>
+<li>"<a href="/articles/setting-your-commit-email-address-on-github">Setting your commit email address on GitHub</a>"</li>
+<li>"<a href="https://git-scm.com/book/en/Customizing-Git-Git-Configuration">Git Configuration</a>" from the <em>Pro Git</em> book</li>
+</ul>
+        </div>
+
+        <div class="support-footer">
+          <ul class="article-footer button-nav">
+            
+              <li><a href="https://github.com/contact" class="minibutton">
+                  <span class="octicon octicon-comment-discussion"></span>
+                  Contact a human
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar">
+  <h3>Article versions</h3>
+  <ul>
+    <li><a href="#" skip-conversion data-proofer-ignore>GitHub.com</a></li>
+
+    
+      <li class="muted">
+        <a data-proofer-ignore>GitHub Enterprise 2.11</a>
+      </li>
+    
+      <li class="muted">
+        <a data-proofer-ignore>GitHub Enterprise 2.10</a>
+      </li>
+    
+      <li class="muted">
+        <a data-proofer-ignore>GitHub Enterprise 2.9</a>
+      </li>
+    
+
+  </ul>
+</div>
+
+
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+
+<div id="footer">
+  <div class="inner">
+    <a href="https://github.com" class="invertocat">
+      <img alt="The GitHub Logo" src="/assets/images/site/invertocat.png" width="24" height="24" />
+    </a>
+    <p class="left">
+      &copy; <span id="year">2017</span> GitHub Inc. All rights reserved.
+    </p>
+      <ul class="links right">
+        <li><a href="/terms-of-service">Terms of Service</a></li>
+        <li><a href="/privacy-policy">Privacy</a></li>
+        
+          <li><a href="/security">Security</a></li>
+        
+        
+          <li><a href="https://github.com/contact">Support</a></li>
+        
+      </ul>
+  </div>
+</div>
+
+
+<div class="fullscreen-overlay"></div>
+</body>
+</html>

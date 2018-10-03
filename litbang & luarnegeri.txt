@@ -1,0 +1,69 @@
+
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN jumlah_populasi integer;
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_prevalensi_thn1 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_absolut_thn1 numeric(11);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_prevalensi_thn2 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_absolut_thn2 numeric(11);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_prevalensi_thn3 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_absolut_thn3 numeric(11);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_prevalensi_thn4 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_absolut_thn4 numeric(11);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_prevalensi_thn5 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_narkoba ADD COLUMN angka_absolut_thn5 numeric(11);
+
+
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_prevalensi_thn1 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_absolut_thn1 numeric(11);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_prevalensi_thn2 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_absolut_thn2 numeric(11);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_prevalensi_thn3 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_absolut_thn3 numeric(11);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_prevalensi_thn4 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_absolut_thn4 numeric(11);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_prevalensi_thn5 numeric(11,2);
+ALTER TABLE datin_survey_penyalahguna_ketergantungan ADD COLUMN angka_absolut_thn5 numeric(11);
+
+ALTER TABLE datin_research_riset ADD COLUMN meta_lokasi text;
+
+DROP VIEW v_puslitdatin_riset;
+
+CREATE OR REPLACE VIEW v_puslitdatin_riset AS
+ SELECT r.id, r.tahun, r.judul, r.lokasi, r.lokasi_idkabkota,
+    r.jumlah_responden, r.hasil_riset, r.file_upload, r.status, t.nm_wilayah,
+    r.meta_lokasi
+   FROM datin_research_riset r
+   LEFT JOIN tr_wilayah t ON t.id_wilayah = r.lokasi_idkabkota;
+
+	 INSERT INTO hukerkerjasama_perjanjianbilateral (kodejeniskerjasama, tgl_pelaksana, tempatpelaksana, tempatpelaksana_idprovinsi,
+            tempatpelaksana_idkabkota, tempatpelaksana_idkecamatan, tempatpelaksana_iddesa,
+            kodenegara, materi, kodeanggaran, no_sprint, jmlh_delegasi_bnn,
+            jmlh_delegasi_client, kodenegara_mitra, file_laporan, created_at,
+            created_by, created_by_username, updated_at, updated_by, updated_by_username,
+            status_aktif, anggaran_id)
+	 VALUES
+	 ('Sidang Regional', '2017-02-04', 'Myanmar', NULL, NULL, NULL, NULL, 'CCDAC dan KBRI di Yangon', 'Kunjungan Delegasi ', 'DIPA', 'Sprin/197/I/KA/HK.05.01/2017/BNN', 8, 0, NULL, NULL, '2017-03-13 12:44:15', 329, 'Tri Siwi', '2017-03-13 15:58:58', 329, 'Tri Siwi', 'y', NULL),
+	 ('Sidang Regional', '2017-01-10', 'Chiang Mai & Chiang Rai', NULL, NULL, NULL, NULL, 'ONCB Thailand', 'the Meeting on ASEAN Cooperation Work Plan to Trackle illicit Drug Production and Trafficking in the Golden Triangle ', 'DIPA', 'Sprin/22/I/KA/HK.05/01/2017/BNN', 4, 0, NULL, NULL, '2017-03-13 12:37:57', 329, 'Tri Siwi', '2017-03-13 15:59:25', 329, 'Tri Siwi', 'y', NULL),
+	 ('Sidang Internasional', '2017-03-13', 'Wina, Austria', NULL, NULL, NULL, NULL, 'UNODC', 'Demand reduction and related measures, Supply reduction and related Measures, International Cooperation', 'DIPA', 'Sprin/487/II/KA/HK.05.01/2017/BNN', 13, 4, NULL, NULL, '2017-03-14 10:42:33', 329, 'Tri Siwi', '2017-03-23 10:40:56', 329, 'DIREKTORAT KERJASAMA', 'y', NULL),
+	 ('Sidang Regional', '2017-03-09', 'Bangkok, Thailand', NULL, NULL, NULL, NULL, 'ONCB Thailand', 'Asean Drug Monitoring Network Operational Workshop', 'DIPA', 'Sprin/532/II/KA/HK.05.01/2017/BNN', 4, 0, NULL, NULL, '2017-03-14 10:45:30', 329, 'Tri Siwi', '2017-04-03 10:45:56', 329, 'DIREKTORAT KERJASAMA', 'y', NULL),
+	 ('Sidang Regional', '2017-03-22', 'Bangkok, Thailand', NULL, NULL, NULL, NULL, 'UNODC', 'Improving on Cross Border Criminal Justice', 'DIPA', 'Sprin/804/III/KA/HK.05/01/2017/BNN', 2, 2, NULL, NULL, '2017-03-27 11:59:13', 329, 'DIREKTORAT KERJASAMA', '2017-04-13 12:41:55', 329, 'DIREKTORAT KERJASAMA', 'y', NULL),
+	 ('Sidang Regional', '2017-04-19', 'Bangkok, Thailand', NULL, NULL, NULL, NULL, 'ONCB Thailand', 'Asean Senior Officials on Drug Matters (ASOD) Intersessional Working Group on Law Enforcement', 'DIPA', 'Sprin/1218/IV/KA/HK.05.01/2017/BNN', 2, 0, NULL, 'KerjasamaLuarnegeri_11_20170503_153550.pdf', '2017-05-03 15:35:50', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Internasional', '2017-05-16', 'Punta Cana, Dominika', NULL, NULL, NULL, NULL, 'IDEC', 'menganalisa permasalahan narkoba dan mencari solusi bersama dalam menangani perdagangan narkotika, kejahatan terorganisir dan tindak pidana ', 'DIPA', 'Sprin/911/III/KA/HK.05/01/2017/BNN', 1, 0, NULL, 'KerjasamaLuarnegeri_12_20170615_110232.pdf', '2017-06-15 11:02:32', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-07-04', 'Singapura', NULL, NULL, NULL, NULL, 'CNB Singapura', 'Berbagi Pengalaman dalam Penanganan masalah narkoba melalui jalur Laut', 'DIPA', 'Sprin/2061/VI/KA/HK.05.01/2017/BNN', 4, 0, NULL, NULL, '2017-07-14 09:37:17', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Internasional', '2017-07-03', 'Amsterdam, Belanda', NULL, NULL, NULL, NULL, 'Trimbos Institutes', 'Pertukaran Informasi melalui Substansi/Presentasi serta site visit ke KBRI Den Haag, Kementerian Luar Negeri Belanda, Trimbos institutes, Pusat Rehabilitasi (GGD Amsterdam, Municipal Health Service), Lembaga Pemasyarakatan PI Haaglanden Scheveningen, serta Pusat Rehabilitasi Delta/Antes', 'DIPA', 'Sprin/1875/VI/KA/HK.05.01/2017/BNN', 5, 10, NULL, NULL, '2017-07-17 11:40:42', 329, 'DIREKTORAT KERJASAMA', '2017-07-17 11:57:00', 329, 'DIREKTORAT KERJASAMA', 'y', NULL),
+	 ('Sidang Regional', '2017-07-04', 'Manila, Filipina', NULL, NULL, NULL, NULL, 'Asean', 'Menggali fakta tentang permasalahan narkoba di negaranya masing-masing dan merekomendasikanlangkah-langkah pemberantasan peredaran gelap narkoba ', 'DIPA', 'Sprin/2050/VI/KA/HK.05.01/2017/BNN', 1, 3, NULL, NULL, '2017-07-17 14:44:35', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-07-25', 'Hanoi, Vietnam', NULL, NULL, NULL, NULL, 'Asean', 'pembahasan perkembangan dan inisiatif-inisiatif baru dalam kerjasama penanggulangan masalah narkotika dikawasan Asia Tenggara', 'DIPA', 'Sprin/2293/VII/KA/HK.05.01/2017/BNN', 12, 2, NULL, 'KerjasamaLuarnegeri_16_20170807_153424.pdf', '2017-08-07 15:34:24', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-07-31', 'Thailand', NULL, NULL, NULL, NULL, 'ONCB Thailand', 'Invitation to the Fourth ASEAN Drug Monitoring Network Operational Workshop', 'DIPA', 'Sprin/2322/VII/KA/HK.05.01/2017/BNN', 4, 0, NULL, NULL, '2017-08-09 15:43:09', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-08-29', 'Hanoi, Vietnam', NULL, NULL, NULL, NULL, 'UNODC', 'informasi terbaru metode analisa dan pelaporan mengenai isu narkotika, psikotropika, prekursor narkotika serta obat-obatan terlarang lainnya', 'DIPA', 'Sprin/2635/VIII/KA/HK.05.01/2017/BNN', 6, 0, NULL, 'KerjasamaLuarnegeri_18_20170906_154835.pdf', '2017-09-06 15:48:35', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-09-20', 'Jeju, Korea', NULL, NULL, NULL, NULL, 'UNODC', 'Sharing Information Drug', 'NONDIPA', 'Sprin/3126/IX/KA/HK.05.01/2017/BNN', 3, 0, NULL, NULL, '2017-09-28 09:36:27', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-09-28', 'Vientiane, Laos', NULL, NULL, NULL, NULL, 'LCDC', 'Finalisasi Draft MoU on the Cooperation in Controlling Narcotic Drugs, Psychotropic Substances, Their Precursors and Chemicals, and Drug Abuse', 'DIPA', 'Sprin/3482/IX/KA/HK.05.01/2017/BNN', 2, 0, NULL, 'KerjasamaLuarnegeri_20_20171006_104045.pdf', '2017-10-06 10:40:45', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Internasional', '2017-09-21', 'Lima, Peru', NULL, NULL, NULL, NULL, 'Kementerian Luar Negeri Peru', 'Kerja Sama Teknis dan Kerja Sama Ekonomi antara Republik Indonesia dan Republik Peru', 'DIPA', 'Sprin/3286/IX/KA/HK.05.01/2017/BNN', 2, 0, NULL, 'KerjasamaLuarnegeri_21_20171006_110453.pdf', '2017-10-06 11:04:53', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Internasional', '2017-10-19', 'Brussel, Belgia', NULL, NULL, NULL, NULL, 'EMCDDA', 'Penandatanganan MoU antara BNN dengan Europian Monitoring Centre for Drugs and Drug Addiction (EMCDDA)', 'DIPA', 'Sprin/3783/X/KA/HK.05.01/2017/BNN', 2, 0, NULL, 'KerjasamaLuarnegeri_22_20171102_114457.pdf', '2017-11-02 11:44:57', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Internasional', '2017-11-06', 'Warsawa, Polandia', NULL, NULL, NULL, NULL, 'Kepolisian Metropolitan Warsawa', 'Paparan Situasi terkini terkait kejahatan Narkotika ', 'NONDIPA', 'Sprin/3935/X/KA/HK.05.01/2017/BNN', 7, 0, NULL, NULL, '2017-12-22 13:24:12', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Internasional', '2017-11-01', 'Lyon, Paris', NULL, NULL, NULL, NULL, 'Interpol Criminal Networks Sub Directorate''s Drug Unit', 'Kejahatan Transnasional', 'DIPA', 'Sprin/4055/X/KA/HK.05.01/2017/BNN', 2, 0, NULL, NULL, '2017-11-22 11:09:22', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Internasional', '2017-12-07', 'Wina', NULL, NULL, NULL, NULL, 'UNODC', 'Consolidated Budget UNODC 2018-2019, Staff Composition and geographical distribution at the UNODC, Implementation of the International drug control treaties, Contribution of the CND and CCPCJ for the Work of the ECOSOC, Provisional Agenda for the 61st Session of the CND dan 27th Session of the CCPCJ', 'DIPA', 'Sprin/4648/XI/KA/HK.05.01/2017/BNN', 3, 1, NULL, 'KerjasamaLuarnegeri_25_20171212_144546.pdf', '2017-12-12 14:45:46', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-12-06', 'Kuala Lumpur, Malaysia', NULL, NULL, NULL, NULL, 'APICC (Asia-Pacific Information and Coordination Center for Combating Drug Crimes', 'Sharing Information Drug', 'DIPA', 'Sprin/4383/XI/KA/HK.05.01/2017/BNN', 2, 0, NULL, 'KerjasamaLuarnegeri_26_20171212_145135.pdf', '2017-12-12 14:51:35', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-11-24', 'Brisbane, Australia', NULL, NULL, NULL, NULL, 'Kemenko Polhukam', 'Pertukaran Informasi Intelijen dalam Peredaran Gelap Narkotika, PelatihanManajemen K-9 dan Perlindungan Kedaulatan Negara dari Peredaran Gelap Narkotika', 'DIPA', 'Sprin/4306/XI/KA/HK.05.01/2017/BNN', 4, 27, NULL, 'KerjasamaLuarnegeri_27_20171213_083756.pdf', '2017-12-13 08:37:56', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL),
+	 ('Sidang Regional', '2017-11-28', 'Bangkok, Thailand', NULL, NULL, NULL, NULL, 'UNODC', 'Pemanfaatan Cyber Space dalam kejahatan Narkotika melalui produksi, perdagangan dan pengiriman', 'DIPA', 'Sprin/4614/XI/KA/HK.05.01/2017/BNN', 6, 0, NULL, 'KerjasamaLuarnegeri_29_20171222_113225.pdf', '2017-12-22 10:04:52', 329, 'DIREKTORAT KERJASAMA', '2017-12-22 11:32:25', 329, 'DIREKTORAT KERJASAMA', 'y', NULL),
+	 ('Sidang Internasional', '2017-11-07', 'Macau', NULL, NULL, NULL, NULL, 'UNODC', 'Penyalahgunaan NAPZA serta Penanganannya di seluruh Dunia', 'NONDIPA', 'Sprin/3937/XI/KA/HK.05.01/2017/BNN', 3, 3, NULL, NULL, '2017-12-18 10:20:53', 329, 'DIREKTORAT KERJASAMA', '2017-12-22 13:25:08', 329, 'DIREKTORAT KERJASAMA', 'y', NULL),
+	 ('Sidang Internasional', '2018-01-09', 'New Delhi, India', NULL, NULL, NULL, NULL, 'Kemenko Polhukam', 'Pertukaran Informasi tentang peredaran bahan dasar Narkotika/Psikotropika', 'DIPA', 'Sprin/28/I/KA/HK.05.01/2018/BNN', 2, 8, NULL, 'KerjasamaLuarnegeri_31_20180123_120742.pdf', '2018-01-23 11:45:46', 329, 'DIREKTORAT KERJASAMA', '2018-01-23 12:07:42', 329, 'DIREKTORAT KERJASAMA', 'y', NULL),
+	 ('Sidang Internasional', '2018-01-24', 'Kolombo, Sri Lanka', NULL, NULL, NULL, NULL, 'Sri Lanka', 'Penandatanganan Nota Kesepahaman tentang Penanggulangan Masalah Narkotika antara RI dan Sri Lanka', 'DIPA', 'Sprin/230/I/KA/HK.05.01/2018/BNN', 4, 0, NULL, NULL, '2018-01-29 10:37:59', 329, 'DIREKTORAT KERJASAMA', NULL, NULL, NULL, 'y', NULL);

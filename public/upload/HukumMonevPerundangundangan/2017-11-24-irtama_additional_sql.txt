@@ -1,0 +1,147 @@
+-- Table: irtama_audit_lha
+-- DROP TABLE irtama_audit_lha;
+CREATE TABLE irtama_audit_lha
+(
+  id serial NOT NULL,
+  created_at timestamp without time zone,
+  created_by integer,
+  created_by_username character varying(100),
+  updated_at timestamp without time zone,
+  updated_by integer,
+  updated_by_username character varying(100),
+  kode_jenis_audit character varying(5),
+  tahun_anggaran smallint,
+  no_sprin character varying(50),
+  tgl_sprin date,
+  periode character varying(6),
+  periode_tahun smallint,
+  periode_bulan smallint,
+  periode_tanggal smallint,
+  nama_tim character varying(250),
+  kode_satker character varying(50),
+  kode_temuan character varying(50),
+  nama_temuan character varying(250),
+  judul_temuan character varying(250),
+  kondisi_temuan text,
+  kriteria character varying(250),
+  sebab_temuan text,
+  akibat_temuan text,
+  kode_tanggapan smallint,
+  kode_rekomendasi character varying(10),
+  rekomendasi character varying(250),
+  keterangan_rekomendasi1 character varying(250),
+  keterangan_rekomendasi2 character varying(250),
+  keterangan_rekomendasi3 character varying(250),
+  kode_status_temuan smallint,
+  tgl_selesai date,
+  url_bukti text,
+  is_data_ptl integer DEFAULT 0
+);
+
+-- Table: irtama_ptl
+-- DROP TABLE irtama_ptl;
+CREATE TABLE irtama_ptl
+(
+  id serial NOT NULL,
+  created_at timestamp without time zone,
+  created_by integer,
+  created_by_username character varying(100),
+  updated_at timestamp without time zone,
+  updated_by integer,
+  updated_by_username character varying(100),
+  no_sprin character varying(50),
+  rekomendasi character varying(250),
+  kode_temuan character varying(50),
+  tindak_lanjut character varying(250),
+  nilai_tindak_lanjut bigint,
+  url_bukti_tindak_lanjut text
+);
+
+-- Table: irtama_reviu_lk
+-- DROP TABLE irtama_reviu_lk;
+CREATE TABLE irtama_reviu_lk
+(
+  id serial NOT NULL,
+  created_at timestamp without time zone,
+  created_by integer,
+  created_by_username character varying(100),
+  updated_at timestamp without time zone,
+  updated_by integer,
+  updated_by_username character varying(100),
+  jumlah_satker integer,
+  sprin character varying(50),
+  tim character varying(50),
+  hasil_reviu_lra character varying(250),
+  hasil_reviu_neraca character varying(250),
+  hasil_reviu_lo character varying(250),
+  hasil_reviu_lpe character varying(250),
+  hasil_reviu_calk character varying(250)
+);
+
+-- Table: irtama_reviu_rkakl
+-- DROP TABLE irtama_reviu_rkakl;
+CREATE TABLE irtama_reviu_rkakl
+(
+  id serial NOT NULL,
+  created_at timestamp without time zone,
+  created_by integer,
+  created_by_username character varying(100),
+  updated_at timestamp without time zone,
+  updated_by integer,
+  updated_by_username character varying(100),
+  no_laporan character varying(10),
+  nama_tim character varying(250),
+  sprin character varying(50),
+  tgl_sprin date,
+  pagu_indikatif_belanja1 character varying(50),
+  pagu_indikatif_belanja2 character varying(250),
+  pagu_indikatif_belanja3 character varying(50),
+  pagu_selebaran_belanja1 character varying(50),
+  pagu_selebaran_belanja2 character varying(50),
+  pagu_selebaran_belanja3 character varying(50),
+  uraian_hasil_reviu character varying(250)
+);
+
+-- Table: irtama_reviu_rkbmn
+-- DROP TABLE irtama_reviu_rkbmn;
+CREATE TABLE irtama_reviu_rkbmn
+(
+  id serial NOT NULL,
+  created_at timestamp without time zone,
+  created_by integer,
+  created_by_username character varying(100),
+  updated_at timestamp without time zone,
+  updated_by integer,
+  updated_by_username character varying(100),
+  idpelaksana smallint,
+  no_sprin character varying(50),
+  kode_satker character varying(50),
+  jenis_bmn character varying(10),
+  jumlah_barang_direncanakan bigint,
+  jumlah_bmn_tersedia bigint,
+  kode_satuan character(5),
+  kodisi_barang_b character varying(250),
+  kodisi_barang_rr character varying(250),
+  kodisi_barang_rb character varying(250),
+  keterangan character varying(250)
+);
+
+-- Table: irtama_reviu_lkip
+-- DROP TABLE irtama_reviu_lkip;
+CREATE TABLE irtama_reviu_lkip
+(
+  id serial NOT NULL,
+  created_at timestamp without time zone,
+  created_by integer,
+  created_by_username character varying(100),
+  updated_at timestamp without time zone,
+  updated_by integer,
+  updated_by_username character varying(100),
+  sprin character varying(50),
+  tgl_sprin date,
+  nama_sop_kebijakan character varying(250),
+  jenis_sop_kebijakan character varying(250),
+  tgl_sop date,
+  dokumen text
+);
+

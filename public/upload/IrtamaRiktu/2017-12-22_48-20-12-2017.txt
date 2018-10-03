@@ -1,0 +1,35 @@
+-- 1. view ptl
+
+
+
+-- View: public.v_irtama_ptl
+
+-- DROP VIEW public.v_irtama_ptl;
+
+CREATE OR REPLACE VIEW public.v_irtama_ptl AS
+ select p.id_ptl, 
+h.id_lha, 
+h.nomor_lha, 
+h.tanggal_lha, 
+h.nama_satker, 
+h.tgl_mulai, 
+h.tgl_selesai,
+h.pengendali_mutu, 
+h.pengendali_teknis,
+v.lookup_name as value_nama_satker,
+h.tahun_anggaran
+from irtama_ptl as p
+join irtama_audit_lha as h on h.id_lha = p.id_lha
+join sin_lookup_values as v on v.lookup_value = h.nama_satker;
+
+ALTER TABLE public.v_irtama_ptl
+    OWNER TO postgres;
+
+
+
+
+
+
+
+	
+	

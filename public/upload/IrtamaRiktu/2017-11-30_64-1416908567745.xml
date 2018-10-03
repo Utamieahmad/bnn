@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<document>
+<asset id="1416908567745" type="TelkomContent_C" subtype="NewsArticle">
+<attribute name="Attribute_Keyword"><string value="Telkom"/></attribute>
+<attribute name="Attribute_Date"><date value="2016-01-27 11:04:04.0"/></attribute>
+<attribute name="flextemplateid"><assetreference type="TelkomContent_CD" value="1404029940425"/></attribute>
+<attribute name="fw_uid"><string value="12cdcf46-d30b-45f8-b548-ec94a20a7d4b"/></attribute>
+<attribute name="Attribute_MediaAsset"><assetreference type="TKMedia_C" value="1416908466734"/></attribute>
+<attribute name="updateddate"><date value="2016-02-15 07:17:37.158"/></attribute>
+<attribute name="status"><string value="ED"/></attribute>
+<attribute name="Attribute_Title"><string value="Pemblokiran Netflix untuk Melindungi Pelanggan"/></attribute>
+<attribute name="Dimension-parent"><array>
+<struct>
+<field name="group"><string value="Locale"/></field>
+<field name="asset"><assetreference type="TelkomContent_C" value="1416908567745"/></field>
+</struct>
+</array>
+</attribute>
+<attribute name="subtype"><string value="NewsArticle"/></attribute>
+<attribute name="Group_NewsCategory"><assetreference type="TelkomContent_P" value="1404032014927"/></attribute>
+<attribute name="updatedby"><string value="fwadmin"/></attribute>
+<attribute name="createdby"><string value="fwadmin"/></attribute>
+<attribute name="Attribute_Author"><string value="Telkom"/></attribute>
+<attribute name="template"><string value="TKContent2"/></attribute>
+<attribute name="Attribute_MultiDescription"><array>
+<struct>
+<field name="ordinal"><decimal value="1"/></field>
+<field name="data"><string value="&#60;p style=&#34;text-align:justify;&#34;&#62; Telkom memblokir Netflix karena tidak memiliki ijin atau tidak sesuai aturan di Indonesia, dan banyak memuat konten yang tidak diperbolehkan di Indonesia. &#60;i&#62;Content&#60;/i&#62; Netflix juga dinilai banyak mengandung &#60;i&#62;content&#60;/i&#62; yang dilarang di Indonesia, terutama kekerasan dan pornografi. &#8220;Pemblokiran ini untuk melindungi pelanggan dari &#60;i&#62;content-content&#60;/i&#62; yang tidak pantas,&#8221; ujar Arif Prabowo Vice President Corporate Communication Telkom.&#60;/p&#62;&#13;&#10;&#13;&#10;&#60;p style=&#34;text-align:justify;&#34;&#62; Aturan yang dimaksud antara lainUndang-Undang No. 33 tahun 2009 tentang Perfilman khususnya Pasal 57,,disebutkan bahwa &#8220;Setiap film dan iklan film yang akan diedarkan dan/atau dipertunjukkan wajib memperoleh surat tanda lulus sensor&#8221;.&#60;/p&#62;&#13;&#10;&#13;&#10;&#60;p style=&#34;text-align:justify;&#34;&#62; Di samping itu langkah yang dilakukan Telkom ini mengacu kepada Undang-UndangNo. 36 Tahun 1999 tentang Telekomunikasi Pasal 21, yang menyatakan bahwa Penyelenggara telekomunikasi dilarang melakukan usaha penyelenggaraan telekomunikasi yang bertentangan dengan kepentingan umum, kesusilaan atau ketertiban umum.&#60;/p&#62;&#13;&#10;&#13;&#10;&#60;p style=&#34;text-align:justify;&#34;&#62; Langkah ini juga merupakan dukungan Telkom selaku BUMN kepada Pemerintah selaku regulator agar Netflix segera melakukan pembicaraan dengan Regulator ataupun operator untuk memberikan kepastian layanannya kepada masyarakat Indonesia.&#60;/p&#62;&#13;&#10;&#13;&#10;&#60;p style=&#34;text-align:justify;&#34;&#62; &#8220;Langkah yang kami ambil dilatarbelakangi untuk melakukan perlindungan dan kepastian layanan kepada masyarakat Indonesia, sekaligus menegakan kedaulatan Indonesia dari pemain asing,&#8221; tegas Arif Prabowo.&#60;/p&#62;&#13;&#10;"/></field>
+</struct>
+</array>
+</attribute>
+<attribute name="Dimension"><array>
+<assetreference type="Dimension" value="1404029918765"/></array>
+</attribute>
+<attribute name="createddate"><date value="2016-01-28 02:31:02.676"/></attribute>
+<attribute name="description"><string value="Pemblokiran Netflix untuk Melindungi Pelanggan"/></attribute>
+<attribute name="name"><string value="Pemblokiran Netflix untuk Melindungi Pelanggan"/></attribute>
+<attribute name="Attribute_Abstract"><string value="Jakarta, 27 Januari 2016 - PT Telekomunikasi Indonesia Tbk (Telkom) menyatakan telah memblokir situs video &#60;i&#62;streaming&#60;/i&#62; Netflix sejak Rabu, 27 Januari 2016 pukul 00.00. Telkom memblokir Netflix karena dianggap tidak memenuhi regulasi yang ada di Indonesia, artinya pelanggan IndiHome, WiFi.id, dan Telkomsel saat ini sudah tidak dapat mengakses Netflix."/></attribute>
+<attribute name="Publist"><array>
+<integer value="1409220882152"/></array>
+</attribute>
+<attribute name="Attribute_Tags"><array>
+<struct>
+<field name="ordinal"><decimal value="1"/></field>
+<field name="data"><assetreference type="TKTags_P" value="1416906842305"/> TELKOM </field>
+</struct>
+<struct>
+<field name="ordinal"><decimal value="2"/></field>
+<field name="data"><assetreference type="TKTags_P" value="1416906841654"/> BUMN </field>
+</struct>
+</array>
+</attribute>
+</asset>
+</document>
+
+
+1404032014927 = siaran pers

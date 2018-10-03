@@ -1,0 +1,22 @@
+web :
+
+konvensional
+sasaran :masyarakat, kelauarga, mahasiswa, pekerja, pelajar
+laporan free text hilang
+tambah field jenis kegiatan list dropdown talkshow, kampanye, dialog interaktif + index
+
+
+media online :  pengelompokan jenis media
+
+responsive di projector
+
+ 
+mobile :
+
+jenis media penyiaran : + videotron
+
+diseminasi informasi 
+
+pengelompokan jenis media 
+
+konvensional ta,mbah field jumlah peserta, sasaran kelompokan
