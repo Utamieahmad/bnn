@@ -5,6 +5,4 @@ vendor/
 
 storage/
 
-composer\.json
-
 composer\.lock
