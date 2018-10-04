@@ -9,4 +9,4 @@ composer\.lock
 
 nbproject/
 
-storage/logs/laravel\.log
+storage/logs/
