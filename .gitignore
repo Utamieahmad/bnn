@@ -8,3 +8,5 @@ storage/framework/
 composer\.lock
 
 nbproject/
+
+storage/logs/laravel\.log

@@ -871,13 +871,146 @@
                 "tags": [
                     "List User"
                 ],
-                "summary": "List User",
-                "operationId": "getList",
+                "summary": "Create User",
+                "operationId": "postUser",
                 "parameters": [
                     {
-                        "name": "page",
+                        "name": "group_id",
                         "in": "formData",
-                        "description": "Pagination",
+                        "description": "ID Group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_name",
+                        "in": "formData",
+                        "description": "username",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_login",
+                        "in": "formData",
+                        "description": "user login",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_email",
+                        "in": "formData",
+                        "description": "User email",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_pass",
+                        "in": "formData",
+                        "description": "user password",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "active_flag",
+                        "in": "formData",
+                        "description": "active flag",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "deskripsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "wilayah_id",
+                        "in": "formData",
+                        "description": "id wilayah",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_pass_decrypt",
+                        "in": "formData",
+                        "description": "password decrypt",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "remember_token",
+                        "in": "formData",
+                        "description": "token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "password",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nip",
+                        "in": "formData",
+                        "description": "NIP",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "flag",
+                        "in": "formData",
+                        "description": "ID Group",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jabatan_pegawai",
+                        "in": "formData",
+                        "description": "jabatan pegawai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "telp_pegawai",
+                        "in": "formData",
+                        "description": "no telepon pegawai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lokasi_kerja",
+                        "in": "formData",
+                        "description": "Lokasi kerja",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto_pegawai",
+                        "in": "formData",
+                        "description": "Foto Pegawai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email_token",
+                        "in": "formData",
+                        "description": "token email",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "temp_change_email",
+                        "in": "formData",
+                        "description": "ID Group",
                         "required": false,
                         "type": "string"
                     }
@@ -907,6 +1040,200 @@
                         "name": "id",
                         "in": "path",
                         "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "List User"
+                ],
+                "summary": "update User by id",
+                "operationId": "update data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "formData",
+                        "description": "ID Group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_name",
+                        "in": "formData",
+                        "description": "username",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_login",
+                        "in": "formData",
+                        "description": "user login",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_email",
+                        "in": "formData",
+                        "description": "User email",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_pass",
+                        "in": "formData",
+                        "description": "user password",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "active_flag",
+                        "in": "formData",
+                        "description": "active flag",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "deskripsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "wilayah_id",
+                        "in": "formData",
+                        "description": "id wilayah",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_pass_decrypt",
+                        "in": "formData",
+                        "description": "password decrypt",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "remember_token",
+                        "in": "formData",
+                        "description": "token",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "password",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nip",
+                        "in": "formData",
+                        "description": "NIP",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "flag",
+                        "in": "formData",
+                        "description": "ID Group",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jabatan_pegawai",
+                        "in": "formData",
+                        "description": "jabatan pegawai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "telp_pegawai",
+                        "in": "formData",
+                        "description": "no telepon pegawai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lokasi_kerja",
+                        "in": "formData",
+                        "description": "Lokasi kerja",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto_pegawai",
+                        "in": "formData",
+                        "description": "Foto Pegawai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email_token",
+                        "in": "formData",
+                        "description": "token email",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "temp_change_email",
+                        "in": "formData",
+                        "description": "ID Group",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "List User"
+                ],
+                "summary": "Delete User by id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete data by id",
                         "required": true,
                         "type": "integer"
                     }
