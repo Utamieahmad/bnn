@@ -1013,6 +1013,264 @@
                 }
             }
         },
+        "/monitoringnihil": {
+            "get": {
+                "tags": [
+                    "Monitoring Nihil"
+                ],
+                "summary": "Get List Data Monitoring Nihil",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Monitoring Nihil"
+                ],
+                "summary": "Create Data Monitoring Nihil",
+                "operationId": "create data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "created_by",
+                        "in": "formData",
+                        "description": "created by",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "created_by_username",
+                        "in": "formData",
+                        "description": "created by username",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_kegiatan",
+                        "in": "formData",
+                        "description": "nama kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_pelaksanaan",
+                        "in": "formData",
+                        "description": "tanggal pelaksana",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keterangan",
+                        "in": "formData",
+                        "description": "keterangan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "idpelaksana",
+                        "in": "formData",
+                        "description": "id pelaksana",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status_entri",
+                        "in": "formData",
+                        "description": "status entri",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/monitoringnihil/{id}": {
+            "get": {
+                "tags": [
+                    "Monitoring Nihil"
+                ],
+                "summary": "Get List Data Monitoring Nihil By id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Monitoring Nihil"
+                ],
+                "summary": "Update Data Monitoring Nihil",
+                "operationId": "update data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "updated_by",
+                        "in": "formData",
+                        "description": "updated by",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "updated_by_username",
+                        "in": "formData",
+                        "description": "updated by username",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_kegiatan",
+                        "in": "formData",
+                        "description": "nama kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_pelaksanaan",
+                        "in": "formData",
+                        "description": "tanggal pelaksana",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keterangan",
+                        "in": "formData",
+                        "description": "keterangan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "idpelaksana",
+                        "in": "formData",
+                        "description": "id pelaksana",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status_entri",
+                        "in": "formData",
+                        "description": "status entri",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Monitoring Nihil"
+                ],
+                "summary": "Delete Data Monitoring Nihil By id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "tags": [
