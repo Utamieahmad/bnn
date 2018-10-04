@@ -14,7 +14,7 @@ class ArahanAPIController extends Controller
 
     public function index(Request $request)
     {
-        
+
         $kondisi = array();
         if ($request->satker) {
             array_push($kondisi, array('satker', 'ilike',   '%'.trim($request->satker).'%'));
@@ -108,7 +108,6 @@ class ArahanAPIController extends Controller
             }
         } catch(\Exception $e) {
             return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
-
         }
     }
 
