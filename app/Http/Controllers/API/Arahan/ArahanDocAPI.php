@@ -1,32 +1,5 @@
 <?php
 
-/**
- * @SWG\Post(
- *   path="/arahan",
- *   tags={"Arahan"},
- *   summary="List Arahan",
- *   operationId="getList",
- *   @SWG\Parameter(
- *     name="Authorization",
- *     in="header",
- *     description="Authorization Token",
- *     required=true,
- *     type="string"
- *   ),
- *   @SWG\Parameter(
- *     name="page",
- *     in="formData",
- *     description="Pagination",
- *     required=false,
- *     type="string"
- *   ),
- *   @SWG\Response(response=200, description="successful operation"),
- *   @SWG\Response(response=406, description="not acceptable"),
- *   @SWG\Response(response=500, description="internal server error")
- * )
- *
- */
-
  /**
   * @SWG\Get(
   *   path="/arahan",
@@ -73,3 +46,65 @@
    * )
    *
    */
+
+   /**
+    * @SWG\Post(
+    *   path="/arahan",
+    *   tags={"Arahan"},
+    *   summary="Store data arahan",
+    *   operationId="Store data",
+    *   @SWG\Parameter(
+    *     name="Authorization",
+    *     in="header",
+    *     description="Authorization Token",
+    *     required=true,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_arahan",
+    *     in="formData",
+    *     description="tgl_arahan",
+    *     required=true,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="satker",
+    *     in="formData",
+    *     description="satker",
+    *     required=true,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_kadaluarsa",
+    *     in="formData",
+    *     description="tgl_kadaluarsa",
+    *     required=true,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="judul_arahan",
+    *     in="formData",
+    *     description="judul_arahan",
+    *     required=true,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="isi_arahan",
+    *     in="formData",
+    *     description="isi_arahan",
+    *     required=true,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status",
+    *     in="formData",
+    *     description="status",
+    *     required=true,
+    *     type="string"
+    *   ),
+    *   @SWG\Response(response=200, description="successful operation"),
+    *   @SWG\Response(response=406, description="not acceptable"),
+    *   @SWG\Response(response=500, description="internal server error")
+    * )
+    *
+    */

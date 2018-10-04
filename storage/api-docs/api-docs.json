@@ -38,8 +38,8 @@
                 "tags": [
                     "Arahan"
                 ],
-                "summary": "List Arahan",
-                "operationId": "getList",
+                "summary": "Store data arahan",
+                "operationId": "Store data",
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -49,10 +49,45 @@
                         "type": "string"
                     },
                     {
-                        "name": "page",
+                        "name": "tgl_arahan",
                         "in": "formData",
-                        "description": "Pagination",
-                        "required": false,
+                        "description": "tgl_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "satker",
+                        "in": "formData",
+                        "description": "satker",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_kadaluarsa",
+                        "in": "formData",
+                        "description": "tgl_kadaluarsa",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "judul_arahan",
+                        "in": "formData",
+                        "description": "judul_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isi_arahan",
+                        "in": "formData",
+                        "description": "isi_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": true,
                         "type": "string"
                     }
                 ],
