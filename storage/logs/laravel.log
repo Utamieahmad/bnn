@@ -8152,3 +8152,28 @@ Stack trace:
 #52 /var/www/html/bnn/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #53 {main}  
 >>>>>>> master
+[2018-10-04 12:50:05] local.ERROR: ErrorException: Unable to merge @SWG\Put() in /var/www/html/bnn/app/Http/Controllers/API/Badiklat/KegiatanDocAPI.php on line 203 in /var/www/html/bnn/vendor/zircote/swagger-php/src/Logger.php:38
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(1024, 'Unable to merge...', '/var/www/html/b...', 38, Array)
+#1 /var/www/html/bnn/vendor/zircote/swagger-php/src/Logger.php(38): trigger_error('Unable to merge...', 1024)
+#2 [internal function]: Swagger\Logger->Swagger\{closure}('Unable to merge...', 1024)
+#3 /var/www/html/bnn/vendor/zircote/swagger-php/src/Logger.php(68): call_user_func(Object(Closure), 'Unable to merge...', 1024)
+#4 /var/www/html/bnn/vendor/zircote/swagger-php/src/Processors/BuildPaths.php(46): Swagger\Logger::notice('Unable to merge...')
+#5 /var/www/html/bnn/vendor/zircote/swagger-php/src/Analysis.php(278): Swagger\Processors\BuildPaths->__invoke(Object(Swagger\Analysis))
+#6 /var/www/html/bnn/vendor/zircote/swagger-php/src/functions.php(44): Swagger\Analysis->process(Array)
+#7 /var/www/html/bnn/vendor/darkaonline/l5-swagger/src/Generator.php(24): Swagger\scan('/var/www/html/b...', Array)
+#8 /var/www/html/bnn/vendor/darkaonline/l5-swagger/src/Console/GenerateDocsCommand.php(32): L5Swagger\Generator::generateDocs()
+#9 [internal function]: L5Swagger\Console\GenerateDocsCommand->fire()
+#10 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#11 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#12 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#13 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Container/Container.php(539): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#14 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Illuminate\Container\Container->call(Array)
+#15 /var/www/html/bnn/vendor/symfony/console/Command/Command.php(255): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#16 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Console/Command.php(167): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#17 /var/www/html/bnn/vendor/symfony/console/Application.php(948): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#18 /var/www/html/bnn/vendor/symfony/console/Application.php(250): Symfony\Component\Console\Application->doRunCommand(Object(L5Swagger\Console\GenerateDocsCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#19 /var/www/html/bnn/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#20 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#21 /var/www/html/bnn/artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#22 {main}  

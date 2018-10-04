@@ -410,6 +410,116 @@
                         "description": "internal server error"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Arahan"
+                ],
+                "summary": "update Arahan by id",
+                "operationId": "update data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_arahan",
+                        "in": "formData",
+                        "description": "tgl_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "satker",
+                        "in": "formData",
+                        "description": "satker",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_kadaluarsa",
+                        "in": "formData",
+                        "description": "tgl_kadaluarsa",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "judul_arahan",
+                        "in": "formData",
+                        "description": "judul_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isi_arahan",
+                        "in": "formData",
+                        "description": "isi_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Arahan"
+                ],
+                "summary": "Delete Arahan by id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
             }
         },
         "/kegiatan": {
@@ -445,7 +555,7 @@
                     "Badiklat Kegiatan"
                 ],
                 "summary": "List Kegiatan",
-                "operationId": "getList",
+                "operationId": "StoreData",
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -455,10 +565,136 @@
                         "type": "string"
                     },
                     {
-                        "name": "page",
+                        "name": "nama_kegiatan",
                         "in": "formData",
-                        "description": "Pagination",
+                        "description": "nama_kegiatan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_pelaksanaan",
+                        "in": "formData",
+                        "description": "tgl_pelaksanaan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat",
+                        "in": "formData",
+                        "description": "tempat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_idprovinsi",
+                        "in": "formData",
+                        "description": "tempat_idprovinsi",
                         "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_idkabkota",
+                        "in": "formData",
+                        "description": "tempat_idkabkota",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_idkecamatan",
+                        "in": "formData",
+                        "description": "tempat_idkecamatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_iddesa",
+                        "in": "formData",
+                        "description": "tempat_iddesa",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_hari_diklat",
+                        "in": "formData",
+                        "description": "total_hari_diklat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_jam_pelajaran",
+                        "in": "formData",
+                        "description": "total_jam_pelajaran",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_narasumber_pengajar",
+                        "in": "formData",
+                        "description": "total_narasumber_pengajar",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_peserta",
+                        "in": "formData",
+                        "description": "total_peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "syarat_mengikuti_diklat",
+                        "in": "formData",
+                        "description": "syarat_mengikuti_diklat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kodeanggaran",
+                        "in": "formData",
+                        "description": "kodeanggaran",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "anggaran_id",
+                        "in": "formData",
+                        "description": "anggaran_id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_selesai",
+                        "in": "formData",
+                        "description": "tgl_selesai",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_laporan",
+                        "in": "formData",
+                        "description": "file_laporan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jenis_diklat",
+                        "in": "formData",
+                        "description": "jenis_diklat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tujuan_kegiatan",
+                        "in": "formData",
+                        "description": "tujuan_kegiatan",
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -509,6 +745,207 @@
                         "description": "internal server error"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Badiklat Kegiatan"
+                ],
+                "summary": "update Badiklat Kegiatan by id",
+                "operationId": "update data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_kegiatan",
+                        "in": "formData",
+                        "description": "nama_kegiatan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_pelaksanaan",
+                        "in": "formData",
+                        "description": "tgl_pelaksanaan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat",
+                        "in": "formData",
+                        "description": "tempat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_idprovinsi",
+                        "in": "formData",
+                        "description": "tempat_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_idkabkota",
+                        "in": "formData",
+                        "description": "tempat_idkabkota",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_idkecamatan",
+                        "in": "formData",
+                        "description": "tempat_idkecamatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_iddesa",
+                        "in": "formData",
+                        "description": "tempat_iddesa",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_hari_diklat",
+                        "in": "formData",
+                        "description": "total_hari_diklat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_jam_pelajaran",
+                        "in": "formData",
+                        "description": "total_jam_pelajaran",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_narasumber_pengajar",
+                        "in": "formData",
+                        "description": "total_narasumber_pengajar",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_peserta",
+                        "in": "formData",
+                        "description": "total_peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "syarat_mengikuti_diklat",
+                        "in": "formData",
+                        "description": "syarat_mengikuti_diklat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kodeanggaran",
+                        "in": "formData",
+                        "description": "kodeanggaran",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "anggaran_id",
+                        "in": "formData",
+                        "description": "anggaran_id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_selesai",
+                        "in": "formData",
+                        "description": "tgl_selesai",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_laporan",
+                        "in": "formData",
+                        "description": "file_laporan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jenis_diklat",
+                        "in": "formData",
+                        "description": "jenis_diklat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tujuan_kegiatan",
+                        "in": "formData",
+                        "description": "tujuan_kegiatan",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Badiklat Kegiatan"
+                ],
+                "summary": "Delete Badiklat Kegiatan by id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
             }
         },
         "/balaiBesar": {
@@ -543,8 +980,8 @@
                 "tags": [
                     "Balai Besar"
                 ],
-                "summary": "List Balai Besar",
-                "operationId": "getList",
+                "summary": "Store data Balai Besar",
+                "operationId": "Store data",
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -554,10 +991,94 @@
                         "type": "string"
                     },
                     {
-                        "name": "page",
+                        "name": "jenis_kegiatan",
                         "in": "formData",
-                        "description": "Pagination",
+                        "description": "jenis_kegiatan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_kegiatan",
+                        "in": "formData",
+                        "description": "nama_kegiatan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tanggal_mulai",
+                        "in": "formData",
+                        "description": "tanggal_mulai",
                         "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tanggal_selesai",
+                        "in": "formData",
+                        "description": "tanggal_selesai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_agenda",
+                        "in": "formData",
+                        "description": "nomor_agenda",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_surat",
+                        "in": "formData",
+                        "description": "nomor_surat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_instansi",
+                        "in": "formData",
+                        "description": "kode_instansi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_instansi",
+                        "in": "formData",
+                        "description": "meta_instansi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_bnn_instansi",
+                        "in": "formData",
+                        "description": "meta_bnn_instansi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_materi",
+                        "in": "formData",
+                        "description": "meta_materi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "bnn_jumlah_peserta",
+                        "in": "formData",
+                        "description": "bnn_jumlah_peserta",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_laporan",
+                        "in": "formData",
+                        "description": "file_laporan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -593,6 +1114,116 @@
                         "name": "id",
                         "in": "path",
                         "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Balai Besar"
+                ],
+                "summary": "update Balai Besar by id",
+                "operationId": "update data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_arahan",
+                        "in": "formData",
+                        "description": "tgl_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "satker",
+                        "in": "formData",
+                        "description": "satker",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_kadaluarsa",
+                        "in": "formData",
+                        "description": "tgl_kadaluarsa",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "judul_arahan",
+                        "in": "formData",
+                        "description": "judul_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isi_arahan",
+                        "in": "formData",
+                        "description": "isi_arahan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Balai Besar"
+                ],
+                "summary": "Delete Balai Besar by id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete data by id",
                         "required": true,
                         "type": "integer"
                     }
@@ -653,10 +1284,150 @@
                         "type": "string"
                     },
                     {
-                        "name": "page",
+                        "name": "nomor_surat_permohonan_pengajuan",
                         "in": "formData",
-                        "description": "Pagination",
+                        "description": "nomor_surat_permohonan_pengajuan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_surat",
+                        "in": "formData",
+                        "description": "tgl_surat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "perihal_surat",
+                        "in": "formData",
+                        "description": "perihal_surat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_lplkn",
+                        "in": "formData",
+                        "description": "no_lplkn",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_lplkn",
+                        "in": "formData",
+                        "description": "tgl_lplkn",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jenis_kasus",
+                        "in": "formData",
+                        "description": "jenis_kasus",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_instansi",
+                        "in": "formData",
+                        "description": "nama_instansi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_pengirim",
+                        "in": "formData",
+                        "description": "nama_pengirim",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pangkat_gol",
+                        "in": "formData",
+                        "description": "pangkat_gol",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_telp_pengirim",
+                        "in": "formData",
+                        "description": "no_telp_pengirim",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "idjenisbarangbukti",
+                        "in": "formData",
+                        "description": "idjenisbarangbukti",
                         "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "idbarangbukti",
+                        "in": "formData",
+                        "description": "idbarangbukti",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kuantitas",
+                        "in": "formData",
+                        "description": "kuantitas",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "satuan",
+                        "in": "formData",
+                        "description": "satuan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "warna",
+                        "in": "formData",
+                        "description": "warna",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "logo",
+                        "in": "formData",
+                        "description": "logo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "laporan_hasil",
+                        "in": "formData",
+                        "description": "laporan_hasil",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hasil_uji",
+                        "in": "formData",
+                        "description": "hasil_uji",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "status_aktif",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "periode",
+                        "in": "formData",
+                        "description": "periode",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jnsbrgbukti",
+                        "in": "formData",
+                        "description": "kode_jnsbrgbukti",
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -692,6 +1463,221 @@
                         "name": "id",
                         "in": "path",
                         "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Balai Lab Pengujian"
+                ],
+                "summary": "update Balai Lab Pengujian by id",
+                "operationId": "update data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_surat_permohonan_pengajuan",
+                        "in": "formData",
+                        "description": "nomor_surat_permohonan_pengajuan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_surat",
+                        "in": "formData",
+                        "description": "tgl_surat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "perihal_surat",
+                        "in": "formData",
+                        "description": "perihal_surat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_lplkn",
+                        "in": "formData",
+                        "description": "no_lplkn",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_lplkn",
+                        "in": "formData",
+                        "description": "tgl_lplkn",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jenis_kasus",
+                        "in": "formData",
+                        "description": "jenis_kasus",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_instansi",
+                        "in": "formData",
+                        "description": "nama_instansi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_pengirim",
+                        "in": "formData",
+                        "description": "nama_pengirim",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pangkat_gol",
+                        "in": "formData",
+                        "description": "pangkat_gol",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_telp_pengirim",
+                        "in": "formData",
+                        "description": "no_telp_pengirim",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "idjenisbarangbukti",
+                        "in": "formData",
+                        "description": "idjenisbarangbukti",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "idbarangbukti",
+                        "in": "formData",
+                        "description": "idbarangbukti",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kuantitas",
+                        "in": "formData",
+                        "description": "kuantitas",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "satuan",
+                        "in": "formData",
+                        "description": "satuan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "warna",
+                        "in": "formData",
+                        "description": "warna",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "logo",
+                        "in": "formData",
+                        "description": "logo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "laporan_hasil",
+                        "in": "formData",
+                        "description": "laporan_hasil",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hasil_uji",
+                        "in": "formData",
+                        "description": "hasil_uji",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "status_aktif",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "periode",
+                        "in": "formData",
+                        "description": "periode",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jnsbrgbukti",
+                        "in": "formData",
+                        "description": "kode_jnsbrgbukti",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Balai Lab Pengujian"
+                ],
+                "summary": "Delete Balai Lab Pengujian by id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete data by id",
                         "required": true,
                         "type": "integer"
                     }
