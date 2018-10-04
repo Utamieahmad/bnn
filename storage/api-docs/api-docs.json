@@ -503,6 +503,71 @@
                 }
             }
         },
+        "/dpo": {
+            "get": {
+                "tags": [
+                    "DPO"
+                ],
+                "summary": "Get List DPO",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/dpo/{id}": {
+            "get": {
+                "tags": [
+                    "DPO"
+                ],
+                "summary": "Get DPO by id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
         "/pemusnahanmobile": {
             "post": {
                 "tags": [
