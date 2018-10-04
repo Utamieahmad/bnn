@@ -3,7 +3,7 @@
     /**
      * @SWG\Post(
      *   path="/pengujian",
-     *   tags={"List Pengujian"},
+     *   tags={"Balai Lab Pengujian"},
      *   summary="List Pengujian",
      *   operationId="getList",
      *   @SWG\Parameter(
@@ -30,7 +30,7 @@
      /**
       * @SWG\Get(
       *   path="/pengujian",
-      *   tags={"List Pengujian"},
+      *   tags={"Balai Lab Pengujian"},
       *   summary="Get List Pengujian",
       *   operationId="get data",
       *   @SWG\Parameter(
@@ -50,7 +50,7 @@
       /**
        * @SWG\Get(
        *   path="/pengujian/{id}",
-       *   tags={"List Pengujian"},
+       *   tags={"Balai Lab Pengujian"},
        *   summary="Get Pengujian by id",
        *   operationId="get data by id",
        *   @SWG\Parameter(

@@ -3,7 +3,7 @@
     /**
      * @SWG\Post(
      *   path="/balaiBesar",
-     *   tags={"List Balai Besar"},
+     *   tags={"Balai Besar"},
      *   summary="List Balai Besar",
      *   operationId="getList",
      *   @SWG\Parameter(
@@ -30,7 +30,7 @@
      /**
       * @SWG\Get(
       *   path="/balaiBesar",
-      *   tags={"List Balai Besar"},
+      *   tags={"Balai Besar"},
       *   summary="Get List Balai Besar",
       *   operationId="get data",
       *   @SWG\Parameter(
@@ -50,7 +50,7 @@
       /**
        * @SWG\Get(
        *   path="/balaiBesar/{id}",
-       *   tags={"List Balai Besar"},
+       *   tags={"Balai Besar"},
        *   summary="Get Balai Besar by id",
        *   operationId="get data by id",
        *   @SWG\Parameter(

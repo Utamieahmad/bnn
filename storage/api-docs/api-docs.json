@@ -9,7 +9,7 @@
         "/arahan": {
             "get": {
                 "tags": [
-                    "List Arahan"
+                    "Arahan"
                 ],
                 "summary": "Get List Arahan",
                 "operationId": "get data",
@@ -36,7 +36,7 @@
             },
             "post": {
                 "tags": [
-                    "List Arahan"
+                    "Arahan"
                 ],
                 "summary": "List Arahan",
                 "operationId": "getList",
@@ -72,7 +72,7 @@
         "/arahan/{id}": {
             "get": {
                 "tags": [
-                    "List Arahan"
+                    "Arahan"
                 ],
                 "summary": "Get Arahan by id",
                 "operationId": "get data by id",
@@ -108,7 +108,7 @@
         "/kegiatan": {
             "get": {
                 "tags": [
-                    "List Kegiatan"
+                    "Badiklat Kegiatan"
                 ],
                 "summary": "Get List Kegiatan",
                 "operationId": "get data",
@@ -135,7 +135,7 @@
             },
             "post": {
                 "tags": [
-                    "List Kegiatan"
+                    "Badiklat Kegiatan"
                 ],
                 "summary": "List Kegiatan",
                 "operationId": "getList",
@@ -171,7 +171,7 @@
         "/kegiatan/{id}": {
             "get": {
                 "tags": [
-                    "List Kegiatan"
+                    "Badiklat Kegiatan"
                 ],
                 "summary": "Get Kegiatan by id",
                 "operationId": "get data by id",
@@ -207,7 +207,7 @@
         "/balaiBesar": {
             "get": {
                 "tags": [
-                    "List Balai Besar"
+                    "Balai Besar"
                 ],
                 "summary": "Get List Balai Besar",
                 "operationId": "get data",
@@ -234,7 +234,7 @@
             },
             "post": {
                 "tags": [
-                    "List Balai Besar"
+                    "Balai Besar"
                 ],
                 "summary": "List Balai Besar",
                 "operationId": "getList",
@@ -270,7 +270,7 @@
         "/balaiBesar/{id}": {
             "get": {
                 "tags": [
-                    "List Balai Besar"
+                    "Balai Besar"
                 ],
                 "summary": "Get Balai Besar by id",
                 "operationId": "get data by id",
@@ -306,7 +306,7 @@
         "/pengujian": {
             "get": {
                 "tags": [
-                    "List Pengujian"
+                    "Balai Lab Pengujian"
                 ],
                 "summary": "Get List Pengujian",
                 "operationId": "get data",
@@ -333,7 +333,7 @@
             },
             "post": {
                 "tags": [
-                    "List Pengujian"
+                    "Balai Lab Pengujian"
                 ],
                 "summary": "List Pengujian",
                 "operationId": "getList",
@@ -369,7 +369,7 @@
         "/pengujian/{id}": {
             "get": {
                 "tags": [
-                    "List Pengujian"
+                    "Balai Lab Pengujian"
                 ],
                 "summary": "Get Pengujian by id",
                 "operationId": "get data by id",
@@ -477,7 +477,7 @@
         "/listjejaring": {
             "post": {
                 "tags": [
-                    "List Jejaring"
+                    "Cegah Advokasi Jejaring"
                 ],
                 "summary": "List Jejaring",
                 "operationId": "getList",
@@ -513,7 +513,7 @@
         "/advojejaring": {
             "get": {
                 "tags": [
-                    "List Jejaring"
+                    "Cegah Advokasi Jejaring"
                 ],
                 "summary": "Get List Jejaring",
                 "operationId": "get data",
@@ -540,7 +540,7 @@
             },
             "post": {
                 "tags": [
-                    "List Jejaring"
+                    "Cegah Advokasi Jejaring"
                 ],
                 "summary": "Store Jejaring",
                 "operationId": "Store Data Jejaring",
@@ -779,7 +779,7 @@
         "/advojejaring/{id}": {
             "get": {
                 "tags": [
-                    "List Jejaring"
+                    "Cegah Advokasi Jejaring"
                 ],
                 "summary": "Get Jejaring by id",
                 "operationId": "get data by id",
@@ -851,7 +851,7 @@
         "/users": {
             "get": {
                 "tags": [
-                    "List User"
+                    "User"
                 ],
                 "summary": "Get List User",
                 "operationId": "get data",
@@ -869,7 +869,7 @@
             },
             "post": {
                 "tags": [
-                    "List User"
+                    "User"
                 ],
                 "summary": "Create User",
                 "operationId": "postUser",
@@ -1031,7 +1031,7 @@
         "/users/{id}": {
             "get": {
                 "tags": [
-                    "List User"
+                    "User"
                 ],
                 "summary": "Get User by id",
                 "operationId": "get data by id",
@@ -1058,7 +1058,7 @@
             },
             "put": {
                 "tags": [
-                    "List User"
+                    "User"
                 ],
                 "summary": "update User by id",
                 "operationId": "update data by id",
@@ -1225,7 +1225,7 @@
             },
             "delete": {
                 "tags": [
-                    "List User"
+                    "User"
                 ],
                 "summary": "Delete User by id",
                 "operationId": "delete data by id",

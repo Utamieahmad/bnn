@@ -3,7 +3,7 @@
     /**
      * @SWG\Post(
      *   path="/listjejaring",
-     *   tags={"List Jejaring"},
+     *   tags={"Cegah Advokasi Jejaring"},
      *   summary="List Jejaring",
      *   operationId="getList",
      *   @SWG\Parameter(
@@ -30,7 +30,7 @@
      /**
       * @SWG\Get(
       *   path="/advojejaring",
-      *   tags={"List Jejaring"},
+      *   tags={"Cegah Advokasi Jejaring"},
       *   summary="Get List Jejaring",
       *   operationId="get data",
       *   @SWG\Parameter(
@@ -50,7 +50,7 @@
       /**
        * @SWG\Get(
        *   path="/advojejaring/{id}",
-       *   tags={"List Jejaring"},
+       *   tags={"Cegah Advokasi Jejaring"},
        *   summary="Get Jejaring by id",
        *   operationId="get data by id",
        *   @SWG\Parameter(
@@ -77,7 +77,7 @@
        /**
         * @SWG\Post(
         *   path="/advojejaring",
-        *   tags={"List Jejaring"},
+        *   tags={"Cegah Advokasi Jejaring"},
         *   summary="Store Jejaring",
         *   operationId="Store Data Jejaring",
         *   @SWG\Parameter(

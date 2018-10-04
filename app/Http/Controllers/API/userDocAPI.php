@@ -3,7 +3,7 @@
 /**
  * @SWG\Get(
  *   path="/users",
- *   tags={"List User"},
+ *   tags={"User"},
  *   summary="Get List User",
  *   operationId="get data",
  *   @SWG\Response(response=200, description="successful operation"),
@@ -16,7 +16,7 @@
  /**
   * @SWG\Get(
   *   path="/users/{id}",
-  *   tags={"List User"},
+  *   tags={"User"},
   *   summary="Get User by id",
   *   operationId="get data by id",
   *   @SWG\Parameter(
@@ -36,7 +36,7 @@
   /**
    * @SWG\Post(
    *   path="/users",
-   *   tags={"List User"},
+   *   tags={"User"},
    *   summary="Create User",
    *   operationId="postUser",
    *   @SWG\Parameter(
@@ -189,7 +189,7 @@
 /**
   * @SWG\Put(
   *   path="/users/{id}",
-  *   tags={"List User"},
+  *   tags={"User"},
   *   summary="update User by id",
   *   operationId="update data by id",
   *   @SWG\Parameter(
@@ -349,7 +349,7 @@
 /**
   * @SWG\Delete(
   *   path="/users/{id}",
-  *   tags={"List User"},
+  *   tags={"User"},
   *   summary="Delete User by id",
   *   operationId="delete data by id",
   *   @SWG\Parameter(
