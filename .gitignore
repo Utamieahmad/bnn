@@ -12,3 +12,5 @@ nbproject/
 storage/logs/
 
 *.log
+
+*.md
