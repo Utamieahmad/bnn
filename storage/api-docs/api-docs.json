@@ -6,6 +6,278 @@
     },
     "basePath": "/bnn/public/api",
     "paths": {
+        "/anggaran": {
+            "get": {
+                "tags": [
+                    "Anggaran"
+                ],
+                "summary": "Get List Data Anggaran",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Anggaran"
+                ],
+                "summary": "Create Data Anggaran",
+                "operationId": "create data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_anggaran",
+                        "in": "formData",
+                        "description": "kode anggaran",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sasaran",
+                        "in": "formData",
+                        "description": "sasaran",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pagu",
+                        "in": "formData",
+                        "description": "pagu",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target_output",
+                        "in": "formData",
+                        "description": "target output",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "satuan_output",
+                        "in": "formData",
+                        "description": "satuan output",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "formData",
+                        "description": "tahun",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "satker_code",
+                        "in": "formData",
+                        "description": "satker code",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "refid_anggaran",
+                        "in": "formData",
+                        "description": "Reff id anggaran",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/anggaran/{id}": {
+            "get": {
+                "tags": [
+                    "Anggaran"
+                ],
+                "summary": "Get List Data Anggaran By id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Anggaran"
+                ],
+                "summary": "Update Data Anggaran",
+                "operationId": "update data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "kode_anggaran",
+                        "in": "formData",
+                        "description": "kode anggaran",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sasaran",
+                        "in": "formData",
+                        "description": "sasaran",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pagu",
+                        "in": "formData",
+                        "description": "pagu",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target_output",
+                        "in": "formData",
+                        "description": "target output",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "satuan_output",
+                        "in": "formData",
+                        "description": "satuan output",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "formData",
+                        "description": "tahun",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "satker_code",
+                        "in": "formData",
+                        "description": "satker code",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "refid_anggaran",
+                        "in": "formData",
+                        "description": "Reff id anggaran",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Anggaran"
+                ],
+                "summary": "Delete Data Anggaran By id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
         "/arahan": {
             "get": {
                 "tags": [
