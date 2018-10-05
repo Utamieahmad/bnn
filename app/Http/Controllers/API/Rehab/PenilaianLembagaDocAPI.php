@@ -3,7 +3,7 @@
 /**
     * @SWG\Get(
     *   path="/penilaianlembaga",
-    *   tags={"Penilaian Lembaga"},
+    *   tags={"Rehab Penilaian Lembaga"},
     *   summary="Get List Data Penilaian Lembaga",
     *   operationId="get data",
     *   @SWG\Parameter(
@@ -23,7 +23,7 @@
 /**
     * @SWG\Get(
     *   path="/penilaianlembaga/{id}",
-    *   tags={"Penilaian Lembaga"},
+    *   tags={"Rehab Penilaian Lembaga"},
     *   summary="Get List Data Penilaian Lembaga by id",
     *   operationId="get data by id",
     *   @SWG\Parameter(

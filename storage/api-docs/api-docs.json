@@ -2597,7 +2597,7 @@
         "/penilaianlembaga": {
             "get": {
                 "tags": [
-                    "Penilaian Lembaga"
+                    "Rehab Penilaian Lembaga"
                 ],
                 "summary": "Get List Data Penilaian Lembaga",
                 "operationId": "get data",
@@ -2626,7 +2626,7 @@
         "/penilaianlembaga/{id}": {
             "get": {
                 "tags": [
-                    "Penilaian Lembaga"
+                    "Rehab Penilaian Lembaga"
                 ],
                 "summary": "Get List Data Penilaian Lembaga by id",
                 "operationId": "get data by id",
