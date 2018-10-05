@@ -1543,6 +1543,362 @@
                 }
             }
         },
+        "/settama": {
+            "get": {
+                "tags": [
+                    "Settama"
+                ],
+                "summary": "Get List Data Settama",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Settama"
+                ],
+                "summary": "Create Data Settama",
+                "operationId": "create data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jns_rujukan",
+                        "in": "formData",
+                        "description": "Jenis rujukan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_rujukan",
+                        "in": "formData",
+                        "description": "No rujukan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_mulai",
+                        "in": "formData",
+                        "description": "Tanggal mulai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_selesai",
+                        "in": "formData",
+                        "description": "Tanggal selesai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pelaksana",
+                        "in": "formData",
+                        "description": "pelaksana",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "bagian",
+                        "in": "formData",
+                        "description": "Bagian",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "jenis_kegiatan",
+                        "in": "formData",
+                        "description": "Jenis kegiatan",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tempat_kegiatan",
+                        "in": "formData",
+                        "description": "Tempat kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tujuan_kegiatan",
+                        "in": "formData",
+                        "description": "Tujuan kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sumber_anggaran",
+                        "in": "formData",
+                        "description": "Sumber anggaran",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_peserta",
+                        "in": "formData",
+                        "description": "meta peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_laporan",
+                        "in": "formData",
+                        "description": "File laporan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "anggaran_id",
+                        "in": "formData",
+                        "description": "Id anggaran",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "Status",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/settama/{id}": {
+            "get": {
+                "tags": [
+                    "Settama"
+                ],
+                "summary": "Get List Data Settama By id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Settama"
+                ],
+                "summary": "Update Data Settama",
+                "operationId": "update data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "jns_rujukan",
+                        "in": "formData",
+                        "description": "Jenis rujukan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_rujukan",
+                        "in": "formData",
+                        "description": "No rujukan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_mulai",
+                        "in": "formData",
+                        "description": "Tanggal mulai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_selesai",
+                        "in": "formData",
+                        "description": "Tanggal selesai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pelaksana",
+                        "in": "formData",
+                        "description": "pelaksana",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "bagian",
+                        "in": "formData",
+                        "description": "Bagian",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "jenis_kegiatan",
+                        "in": "formData",
+                        "description": "Jenis kegiatan",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tempat_kegiatan",
+                        "in": "formData",
+                        "description": "Tempat kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tujuan_kegiatan",
+                        "in": "formData",
+                        "description": "Tujuan kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sumber_anggaran",
+                        "in": "formData",
+                        "description": "Sumber anggaran",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_peserta",
+                        "in": "formData",
+                        "description": "meta peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_laporan",
+                        "in": "formData",
+                        "description": "File laporan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "anggaran_id",
+                        "in": "formData",
+                        "description": "Id anggaran",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "Status",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Settama"
+                ],
+                "summary": "Delete Data Settama By id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "tags": [
