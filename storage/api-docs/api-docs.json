@@ -1758,6 +1758,117 @@
                         "description": "internal server error"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Berantas Razia"
+                ],
+                "summary": "Store data Berantas Razia",
+                "operationId": "Store data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_razia",
+                        "in": "formData",
+                        "description": "tgl_razia",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lokasi",
+                        "in": "formData",
+                        "description": "lokasi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "koordinat",
+                        "in": "formData",
+                        "description": "koordinat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uraian_singkat",
+                        "in": "formData",
+                        "description": "uraian_singkat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_dirazia",
+                        "in": "formData",
+                        "description": "jumlah_dirazia",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_terindikasi",
+                        "in": "formData",
+                        "description": "jumlah_terindikasi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_ditemukan",
+                        "in": "formData",
+                        "description": "jumlah_ditemukan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keterangan_lainnya",
+                        "in": "formData",
+                        "description": "keterangan_lainnya",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto1",
+                        "in": "formData",
+                        "description": "foto1",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto2",
+                        "in": "formData",
+                        "description": "foto2",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto3",
+                        "in": "formData",
+                        "description": "foto3",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_instansi",
+                        "in": "formData",
+                        "description": "id_instansi",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
             }
         },
         "/berantasrazia/{id}": {
@@ -1779,6 +1890,158 @@
                         "name": "id",
                         "in": "path",
                         "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Berantas Razia"
+                ],
+                "summary": "update Berantas Razia by id",
+                "operationId": "update data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_razia",
+                        "in": "formData",
+                        "description": "tgl_razia",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lokasi",
+                        "in": "formData",
+                        "description": "lokasi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "koordinat",
+                        "in": "formData",
+                        "description": "koordinat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uraian_singkat",
+                        "in": "formData",
+                        "description": "uraian_singkat",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_dirazia",
+                        "in": "formData",
+                        "description": "jumlah_dirazia",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_terindikasi",
+                        "in": "formData",
+                        "description": "jumlah_terindikasi",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_ditemukan",
+                        "in": "formData",
+                        "description": "jumlah_ditemukan",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keterangan_lainnya",
+                        "in": "formData",
+                        "description": "keterangan_lainnya",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto1",
+                        "in": "formData",
+                        "description": "foto1",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto2",
+                        "in": "formData",
+                        "description": "foto2",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto3",
+                        "in": "formData",
+                        "description": "foto3",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_instansi",
+                        "in": "formData",
+                        "description": "id_instansi",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Berantas Razia"
+                ],
+                "summary": "Delete Berantas Razia by id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete data by id",
                         "required": true,
                         "type": "integer"
                     }
@@ -1823,6 +2086,313 @@
                         "description": "internal server error"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "DPO"
+                ],
+                "summary": "Store data DPO",
+                "operationId": "Store data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_sprint_dpo",
+                        "in": "formData",
+                        "description": "nomor_sprint_dpo",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama",
+                        "in": "formData",
+                        "description": "nama",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamat",
+                        "in": "formData",
+                        "description": "alamat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jenis_kelamin",
+                        "in": "formData",
+                        "description": "kode_jenis_kelamin",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_lahir",
+                        "in": "formData",
+                        "description": "tempat_lahir",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "usia",
+                        "in": "formData",
+                        "description": "usia",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_kelompok_usia",
+                        "in": "formData",
+                        "description": "kode_kelompok_usia",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_pendidikan_akhir",
+                        "in": "formData",
+                        "description": "kode_pendidikan_akhir",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_pekerjaan",
+                        "in": "formData",
+                        "description": "kode_pekerjaan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_warga_negara",
+                        "in": "formData",
+                        "description": "kode_warga_negara",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_peran_tersangka",
+                        "in": "formData",
+                        "description": "kode_peran_tersangka",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_identitas",
+                        "in": "formData",
+                        "description": "no_identitas",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_negara",
+                        "in": "formData",
+                        "description": "kode_negara",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jenisidentitas",
+                        "in": "formData",
+                        "description": "kode_jenisidentitas",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatktp_idprovinsi",
+                        "in": "formData",
+                        "description": "alamatktp_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatktp_idkabkota",
+                        "in": "formData",
+                        "description": "alamatktp_idkabkota",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatktp_kodepos",
+                        "in": "formData",
+                        "description": "alamatktp_kodepos",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatdomisili",
+                        "in": "formData",
+                        "description": "alamatdomisili",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatdomisili_idprovinsi",
+                        "in": "formData",
+                        "description": "alamatdomisili_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatdomisili_idkabkota",
+                        "in": "formData",
+                        "description": "alamatdomisili_idkabkota",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatdomisili_kodepos",
+                        "in": "formData",
+                        "description": "alamatdomisili_kodepos",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatlainnya",
+                        "in": "formData",
+                        "description": "alamatlainnya",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatlainnya_idprovinsi",
+                        "in": "formData",
+                        "description": "alamatlainnya_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatlainnya_idkabkota",
+                        "in": "formData",
+                        "description": "alamatlainnya_idkabkota",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatlainnya_kodepos",
+                        "in": "formData",
+                        "description": "alamatlainnya_kodepos",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_warna_rambut",
+                        "in": "formData",
+                        "description": "fisik_warna_rambut",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_tipikal_rambut",
+                        "in": "formData",
+                        "description": "fisik_tipikal_rambut",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_tinggi_badan",
+                        "in": "formData",
+                        "description": "fisik_tinggi_badan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_perawakan",
+                        "in": "formData",
+                        "description": "fisik_perawakan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_warna_kulit",
+                        "in": "formData",
+                        "description": "fisik_warna_kulit",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_bentuk_mata",
+                        "in": "formData",
+                        "description": "fisik_bentuk_mata",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_bentuk_wajah",
+                        "in": "formData",
+                        "description": "fisik_bentuk_wajah",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_lohat_bahasa",
+                        "in": "formData",
+                        "description": "fisik_lohat_bahasa",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_suku_ras",
+                        "in": "formData",
+                        "description": "fisik_suku_ras",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_foto_tampak_depan",
+                        "in": "formData",
+                        "description": "file_foto_tampak_depan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_foto_tampak_sampingkanan",
+                        "in": "formData",
+                        "description": "file_foto_tampak_sampingkanan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_foto_tampak_sampingkiri",
+                        "in": "formData",
+                        "description": "file_foto_tampak_sampingkiri",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_laporan",
+                        "in": "formData",
+                        "description": "file_laporan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_instansi",
+                        "in": "formData",
+                        "description": "id_instansi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
             }
         },
         "/dpo/{id}": {
@@ -1844,6 +2414,354 @@
                         "name": "id",
                         "in": "path",
                         "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "DPO"
+                ],
+                "summary": "update DPO by id",
+                "operationId": "update data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_sprint_dpo",
+                        "in": "formData",
+                        "description": "nomor_sprint_dpo",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama",
+                        "in": "formData",
+                        "description": "nama",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamat",
+                        "in": "formData",
+                        "description": "alamat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jenis_kelamin",
+                        "in": "formData",
+                        "description": "kode_jenis_kelamin",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_lahir",
+                        "in": "formData",
+                        "description": "tempat_lahir",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "usia",
+                        "in": "formData",
+                        "description": "usia",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_kelompok_usia",
+                        "in": "formData",
+                        "description": "kode_kelompok_usia",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_pendidikan_akhir",
+                        "in": "formData",
+                        "description": "kode_pendidikan_akhir",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_pekerjaan",
+                        "in": "formData",
+                        "description": "kode_pekerjaan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_warga_negara",
+                        "in": "formData",
+                        "description": "kode_warga_negara",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_peran_tersangka",
+                        "in": "formData",
+                        "description": "kode_peran_tersangka",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "no_identitas",
+                        "in": "formData",
+                        "description": "no_identitas",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_negara",
+                        "in": "formData",
+                        "description": "kode_negara",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jenisidentitas",
+                        "in": "formData",
+                        "description": "kode_jenisidentitas",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatktp_idprovinsi",
+                        "in": "formData",
+                        "description": "alamatktp_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatktp_idkabkota",
+                        "in": "formData",
+                        "description": "alamatktp_idkabkota",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatktp_kodepos",
+                        "in": "formData",
+                        "description": "alamatktp_kodepos",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatdomisili",
+                        "in": "formData",
+                        "description": "alamatdomisili",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatdomisili_idprovinsi",
+                        "in": "formData",
+                        "description": "alamatdomisili_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatdomisili_idkabkota",
+                        "in": "formData",
+                        "description": "alamatdomisili_idkabkota",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatdomisili_kodepos",
+                        "in": "formData",
+                        "description": "alamatdomisili_kodepos",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatlainnya",
+                        "in": "formData",
+                        "description": "alamatlainnya",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatlainnya_idprovinsi",
+                        "in": "formData",
+                        "description": "alamatlainnya_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatlainnya_idkabkota",
+                        "in": "formData",
+                        "description": "alamatlainnya_idkabkota",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamatlainnya_kodepos",
+                        "in": "formData",
+                        "description": "alamatlainnya_kodepos",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_warna_rambut",
+                        "in": "formData",
+                        "description": "fisik_warna_rambut",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_tipikal_rambut",
+                        "in": "formData",
+                        "description": "fisik_tipikal_rambut",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_tinggi_badan",
+                        "in": "formData",
+                        "description": "fisik_tinggi_badan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_perawakan",
+                        "in": "formData",
+                        "description": "fisik_perawakan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_warna_kulit",
+                        "in": "formData",
+                        "description": "fisik_warna_kulit",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_bentuk_mata",
+                        "in": "formData",
+                        "description": "fisik_bentuk_mata",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_bentuk_wajah",
+                        "in": "formData",
+                        "description": "fisik_bentuk_wajah",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_lohat_bahasa",
+                        "in": "formData",
+                        "description": "fisik_lohat_bahasa",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fisik_suku_ras",
+                        "in": "formData",
+                        "description": "fisik_suku_ras",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_foto_tampak_depan",
+                        "in": "formData",
+                        "description": "file_foto_tampak_depan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_foto_tampak_sampingkanan",
+                        "in": "formData",
+                        "description": "file_foto_tampak_sampingkanan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_foto_tampak_sampingkiri",
+                        "in": "formData",
+                        "description": "file_foto_tampak_sampingkiri",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_laporan",
+                        "in": "formData",
+                        "description": "file_laporan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_instansi",
+                        "in": "formData",
+                        "description": "id_instansi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "DPO"
+                ],
+                "summary": "Delete DPO by id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete data by id",
                         "required": true,
                         "type": "integer"
                     }
