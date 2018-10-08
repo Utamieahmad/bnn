@@ -2594,6 +2594,330 @@
                 }
             }
         },
+        "/pelatihanpeserta": {
+            "get": {
+                "tags": [
+                    "Rehab Pelatihan Peserta"
+                ],
+                "summary": "Get List Data rehab pelatihan peserta",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Rehab Pelatihan Peserta"
+                ],
+                "summary": "Create Data Rehab pelatihan peserta",
+                "operationId": "create data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_header",
+                        "in": "formData",
+                        "description": "ID Header",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "nama_peserta",
+                        "in": "formData",
+                        "description": "Nama peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_identitas",
+                        "in": "formData",
+                        "description": "No identitas",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jeniskelamin",
+                        "in": "formData",
+                        "description": "Kode jenis kelamin",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_hp",
+                        "in": "formData",
+                        "description": "Nomor hp",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email_peserta",
+                        "in": "formData",
+                        "description": "Email peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_instansilembaga",
+                        "in": "formData",
+                        "description": "Asal instansi lembaga",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "Status aktif",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamat",
+                        "in": "formData",
+                        "description": "Alamat",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/pelatihanpeserta/{id}": {
+            "get": {
+                "tags": [
+                    "Rehab Pelatihan Peserta"
+                ],
+                "summary": "Get List Data Rehab pelatihan peserta By id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Rehab Pelatihan Peserta"
+                ],
+                "summary": "Update Data Rehab pelatihan peserta",
+                "operationId": "update data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "id_header",
+                        "in": "formData",
+                        "description": "ID Header",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "nama_peserta",
+                        "in": "formData",
+                        "description": "Nama peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_identitas",
+                        "in": "formData",
+                        "description": "No identitas",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jeniskelamin",
+                        "in": "formData",
+                        "description": "Kode jenis kelamin",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_hp",
+                        "in": "formData",
+                        "description": "Nomor hp",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email_peserta",
+                        "in": "formData",
+                        "description": "Email peserta",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_instansilembaga",
+                        "in": "formData",
+                        "description": "Asal instansi lembaga",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "Status aktif",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alamat",
+                        "in": "formData",
+                        "description": "Alamat",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/pelatihanpeserta/{id_detail}": {
+            "delete": {
+                "tags": [
+                    "Rehab Pelatihan Peserta"
+                ],
+                "summary": "Delete Data pelatihan peserta By id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_detail",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/single_pelatihan_rehabilitasi/{parent_id}": {
+            "get": {
+                "tags": [
+                    "Rehab Pelatihan Peserta"
+                ],
+                "summary": "Get List Data Rehab pelatihan peserta By id parent",
+                "operationId": "get data by id parent",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parent_id",
+                        "in": "path",
+                        "description": "id parent data",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
         "/penilaianlembaga": {
             "get": {
                 "tags": [
