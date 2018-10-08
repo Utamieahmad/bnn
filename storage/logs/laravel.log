@@ -1,5 +1,5 @@
 [2018-04-26 03:37:12] local.ERROR: ErrorException: count(): Parameter must be an array or an object that implements Countable in C:\xampp\htdocs\bnn\bnn\app\Http\Controllers\balaiBesarController.php:166
-Stack trace:
+Stack trace: 
 #0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 166, Array)
 #1 C:\xampp\htdocs\bnn\bnn\app\Http\Controllers\balaiBesarController.php(166): count(Object(stdClass))
 #2 [internal function]: App\Http\Controllers\balaiBesarController->magang(Object(Illuminate\Http\Request))
@@ -7736,7 +7736,7 @@ Stack trace:
 #29 C:\wamp64\www\bnn\vendor\symfony\console\Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #30 C:\wamp64\www\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #31 C:\wamp64\www\bnn\artisan(38): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
-#32 {main}  
+#32 {main}
 [2018-10-04 07:37:19] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -7774,7 +7774,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 07:37:19] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -7791,7 +7791,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 07:39:51] production.ERROR: ErrorException: file_get_contents(C:\XAMPP\htdocs\bnn/.env): failed to open stream: No such file or directory in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Console\KeyGenerateCommand.php:95
 Stack trace:
 #0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'file_get_conten...', 'C:\\XAMPP\\htdocs...', 95, Array)
@@ -7811,7 +7811,7 @@ Stack trace:
 #14 C:\XAMPP\htdocs\bnn\vendor\symfony\console\Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #15 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #16 C:\XAMPP\htdocs\bnn\artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
-#17 {main}  
+#17 {main}
 [2018-10-04 07:44:07] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -7849,7 +7849,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 07:44:07] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -7866,7 +7866,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 07:50:08] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -7904,7 +7904,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 07:50:08] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -7921,7 +7921,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 07:50:19] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -7959,7 +7959,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 07:50:19] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -7976,7 +7976,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 07:56:31] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8014,7 +8014,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 07:56:31] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8031,7 +8031,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 07:56:33] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8069,7 +8069,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 07:56:33] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8086,7 +8086,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:07:43] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8124,7 +8124,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 09:07:43] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8141,7 +8141,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:08:44] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8179,7 +8179,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 09:08:44] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8196,7 +8196,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:08:53] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8234,7 +8234,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 09:08:53] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8251,7 +8251,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:09:53] production.ERROR: ErrorException: file_get_contents(C:\XAMPP\htdocs\bnn/.env): failed to open stream: No such file or directory in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Console\KeyGenerateCommand.php:95
 Stack trace:
 #0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'file_get_conten...', 'C:\\XAMPP\\htdocs...', 95, Array)
@@ -8271,7 +8271,7 @@ Stack trace:
 #14 C:\XAMPP\htdocs\bnn\vendor\symfony\console\Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #15 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #16 C:\XAMPP\htdocs\bnn\artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
-#17 {main}  
+#17 {main}
 [2018-10-04 09:11:03] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8309,7 +8309,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 09:11:03] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8326,7 +8326,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:11:08] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8364,7 +8364,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 09:11:08] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8381,7 +8381,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:11:17] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8419,7 +8419,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 09:11:17] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8436,7 +8436,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:12:08] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8474,7 +8474,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 09:12:08] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -8491,7 +8491,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:12:46] local.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('\xFB\xBE3\f\x7F?}\xE3\xBBSK\x81*\xDCF...', 'AES-256-CBC')
@@ -8529,7 +8529,7 @@ Stack trace:
 #32 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #33 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #34 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#35 {main}  
+#35 {main}
 [2018-10-04 09:12:46] local.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\Encrypter.php:43
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Encryption\EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('\xFB\xBE3\f\x7F?}\xE3\xBBSK\x81*\xDCF...', 'AES-256-CBC')
@@ -8546,7 +8546,7 @@ Stack trace:
 #11 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(215): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #12 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 C:\XAMPP\htdocs\bnn\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
-#14 {main}  
+#14 {main}
 [2018-10-04 09:13:36] local.ERROR: PDOException: could not find driver in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:68
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(68): PDO->__construct('pgsql:host=127....', 'postgres', 'dbadmin', Array)
@@ -8602,7 +8602,7 @@ Stack trace:
 #50 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #51 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #52 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#53 {main}  
+#53 {main}
 [2018-10-04 09:13:36] local.ERROR: PDOException: could not find driver in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:68
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(68): PDO->__construct('pgsql:host=127....', 'postgres', 'dbadmin', Array)
@@ -8705,7 +8705,7 @@ Stack trace:
 #40 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #41 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #42 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#43 {main}  
+#43 {main}
 [2018-10-04 09:13:36] local.ERROR: GuzzleHttp\Exception\ServerException: Server error: `POST http://localhost/bnn/public/api/login` resulted in a `500 Internal Server Error` response:
 <!DOCTYPE html>
 <html>
@@ -8773,7 +8773,7 @@ Stack trace:
 #56 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #57 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #58 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#59 {main}  
+#59 {main}
 [2018-10-04 09:15:01] local.ERROR: PDOException: could not find driver in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:68
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(68): PDO->__construct('pgsql:host=127....', 'postgres', 'dbadmin', Array)
@@ -8829,7 +8829,7 @@ Stack trace:
 #50 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #51 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #52 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#53 {main}  
+#53 {main}
 [2018-10-04 09:15:01] local.ERROR: PDOException: could not find driver in C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:68
 Stack trace:
 #0 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(68): PDO->__construct('pgsql:host=127....', 'postgres', 'dbadmin', Array)
@@ -8932,7 +8932,7 @@ Stack trace:
 #40 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #41 C:\XAMPP\htdocs\bnn\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #42 C:\XAMPP\htdocs\bnn\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#43 {main}  
+#43 {main}
 
 Next ErrorException: count(): Parameter must be an array or an object that implements Countable (View: /var/www/html/bnn/resources/views/pencegahan/advokasi/koordinasi/index_pendataanKoordinasi.blade.php) in /var/www/html/bnn/storage/framework/views/ce831a91d9cbf70cb7562f278f73857a06947d3d.php:97
 Stack trace:
@@ -8989,7 +8989,7 @@ Stack trace:
 #50 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #51 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #52 /var/www/html/bnn/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#53 {main}  
+#53 {main}
 [2018-10-05 04:24:07] local.ERROR: ErrorException: count(): Parameter must be an array or an object that implements Countable in /var/www/html/bnn/storage/framework/views/ce831a91d9cbf70cb7562f278f73857a06947d3d.php:97
 Stack trace:
 #0 /var/www/html/bnn/storage/framework/views/ce831a91d9cbf70cb7562f278f73857a06947d3d.php(97): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'count(): Parame...', '/var/www/html/b...', 97, Array)
@@ -9103,4 +9103,4 @@ Stack trace:
 #50 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #51 /var/www/html/bnn/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #52 /var/www/html/bnn/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#53 {main}  
+#53 {main}
