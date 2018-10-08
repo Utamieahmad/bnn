@@ -4949,6 +4949,629 @@
                 }
             }
         },
+        "/pelatihan": {
+            "get": {
+                "tags": [
+                    "Rehab Pelatihan"
+                ],
+                "summary": "Get List Data Rehab pelatihan",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Rehab Pelatihan"
+                ],
+                "summary": "Create Data Rehab pelatihan",
+                "operationId": "create data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kategori",
+                        "in": "formData",
+                        "description": "Kategori",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_pelaksana",
+                        "in": "formData",
+                        "description": "No rujukan",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "nomor_sprint",
+                        "in": "formData",
+                        "description": "Nomor Sprint",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_sprint",
+                        "in": "formData",
+                        "description": "Tanggal Sprint",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_dilaksanakan_mulai",
+                        "in": "formData",
+                        "description": "Tanggal mulai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_dilaksanakan_selesai",
+                        "in": "formData",
+                        "description": "Tanggal selesai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat",
+                        "in": "formData",
+                        "description": "Tempat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_idprovinsi",
+                        "in": "formData",
+                        "description": "Id Provinsi",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tempat_idkabkota",
+                        "in": "formData",
+                        "description": "Id kota",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tempat_kodepos",
+                        "in": "formData",
+                        "description": "Kode pos",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_narasumber",
+                        "in": "formData",
+                        "description": "Jumlah narasumber",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tema",
+                        "in": "formData",
+                        "description": "Tema",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_materi",
+                        "in": "formData",
+                        "description": "File materi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "Status",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uraian_singkat",
+                        "in": "formData",
+                        "description": "Uraian Singkat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "koordinat",
+                        "in": "formData",
+                        "description": "Koordinat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_peserta",
+                        "in": "formData",
+                        "description": "Total peserta",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "foto1",
+                        "in": "formData",
+                        "description": "Foto",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto2",
+                        "in": "formData",
+                        "description": "Foto 2",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto3",
+                        "in": "formData",
+                        "description": "Foto 3",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jenis_kegiatan",
+                        "in": "formData",
+                        "description": "Jenis kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_peserta",
+                        "in": "formData",
+                        "description": "Jumlah peserta",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "Status",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/pelatihan/{id}": {
+            "get": {
+                "tags": [
+                    "Rehab Pelatihan"
+                ],
+                "summary": "Get List Data Rehab pelatihan by id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Rehab Pelatihan"
+                ],
+                "summary": "Update Data Rehab pelatihan",
+                "operationId": "update data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "kategori",
+                        "in": "formData",
+                        "description": "Kategori",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_pelaksana",
+                        "in": "formData",
+                        "description": "No rujukan",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "nomor_sprint",
+                        "in": "formData",
+                        "description": "Nomor Sprint",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_sprint",
+                        "in": "formData",
+                        "description": "Tanggal Sprint",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_dilaksanakan_mulai",
+                        "in": "formData",
+                        "description": "Tanggal mulai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tgl_dilaksanakan_selesai",
+                        "in": "formData",
+                        "description": "Tanggal selesai",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat",
+                        "in": "formData",
+                        "description": "Tempat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tempat_idprovinsi",
+                        "in": "formData",
+                        "description": "Id Provinsi",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tempat_idkabkota",
+                        "in": "formData",
+                        "description": "Id kota",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tempat_kodepos",
+                        "in": "formData",
+                        "description": "Kode pos",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_narasumber",
+                        "in": "formData",
+                        "description": "Jumlah narasumber",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tema",
+                        "in": "formData",
+                        "description": "Tema",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_materi",
+                        "in": "formData",
+                        "description": "File materi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "Status",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uraian_singkat",
+                        "in": "formData",
+                        "description": "Uraian Singkat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "koordinat",
+                        "in": "formData",
+                        "description": "Koordinat",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_peserta",
+                        "in": "formData",
+                        "description": "Total peserta",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "foto1",
+                        "in": "formData",
+                        "description": "Foto",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto2",
+                        "in": "formData",
+                        "description": "Foto 2",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "foto3",
+                        "in": "formData",
+                        "description": "Foto 3",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jenis_kegiatan",
+                        "in": "formData",
+                        "description": "Jenis kegiatan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_peserta",
+                        "in": "formData",
+                        "description": "Jumlah peserta",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "Status",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Rehab Pelatihan"
+                ],
+                "summary": "Delete Data Pelatihan By id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id data",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/listpelatihan": {
+            "post": {
+                "tags": [
+                    "Rehab Pelatihan"
+                ],
+                "summary": "Get Data Rehab pelatihan by request",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pelaksana",
+                        "in": "formData",
+                        "description": "Pelaksana",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_from",
+                        "in": "formData",
+                        "description": "start from",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_to",
+                        "in": "formData",
+                        "description": "start to",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_from",
+                        "in": "formData",
+                        "description": "end from",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_to",
+                        "in": "formData",
+                        "description": "End to",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jumlah_from",
+                        "in": "formData",
+                        "description": "Jumlah from",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "jumlah_to",
+                        "in": "formData",
+                        "description": "Jumlah to",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tema",
+                        "in": "formData",
+                        "description": "Tema",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_sprint",
+                        "in": "formData",
+                        "description": "Nomor sprint",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lokasi",
+                        "in": "formData",
+                        "description": "Lokasi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "Status",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kategori",
+                        "in": "formData",
+                        "description": "Kategori",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_wilayah",
+                        "in": "formData",
+                        "description": "Id wilayah",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "formData",
+                        "description": "Limit",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "Page",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tipe",
+                        "in": "formData",
+                        "description": "Tipe",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
         "/settama": {
             "get": {
                 "tags": [
