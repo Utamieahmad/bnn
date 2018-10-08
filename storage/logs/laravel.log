@@ -1,5 +1,5 @@
 [2018-04-26 03:37:12] local.ERROR: ErrorException: count(): Parameter must be an array or an object that implements Countable in C:\xampp\htdocs\bnn\bnn\app\Http\Controllers\balaiBesarController.php:166
-Stack trace: 
+Stack trace:
 #0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 166, Array)
 #1 C:\xampp\htdocs\bnn\bnn\app\Http\Controllers\balaiBesarController.php(166): count(Object(stdClass))
 #2 [internal function]: App\Http\Controllers\balaiBesarController->magang(Object(Illuminate\Http\Request))
