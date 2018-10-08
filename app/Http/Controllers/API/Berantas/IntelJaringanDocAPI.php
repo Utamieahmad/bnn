@@ -2,8 +2,8 @@
 
 /**
  * @SWG\Post(
- *   path="/listberantasrazia",
- *   tags={"Berantas Razia"},
+ *   path="/getintelbylkn",
+ *   tags={"Berantas Intel Jaringan"},
  *   summary="List Data by Page",
  *   operationId="getList",
  *   @SWG\Parameter(
@@ -29,8 +29,8 @@
 
  /**
   * @SWG\Get(
-  *   path="/berantasrazia",
-  *   tags={"Berantas Razia"},
+  *   path="/inteljaringan",
+  *   tags={"Berantas Intel Jaringan"},
   *   summary="Get List Data",
   *   operationId="get data",
   *   @SWG\Parameter(
@@ -49,8 +49,8 @@
 
   /**
    * @SWG\Get(
-   *   path="/berantasrazia/{id}",
-   *   tags={"Berantas Razia"},
+   *   path="/inteljaringan/{id}",
+   *   tags={"Berantas Intel Jaringan"},
    *   summary="Get Data by id",
    *   operationId="get data by id",
    *   @SWG\Parameter(
@@ -76,8 +76,8 @@
 
    /**
     * @SWG\Post(
-    *   path="/berantasrazia",
-    *   tags={"Berantas Razia"},
+    *   path="/inteljaringan",
+    *   tags={"Berantas Intel Jaringan"},
     *   summary="Store data",
     *   operationId="Store data",
     *   @SWG\Parameter(
@@ -88,87 +88,115 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="tgl_razia",
+    *     name="nomor_lkn",
     *     in="formData",
-    *     description="tgl_razia",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="lokasi",
-    *     in="formData",
-    *     description="lokasi",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="koordinat",
-    *     in="formData",
-    *     description="koordinat",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="uraian_singkat",
-    *     in="formData",
-    *     description="uraian_singkat",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_dirazia",
-    *     in="formData",
-    *     description="jumlah_dirazia",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_terindikasi",
-    *     in="formData",
-    *     description="jumlah_terindikasi",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_ditemukan",
-    *     in="formData",
-    *     description="jumlah_ditemukan",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="keterangan_lainnya",
-    *     in="formData",
-    *     description="keterangan_lainnya",
+    *     description="nomor_lkn",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="foto1",
+    *     name="id_kasus",
     *     in="formData",
-    *     description="foto1",
+    *     description="id_kasus",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="foto2",
+    *     name="keterlibatan_jaringan",
     *     in="formData",
-    *     description="foto2",
+    *     description="keterlibatan_jaringan",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="foto3",
+    *     name="nama_jaringan",
     *     in="formData",
-    *     description="foto3",
+    *     description="nama_jaringan",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_instansi",
+    *     name="nama_komandan_jaringan",
     *     in="formData",
-    *     description="id_instansi",
-    *     required=true,
+    *     description="nama_komandan_jaringan",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kode_jenisjaringan",
+    *     in="formData",
+    *     description="kode_jenisjaringan",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="asal_wilayah_jaringan",
+    *     in="formData",
+    *     description="asal_wilayah_jaringan",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="asal_negara_jaringan",
+    *     in="formData",
+    *     description="asal_negara_jaringan",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="keterkaitan_jaringan_lain",
+    *     in="formData",
+    *     description="keterkaitan_jaringan_lain",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="nama_jaringan_terkait",
+    *     in="formData",
+    *     description="nama_jaringan_terkait",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_aktif",
+    *     in="formData",
+    *     description="status_aktif",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="asal_wilayah_idprovinsi",
+    *     in="formData",
+    *     description="asal_wilayah_idprovinsi",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="asal_wilayah_idkabkota",
+    *     in="formData",
+    *     description="asal_wilayah_idkabkota",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="meta_jaringan_terkait",
+    *     in="formData",
+    *     description="meta_jaringan_terkait",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status",
+    *     in="formData",
+    *     description="status",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="file_upload",
+    *     in="formData",
+    *     description="file_upload",
+    *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Response(response=200, description="successful operation"),
@@ -180,8 +208,8 @@
 
     /**
       * @SWG\Put(
-      *   path="/berantasrazia/{id}",
-      *   tags={"Berantas Razia"},
+      *   path="/inteljaringan/{id}",
+      *   tags={"Berantas Intel Jaringan"},
       *   summary="update data by id",
       *   operationId="update data by id",
       *   @SWG\Parameter(
@@ -199,87 +227,115 @@
       *     type="string"
       *   ),
       *   @SWG\Parameter(
-      *     name="tgl_razia",
+      *     name="nomor_lkn",
       *     in="formData",
-      *     description="tgl_razia",
-      *     required=true,
-      *     type="string"
-      *   ),
-      *   @SWG\Parameter(
-      *     name="lokasi",
-      *     in="formData",
-      *     description="lokasi",
-      *     required=true,
-      *     type="string"
-      *   ),
-      *   @SWG\Parameter(
-      *     name="koordinat",
-      *     in="formData",
-      *     description="koordinat",
-      *     required=true,
-      *     type="string"
-      *   ),
-      *   @SWG\Parameter(
-      *     name="uraian_singkat",
-      *     in="formData",
-      *     description="uraian_singkat",
-      *     required=true,
-      *     type="string"
-      *   ),
-      *   @SWG\Parameter(
-      *     name="jumlah_dirazia",
-      *     in="formData",
-      *     description="jumlah_dirazia",
-      *     required=true,
-      *     type="string"
-      *   ),
-      *   @SWG\Parameter(
-      *     name="jumlah_terindikasi",
-      *     in="formData",
-      *     description="jumlah_terindikasi",
-      *     required=true,
-      *     type="string"
-      *   ),
-      *   @SWG\Parameter(
-      *     name="jumlah_ditemukan",
-      *     in="formData",
-      *     description="jumlah_ditemukan",
-      *     required=true,
-      *     type="string"
-      *   ),
-      *   @SWG\Parameter(
-      *     name="keterangan_lainnya",
-      *     in="formData",
-      *     description="keterangan_lainnya",
+      *     description="nomor_lkn",
       *     required=false,
       *     type="string"
       *   ),
       *   @SWG\Parameter(
-      *     name="foto1",
+      *     name="id_kasus",
       *     in="formData",
-      *     description="foto1",
+      *     description="id_kasus",
       *     required=false,
       *     type="string"
       *   ),
       *   @SWG\Parameter(
-      *     name="foto2",
+      *     name="keterlibatan_jaringan",
       *     in="formData",
-      *     description="foto2",
+      *     description="keterlibatan_jaringan",
       *     required=false,
       *     type="string"
       *   ),
       *   @SWG\Parameter(
-      *     name="foto3",
+      *     name="nama_jaringan",
       *     in="formData",
-      *     description="foto3",
+      *     description="nama_jaringan",
       *     required=false,
       *     type="string"
       *   ),
       *   @SWG\Parameter(
-      *     name="id_instansi",
+      *     name="nama_komandan_jaringan",
       *     in="formData",
-      *     description="id_instansi",
-      *     required=true,
+      *     description="nama_komandan_jaringan",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="kode_jenisjaringan",
+      *     in="formData",
+      *     description="kode_jenisjaringan",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="asal_wilayah_jaringan",
+      *     in="formData",
+      *     description="asal_wilayah_jaringan",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="asal_negara_jaringan",
+      *     in="formData",
+      *     description="asal_negara_jaringan",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="keterkaitan_jaringan_lain",
+      *     in="formData",
+      *     description="keterkaitan_jaringan_lain",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="nama_jaringan_terkait",
+      *     in="formData",
+      *     description="nama_jaringan_terkait",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="status_aktif",
+      *     in="formData",
+      *     description="status_aktif",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="asal_wilayah_idprovinsi",
+      *     in="formData",
+      *     description="asal_wilayah_idprovinsi",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="asal_wilayah_idkabkota",
+      *     in="formData",
+      *     description="asal_wilayah_idkabkota",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="meta_jaringan_terkait",
+      *     in="formData",
+      *     description="meta_jaringan_terkait",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="status",
+      *     in="formData",
+      *     description="status",
+      *     required=false,
+      *     type="string"
+      *   ),
+      *   @SWG\Parameter(
+      *     name="file_upload",
+      *     in="formData",
+      *     description="file_upload",
+      *     required=false,
       *     type="string"
       *   ),
       *   @SWG\Response(response=200, description="successful operation"),
@@ -291,8 +347,8 @@
 
     /**
       * @SWG\Delete(
-      *   path="/berantasrazia/{id}",
-      *   tags={"Berantas Razia"},
+      *   path="/inteljaringan/{id}",
+      *   tags={"Berantas Intel Jaringan"},
       *   summary="Delete Data by id",
       *   operationId="delete data by id",
       *   @SWG\Parameter(

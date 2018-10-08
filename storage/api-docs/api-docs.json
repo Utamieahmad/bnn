@@ -1700,7 +1700,7 @@
                 "tags": [
                     "Berantas Razia"
                 ],
-                "summary": "List Berantas Razia",
+                "summary": "List Data by Page",
                 "operationId": "getList",
                 "parameters": [
                     {
@@ -1736,7 +1736,7 @@
                 "tags": [
                     "Berantas Razia"
                 ],
-                "summary": "Get List Berantas Razia",
+                "summary": "Get List Data",
                 "operationId": "get data",
                 "parameters": [
                     {
@@ -1763,7 +1763,7 @@
                 "tags": [
                     "Berantas Razia"
                 ],
-                "summary": "Store data Berantas Razia",
+                "summary": "Store data",
                 "operationId": "Store data",
                 "parameters": [
                     {
@@ -1876,7 +1876,7 @@
                 "tags": [
                     "Berantas Razia"
                 ],
-                "summary": "Get Berantas Razia by id",
+                "summary": "Get Data by id",
                 "operationId": "get data by id",
                 "parameters": [
                     {
@@ -1910,7 +1910,7 @@
                 "tags": [
                     "Berantas Razia"
                 ],
-                "summary": "update Berantas Razia by id",
+                "summary": "update data by id",
                 "operationId": "update data by id",
                 "parameters": [
                     {
@@ -2028,7 +2028,7 @@
                 "tags": [
                     "Berantas Razia"
                 ],
-                "summary": "Delete Berantas Razia by id",
+                "summary": "Delete Data by id",
                 "operationId": "delete data by id",
                 "parameters": [
                     {
@@ -2749,6 +2749,426 @@
                     "DPO"
                 ],
                 "summary": "Delete DPO by id",
+                "operationId": "delete data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/getintelbylkn": {
+            "post": {
+                "tags": [
+                    "Berantas Intel Jaringan"
+                ],
+                "summary": "List Data by Page",
+                "operationId": "getList",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "Pagination",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/inteljaringan": {
+            "get": {
+                "tags": [
+                    "Berantas Intel Jaringan"
+                ],
+                "summary": "Get List Data",
+                "operationId": "get data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Berantas Intel Jaringan"
+                ],
+                "summary": "Store data",
+                "operationId": "Store data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_lkn",
+                        "in": "formData",
+                        "description": "nomor_lkn",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_kasus",
+                        "in": "formData",
+                        "description": "id_kasus",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keterlibatan_jaringan",
+                        "in": "formData",
+                        "description": "keterlibatan_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_jaringan",
+                        "in": "formData",
+                        "description": "nama_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_komandan_jaringan",
+                        "in": "formData",
+                        "description": "nama_komandan_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jenisjaringan",
+                        "in": "formData",
+                        "description": "kode_jenisjaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_wilayah_jaringan",
+                        "in": "formData",
+                        "description": "asal_wilayah_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_negara_jaringan",
+                        "in": "formData",
+                        "description": "asal_negara_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keterkaitan_jaringan_lain",
+                        "in": "formData",
+                        "description": "keterkaitan_jaringan_lain",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_jaringan_terkait",
+                        "in": "formData",
+                        "description": "nama_jaringan_terkait",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "status_aktif",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_wilayah_idprovinsi",
+                        "in": "formData",
+                        "description": "asal_wilayah_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_wilayah_idkabkota",
+                        "in": "formData",
+                        "description": "asal_wilayah_idkabkota",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_jaringan_terkait",
+                        "in": "formData",
+                        "description": "meta_jaringan_terkait",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_upload",
+                        "in": "formData",
+                        "description": "file_upload",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/inteljaringan/{id}": {
+            "get": {
+                "tags": [
+                    "Berantas Intel Jaringan"
+                ],
+                "summary": "Get Data by id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Berantas Intel Jaringan"
+                ],
+                "summary": "update data by id",
+                "operationId": "update data by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nomor_lkn",
+                        "in": "formData",
+                        "description": "nomor_lkn",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_kasus",
+                        "in": "formData",
+                        "description": "id_kasus",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keterlibatan_jaringan",
+                        "in": "formData",
+                        "description": "keterlibatan_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_jaringan",
+                        "in": "formData",
+                        "description": "nama_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_komandan_jaringan",
+                        "in": "formData",
+                        "description": "nama_komandan_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kode_jenisjaringan",
+                        "in": "formData",
+                        "description": "kode_jenisjaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_wilayah_jaringan",
+                        "in": "formData",
+                        "description": "asal_wilayah_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_negara_jaringan",
+                        "in": "formData",
+                        "description": "asal_negara_jaringan",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keterkaitan_jaringan_lain",
+                        "in": "formData",
+                        "description": "keterkaitan_jaringan_lain",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nama_jaringan_terkait",
+                        "in": "formData",
+                        "description": "nama_jaringan_terkait",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status_aktif",
+                        "in": "formData",
+                        "description": "status_aktif",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_wilayah_idprovinsi",
+                        "in": "formData",
+                        "description": "asal_wilayah_idprovinsi",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "asal_wilayah_idkabkota",
+                        "in": "formData",
+                        "description": "asal_wilayah_idkabkota",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "meta_jaringan_terkait",
+                        "in": "formData",
+                        "description": "meta_jaringan_terkait",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "description": "status",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_upload",
+                        "in": "formData",
+                        "description": "file_upload",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Berantas Intel Jaringan"
+                ],
+                "summary": "Delete Data by id",
                 "operationId": "delete data by id",
                 "parameters": [
                     {
