@@ -23,6 +23,9 @@ Route::post('/forgot_password_process','AuthenticationController@forgot_password
 Route::get('/reset_password/{token}', 'AuthenticationController@reset_password')->name('reset_password');
 Route::post('/reset_password_process', 'AuthenticationController@reset_password')->name('reset_password_process');
 Route::get('/reset_email/{token}', 'AuthenticationController@reset_email')->name('reset_email');
+Route::get('/api/documentation',function(){ //redirect to web SIN 
+	return redirect('/login');
+});
 
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/','DashboardController@dashboard')->name('dashboard');
