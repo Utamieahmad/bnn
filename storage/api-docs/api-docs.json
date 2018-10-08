@@ -3664,6 +3664,49 @@
                 }
             }
         },
+        "/penilaian_lembaga_rehabilitasi": {
+            "post": {
+                "tags": [
+                    "Rehab Penilaian Lembaga"
+                ],
+                "summary": "Get List Data Penilaian Lembaga by id",
+                "operationId": "get data by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "formData",
+                        "description": "Limit",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "Page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
         "/settama": {
             "get": {
                 "tags": [
