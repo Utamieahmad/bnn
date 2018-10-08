@@ -224,7 +224,8 @@ Route::group(['middleware' => ['auth:api', 'TokenCheck']], function () {
   Route::resource('penilaianlembaga', 'Rehab\PenilaianLembagaAPIController');
 
   // Route::get('dokumen_nspk_rehabilitasi','Rehab\NspkAPIController@dokumenNSPKRehabilitasi');
-  Route::get('penilaian_lembaga_rehabilitasi','Rehab\PenilaianLembagaAPIController@penilaianLembagaRehabilitasi');
+  //  Route::get('penilaian_lembaga_rehabilitasi','Rehab\PenilaianLembagaAPIController@penilaianLembagaRehabilitasi');
+  Route::post('penilaian_lembaga_rehabilitasi','Rehab\PenilaianLembagaAPIController@penilaianLembagaRehabilitasi');
   //Badiklat
   Route::resource('kegiatan', 'Badiklat\KegiatanAPIController');
   Route::resource('kegiatanpeserta', 'Badiklat\KegiatanPesertaAPIController');
