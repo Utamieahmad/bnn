@@ -30,6 +30,18 @@ use Excel;
 class Controller extends BaseController
 {
   use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+  //url api
+  public static function urlapi(){
+    return $api_url = config('app.url_api_local');
+    // return $api_url = config('app.url_soadev');
+    // return $api_url = config('app.url_soa');
+  }
+  // public static function urlapisoaDev(){
+  //   return $api_url = config('app.url_soadev');
+  // }
+  // public static function urlapisoa(){
+  //   return $api_url = config('app.url_soa');
+  // }
 
   function replacer(& $item, $key) {
     // if ($item === null) {

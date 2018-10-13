@@ -23,6 +23,7 @@ class AdvokasiController extends Controller
     public $data;
     public $selected;
     public $form_params;
+
     public function pendataanKoordinasi(Request $request){
         $client = new Client();
         if ($request->input('page')) {
@@ -30,7 +31,9 @@ class AdvokasiController extends Controller
         } else {
           $page = 1;
         }
-        $baseUrl = URL::to('/');
+        // $url_api = ;
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $kondisi = '';
@@ -125,16 +128,17 @@ class AdvokasiController extends Controller
         $offset = 'page='.$current_page;
 
         $requestAdvorakor = $client->request('GET', $baseUrl.'/api/advorakor?id_wilayah='.$request->session()->get('wilayah').'&'.$limit.'&'.$offset.$kondisi,
+        // $requestAdvorakor = $client->request('GET', $baseUrl.'cegah/advorakor?id_wilayah='.$request->session()->get('wilayah').'&'.$limit.'&'.$offset.$kondisi,
             [
                 'headers' =>
                 [
                     'Authorization' => 'Bearer '.$token
+                    // 'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
                 ]
             ]
         );
         $advorakor = json_decode($requestAdvorakor->getBody()->getContents(), true);
-
-
+        // dd($advorakor);
         $this->data['data_advorakor'] = $advorakor['data'];
         $page = $advorakor['paginate'];
         $this->data['titledel'] = "advorakor";
@@ -171,7 +175,8 @@ class AdvokasiController extends Controller
 
     public function addpendataanKoordinasi(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -201,7 +206,8 @@ class AdvokasiController extends Controller
     public function editpendataanKoordinasi(Request $request){
        $id = $request->id;
        $client = new Client();
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $requestDataDetail= $client->request('GET', $baseUrl.'/api/advorakor/'.$id,
@@ -243,7 +249,8 @@ class AdvokasiController extends Controller
 
     public function inputpendataanKoordinasi(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -433,7 +440,8 @@ class AdvokasiController extends Controller
     public function updatependataanKoordinasi(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -662,7 +670,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
 				$get = $request->all();
 				$kondisi = "";
@@ -771,7 +780,8 @@ class AdvokasiController extends Controller
         } else {
           $page = 1;
         }
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $kondisi = '';
@@ -911,7 +921,8 @@ class AdvokasiController extends Controller
 
     public function addpendataanJejaring(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -929,7 +940,8 @@ class AdvokasiController extends Controller
     public function editpendataanJejaring(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advojejaring/'.$id,
@@ -961,7 +973,8 @@ class AdvokasiController extends Controller
 
     public function inputpendataanJejaring(Request $request){
 
-       $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -1125,7 +1138,8 @@ class AdvokasiController extends Controller
     public function updatependataanJejaring(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -1314,7 +1328,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
 				$get = $request->all();
 				$kondisi = "";
@@ -1415,7 +1430,8 @@ class AdvokasiController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $kondisi = '';
@@ -1556,7 +1572,8 @@ class AdvokasiController extends Controller
 
     public function addpendataanAsistensi(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -1574,7 +1591,8 @@ class AdvokasiController extends Controller
     public function editpendataanAsistensi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advoasistensi/'.$id,
@@ -1606,7 +1624,8 @@ class AdvokasiController extends Controller
 
     public function inputpendataanAsistensi(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -1770,7 +1789,8 @@ class AdvokasiController extends Controller
     public function updatependataanAsistensi(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -1959,7 +1979,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
 				$get = $request->all();
 				$kondisi = "";
@@ -2060,7 +2081,8 @@ class AdvokasiController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvoasistensipenguatan = $client->request('GET', $baseUrl.'/api/advoasistensipenguatan?page='.$page,
@@ -2093,7 +2115,8 @@ class AdvokasiController extends Controller
 
     public function addpenguatanAsistensi(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -2111,7 +2134,8 @@ class AdvokasiController extends Controller
     public function editpenguatanAsistensi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advoasistensipenguatan/'.$id,
@@ -2143,7 +2167,8 @@ class AdvokasiController extends Controller
 
     public function inputpenguatanAsistensi(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -2243,7 +2268,8 @@ class AdvokasiController extends Controller
     public function updatepenguatanAsistensi(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -2342,7 +2368,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPrintData = $client->request('GET', $baseUrl.'/api/advoasistensipenguatan?page='.$page,
             [
@@ -2388,7 +2415,8 @@ class AdvokasiController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $kondisi = '';
@@ -2529,7 +2557,8 @@ class AdvokasiController extends Controller
 
     public function addpendataanIntervensi(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -2547,7 +2576,8 @@ class AdvokasiController extends Controller
     public function editpendataanIntervensi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advointervensi/'.$id,
@@ -2579,7 +2609,8 @@ class AdvokasiController extends Controller
 
     public function inputpendataanIntervensi(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -2743,7 +2774,8 @@ class AdvokasiController extends Controller
     public function updatependataanIntervensi(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -2932,7 +2964,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
 				$get = $request->all();
 				$kondisi = "";
@@ -3033,7 +3066,8 @@ class AdvokasiController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $kondisi = '';
@@ -3174,7 +3208,8 @@ class AdvokasiController extends Controller
 
     public function addpendataanSupervisi(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -3192,7 +3227,8 @@ class AdvokasiController extends Controller
     public function editpendataanSupervisi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advosupervisi/'.$id,
@@ -3224,7 +3260,8 @@ class AdvokasiController extends Controller
 
     public function inputpendataanSupervisi(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -3388,7 +3425,8 @@ class AdvokasiController extends Controller
     public function updatependataanSupervisi(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -3577,7 +3615,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
 				$get = $request->all();
 				$kondisi = "";
@@ -3678,7 +3717,8 @@ class AdvokasiController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $kondisi = '';
@@ -3818,7 +3858,8 @@ class AdvokasiController extends Controller
 
     public function addpendataanMonitoring(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -3836,7 +3877,8 @@ class AdvokasiController extends Controller
     public function editpendataanMonitoring(Request $request){
           $id = $request->id;
           $client = new Client();
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $requestDataDetail= $client->request('GET', $baseUrl.'/api/advomonev/'.$id,
@@ -3868,7 +3910,8 @@ class AdvokasiController extends Controller
 
     public function inputpendataanMonitoring(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -4032,7 +4075,8 @@ class AdvokasiController extends Controller
     public function updatependataanMonitoring(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -4221,7 +4265,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
 				$get = $request->all();
 				$kondisi = "";
@@ -4322,7 +4367,8 @@ class AdvokasiController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $kondisi = '';
@@ -4462,7 +4508,8 @@ class AdvokasiController extends Controller
 
     public function addpendataanBimbingan(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -4480,7 +4527,8 @@ class AdvokasiController extends Controller
     public function editpendataanBimbingan(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advobimtek/'.$id,
@@ -4512,7 +4560,8 @@ class AdvokasiController extends Controller
 
     public function inputpendataanBimbingan(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -4676,7 +4725,8 @@ class AdvokasiController extends Controller
     public function updatependataanBimbingan(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -4865,7 +4915,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
 				$get = $request->all();
 				$kondisi = "";
@@ -4966,7 +5017,8 @@ class AdvokasiController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $kondisi = '';
@@ -5107,7 +5159,8 @@ class AdvokasiController extends Controller
 
     public function addpendataanSosialisasi(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -5125,7 +5178,8 @@ class AdvokasiController extends Controller
     public function editpendataanSosialisasi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemsosialisasi/'.$id,
@@ -5157,7 +5211,8 @@ class AdvokasiController extends Controller
 
     public function inputpendataanSosialisasi(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+       // $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -5321,7 +5376,8 @@ class AdvokasiController extends Controller
     public function updatependataanSosialisasi(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+          // $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -5510,7 +5566,8 @@ class AdvokasiController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
 
 				$get = $request->all();
 				$kondisi = "";

@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use URL;
+
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class AdministratorController extends Controller
 {
 	public $data = [];
     public function monitoringNihil(Request $request){
+      $client = new Client();
+			$baseUrl = URL::to($this->urlapi());
+			$token = $request->session()->get('token');
+
     	$this->limit = config('app.limit');
     	$this->data['title'] = 'Monitoring Nihil';
         if($request->page){
@@ -18,13 +26,24 @@ class AdministratorController extends Controller
             $start_number = $current_page;
         }
     	$limit = 'limit='.$this->limit;
-        $offset = 'page='.$current_page;
-    	$datas = execute_api('api/monitoringnihil?'.$limit.'&'.$offset,'get');
-		$datas = json_decode(json_encode($datas), FALSE);
+      $offset = 'page='.$current_page;
+			$datas = $client->request('GET', $baseUrl.'/api/monitoringnihil?'.$limit.'&'.$offset,
+				[
+						'headers' =>
+						[
+								'Authorization' => 'Bearer '.$token
+								// 'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
+						]
+				]
+			);
+    	// $datas = execute_api('api/monitoringnihil?'.$limit.'&'.$offset,'get');
+		// $datas = json_decode(json_encode($datas), FALSE);
+		$datas = json_decode($datas->getBody()->getContents(),FALSE);
+		// dd($datas);
 		if($datas->code == 200){
 			$this->data['data'] = $datas->data;
 		}else{
-			$this->data['data'] = [];	
+			$this->data['data'] = [];
 		}
 		// echo '<pre>';
 		// print_r($datas);
