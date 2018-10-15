@@ -141,13 +141,13 @@
 									@endif
 								</tbody>
 							</table>
-							<ul id="pagination-demo" class="pagination-sm"></ul>
+							{{-- <ul id="pagination-demo" class="pagination-sm"></ul> --}}
 						</div>
-						<!-- @if(count($data_advorakor))
+						@if(count($data_advorakor))
 							<div class="pagination_wrap">
 								{!! $pagination !!}
 							</div>
-						@endif -->
+						@endif
 					</div>
 				</div>
 			</div>
