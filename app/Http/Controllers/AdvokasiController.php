@@ -170,6 +170,7 @@ class AdvokasiController extends Controller
         // dd($filter);
         $this->data['pagination'] = paginations($current_page,$total_item, $this->limit, config('app.page_ellipsis'), '/'.$request->route()->getPrefix()."/".$request->route()->getName(),$filtering,$filter);
         $this->data['breadcrumps'] = breadcrumps_dir_advokasi($request->route()->getName());
+        // dd($this->data);
         return view('pencegahan.advokasi.koordinasi.index_pendataanKoordinasi',$this->data);
     }
 

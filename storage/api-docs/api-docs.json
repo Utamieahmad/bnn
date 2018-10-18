@@ -20,6 +20,20 @@
                         "description": "Authorization Token",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "get data by id",
+                        "required": true,
+                        "type": "integer"
                     }
                 ],
                 "responses": {
