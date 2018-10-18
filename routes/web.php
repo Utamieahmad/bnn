@@ -297,7 +297,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/add_penilaian_lembaga_pascarehabilitasi','RehabilitasiController@addpenilaianLembagaPasca')->name('add_penilaian_lembaga_pascarehabilitasi');
 			Route::post('/save_penilaian_lembaga_pascarehabilitasi','RehabilitasiController@addpenilaianLembagaPasca')->name('save_penilaian_lembaga_pascarehabilitasi');
 			Route::post('/update_penilaian_lembaga_pascarehabilitasi','RehabilitasiController@updatePenilaianLembagaPasca')->name('update_penilaian_lembaga_pascarehabilitasi');
-			Route::post('/delete_penilaian_lembaga_pascarehabilitasi','RehabilitasiController@addpenilaianLembagaPasca')->name('delete_penilaian_lembaga_pascarehabilitasi');
+			Route::post('/delete_penilaian_lembaga_pascarehabilitasi','RehabilitasiController@addpenilaianLembagaPasca')->name('delete_penilaian_lembaga_pascarehabilitasi');//diindikasi salah
 
 		});
 		Route::get('/print_page_pascarehabilitasi/{segment?}/{page?}','RehabilitasiController@printPage')->name("print_page_pascarehabilitasi");
