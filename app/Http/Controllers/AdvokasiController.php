@@ -127,13 +127,13 @@ class AdvokasiController extends Controller
         $limit = 'limit='.$this->limit;
         $offset = 'page='.$current_page;
 
-        $requestAdvorakor = $client->request('GET', $baseUrl.'/api/advorakor?id_wilayah='.$request->session()->get('wilayah').'&'.$limit.'&'.$offset.$kondisi,
-        // $requestAdvorakor = $client->request('GET', $baseUrl.'cegah/advorakor?id_wilayah='.$request->session()->get('wilayah').'&'.$limit.'&'.$offset.$kondisi,
+        // $requestAdvorakor = $client->request('GET', $baseUrl.'/api/advorakor?id_wilayah='.$request->session()->get('wilayah').'&'.$limit.'&'.$offset.$kondisi,
+        $requestAdvorakor = $client->request('GET', $baseUrl.'cegah/advorakor?id_wilayah='.$request->session()->get('wilayah').'&'.$limit.'&'.$offset.$kondisi,
             [
                 'headers' =>
                 [
-                    'Authorization' => 'Bearer '.$token
-                    // 'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
+                    // 'Authorization' => 'Bearer '.$token
+                    'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
                 ]
             ]
         );

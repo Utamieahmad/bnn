@@ -16,37 +16,69 @@ class SettamaController extends Controller
 	public $data=[];
 	public $form_params=[];
 	public $selected=[];
-    public function sekretariatUtama(Request $request){
-    	$this->limit = config('app.limit');
-        $this->data['title'] = "Kegiatan Sekretariat Utama";
-        if($request->page){
-            $current_page = $request->page;
-            $start_number = ($this->limit * ($request->page -1 )) + 1;
-        }else{
-            $current_page = 1;
-            $start_number = $current_page;
-        }
-        $limit = 'limit='.$this->limit;
-        $offset = 'page='.$current_page;
-        $datas = execute_api_json('api/settama?'.$limit.'&'.$offset,'get');
-    	if(($datas->status != 'error') && ($datas->code == 200) ){
-    		$this->data['data'] = $datas->data;
-    	}else{
-    		$this->data['data'] = [];
-    	}
-        $this->data['delete_route'] = 'delete_sekretariat_utama';
-        $this->data['path'] = $request->path();
-        $this->data['route_name'] = $request->route()->getName();
-        $this->data['start_number'] = $start_number;
-        $this->data['current_page'] = $current_page;
-        $total_item = $datas->paginate->totalpage * $this->limit;
-        $this->data['pagination'] = pagination($current_page,$total_item, $this->limit, config('app.page_ellipsis'), $request->route()->getPrefix()."/".$request->route()->getName()."/%d");
-        $this->data['breadcrumps'] = breadcrumps($request->route()->getName());
-    	return view('settama.index_sekretariatUtama',$this->data);
-    }
+	//indikasi tidak terpakai
+    // public function sekretariatUtama(Request $request){
+    // 	$this->limit = config('app.limit');
+    //     $this->data['title'] = "Kegiatan Sekretariat Utama";
+    //     if($request->page){
+    //         $current_page = $request->page;
+    //         $start_number = ($this->limit * ($request->page -1 )) + 1;
+    //     }else{
+    //         $current_page = 1;
+    //         $start_number = $current_page;
+    //     }
+    //     $limit = 'limit='.$this->limit;
+    //     $offset = 'page='.$current_page;
+		//
+		// 		$client = new Client();
+		// 		$baseUrl = URL::to($this->urlapi());
+    //     $token = $request->session()->get('token');
+    //     // $datas = execute_api_json('api/settama?'.$limit.'&'.$offset,'get');
+		// 		$datas = $client->request('GET', $baseUrl.'settama/settama?'.$limit.'&'.$offset,
+    //         [
+    //             'headers' =>
+    //             [
+    //                 // 'Authorization' => 'Bearer '.$token
+    //                 'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
+    //             ]
+    //         ]
+    //     );
+    //     $datas = json_decode($datas->getBody()->getContents(),FALSE);
+		// 		dd($datas);
+		//
+    // 	if(($datas->status != 'error') && ($datas->code == 200) ){
+    // 		$this->data['data'] = $datas->data;
+    // 	}else{
+    // 		$this->data['data'] = [];
+    // 	}
+    //     $this->data['delete_route'] = 'delete_sekretariat_utama';
+    //     $this->data['path'] = $request->path();
+    //     $this->data['route_name'] = $request->route()->getName();
+    //     $this->data['start_number'] = $start_number;
+    //     $this->data['current_page'] = $current_page;
+    //     $total_item = $datas->paginate->totalpage * $this->limit;
+    //     $this->data['pagination'] = pagination($current_page,$total_item, $this->limit, config('app.page_ellipsis'), $request->route()->getPrefix()."/".$request->route()->getName()."/%d");
+    //     $this->data['breadcrumps'] = breadcrumps($request->route()->getName());
+    // 	return view('settama.index_sekretariatUtama',$this->data);
+    // }
+
     public function editSekretariatUtama(Request $request){
     	$id = $request->id;
-    	$datas = execute_api_json('api/settama/'.$id,'get');
+					$client = new Client();
+					// $baseUrl = URL::to($this->urlapi());
+	        // $token = $request->session()->get('token');
+		    	$datas = execute_api_json('api/settama/'.$id,'get');
+					// $datas = $client->request('GET', $baseUrl.'settama/settama/'.$id,
+	        //     [
+	        //         'headers' =>
+	        //         [
+	        //             // 'Authorization' => 'Bearer '.$token
+	        //             'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
+	        //         ]
+	        //     ]
+	        // );
+	        // $datas = json_decode($datas->getBody()->getContents(),FALSE);
+					// dd($datas);
     	if(($datas->status != 'error') && ($datas->code == 200) ){
     		$this->data['data'] = $datas->data;
     		$d = $datas->data;
@@ -494,6 +526,7 @@ class SettamaController extends Controller
         $filter_parameter['javascript'] = 'onChange=showPeriode(this)';
         $filter_parameter['route'] = $request->route()->getName();
         $request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/2','GET');
+				// dd($request_kegiatan);
 		if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
         	$this->data['kegiatan'] = $request_kegiatan->data;
 		}else {
@@ -512,7 +545,22 @@ class SettamaController extends Controller
         }
         $limit = 'limit='.$this->limit;
         $offset = 'page='.$current_page;
+
+				// $client = new Client();
+				// $baseUrl = URL::to($this->urlapi());
+        // $token = $request->session()->get('token');
         $datas = execute_api_json('api/settama?biro=2&'.$limit.'&'.$offset.$kondisi,'get');
+				// $datas = $client->request('GET', $baseUrl.'settama/settama?biro=2&'.$limit.'&'.$offset.$kondisi,
+        //     [
+        //         'headers' =>
+        //         [
+        //             // 'Authorization' => 'Bearer '.$token
+        //             'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
+        //         ]
+        //     ]
+        // );
+        // $datas = json_decode($datas->getBody()->getContents(),FALSE);
+				// dd($datas);
     	if(($datas->status != 'error') && ($datas->code == 200) ){
     		$this->data['data'] = $datas->data;
     	}else{
@@ -1110,9 +1158,21 @@ class SettamaController extends Controller
         $limit = 'limit='.$this->limit;
         $offset = 'page='.$current_page;
 
-
+				// $client = new Client();
+				// $baseUrl = URL::to($this->urlapi());
+        // $token = $request->session()->get('token');
         $datas = execute_api_json('api/settama?biro=1&'.$limit.'&'.$offset.$kondisi,'get');
-
+				// $datas = $client->request('GET', $baseUrl.'settama/settama?biro=1&'.$limit.'&'.$offset.$kondisi,
+        //     [
+        //         'headers' =>
+        //         [
+        //             // 'Authorization' => 'Bearer '.$token
+        //             'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
+        //         ]
+        //     ]
+        // );
+        // $datas = json_decode($datas->getBody()->getContents(),FALSE);
+				// dd($datas);
         // exit();
     	if(($datas->status != 'error') && ($datas->code == 200) ){
     		$this->data['data'] = $datas->data;
