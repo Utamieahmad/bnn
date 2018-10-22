@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use Carbon\Carbon;
 use Storage;
+use URL;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class balaiBesarController extends Controller{
 	public $data = array();
@@ -135,7 +138,22 @@ class balaiBesarController extends Controller{
 
         $limit = 'limit='.$this->limit;
         $offset = 'page='.$current_page;
-        $query = execute_api_json('api/balaiBesar?'.$limit.'&'.$offset.$kondisi,'get');
+				$client = new Client();
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+        // $query = execute_api_json('api/balaiBesar?'.$limit.'&'.$offset.$kondisi,'get');
+        $query= $client->request('GET', $baseUrl.'/api/balaiBesar?'.$limit.'&'.$offset.$kondisi,
+           [
+               'headers' =>
+               [
+                   'Authorization' => 'Bearer '.$token
+               ]
+           ]
+        );
+
+        $query = json_decode($query->getBody()->getContents(), FALSE);
+				// dd($query);
         if($query->code == 200 && $query->status != 'error'){
             $this->data['data'] = $query->data;
             $total_item = $query->paginate->totalpage * $this->limit;
@@ -160,7 +178,18 @@ class balaiBesarController extends Controller{
         $this->data['start_number'] = $start_number;
         $this->data['current_page'] = $current_page;
 
-        $query = execute_api_json('/api/lookup/balai_besar_kegiatan','GET');
+        // $query = execute_api_json('/api/lookup/balai_besar_kegiatan','GET');
+				$query= $client->request('GET', $baseUrl.'/api/lookup/balai_besar_kegiatan',
+           [
+               'headers' =>
+               [
+                   'Authorization' => 'Bearer '.$token
+               ]
+           ]
+        );
+
+        $query = json_decode($query->getBody()->getContents(), FALSE);
+				// dd($query);
         $arr_kegiatan = [];
         if($query->code == 200 && $query->status != 'error'){
             if(count($query->data)>0){
@@ -175,7 +204,18 @@ class balaiBesarController extends Controller{
         }
         $this->data['jenis_kegiatan']  =$arr_kegiatan;
 
-        $query = execute_api('/api/lookup/balai_besar_instansi','GET');
+        // $query = execute_api('/api/lookup/balai_besar_instansi','GET');
+				$query= $client->request('GET', $baseUrl.'/api/lookup/balai_besar_instansi',
+           [
+               'headers' =>
+               [
+                   'Authorization' => 'Bearer '.$token
+               ]
+           ]
+        );
+				$query = json_decode($query->getBody()->getContents(), true);
+				// dd($query);
+
         if($query['code'] == 200 && $query['status'] != 'error'){
             $this->data['instansi']  = $query['data'];
         }else{
@@ -185,9 +225,16 @@ class balaiBesarController extends Controller{
         $this->data['pagination'] = paginations($current_page,$total_item, $this->limit, config('app.page_ellipsis'), config('app.url')."/".$request->route()->getPrefix()."/".$request->route()->getName(),$filtering,$filter );
     	return view('balai_besar.magang.index_magang',$this->data);
     }
+
     public function editMagang(Request $request){
         $id = $request->id;
         $datas = [];
+
+				$client = new Client();
+        $baseUrl = URL::to($this->urlapi());
+        // $baseUrl = URL::to('/');
+        $token = $request->session()->get('token');
+
         $url_simpeg = config('app.url_simpeg');
         $datas = execute_api_json($url_simpeg,'GET');
         if( ($datas->code == 200) && ($datas->status != 'error') ){
@@ -196,21 +243,54 @@ class balaiBesarController extends Controller{
             $this->data['satker'] = [];
         }
 
-        $datas = execute_api_json('/api/balaiBesar/'.$id,'GET');
+        // $datas = execute_api_json('/api/balaiBesar/'.$id,'GET');
+				$datas= $client->request('GET', $baseUrl.'/api/balaiBesar/'.$id,
+           [
+               'headers' =>
+               [
+                   'Authorization' => 'Bearer '.$token
+               ]
+           ]
+       );
+
+       $datas = json_decode($datas->getBody()->getContents(), FALSE);
+			 // dd($datas);
         if( ($datas->code == 200) && ($datas->status != 'error') ){
             $this->data['data'] = $datas->data;
         }else{
             $this->data['data'] = [];
         }
         $this->data['file_path'] = config('app.balai_besar_file_path');
-        $query = execute_api_json('/api/lookup/balai_besar_kegiatan','GET');
+        // $query = execute_api_json('/api/lookup/balai_besar_kegiatan','GET');
+				$query= $client->request('GET', $baseUrl.'/api/lookup/balai_besar_kegiatan',
+           [
+               'headers' =>
+               [
+                   'Authorization' => 'Bearer '.$token
+               ]
+           ]
+        );
+
+        $query = json_decode($query->getBody()->getContents(), FALSE);
+				// dd($query);
         if($query->code == 200 && $query->status != 'error'){
             $this->data['jenis_kegiatan']  = $query->data;
         }else{
             $this->data['jenis_kegiatan']  = [];
         }
 
-        $query = execute_api_json('/api/lookup/balai_besar_instansi','GET');
+        // $query = execute_api_json('/api/lookup/balai_besar_instansi','GET');
+				$query= $client->request('GET', $baseUrl.'/api/lookup/balai_besar_instansi',
+           [
+               'headers' =>
+               [
+                   'Authorization' => 'Bearer '.$token
+               ]
+           ]
+        );
+
+        $query = json_decode($query->getBody()->getContents(), FALSE);
+				// dd($query);
         if($query->code == 200 && $query->status != 'error'){
             $this->data['instansi']  = $query->data;
         }else{
@@ -220,6 +300,10 @@ class balaiBesarController extends Controller{
     	return view('balai_besar.magang.edit_magang',$this->data);
     }
     public function addMagang(Request $request){
+			$client = new Client();
+			$baseUrl = URL::to($this->urlapi());
+			// $baseUrl = URL::to('/');
+			$token = $request->session()->get('token');
     	if($request->isMethod('post')){
             $kode_instansi = $request->kode_instansi;
             $except  = [];
@@ -314,8 +398,20 @@ class balaiBesarController extends Controller{
                     $file_message = "Dengan File gagal diupload.".json_encodee($e->getResponse());
                 }
             }
-            $query = execute_api_json('/api/balaiBesar','POST',$this->form_params);
+						// dd($this->form_params);
+						// $query = execute_api_json('/api/balaiBesar','POST',$this->form_params);
+		       	$query= $client->request('POST', $baseUrl.'/api/balaiBesar',
+		           [
+		               'headers' =>
+		               [
+		                   'Authorization' => 'Bearer '.$token
+		               ],
+									 'form_params' => $this->form_params
+		           ]
+		       	);
 
+		       $query = json_decode($query->getBody()->getContents(), FALSE);
+					 // dd($query);
 						$trail['audit_menu'] = 'Balai Besar - Magang';
 						$trail['audit_event'] = 'post';
 						$trail['audit_value'] = json_encode($this->form_params);
@@ -340,7 +436,7 @@ class balaiBesarController extends Controller{
             return redirect(route('data_magang'))->with('status',$this->data);
     	}else{
             $datas = [];
-    		$url_simpeg = config('app.url_simpeg');
+    				$url_simpeg = config('app.url_simpeg');
             $datas = execute_api_json($url_simpeg,'GET');
             if( ($datas->code == 200) && ($datas->status != 'error') ){
                 $this->data['satker'] = $datas->data;
@@ -348,16 +444,38 @@ class balaiBesarController extends Controller{
                 $this->data['satker'] = [];
             }
 
-			$this->data['breadcrumps'] = breadcrump_balai_besar($request->route()->getName());
+						$this->data['breadcrumps'] = breadcrump_balai_besar($request->route()->getName());
 
-            $query = execute_api_json('/api/lookup/balai_besar_kegiatan','GET');
+            // $query = execute_api_json('/api/lookup/balai_besar_kegiatan','GET');
+		        $query= $client->request('GET', $baseUrl.'/api/lookup/balai_besar_kegiatan',
+		           [
+		               'headers' =>
+		               [
+		                   'Authorization' => 'Bearer '.$token
+		               ]
+		           ]
+		        );
+
+		        $query = json_decode($query->getBody()->getContents(), FALSE);
+
             if($query->code == 200 && $query->status != 'error'){
                 $this->data['jenis_kegiatan']  = $query->data;
             }else{
                 $this->data['jenis_kegiatan']  = [];
             }
 
-            $query = execute_api_json('/api/lookup/balai_besar_instansi','GET');
+            // $query = execute_api_json('/api/lookup/balai_besar_instansi','GET');
+		        $query= $client->request('GET', $baseUrl.'/api/lookup/balai_besar_instansi',
+		           [
+		               'headers' =>
+		               [
+		                   'Authorization' => 'Bearer '.$token
+		               ]
+		           ]
+		        );
+
+		        $query = json_decode($query->getBody()->getContents(), FALSE);
+
             if($query->code == 200 && $query->status != 'error'){
                 $this->data['instansi']  = $query->data;
             }else{
@@ -369,6 +487,11 @@ class balaiBesarController extends Controller{
     	}
     }
     public function updateMagang(Request $request){
+				$client = new Client();
+				$baseUrl = URL::to($this->urlapi());
+				// $baseUrl = URL::to('/');
+				$token = $request->session()->get('token');
+
         $kode_instansi = $request->kode_instansi;
         $id = $request->id;
         $except  = [];
@@ -465,7 +588,19 @@ class balaiBesarController extends Controller{
             }
         }
 
-        $query = execute_api_json('/api/balaiBesar/'.$id,'PUT',$this->form_params);
+        // $query = execute_api_json('/api/balaiBesar/'.$id,'PUT',$this->form_params);
+				$query= $client->request('PUT', $baseUrl.'/api/balaiBesar/'.$id,
+					 [
+							 'headers' =>
+							 [
+									 'Authorization' => 'Bearer '.$token
+							 ],
+							 'form_params' => $this->form_params
+					 ]
+				);
+
+			 $query = json_decode($query->getBody()->getContents(), FALSE);
+			 // dd($query);
 
 				$trail['audit_menu'] = 'Balai Besar - Magang';
 				$trail['audit_event'] = 'put';
