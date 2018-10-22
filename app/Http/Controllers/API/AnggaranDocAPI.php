@@ -16,15 +16,15 @@
     *   @SWG\Parameter(
     *     name="page",
 *         in="query",
-    *     description="get data by id",
-    *     required=true,
+    *     description="page",
+    *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
     *     name="limit",
 *         in="query",
-    *     description="get data by id",
-    *     required=true,
+    *     description="limit data",
+    *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Response(response=200, description="successful operation"),

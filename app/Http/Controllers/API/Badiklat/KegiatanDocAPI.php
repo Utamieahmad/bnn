@@ -1,24 +1,38 @@
 <?php
 
-     /**
-      * @SWG\Get(
-      *   path="/kegiatan",
-      *   tags={"Badiklat Kegiatan"},
-      *   summary="Get List Kegiatan",
-      *   operationId="get data",
-      *   @SWG\Parameter(
-      *     name="Authorization",
-      *     in="header",
-      *     description="Authorization Token",
-      *     required=true,
-      *     type="string"
-      *   ),
-      *   @SWG\Response(response=200, description="successful operation"),
-      *   @SWG\Response(response=406, description="not acceptable"),
-      *   @SWG\Response(response=500, description="internal server error")
-      * )
-      *
-      */
+/**
+    * @SWG\Get(
+    *   path="/kegiatan",
+    *   tags={"Badiklat Kegiatan"},
+    *   summary="Get List Kegiatan",
+    *   operationId="get data",
+    *   @SWG\Parameter(
+    *     name="Authorization",
+    *     in="header",
+    *     description="Authorization Token",
+    *     required=true,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="page",
+    *     in="query",
+    *     description="page",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="limit",
+    *     in="query",
+    *     description="limit data",
+    *     required=false,
+    *     type="integer"
+    *   ),    
+    *   @SWG\Response(response=200, description="successful operation"),
+    *   @SWG\Response(response=406, description="not acceptable"),
+    *   @SWG\Response(response=500, description="internal server error")
+    * )
+    *
+*/
 
       /**
        * @SWG\Get(
@@ -224,21 +238,21 @@
            *     name="nama_kegiatan",
            *     in="formData",
            *     description="nama_kegiatan",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Parameter(
            *     name="tgl_pelaksanaan",
            *     in="formData",
            *     description="tgl_pelaksanaan",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Parameter(
            *     name="tempat",
            *     in="formData",
            *     description="tempat",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Parameter(
@@ -252,7 +266,7 @@
            *     name="tempat_idkabkota",
            *     in="formData",
            *     description="tempat_idkabkota",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Parameter(
@@ -308,7 +322,7 @@
            *     name="kodeanggaran",
            *     in="formData",
            *     description="kodeanggaran",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Parameter(
@@ -322,14 +336,14 @@
            *     name="status",
            *     in="formData",
            *     description="status",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Parameter(
            *     name="tgl_selesai",
            *     in="formData",
            *     description="tgl_selesai",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Parameter(
@@ -343,14 +357,14 @@
            *     name="jenis_diklat",
            *     in="formData",
            *     description="jenis_diklat",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Parameter(
            *     name="tujuan_kegiatan",
            *     in="formData",
            *     description="tujuan_kegiatan",
-           *     required=true,
+           *     required=false,
            *     type="string"
            *   ),
            *   @SWG\Response(response=200, description="successful operation"),

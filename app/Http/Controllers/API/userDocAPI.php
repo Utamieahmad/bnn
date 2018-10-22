@@ -1,37 +1,51 @@
 <?php
 
 /**
- * @SWG\Get(
- *   path="/users",
- *   tags={"User"},
- *   summary="Get List User",
- *   operationId="get data",
- *   @SWG\Response(response=200, description="successful operation"),
- *   @SWG\Response(response=406, description="not acceptable"),
- *   @SWG\Response(response=500, description="internal server error")
- * )
- *
- */
+    * @SWG\Get(
+    *   path="/users",
+    *   tags={"User"},
+    *   summary="Get List User",
+    *   operationId="get data",
+    *   @SWG\Parameter(
+    *     name="page",
+    *     in="query",
+    *     description="page",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="limit",
+    *     in="query",
+    *     description="limit data",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Response(response=200, description="successful operation"),
+    *   @SWG\Response(response=406, description="not acceptable"),
+    *   @SWG\Response(response=500, description="internal server error")
+    * )
+    *
+*/
 
  /**
-  * @SWG\Get(
-  *   path="/users/{id}",
-  *   tags={"User"},
-  *   summary="Get User by id",
-  *   operationId="get data by id",
-  *   @SWG\Parameter(
-  *     name="id",
-  *     in="path",
-  *     description="get data by id",
-  *     required=true,
-  *     type="integer"
-  *   ),
-  *   @SWG\Response(response=200, description="successful operation"),
-  *   @SWG\Response(response=406, description="not acceptable"),
-  *   @SWG\Response(response=500, description="internal server error")
-  * )
-  *
-  */
+    * @SWG\Get(
+    *   path="/users/{id}",
+    *   tags={"User"},
+    *   summary="Get User by id",
+    *   operationId="get data by id",
+    *   @SWG\Parameter(
+    *     name="id",
+    *     in="path",
+    *     description="get data by id",
+    *     required=true,
+    *     type="integer"
+    *   ),    
+    *   @SWG\Response(response=200, description="successful operation"),
+    *   @SWG\Response(response=406, description="not acceptable"),
+    *   @SWG\Response(response=500, description="internal server error")
+    * )
+    * 
+*/
 
   /**
    * @SWG\Post(

@@ -63,7 +63,6 @@ class AnggaranAPIController extends Controller
 
     public function store(Request $request)
     {
-      dd($request);
         try {
             $data = Anggaran::create($request->except('api_token','created_by'));
             $response['eventID'] = $data->id;

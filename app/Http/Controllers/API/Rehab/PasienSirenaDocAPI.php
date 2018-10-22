@@ -2,9 +2,9 @@
 
 /**
     * @SWG\Get(
-    *   path="/penilaianlembaga",
-    *   tags={"Rehab Penilaian Lembaga"},
-    *   summary="Get List Data Penilaian Lembaga",
+    *   path="/pasiensirena",
+    *   tags={"Rehab Pasien Sirena"},
+    *   summary="Get List Data Rehab pasien sirena",
     *   operationId="get data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -36,9 +36,9 @@
 
 /**
     * @SWG\Get(
-    *   path="/penilaianlembaga/{id}",
-    *   tags={"Rehab Penilaian Lembaga"},
-    *   summary="Get List Data Penilaian Lembaga by id",
+    *   path="/pasiensirena/{id}",
+    *   tags={"Rehab Pasien Sirena"},
+    *   summary="Get List Data Rehab pasien sirena by id",
     *   operationId="get data by id",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -63,9 +63,9 @@
 
 /**
     * @SWG\Post(
-    *   path="/penilaianlembaga",
-    *   tags={"Rehab Penilaian Lembaga"},
-    *   summary="Create Data Penilaian Lembaga",
+    *   path="/pasiensirena",
+    *   tags={"Rehab Pasien Sirena"},
+    *   summary="Create Data Rehab pasien sirena",
     *   operationId="create data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -75,16 +75,86 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_lembaga",
+    *     name="idx_assesment",
     *     in="formData",
-    *     description="id lembaga",
+    *     description="idx assesment",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="idx_pasien",
+    *     in="formData",
+    *     description="idx pasien",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
     *     name="nama",
     *     in="formData",
-    *     description="Nama",
+    *     description="Nama pasien",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_kelamin",
+    *     in="formData",
+    *     description="Jenis kelamin",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="golongan_darah",
+    *     in="formData",
+    *     description="golongan darah",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tempat_lahir",
+    *     in="formData",
+    *     description="Tempat lahir",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_lahir",
+    *     in="formData",
+    *     description="Tanggal lahir(Y-m-d H:i:s)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="agama",
+    *     in="formData",
+    *     description="Agama",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_nikah",
+    *     in="formData",
+    *     description="Status nikah",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="no_identitas",
+    *     in="formData",
+    *     description="No identitas",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_identitas",
+    *     in="formData",
+    *     description="Jenis identitas",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="nik",
+    *     in="formData",
+    *     description="NIK",
     *     required=false,
     *     type="string"
     *   ),
@@ -96,436 +166,387 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="alamat_kodepos",
+    *     name="no_telp",
     *     in="formData",
-    *     description="Kode Pos",
+    *     description="No telepon",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="alamat_idprovinsi",
+    *     name="no_hp",
     *     in="formData",
-    *     description="id provinsi",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="alamat_idkabkota",
-    *     in="formData",
-    *     description="id kota",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_04_a",
-    *     in="formData",
-    *     description="Nilai 04 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_04_b",
-    *     in="formData",
-    *     description="Nilai 04 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_04_c",
-    *     in="formData",
-    *     description="Nilai 04 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_a",
-    *     in="formData",
-    *     description="Nilai 05 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_b",
-    *     in="formData",
-    *     description="Nilai 05 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_c",
-    *     in="formData",
-    *     description="Nilai 05 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_d",
-    *     in="formData",
-    *     description="Nilai 05 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_e",
-    *     in="formData",
-    *     description="Nilai 05 E",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_f",
-    *     in="formData",
-    *     description="Nilai 05 F",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_a",
-    *     in="formData",
-    *     description="Nilai 06 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_b",
-    *     in="formData",
-    *     description="Nilai 06 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_c",
-    *     in="formData",
-    *     description="Nilai 06 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_d",
-    *     in="formData",
-    *     description="Nilai 06 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_e",
-    *     in="formData",
-    *     description="Nilai 06 E",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_f",
-    *     in="formData",
-    *     description="Nilai 06 F",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_g",
-    *     in="formData",
-    *     description="Nilai 06 G",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_a",
-    *     in="formData",
-    *     description="Nilai 07 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_b",
-    *     in="formData",
-    *     description="Nilai 07 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_c",
-    *     in="formData",
-    *     description="Nilai 07 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_d",
-    *     in="formData",
-    *     description="Nilai 07 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_e",
-    *     in="formData",
-    *     description="Nilai 07 E",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_f",
-    *     in="formData",
-    *     description="Nilai 07 F",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_g",
-    *     in="formData",
-    *     description="Nilai 07 G",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_h",
-    *     in="formData",
-    *     description="Nilai 07 H",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_i",
-    *     in="formData",
-    *     description="Nilai 07 I",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_08_a",
-    *     in="formData",
-    *     description="Nilai 08 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_08_b",
-    *     in="formData",
-    *     description="Nilai 08 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_08_c",
-    *     in="formData",
-    *     description="Nilai 08 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_08_d",
-    *     in="formData",
-    *     description="Nilai 08 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_09_a",
-    *     in="formData",
-    *     description="Nilai 09 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_09_b",
-    *     in="formData",
-    *     description="Nilai 09 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_09_c",
-    *     in="formData",
-    *     description="Nilai 09 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_09_d",
-    *     in="formData",
-    *     description="Nilai 09 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_a",
-    *     in="formData",
-    *     description="Nilai 10 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_b",
-    *     in="formData",
-    *     description="Nilai 10 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_c",
-    *     in="formData",
-    *     description="Nilai 10 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_d",
-    *     in="formData",
-    *     description="Nilai 10 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_e",
-    *     in="formData",
-    *     description="Nilai 10 E",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_f",
-    *     in="formData",
-    *     description="Nilai 10 F",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_g",
-    *     in="formData",
-    *     description="Nilai 10 G",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_h",
-    *     in="formData",
-    *     description="Nilai 10 H",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_i",
-    *     in="formData",
-    *     description="Nilai 10 I",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_j",
-    *     in="formData",
-    *     description="Nilai 10 J",
+    *     description="No Hp",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nilai_10_k",
+    *     name="usia",
     *     in="formData",
-    *     description="Nilai 10 K",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_a",
-    *     in="formData",
-    *     description="Nilai 11 A",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_b",
-    *     in="formData",
-    *     description="Nilai 11 B",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_c",
-    *     in="formData",
-    *     description="Nilai 11 C",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_d",
-    *     in="formData",
-    *     description="Nilai 11 D",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_e",
-    *     in="formData",
-    *     description="Nilai 11 E",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_pecandu_yang_direhab",
-    *     in="formData",
-    *     description="Jumlah pecandu yang direhab",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_pecandu_selesai",
-    *     in="formData",
-    *     description="Jumlah pecandu selesai",
+    *     description="Usia",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="jumlah_pecandu_tidakselesai_kabur",
+    *     name="pendidikan",
     *     in="formData",
-    *     description="Jumlah pecandu yang tidak selsai kabur",
+    *     description="Pendidikan",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="jumlah_pecandu_tidakselesai_pulang",
+    *     name="pendidikan_akhir",
     *     in="formData",
-    *     description="Jumlah pecandu yang tidak selsai pulang",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_pecandu_tidakselesai_dirujuk",
-    *     in="formData",
-    *     description="Jumlah pecandu yang tidak selsai dirujuk",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_asalpecandu_razia",
-    *     in="formData",
-    *     description="Jumlah pecandu razia",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_asalpecandu_rujukanlembaga",
-    *     in="formData",
-    *     description="Jumlah pecandu rujukan lembaga",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_asalpecandu_datangsendiri",
-    *     in="formData",
-    *     description="Jumlah pecandu datang sendiri",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="status_aktif",
-    *     in="formData",
-    *     description="Status aktif",
+    *     description="Pendidikan",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="tipe",
+    *     name="pekerjaan",
     *     in="formData",
-    *     description="Tipe",
+    *     description="Pekerjaan",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="no_rekam_medis",
+    *     in="formData",
+    *     description="No rekam medis",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="no_registrasi",
+    *     in="formData",
+    *     description="No registrasi",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_registrasi",
+    *     in="formData",
+    *     description="Tanggal registrasi(Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="warga_negara",
+    *     in="formData",
+    *     description="Warga negara",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="negara",
+    *     in="formData",
+    *     description="Negara",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_propinsi",
+    *     in="formData",
+    *     description="Kode provinsi",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_kabupaten",
+    *     in="formData",
+    *     description="Kode kabupaten",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="umur",
+    *     in="formData",
+    *     description="Umur",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_pos",
+    *     in="formData",
+    *     description="kode pos",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="sumber_biaya",
+    *     in="formData",
+    *     description="Sumber biaya",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="sumber_pasien",
+    *     in="formData",
+    *     description="Sumber pasien",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_wilayah",
+    *     in="formData",
+    *     description="Kode wilayah",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_wilayah_propinsi",
+    *     in="formData",
+    *     description="kode wilayah provinsi",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jns_org",
+    *     in="formData",
+    *     description="Jenis organisasi",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_bnn",
+    *     in="formData",
+    *     description="kode BNN",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tempat_rehab",
+    *     in="formData",
+    *     description="Tempat rehab",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_tempat_rehab",
+    *     in="formData",
+    *     description="kode tempat rehab",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kode_pos",
+    *     in="formData",
+    *     description="kode pos",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="rt_rw",
+    *     in="formData",
+    *     description="RT RW",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="suku",
+    *     in="formData",
+    *     description="Suku",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="ayah",
+    *     in="formData",
+    *     description="Nama ayah",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="ibu",
+    *     in="formData",
+    *     description="Nama ibu",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_rehab",
+    *     in="formData",
+    *     description="status rehab",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_proses",
+    *     in="formData",
+    *     description="Status proses",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_check_doc",
+    *     in="formData",
+    *     description="Status check dokter",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_rawat",
+    *     in="formData",
+    *     description="Status rawat",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_rawat_inap",
+    *     in="formData",
+    *     description="Status rawat inap",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="klg_nama",
+    *     in="formData",
+    *     description="nama keluarga",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="klg_hubungan",
+    *     in="formData",
+    *     description="hubungan keluarga",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="klg_alamat",
+    *     in="formData",
+    *     description="Alamat keluarga",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="klg_telp",
+    *     in="formData",
+    *     description="Telepon keluarga",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_rekam_medis",
+    *     in="formData",
+    *     description="Tanggal rekam medis (Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_mulai_rehab",
+    *     in="formData",
+    *     description="Tanggal mulai rehab(Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="inst_rujuk",
+    *     in="formData",
+    *     description="Inst rujuk",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="rujuk_rehab",
+    *     in="formData",
+    *     description="Rehab rujuk",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_mulai_pasca",
+    *     in="formData",
+    *     description="Tanggal mulai pasca(Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="inst_pasca",
+    *     in="formData",
+    *     description="Inst pasca",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="rujuk_pasca",
+    *     in="formData",
+    *     description="Pasca rujuk",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="inst_lanjut",
+    *     in="formData",
+    *     description="Inst lanjut",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="rujuk_lanjut",
+    *     in="formData",
+    *     description="Rujuk lanjut",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jns_treat",
+    *     in="formData",
+    *     description="Jenis treat",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_assestment",
+    *     in="formData",
+    *     description="Tanggal assestment (Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_balai",
+    *     in="formData",
+    *     description="Kode balai",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="outcome_pasien",
+    *     in="formData",
+    *     description="Outcome pasien",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="active_pasien",
+    *     in="formData",
+    *     description="Active pasien",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jns_pendaftar",
+    *     in="formData",
+    *     description="Jenis pendaftaran",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="flag_pasien",
+    *     in="formData",
+    *     description="Flag pasien",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_rm",
+    *     in="formData",
+    *     description="Status RM",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_program",
+    *     in="formData",
+    *     description="Status program",
     *     required=false,
     *     type="string"
     *   ),
@@ -538,9 +559,9 @@
 
 /**
     * @SWG\Put(
-    *   path="/penilaianlembaga/{id}",
-    *   tags={"Rehab Penilaian Lembaga"},
-    *   summary="Update Data Penilaian Lembaga",
+    *   path="/pasiensirena/{id}",
+    *   tags={"Rehab Pasien Sirena"},
+    *   summary="Update Data Rehab pasien sirena",
     *   operationId="update data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -557,16 +578,86 @@
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_lembaga",
+    *     name="idx_assesment",
     *     in="formData",
-    *     description="id lembaga",
+    *     description="idx assesment",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="idx_pasien",
+    *     in="formData",
+    *     description="idx pasien",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
     *     name="nama",
     *     in="formData",
-    *     description="Nama",
+    *     description="Nama pasien",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_kelamin",
+    *     in="formData",
+    *     description="Jenis kelamin",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="golongan_darah",
+    *     in="formData",
+    *     description="golongan darah",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tempat_lahir",
+    *     in="formData",
+    *     description="Tempat lahir",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_lahir",
+    *     in="formData",
+    *     description="Tanggal lahir(Y-m-d H:i:s)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="agama",
+    *     in="formData",
+    *     description="Agama",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_nikah",
+    *     in="formData",
+    *     description="Status nikah",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="no_identitas",
+    *     in="formData",
+    *     description="No identitas",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_identitas",
+    *     in="formData",
+    *     description="Jenis identitas",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="nik",
+    *     in="formData",
+    *     description="NIK",
     *     required=false,
     *     type="string"
     *   ),
@@ -578,436 +669,387 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="alamat_kodepos",
+    *     name="no_telp",
     *     in="formData",
-    *     description="Kode Pos",
+    *     description="No telepon",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="alamat_idprovinsi",
+    *     name="no_hp",
     *     in="formData",
-    *     description="id provinsi",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="alamat_idkabkota",
-    *     in="formData",
-    *     description="id kota",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_04_a",
-    *     in="formData",
-    *     description="Nilai 04 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_04_b",
-    *     in="formData",
-    *     description="Nilai 04 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_04_c",
-    *     in="formData",
-    *     description="Nilai 04 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_a",
-    *     in="formData",
-    *     description="Nilai 05 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_b",
-    *     in="formData",
-    *     description="Nilai 05 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_c",
-    *     in="formData",
-    *     description="Nilai 05 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_d",
-    *     in="formData",
-    *     description="Nilai 05 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_e",
-    *     in="formData",
-    *     description="Nilai 05 E",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_05_f",
-    *     in="formData",
-    *     description="Nilai 05 F",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_a",
-    *     in="formData",
-    *     description="Nilai 06 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_b",
-    *     in="formData",
-    *     description="Nilai 06 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_c",
-    *     in="formData",
-    *     description="Nilai 06 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_d",
-    *     in="formData",
-    *     description="Nilai 06 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_e",
-    *     in="formData",
-    *     description="Nilai 06 E",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_f",
-    *     in="formData",
-    *     description="Nilai 06 F",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_06_g",
-    *     in="formData",
-    *     description="Nilai 06 G",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_a",
-    *     in="formData",
-    *     description="Nilai 07 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_b",
-    *     in="formData",
-    *     description="Nilai 07 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_c",
-    *     in="formData",
-    *     description="Nilai 07 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_d",
-    *     in="formData",
-    *     description="Nilai 07 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_e",
-    *     in="formData",
-    *     description="Nilai 07 E",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_f",
-    *     in="formData",
-    *     description="Nilai 07 F",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_g",
-    *     in="formData",
-    *     description="Nilai 07 G",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_h",
-    *     in="formData",
-    *     description="Nilai 07 H",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_07_i",
-    *     in="formData",
-    *     description="Nilai 07 I",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_08_a",
-    *     in="formData",
-    *     description="Nilai 08 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_08_b",
-    *     in="formData",
-    *     description="Nilai 08 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_08_c",
-    *     in="formData",
-    *     description="Nilai 08 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_08_d",
-    *     in="formData",
-    *     description="Nilai 08 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_09_a",
-    *     in="formData",
-    *     description="Nilai 09 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_09_b",
-    *     in="formData",
-    *     description="Nilai 09 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_09_c",
-    *     in="formData",
-    *     description="Nilai 09 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_09_d",
-    *     in="formData",
-    *     description="Nilai 09 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_a",
-    *     in="formData",
-    *     description="Nilai 10 A",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_b",
-    *     in="formData",
-    *     description="Nilai 10 B",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_c",
-    *     in="formData",
-    *     description="Nilai 10 C",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_d",
-    *     in="formData",
-    *     description="Nilai 10 D",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_e",
-    *     in="formData",
-    *     description="Nilai 10 E",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_f",
-    *     in="formData",
-    *     description="Nilai 10 F",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_g",
-    *     in="formData",
-    *     description="Nilai 10 G",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_h",
-    *     in="formData",
-    *     description="Nilai 10 H",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_i",
-    *     in="formData",
-    *     description="Nilai 10 I",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_10_j",
-    *     in="formData",
-    *     description="Nilai 10 J",
+    *     description="No Hp",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nilai_10_k",
+    *     name="usia",
     *     in="formData",
-    *     description="Nilai 10 K",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_a",
-    *     in="formData",
-    *     description="Nilai 11 A",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_b",
-    *     in="formData",
-    *     description="Nilai 11 B",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_c",
-    *     in="formData",
-    *     description="Nilai 11 C",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_d",
-    *     in="formData",
-    *     description="Nilai 11 D",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nilai_11_e",
-    *     in="formData",
-    *     description="Nilai 11 E",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_pecandu_yang_direhab",
-    *     in="formData",
-    *     description="Jumlah pecandu yang direhab",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_pecandu_selesai",
-    *     in="formData",
-    *     description="Jumlah pecandu selesai",
+    *     description="Usia",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="jumlah_pecandu_tidakselesai_kabur",
+    *     name="pendidikan",
     *     in="formData",
-    *     description="Jumlah pecandu yang tidak selsai kabur",
+    *     description="Pendidikan",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="jumlah_pecandu_tidakselesai_pulang",
+    *     name="pendidikan_akhir",
     *     in="formData",
-    *     description="Jumlah pecandu yang tidak selsai pulang",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_pecandu_tidakselesai_dirujuk",
-    *     in="formData",
-    *     description="Jumlah pecandu yang tidak selsai dirujuk",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_asalpecandu_razia",
-    *     in="formData",
-    *     description="Jumlah pecandu razia",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_asalpecandu_rujukanlembaga",
-    *     in="formData",
-    *     description="Jumlah pecandu rujukan lembaga",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="jumlah_asalpecandu_datangsendiri",
-    *     in="formData",
-    *     description="Jumlah pecandu datang sendiri",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="status_aktif",
-    *     in="formData",
-    *     description="Status aktif",
+    *     description="Pendidikan",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="tipe",
+    *     name="pekerjaan",
     *     in="formData",
-    *     description="Tipe",
+    *     description="Pekerjaan",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="no_rekam_medis",
+    *     in="formData",
+    *     description="No rekam medis",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="no_registrasi",
+    *     in="formData",
+    *     description="No registrasi",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_registrasi",
+    *     in="formData",
+    *     description="Tanggal registrasi(Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="warga_negara",
+    *     in="formData",
+    *     description="Warga negara",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="negara",
+    *     in="formData",
+    *     description="Negara",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_propinsi",
+    *     in="formData",
+    *     description="Kode provinsi",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_kabupaten",
+    *     in="formData",
+    *     description="Kode kabupaten",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="umur",
+    *     in="formData",
+    *     description="Umur",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_pos",
+    *     in="formData",
+    *     description="kode pos",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="sumber_biaya",
+    *     in="formData",
+    *     description="Sumber biaya",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="sumber_pasien",
+    *     in="formData",
+    *     description="Sumber pasien",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_wilayah",
+    *     in="formData",
+    *     description="Kode wilayah",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_wilayah_propinsi",
+    *     in="formData",
+    *     description="kode wilayah provinsi",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jns_org",
+    *     in="formData",
+    *     description="Jenis organisasi",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_bnn",
+    *     in="formData",
+    *     description="kode BNN",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tempat_rehab",
+    *     in="formData",
+    *     description="Tempat rehab",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_tempat_rehab",
+    *     in="formData",
+    *     description="kode tempat rehab",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kode_pos",
+    *     in="formData",
+    *     description="kode pos",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="rt_rw",
+    *     in="formData",
+    *     description="RT RW",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="suku",
+    *     in="formData",
+    *     description="Suku",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="ayah",
+    *     in="formData",
+    *     description="Nama ayah",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="ibu",
+    *     in="formData",
+    *     description="Nama ibu",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_rehab",
+    *     in="formData",
+    *     description="status rehab",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_proses",
+    *     in="formData",
+    *     description="Status proses",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_check_doc",
+    *     in="formData",
+    *     description="Status check dokter",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_rawat",
+    *     in="formData",
+    *     description="Status rawat",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_rawat_inap",
+    *     in="formData",
+    *     description="Status rawat inap",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="klg_nama",
+    *     in="formData",
+    *     description="nama keluarga",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="klg_hubungan",
+    *     in="formData",
+    *     description="hubungan keluarga",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="klg_alamat",
+    *     in="formData",
+    *     description="Alamat keluarga",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="klg_telp",
+    *     in="formData",
+    *     description="Telepon keluarga",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_rekam_medis",
+    *     in="formData",
+    *     description="Tanggal rekam medis (Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_mulai_rehab",
+    *     in="formData",
+    *     description="Tanggal mulai rehab(Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="inst_rujuk",
+    *     in="formData",
+    *     description="Inst rujuk",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="rujuk_rehab",
+    *     in="formData",
+    *     description="Rehab rujuk",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_mulai_pasca",
+    *     in="formData",
+    *     description="Tanggal mulai pasca(Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="inst_pasca",
+    *     in="formData",
+    *     description="Inst pasca",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="rujuk_pasca",
+    *     in="formData",
+    *     description="Pasca rujuk",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="inst_lanjut",
+    *     in="formData",
+    *     description="Inst lanjut",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="rujuk_lanjut",
+    *     in="formData",
+    *     description="Rujuk lanjut",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jns_treat",
+    *     in="formData",
+    *     description="Jenis treat",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_assestment",
+    *     in="formData",
+    *     description="Tanggal assestment (Y-m-d)",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kd_balai",
+    *     in="formData",
+    *     description="Kode balai",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="outcome_pasien",
+    *     in="formData",
+    *     description="Outcome pasien",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="active_pasien",
+    *     in="formData",
+    *     description="Active pasien",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jns_pendaftar",
+    *     in="formData",
+    *     description="Jenis pendaftaran",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="flag_pasien",
+    *     in="formData",
+    *     description="Flag pasien",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_rm",
+    *     in="formData",
+    *     description="Status RM",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status_program",
+    *     in="formData",
+    *     description="Status program",
     *     required=false,
     *     type="string"
     *   ),
@@ -1020,9 +1062,9 @@
 
 /**
     * @SWG\Delete(
-    *   path="/penilaianlembaga/{id}",
-    *   tags={"Rehab Penilaian Lembaga"},
-    *   summary="Delete Data penilian lembaga By id",
+    *   path="/pasiensirena/{id}",
+    *   tags={"Rehab Pasien Sirena"},
+    *   summary="Delete Data Rehab pasien sirena By id",
     *   operationId="delete data by id",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -1036,41 +1078,6 @@
     *     in="path",
     *     description="id data",
     *     required=true,
-    *     type="integer"
-    *   ),
-    *   @SWG\Response(response=200, description="successful operation"),
-    *   @SWG\Response(response=406, description="not acceptable"),
-    *   @SWG\Response(response=500, description="internal server error")
-    * )
-    *
-*/
-
-
-/**
-    * @SWG\Post(
-    *   path="/penilaian_lembaga_rehabilitasi",
-    *   tags={"Rehab Penilaian Lembaga"},
-    *   summary="Get List Data Penilaian Lembaga by id",
-    *   operationId="get data by id",
-    *   @SWG\Parameter(
-    *     name="Authorization",
-    *     in="header",
-    *     description="Authorization Token",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="limit",
-    *     in="formData",
-    *     description="Limit",
-    *     required=false,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="page",
-    *     in="formData",
-    *     description="Page",
-    *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Response(response=200, description="successful operation"),

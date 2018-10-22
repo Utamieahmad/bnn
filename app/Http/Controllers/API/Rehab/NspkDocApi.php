@@ -2,9 +2,9 @@
 
 /**
     * @SWG\Get(
-    *   path="/pelatihanpeserta",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Get List Data rehab pelatihan peserta",
+    *   path="/nspk",
+    *   tags={"Rehab Nspk"},
+    *   summary="Get List Data Rehab Nspk",
     *   operationId="get data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -36,9 +36,9 @@
 
 /**
     * @SWG\Get(
-    *   path="/pelatihanpeserta/{id}",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Get List Data Rehab pelatihan peserta By id",
+    *   path="/nspk/{id}",
+    *   tags={"Rehab Nspk"},
+    *   summary="Get List Data Rehab Nspk by id",
     *   operationId="get data by id",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -63,9 +63,9 @@
 
 /**
     * @SWG\Post(
-    *   path="/pelatihanpeserta",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Create Data Rehab pelatihan peserta",
+    *   path="/nspk",
+    *   tags={"Rehab Nspk"},
+    *   summary="Create Data Rehab Nspk",
     *   operationId="create data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -75,51 +75,51 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_header",
+    *     name="kategori",
     *     in="formData",
-    *     description="ID Header",
-    *     required=true,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nama_peserta",
-    *     in="formData",
-    *     description="Nama peserta",
+    *     description="Kategori",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nomor_identitas",
+    *     name="kode_direktorat",
     *     in="formData",
-    *     description="No identitas",
+    *     description="Kode direktorat",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="kode_jeniskelamin",
+    *     name="tgl_pembuatan",
     *     in="formData",
-    *     description="Kode jenis kelamin",
+    *     description="Tanggal pembuatan (Y-m-d)",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nomor_hp",
+    *     name="nama_nspk",
     *     in="formData",
-    *     description="Nomor hp",
+    *     description="Nama Nspk",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="email_peserta",
+    *     name="nomor_nsdpk",
     *     in="formData",
-    *     description="Email peserta",
+    *     description="No nsdpk",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="asal_instansilembaga",
+    *     name="peruntukan",
     *     in="formData",
-    *     description="Asal instansi lembaga",
+    *     description="Peruntukan",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="file_nspk",
+    *     in="formData",
+    *     description="File nspk",
     *     required=false,
     *     type="string"
     *   ),
@@ -129,14 +129,42 @@
     *     description="Status aktif",
     *     required=false,
     *     type="string"
-    *   ),
+    *   ),    
     *   @SWG\Parameter(
-    *     name="alamat",
+    *     name="periode",
     *     in="formData",
-    *     description="Alamat",
+    *     description="Periode",
     *     required=false,
     *     type="string"
     *   ),
+    *   @SWG\Parameter(
+    *     name="periode_tahun",
+    *     in="formData",
+    *     description="Periode tahun",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="periode_bulan",
+    *     in="formData",
+    *     description="Periode bulan",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="periode_tanggal",
+    *     in="formData",
+    *     description="Periode tanggal",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status",
+    *     in="formData",
+    *     description="Status",
+    *     required=false,
+    *     type="string"
+    *   ),    
     *   @SWG\Response(response=200, description="successful operation"),
     *   @SWG\Response(response=406, description="not acceptable"),
     *   @SWG\Response(response=500, description="internal server error")
@@ -146,9 +174,9 @@
 
 /**
     * @SWG\Put(
-    *   path="/pelatihanpeserta/{id}",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Update Data Rehab pelatihan peserta",
+    *   path="/nspk/{id}",
+    *   tags={"Rehab Nspk"},
+    *   summary="Update Data Rehab Nspk",
     *   operationId="update data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -165,51 +193,51 @@
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_header",
+    *     name="kategori",
     *     in="formData",
-    *     description="ID Header",
-    *     required=true,
-    *     type="integer"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="nama_peserta",
-    *     in="formData",
-    *     description="Nama peserta",
+    *     description="Kategori",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nomor_identitas",
+    *     name="kode_direktorat",
     *     in="formData",
-    *     description="No identitas",
+    *     description="Kode direktorat",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="kode_jeniskelamin",
+    *     name="tgl_pembuatan",
     *     in="formData",
-    *     description="Kode jenis kelamin",
+    *     description="Tanggal pembuatan (Y-m-d)",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nomor_hp",
+    *     name="nama_nspk",
     *     in="formData",
-    *     description="Nomor hp",
+    *     description="Nama Nspk",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="email_peserta",
+    *     name="nomor_nsdpk",
     *     in="formData",
-    *     description="Email peserta",
+    *     description="No nsdpk",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="asal_instansilembaga",
+    *     name="peruntukan",
     *     in="formData",
-    *     description="Asal instansi lembaga",
+    *     description="Peruntukan",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="file_nspk",
+    *     in="formData",
+    *     description="File nspk",
     *     required=false,
     *     type="string"
     *   ),
@@ -219,14 +247,42 @@
     *     description="Status aktif",
     *     required=false,
     *     type="string"
-    *   ),
+    *   ),    
     *   @SWG\Parameter(
-    *     name="alamat",
+    *     name="periode",
     *     in="formData",
-    *     description="Alamat",
+    *     description="Periode",
     *     required=false,
     *     type="string"
     *   ),
+    *   @SWG\Parameter(
+    *     name="periode_tahun",
+    *     in="formData",
+    *     description="Periode tahun",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="periode_bulan",
+    *     in="formData",
+    *     description="Periode bulan",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="periode_tanggal",
+    *     in="formData",
+    *     description="Periode tanggal",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="status",
+    *     in="formData",
+    *     description="Status",
+    *     required=false,
+    *     type="string"
+    *   ),    
     *   @SWG\Response(response=200, description="successful operation"),
     *   @SWG\Response(response=406, description="not acceptable"),
     *   @SWG\Response(response=500, description="internal server error")
@@ -236,9 +292,9 @@
 
 /**
     * @SWG\Delete(
-    *   path="/pelatihanpeserta/{id_detail}",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Delete Data pelatihan peserta By id",
+    *   path="/nspk/{id}",
+    *   tags={"Rehab Nspk"},
+    *   summary="Delete Data Rehab nspk By id",
     *   operationId="delete data by id",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -248,36 +304,9 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_detail",
+    *     name="id",
     *     in="path",
     *     description="id data",
-    *     required=true,
-    *     type="integer"
-    *   ),
-    *   @SWG\Response(response=200, description="successful operation"),
-    *   @SWG\Response(response=406, description="not acceptable"),
-    *   @SWG\Response(response=500, description="internal server error")
-    * )
-    *
-*/
-
-/**
-    * @SWG\Get(
-    *   path="/single_pelatihan_rehabilitasi/{parent_id}",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Get List Data Rehab pelatihan peserta By id parent",
-    *   operationId="get data by id parent",
-    *   @SWG\Parameter(
-    *     name="Authorization",
-    *     in="header",
-    *     description="Authorization Token",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="parent_id",
-    *     in="path",
-    *     description="id parent data",
     *     required=true,
     *     type="integer"
     *   ),

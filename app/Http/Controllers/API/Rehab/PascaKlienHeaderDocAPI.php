@@ -2,9 +2,9 @@
 
 /**
     * @SWG\Get(
-    *   path="/pelatihanpeserta",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Get List Data rehab pelatihan peserta",
+    *   path="/pascaklienheader",
+    *   tags={"Rehab Pasca klien Header"},
+    *   summary="Get List Data Rehab pasca klien header",
     *   operationId="get data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -36,9 +36,9 @@
 
 /**
     * @SWG\Get(
-    *   path="/pelatihanpeserta/{id}",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Get List Data Rehab pelatihan peserta By id",
+    *   path="/pascaklienheader/{id}",
+    *   tags={"Rehab Pasca klien Header"},
+    *   summary="Get List Data Rehab pasca klien header by id",
     *   operationId="get data by id",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -63,9 +63,9 @@
 
 /**
     * @SWG\Post(
-    *   path="/pelatihanpeserta",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Create Data Rehab pelatihan peserta",
+    *   path="/pascaklienheader",
+    *   tags={"Rehab Pasca klien Header"},
+    *   summary="Create Data Rehab pasca klien header",
     *   operationId="create data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -75,68 +75,82 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_header",
+    *     name="id_instansi",
     *     in="formData",
-    *     description="ID Header",
+    *     description="ID instansi",
     *     required=true,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="nama_peserta",
+    *     name="id_provinsi",
     *     in="formData",
-    *     description="Nama peserta",
+    *     description="ID provinsi",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_pelaksanaan_mulai",
+    *     in="formData",
+    *     description="Tanggal mulai pelaksanaan (Y-m-d)",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nomor_identitas",
+    *     name="tgl_pelaksanaan_selesai",
     *     in="formData",
-    *     description="No identitas",
+    *     description="Tanggal selesai pelaksanaan (Y-m-d)",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="kode_jeniskelamin",
+    *     name="tipe",
     *     in="formData",
-    *     description="Kode jenis kelamin",
+    *     description="Tipe",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nomor_hp",
+    *     name="periode",
     *     in="formData",
-    *     description="Nomor hp",
+    *     description="Periode",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="email_peserta",
+    *     name="periode_tahun",
     *     in="formData",
-    *     description="Email peserta",
+    *     description="Tahun periode",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="periode_bulan",
+    *     in="formData",
+    *     description="Bulan periode",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jumlah_klien",
+    *     in="formData",
+    *     description="Jumlah klien",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kode_jenis_layanan",
+    *     in="formData",
+    *     description="Kode jenis layanan",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="asal_instansilembaga",
+    *     name="jumlah_uang_klaim",
     *     in="formData",
-    *     description="Asal instansi lembaga",
+    *     description="Jumlah uang klaim",
     *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="status_aktif",
-    *     in="formData",
-    *     description="Status aktif",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="alamat",
-    *     in="formData",
-    *     description="Alamat",
-    *     required=false,
-    *     type="string"
-    *   ),
+    *     type="integer"
+    *   ),    
     *   @SWG\Response(response=200, description="successful operation"),
     *   @SWG\Response(response=406, description="not acceptable"),
     *   @SWG\Response(response=500, description="internal server error")
@@ -146,9 +160,9 @@
 
 /**
     * @SWG\Put(
-    *   path="/pelatihanpeserta/{id}",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Update Data Rehab pelatihan peserta",
+    *   path="/pascaklienheader/{id}",
+    *   tags={"Rehab Pasca klien Header"},
+    *   summary="Update Data Rehab pasca klien header",
     *   operationId="update data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -165,68 +179,82 @@
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_header",
+    *     name="id_instansi",
     *     in="formData",
-    *     description="ID Header",
-    *     required=true,
+    *     description="ID instansi",
+    *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="nama_peserta",
+    *     name="id_provinsi",
     *     in="formData",
-    *     description="Nama peserta",
+    *     description="ID provinsi",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="tgl_pelaksanaan_mulai",
+    *     in="formData",
+    *     description="Tanggal mulai pelaksanaan (Y-m-d)",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nomor_identitas",
+    *     name="tgl_pelaksanaan_selesai",
     *     in="formData",
-    *     description="No identitas",
+    *     description="Tanggal selesai pelaksanaan (Y-m-d)",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="kode_jeniskelamin",
+    *     name="tipe",
     *     in="formData",
-    *     description="Kode jenis kelamin",
+    *     description="Tipe",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="nomor_hp",
+    *     name="periode",
     *     in="formData",
-    *     description="Nomor hp",
+    *     description="Periode",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="email_peserta",
+    *     name="periode_tahun",
     *     in="formData",
-    *     description="Email peserta",
+    *     description="Tahun periode",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="periode_bulan",
+    *     in="formData",
+    *     description="Bulan periode",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jumlah_klien",
+    *     in="formData",
+    *     description="Jumlah klien",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kode_jenis_layanan",
+    *     in="formData",
+    *     description="Kode jenis layanan",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="asal_instansilembaga",
+    *     name="jumlah_uang_klaim",
     *     in="formData",
-    *     description="Asal instansi lembaga",
+    *     description="Jumlah uang klaim",
     *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="status_aktif",
-    *     in="formData",
-    *     description="Status aktif",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="alamat",
-    *     in="formData",
-    *     description="Alamat",
-    *     required=false,
-    *     type="string"
-    *   ),
+    *     type="integer"
+    *   ),    
     *   @SWG\Response(response=200, description="successful operation"),
     *   @SWG\Response(response=406, description="not acceptable"),
     *   @SWG\Response(response=500, description="internal server error")
@@ -236,9 +264,9 @@
 
 /**
     * @SWG\Delete(
-    *   path="/pelatihanpeserta/{id_detail}",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Delete Data pelatihan peserta By id",
+    *   path="/pascaklienheader/{id}",
+    *   tags={"Rehab Pasca klien Header"},
+    *   summary="Delete Data pasca klien header By id",
     *   operationId="delete data by id",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -248,36 +276,9 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="id_detail",
+    *     name="id",
     *     in="path",
     *     description="id data",
-    *     required=true,
-    *     type="integer"
-    *   ),
-    *   @SWG\Response(response=200, description="successful operation"),
-    *   @SWG\Response(response=406, description="not acceptable"),
-    *   @SWG\Response(response=500, description="internal server error")
-    * )
-    *
-*/
-
-/**
-    * @SWG\Get(
-    *   path="/single_pelatihan_rehabilitasi/{parent_id}",
-    *   tags={"Rehab Pelatihan Peserta"},
-    *   summary="Get List Data Rehab pelatihan peserta By id parent",
-    *   operationId="get data by id parent",
-    *   @SWG\Parameter(
-    *     name="Authorization",
-    *     in="header",
-    *     description="Authorization Token",
-    *     required=true,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="parent_id",
-    *     in="path",
-    *     description="id parent data",
     *     required=true,
     *     type="integer"
     *   ),

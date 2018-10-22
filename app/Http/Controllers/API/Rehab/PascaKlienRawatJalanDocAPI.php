@@ -2,9 +2,9 @@
 
 /**
     * @SWG\Get(
-    *   path="/settama",
-    *   tags={"Settama"},
-    *   summary="Get List Data Settama",
+    *   path="/pascaklienjalan",
+    *   tags={"Rehab Pasca Klien Rawat Jalan"},
+    *   summary="Get List Data Rehab klien rawat jalan",
     *   operationId="get data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -12,6 +12,20 @@
     *     description="Authorization Token",
     *     required=true,
     *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="page",
+    *     in="query",
+    *     description="page",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="limit",
+    *     in="query",
+    *     description="limit data",
+    *     required=false,
+    *     type="integer"
     *   ),
     *   @SWG\Response(response=200, description="successful operation"),
     *   @SWG\Response(response=406, description="not acceptable"),
@@ -22,9 +36,9 @@
 
 /**
     * @SWG\Get(
-    *   path="/settama/{id}",
-    *   tags={"Settama"},
-    *   summary="Get List Data Settama By id",
+    *   path="/pascaklienjalan/{id}",
+    *   tags={"Rehab Pasca Klien Rawat Jalan"},
+    *   summary="Get List Data Rehab klien rawat jalan by id",
     *   operationId="get data by id",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -36,7 +50,7 @@
     *   @SWG\Parameter(
     *     name="id",
     *     in="path",
-    *     description="get data by id",
+    *     description="id data",
     *     required=true,
     *     type="integer"
     *   ),
@@ -49,9 +63,9 @@
 
 /**
     * @SWG\Post(
-    *   path="/settama",
-    *   tags={"Settama"},
-    *   summary="Create Data Settama",
+    *   path="/pascaklienjalan",
+    *   tags={"Rehab Pasca Klien Rawat Jalan"},
+    *   summary="Create Data Rehab pasien rawat jalan",
     *   operationId="create data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -61,103 +75,131 @@
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="jns_rujukan",
+    *     name="id_header",
     *     in="formData",
-    *     description="Jenis rujukan",
+    *     description="ID header",
+    *     required=true,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="nama",
+    *     in="formData",
+    *     description="Nama",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="no_rujukan",
+    *     name="no_identitas",
     *     in="formData",
-    *     description="No rujukan",
+    *     description="Nomor identitas",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="tgl_mulai",
+    *     name="alamat",
     *     in="formData",
-    *     description="Tanggal mulai",
+    *     description="Alamat",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="tgl_selesai",
+    *     name="kode_jeniskelamin",
     *     in="formData",
-    *     description="Tanggal selesai",
+    *     description="Kode jenis kelamin",
     *     required=false,
     *     type="string"
     *   ),
     *   @SWG\Parameter(
-    *     name="pelaksana",
+    *     name="no_hape",
     *     in="formData",
-    *     description="pelaksana",
+    *     description="No hp",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="email",
+    *     in="formData",
+    *     description="Email",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_01",
+    *     in="formData",
+    *     description="Jenis layanan 01",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="bagian",
+    *     name="jenis_layanan_02",
     *     in="formData",
-    *     description="Bagian",
+    *     description="Jenis layanan 02",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="jenis_kegiatan",
+    *     name="jenis_layanan_03",
     *     in="formData",
-    *     description="Jenis kegiatan",
+    *     description="Jenis layanan 03",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="tempat_kegiatan",
+    *     name="jenis_layanan_04_01",
     *     in="formData",
-    *     description="Tempat kegiatan",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="tujuan_kegiatan",
-    *     in="formData",
-    *     description="Tujuan kegiatan",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="sumber_anggaran",
-    *     in="formData",
-    *     description="Sumber anggaran",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="meta_peserta",
-    *     in="formData",
-    *     description="meta peserta",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="file_laporan",
-    *     in="formData",
-    *     description="File laporan",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="anggaran_id",
-    *     in="formData",
-    *     description="Id anggaran",
+    *     description="Jenis layanan 04 01",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="status",
+    *     name="jenis_layanan_05",
     *     in="formData",
-    *     description="Status",
+    *     description="Jenis layanan 05",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_06_01",
+    *     in="formData",
+    *     description="Jenis layanan 06 01",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_lainnya",
+    *     in="formData",
+    *     description="Jenis layanan lainnya",
     *     required=false,
     *     type="string"
     *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_lainnya_jumlah",
+    *     in="formData",
+    *     description="Jumlah Jenis layanan lainnya",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_04_02",
+    *     in="formData",
+    *     description="Jenis layanan 04 02",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_04_03",
+    *     in="formData",
+    *     description="Jenis layanan 04 03",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_06_02",
+    *     in="formData",
+    *     description="Jenis layanan 06 02",
+    *     required=false,
+    *     type="integer"
+    *   ),    
     *   @SWG\Response(response=200, description="successful operation"),
     *   @SWG\Response(response=406, description="not acceptable"),
     *   @SWG\Response(response=500, description="internal server error")
@@ -167,9 +209,9 @@
 
 /**
     * @SWG\Put(
-    *   path="/settama/{id}",
-    *   tags={"Settama"},
-    *   summary="Update Data Settama",
+    *   path="/pascaklienjalan/{id}",
+    *   tags={"Rehab Pasca Klien Rawat Jalan"},
+    *   summary="Update Data Rehab pasien rawat jalan",
     *   operationId="update data",
     *   @SWG\Parameter(
     *     name="Authorization",
@@ -186,103 +228,131 @@
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="jns_rujukan",
+    *     name="id_header",
     *     in="formData",
-    *     description="Jenis rujukan",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="no_rujukan",
-    *     in="formData",
-    *     description="No rujukan",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="tgl_mulai",
-    *     in="formData",
-    *     description="Tanggal mulai",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="tgl_selesai",
-    *     in="formData",
-    *     description="Tanggal selesai",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="pelaksana",
-    *     in="formData",
-    *     description="pelaksana",
+    *     description="ID header",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="bagian",
+    *     name="nama",
     *     in="formData",
-    *     description="Bagian",
+    *     description="Nama",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="no_identitas",
+    *     in="formData",
+    *     description="Nomor identitas",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="alamat",
+    *     in="formData",
+    *     description="Alamat",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="kode_jeniskelamin",
+    *     in="formData",
+    *     description="Kode jenis kelamin",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="no_hape",
+    *     in="formData",
+    *     description="No hp",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="email",
+    *     in="formData",
+    *     description="Email",
+    *     required=false,
+    *     type="string"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_01",
+    *     in="formData",
+    *     description="Jenis layanan 01",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="jenis_kegiatan",
+    *     name="jenis_layanan_02",
     *     in="formData",
-    *     description="Jenis kegiatan",
+    *     description="Jenis layanan 02",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="tempat_kegiatan",
+    *     name="jenis_layanan_03",
     *     in="formData",
-    *     description="Tempat kegiatan",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="tujuan_kegiatan",
-    *     in="formData",
-    *     description="Tujuan kegiatan",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="sumber_anggaran",
-    *     in="formData",
-    *     description="Sumber anggaran",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="meta_peserta",
-    *     in="formData",
-    *     description="meta peserta",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="file_laporan",
-    *     in="formData",
-    *     description="File laporan",
-    *     required=false,
-    *     type="string"
-    *   ),
-    *   @SWG\Parameter(
-    *     name="anggaran_id",
-    *     in="formData",
-    *     description="Id anggaran",
+    *     description="Jenis layanan 03",
     *     required=false,
     *     type="integer"
     *   ),
     *   @SWG\Parameter(
-    *     name="status",
+    *     name="jenis_layanan_04_01",
     *     in="formData",
-    *     description="Status",
+    *     description="Jenis layanan 04 01",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_05",
+    *     in="formData",
+    *     description="Jenis layanan 05",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_06_01",
+    *     in="formData",
+    *     description="Jenis layanan 06 01",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_lainnya",
+    *     in="formData",
+    *     description="Jenis layanan lainnya",
     *     required=false,
     *     type="string"
     *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_lainnya_jumlah",
+    *     in="formData",
+    *     description="Jumlah Jenis layanan lainnya",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_04_02",
+    *     in="formData",
+    *     description="Jenis layanan 04 02",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_04_03",
+    *     in="formData",
+    *     description="Jenis layanan 04 03",
+    *     required=false,
+    *     type="integer"
+    *   ),
+    *   @SWG\Parameter(
+    *     name="jenis_layanan_06_02",
+    *     in="formData",
+    *     description="Jenis layanan 06 02",
+    *     required=false,
+    *     type="integer"
+    *   ),    
     *   @SWG\Response(response=200, description="successful operation"),
     *   @SWG\Response(response=406, description="not acceptable"),
     *   @SWG\Response(response=500, description="internal server error")
@@ -292,9 +362,9 @@
 
 /**
     * @SWG\Delete(
-    *   path="/settama/{id}",
-    *   tags={"Settama"},
-    *   summary="Delete Data Settama By id",
+    *   path="/pascaklienjalan/{id}",
+    *   tags={"Rehab Pasca Klien Rawat Jalan"},
+    *   summary="Delete Data pasien rawat jalan By id",
     *   operationId="delete data by id",
     *   @SWG\Parameter(
     *     name="Authorization",
