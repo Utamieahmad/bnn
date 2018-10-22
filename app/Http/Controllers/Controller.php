@@ -32,8 +32,8 @@ class Controller extends BaseController
   use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
   //url api
   public static function urlapi(){
-//    return $api_url = config('app.url_api_local');
-     return $api_url = config('app.url_soadev');
+   return $api_url = config('app.url_api_local');
+     // return $api_url = config('app.url_soadev');
     // return $api_url = config('app.url_soa');
   }
   // public static function urlapisoaDev(){
