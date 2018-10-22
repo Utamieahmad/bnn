@@ -1276,12 +1276,19 @@ class SettamaController extends Controller
 
     }
     public function addSekretariatUtamaUmum(Request $request){
+
+		$client = new Client();
+		$baseUrl = URL::to($this->urlapi());
+		// $baseUrl = URL::to('/');
+		$token = $request->session()->get('token');
+
     	if($request->isMethod('post')){
     		$insertId = "";
-			$baseUrl = URL::to('/');
-        	$token = $request->session()->get('token');
+					// $baseUrl = URL::to('/');
+        	// $token = $request->session()->get('token');
+					//
+        	// $client = new Client();
 
-        	$client = new Client();
 	       	if ($request->input('sumber_anggaran')=="DIPA") {
 	            $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                    [
@@ -1302,6 +1309,7 @@ class SettamaController extends Controller
                        ]
                    ]
                 );
+								// dd($requestAnggaran);
 
 	            $resultAnggaran = json_decode($requestAnggaran->getBody()->getContents(), true);
 	            $anggaran = $resultAnggaran['data']['eventID'];
@@ -1340,8 +1348,20 @@ class SettamaController extends Controller
     			$json_peserta = "";
     		}
 			$this->form_params['meta_peserta'] = $json_peserta;
+			// $query = execute_api_json('api/settama','POST',$this->form_params);
 
-			$query = execute_api_json('api/settama','POST',$this->form_params);
+			$query = $client->request('POST', $baseUrl.'/api/settama',
+					 [
+							 'headers' =>
+							 [
+									 'Authorization' => 'Bearer '.$token
+							 ],
+							 'form_params' => $this->form_params
+					 ]
+				);
+				dd($query);
+			//
+			// $resultAnggaran = json_decode($requestAnggaran->getBody()->getContents(), true);
 
 			$trail['audit_menu'] = 'Sekretariat Utama - Biro Umum';
 			$trail['audit_event'] = 'post';
@@ -1373,7 +1393,7 @@ class SettamaController extends Controller
 	                        if( ($storeFile->code == 200) && ($storeFile->status != 'error') ){
 	                        	$file_message .= "";
 	                        }else{
-								$file_message.= "Server Error : File gagal disimpan.";
+														$file_message.= "Server Error : File gagal disimpan.";
 	                        }
 
 	                    }else{
@@ -1402,7 +1422,18 @@ class SettamaController extends Controller
     		 return redirect(route('settama_umum'))->with('status',$this->data);
 
     	}else{
-    		$datas = execute_api_json('api/lookup/rujukan','get');
+    		// $datas = execute_api_json('api/lookup/rujukan','get');
+				$datas = $client->request('GET', $baseUrl.'/api/lookup/rujukan',
+					[
+							'headers' =>
+							[
+									'Authorization' => 'Bearer '.$token
+									// 'Authorization' => 'Bearer rUjEwAucsuiEc0wyypbuchvwEB19DgCnEqj5uGl2Yytp9aFqlEWfAUQM45W7MRKHaCF5bowyECplrTCWOk3M2mmFxCFsjevNKbsEpRz8nELNpHiM19y5C4ZXYi1CcLtuvBuiN0JH0pg5ngn599SRg7amx2EQnQDrv0oBgBLCaaZZeCsaAkGVfRZBTzp4RrtVW9CdGxsSHGdsRJLctNA0GTYjUZ7vhbmbawLV4bcCmlCNAmg1OctS4nJSUQtPpUy'
+							]
+					]
+				);
+				$datas = json_decode($datas->getBody()->getContents(), FALSE);
+				// dd($datas);
 
 		    if(($datas->code == 200) && ($datas->status != 'error') ){
 		        $this->data['rujukan'] = $datas->data;
