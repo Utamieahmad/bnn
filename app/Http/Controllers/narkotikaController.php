@@ -348,9 +348,9 @@ class narkotikaController extends Controller
         return view('pemberantasan.narkotika.edit_pendataanLKN',$this->data);
     }
 
-    public function addpendataanLKN(Request $request){        
+    public function addpendataanLKN(Request $request){
       $this->data['title']="Pemberantasan";
-      $client = new Client();      
+      $client = new Client();
       $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
@@ -397,7 +397,7 @@ class narkotikaController extends Controller
 
         $client = new Client();
 
-        //generate image base64        
+        //generate image base64
         // Handle File Upload
         if($request->hasFile('foto1')){
             // Get filename with the extension
@@ -409,22 +409,67 @@ class narkotikaController extends Controller
             // dd($imageBase64);
             // Get just ext
             $extension = $request->file('foto1')->getClientOriginalExtension();
-            // Filename to store            
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;            
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('foto1')->storeAs('storage/images', $fileNameToStore);      
-            dd($path);
-            $image = storage_path('storage/images/'.$fileNameToStore);
-//            dd()
+            $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+            // dd($path);
+            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           // dd($image);
             $data = file_get_contents($image);
-            $imageBase64 = base64_encode($data);
-//            dd($imageBase64);
-            Storage::delete('storage/images/'.$fileNameToStore);
-            // dd($fileNameToStore);
-            // dd($imageBase64);
+            $image1 = base64_encode($data);
+            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+        }else{
+          $image1 = null;
         }
-        dd($imageBase64);
-        
+
+        if($request->hasFile('foto2')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // $data = file_get_contents(public_path('imageupload/IMG_20180926_101723_1540489746.jpg'));
+            // $imageBase64 = base64_encode($data);
+            // dd($imageBase64);
+            // Get just ext
+            $extension = $request->file('foto2')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+            // dd($path);
+            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           // dd($image);
+            $data = file_get_contents($image);
+            $image2 = base64_encode($data);
+            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+        }else{
+          $image2 = null;
+        }
+
+        if($request->hasFile('foto3')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // $data = file_get_contents(public_path('imageupload/IMG_20180926_101723_1540489746.jpg'));
+            // $imageBase64 = base64_encode($data);
+            // dd($imageBase64);
+            // Get just ext
+            $extension = $request->file('foto3')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+            // dd($path);
+            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           // dd($image);
+            $data = file_get_contents($image);
+            $image3 = base64_encode($data);
+            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+        }else{
+          $image3 = null;
+        }
 
         $requestkasus = $client->request('POST', $baseUrl.'/api/kasus',
                 [
@@ -451,6 +496,9 @@ class narkotikaController extends Controller
                         'rute_tujuan' => $request->input('ruteTujuan'),
                         'kasus_jenis' => $request->input('jenisKasus'),
                         //'kasus_kelompok' => $request->input('kelompokKasus'),
+                        'foto1' => $image1,
+                        'foto2' => $image2,
+                        'foto3' => $image3,
                         'uraian_singkat' => $request->input('uraian_singkat'),
                         'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                         'meta_penyidik' => json_encode($request->input('penyidik')),
