@@ -267,6 +267,18 @@
 											</select>
 										</div>
 									</div>
+                                                                        <div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"  >Uraian Singkat</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" name="uraian_singkat" value="{{$data_kasus['data']['uraian_singkat']}}"  class="form-control col-md-7 col-xs-12">
+										</div>
+									</div>
+                                                                        <div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"  >Keterangan Lainnya</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" name="keterangan_lainnya" value="{{$data_kasus['data']['keterangan_lainnya']}}"  class="form-control col-md-7 col-xs-12">
+										</div>
+									</div>
 									<!--div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 col-xs-12">Kelompok Kasus</label>
 										<div class="col-md-6 col-sm-6 col-xs-12">

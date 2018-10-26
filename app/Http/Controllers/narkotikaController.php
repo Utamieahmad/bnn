@@ -348,10 +348,9 @@ class narkotikaController extends Controller
         return view('pemberantasan.narkotika.edit_pendataanLKN',$this->data);
     }
 
-    public function addpendataanLKN(Request $request){
+    public function addpendataanLKN(Request $request){        
       $this->data['title']="Pemberantasan";
-      $client = new Client();
-
+      $client = new Client();      
       $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
@@ -398,6 +397,35 @@ class narkotikaController extends Controller
 
         $client = new Client();
 
+        //generate image base64        
+        // Handle File Upload
+        if($request->hasFile('foto1')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // $data = file_get_contents(public_path('imageupload/IMG_20180926_101723_1540489746.jpg'));
+            // $imageBase64 = base64_encode($data);
+            // dd($imageBase64);
+            // Get just ext
+            $extension = $request->file('foto1')->getClientOriginalExtension();
+            // Filename to store            
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;            
+            // Upload Image
+            $path = $request->file('foto1')->storeAs('storage/images', $fileNameToStore);      
+            dd($path);
+            $image = storage_path('storage/images/'.$fileNameToStore);
+//            dd()
+            $data = file_get_contents($image);
+            $imageBase64 = base64_encode($data);
+//            dd($imageBase64);
+            Storage::delete('storage/images/'.$fileNameToStore);
+            // dd($fileNameToStore);
+            // dd($imageBase64);
+        }
+        dd($imageBase64);
+        
+
         $requestkasus = $client->request('POST', $baseUrl.'/api/kasus',
                 [
                     'headers' =>
@@ -423,6 +451,8 @@ class narkotikaController extends Controller
                         'rute_tujuan' => $request->input('ruteTujuan'),
                         'kasus_jenis' => $request->input('jenisKasus'),
                         //'kasus_kelompok' => $request->input('kelompokKasus'),
+                        'uraian_singkat' => $request->input('uraian_singkat'),
+                        'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                         'meta_penyidik' => json_encode($request->input('penyidik')),
                         'satker_penyidik' => $request->input('satker'),
                         'kategori' => 'narkotika',
@@ -472,6 +502,8 @@ class narkotikaController extends Controller
                                   'rute_transit' => $request->input('ruteTransit'),
                                   'rute_tujuan' => $request->input('ruteTujuan'),
                                   'kasus_jenis' => $request->input('jenisKasus'),
+                                  'uraian_singkat' => $request->input('uraian_singkat'),
+                                  'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                                   //'kasus_kelompok' => $request->input('kelompokKasus'),
                                   'meta_penyidik' => json_encode($request->input('penyidik')),
                                   'satker_penyidik' => $request->input('satker'),
@@ -531,6 +563,8 @@ class narkotikaController extends Controller
                     'rute_transit' => $request->input('ruteTransit'),
                     'rute_tujuan' => $request->input('ruteTujuan'),
                     'kasus_jenis' => $request->input('jenisKasus'),
+                    'uraian_singkat' => $request->input('uraian_singkat'),
+                    'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                     //'kasus_kelompok' => $request->input('kelompokKasus'),
                     'meta_penyidik' => json_encode($request->input('penyidik')),
                     'updated_by' => $request->session()->get('id'),
@@ -577,6 +611,8 @@ class narkotikaController extends Controller
                                   'rute_transit' => $request->input('ruteTransit'),
                                   'rute_tujuan' => $request->input('ruteTujuan'),
                                   'kasus_jenis' => $request->input('jenisKasus'),
+                                  'uraian_singkat' => $request->input('uraian_singkat'),
+                                  'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                                   //'kasus_kelompok' => $request->input('kelompokKasus'),
                                   'meta_penyidik' => json_encode($request->input('penyidik')),
                                   'updated_by' => $request->session()->get('id'),

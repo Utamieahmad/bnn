@@ -51,7 +51,7 @@
 			            @endif
 			            @include('_templateFilter.narkotika_lkn_filter')
 
-
+                                            <div style="overflow-x:auto;">
 						<table id="datatable-responsive" class="table table-striped dt-responsive nowrap text-left" cellspacing="0" width="100%">
 							<thead>
 								<tr>
@@ -143,6 +143,7 @@
 										@endif
 									</tbody>
 								</table>
+                                                    </div>
 								@if(count($data_kasus) > 0)
 					              {!! $pagination !!}
 					            @endif
