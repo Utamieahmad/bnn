@@ -398,24 +398,13 @@ class narkotikaController extends Controller
         $client = new Client();
 
         //generate image base64
-        // Handle File Upload
         if($request->hasFile('foto1')){
-            // Get filename with the extension
             $filenameWithExt = $request->file('foto1')->getClientOriginalName();
-            // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // $data = file_get_contents(public_path('imageupload/IMG_20180926_101723_1540489746.jpg'));
-            // $imageBase64 = base64_encode($data);
-            // dd($imageBase64);
-            // Get just ext
             $extension = $request->file('foto1')->getClientOriginalExtension();
-            // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
             $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            // dd($path);
             $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
-           // dd($image);
             $data = file_get_contents($image);
             $image1 = base64_encode($data);
             Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
@@ -424,22 +413,12 @@ class narkotikaController extends Controller
         }
 
         if($request->hasFile('foto2')){
-            // Get filename with the extension
             $filenameWithExt = $request->file('foto2')->getClientOriginalName();
-            // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // $data = file_get_contents(public_path('imageupload/IMG_20180926_101723_1540489746.jpg'));
-            // $imageBase64 = base64_encode($data);
-            // dd($imageBase64);
-            // Get just ext
             $extension = $request->file('foto2')->getClientOriginalExtension();
-            // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
             $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            // dd($path);
             $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
-           // dd($image);
             $data = file_get_contents($image);
             $image2 = base64_encode($data);
             Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
@@ -448,22 +427,12 @@ class narkotikaController extends Controller
         }
 
         if($request->hasFile('foto3')){
-            // Get filename with the extension
             $filenameWithExt = $request->file('foto3')->getClientOriginalName();
-            // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // $data = file_get_contents(public_path('imageupload/IMG_20180926_101723_1540489746.jpg'));
-            // $imageBase64 = base64_encode($data);
-            // dd($imageBase64);
-            // Get just ext
             $extension = $request->file('foto3')->getClientOriginalExtension();
-            // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
             $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            // dd($path);
             $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
-           // dd($image);
             $data = file_get_contents($image);
             $image3 = base64_encode($data);
             Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
