@@ -179,7 +179,7 @@
                                     </div>
                                 </div>
 								
-								<div class="form-group">
+                                <div class="form-group">
                                     <label for="uraian_singkat" class="col-md-3 col-sm-3 col-xs-12 control-label">Uraian Singkat Materi</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input value="{{$data->uraian_singkat}}" id="uraian_singkat" name="uraian_singkat" type="text" class="form-control">

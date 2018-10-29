@@ -1032,6 +1032,54 @@ class RehabilitasiController extends Controller
             }
             $this->form_params['created_by_username'] = getPelaksana($request->id_pelaksana);
             $this->form_params['kategori'] = 'plrkm';
+            $this->form_params['uraian_singkat'] = $request->input('uraian_singkat');
+            
+            //generate image base64
+            if($request->hasFile('foto1')){
+                $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('foto1')->getClientOriginalExtension();
+                $fileNameToStore= $filename.'_'.time().'.'.$extension;
+                $path = $request->file('foto1')->storeAs('Rehabilitasi/KegiatanPelatihan/PLRKM', $fileNameToStore);
+                $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+                $data = file_get_contents($image);
+                $image1 = base64_encode($data);
+                Storage::delete('Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+            }else{
+              $image1 = null;
+            }
+            $this->form_params['foto1'] = $image1;
+
+            if($request->hasFile('foto2')){
+                $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('foto2')->getClientOriginalExtension();
+                $fileNameToStore= $filename.'_'.time().'.'.$extension;
+                $path = $request->file('foto2')->storeAs('Rehabilitasi/KegiatanPelatihan/PLRKM', $fileNameToStore);
+                $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+                $data = file_get_contents($image);
+                $image2 = base64_encode($data);
+                Storage::delete('Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+            }else{
+              $image2 = null;
+            }
+            $this->form_params['foto2'] = $image2;
+
+            if($request->hasFile('foto3')){
+                $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('foto3')->getClientOriginalExtension();
+                $fileNameToStore= $filename.'_'.time().'.'.$extension;
+                $path = $request->file('foto3')->storeAs('Rehabilitasi/KegiatanPelatihan/PLRKM', $fileNameToStore);
+                $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+                $data = file_get_contents($image);
+                $image3 = base64_encode($data);
+                Storage::delete('Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+            }else{
+              $image3 = null;
+            }
+            $this->form_params['foto3'] = $image3;
+            
             $data_request = execute_api_json('api/pelatihan/','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRKM - Kegiatan';
@@ -1100,7 +1148,7 @@ class RehabilitasiController extends Controller
     }
     public function updateKegiatanPelatihanPlrkm(Request $request){
         $id = $request->id;
-        $this->form_params = $request->except(['_token', 'id']);
+        $this->form_params = $request->except(['_token', 'id', 'foto1_old', 'foto2_old', 'foto3_old']);
         $file_message = "";
         if($request->tgl_sprint){
             $date = explode('/', $request->tgl_sprint);
@@ -1130,6 +1178,54 @@ class RehabilitasiController extends Controller
             }
         }
         $this->form_params['created_by_username'] = getPelaksana($request->id_pelaksana);
+        $this->form_params['uraian_singkat'] = $request->input('uraian_singkat');
+        
+        //generate image base64
+        if($request->hasFile('foto1')){
+            $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto1')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto1')->storeAs('Rehabilitasi/KegiatanPelatihan/PLRKM', $fileNameToStore);
+            $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image1 = base64_encode($data);
+            Storage::delete('Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+        }else{
+          $image1 = $request->input('foto1_old');
+        }        
+        $this->form_params['foto1'] = $image1;     
+
+        if($request->hasFile('foto2')){
+            $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto2')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto2')->storeAs('Rehabilitasi/KegiatanPelatihan/PLRKM', $fileNameToStore);
+            $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image2 = base64_encode($data);
+            Storage::delete('Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+        }else{
+          $image2 = $request->input('foto2_old');
+        }
+        $this->form_params['foto2'] = $image2;        
+
+        if($request->hasFile('foto3')){
+            $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto3')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto3')->storeAs('Rehabilitasi/KegiatanPelatihan/PLRKM', $fileNameToStore);
+            $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image3 = base64_encode($data);
+            Storage::delete('Rehabilitasi/KegiatanPelatihan/PLRKM/'.$fileNameToStore);
+        }else{
+          $image3 = $request->input('foto3_old');
+        }
+        $this->form_params['foto3'] = $image3; 
+        
         $data_request = execute_api_json('api/pelatihan/'.$id,'PUT',$this->form_params);
 
 				$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRKM - Kegiatan';
@@ -2464,7 +2560,7 @@ class RehabilitasiController extends Controller
 
     public function updateKegiatanPelatihanPlrip(Request $request){
         $id = $request->id;
-        $this->form_params = $request->except(['_token', 'id']);
+        $this->form_params = $request->except(['_token', 'id', 'foto1_old', 'foto2_old', 'foto3_old']);
         $file_message = "";
         if($request->tgl_sprint){
             $date = explode('/', $request->tgl_sprint);
@@ -2507,10 +2603,9 @@ class RehabilitasiController extends Controller
             $image1 = base64_encode($data);
             Storage::delete('Rehabilitasi/KegiatanPelatihan/PLRIP/'.$fileNameToStore);
         }else{
-          $image1 = '';
+          $image1 = $request->input('foto1_old');
         }        
         $this->form_params['foto1'] = $image1;     
-//        dd($this->form_params['foto1']);
 
         if($request->hasFile('foto2')){
             $filenameWithExt = $request->file('foto2')->getClientOriginalName();
@@ -2541,8 +2636,7 @@ class RehabilitasiController extends Controller
           $image3 = $request->input('foto3_old');
         }
         $this->form_params['foto3'] = $image3;    
-//        $this->form_params = $request->except(['foto1_old','foto2_old','foto3_old']);
-        dd($this->form_params);
+//        dd($this->form_params);
         $data_request = execute_api_json('api/pelatihan/'.$id,'PUT',$this->form_params);
 
 				$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRIP - Kegiatan';
@@ -2556,7 +2650,7 @@ class RehabilitasiController extends Controller
 				$trail['created_by'] = $request->session()->get('id');
 
 				$qtrail = $this->inputtrail($request->session()->get('token'),$trail);
-                                dd($data_request);
+//                                dd($data_request);
         if( ($data_request->code == 200) && ($data_request->status != 'error') ){
             // $id = $data_request->data->eventID;
             $this->kelengkapan_KegiatanPelatihanPlrip($id);
@@ -3838,6 +3932,54 @@ class RehabilitasiController extends Controller
             }
 
             $this->form_params['kategori'] = 'pasca';
+            $this->form_params['uraian_singkat'] = $request->input('uraian_singkat');
+            
+            //generate image base64
+            if($request->hasFile('foto1')){
+                $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('foto1')->getClientOriginalExtension();
+                $fileNameToStore= $filename.'_'.time().'.'.$extension;
+                $path = $request->file('foto1')->storeAs('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi', $fileNameToStore);
+                $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+                $data = file_get_contents($image);
+                $image1 = base64_encode($data);
+                Storage::delete('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+            }else{
+              $image1 = null;
+            }
+            $this->form_params['foto1'] = $image1;
+
+            if($request->hasFile('foto2')){
+                $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('foto2')->getClientOriginalExtension();
+                $fileNameToStore= $filename.'_'.time().'.'.$extension;
+                $path = $request->file('foto2')->storeAs('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi', $fileNameToStore);
+                $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+                $data = file_get_contents($image);
+                $image2 = base64_encode($data);
+                Storage::delete('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+            }else{
+              $image2 = null;
+            }
+            $this->form_params['foto2'] = $image2;
+
+            if($request->hasFile('foto3')){
+                $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('foto3')->getClientOriginalExtension();
+                $fileNameToStore= $filename.'_'.time().'.'.$extension;
+                $path = $request->file('foto3')->storeAs('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi', $fileNameToStore);
+                $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+                $data = file_get_contents($image);
+                $image3 = base64_encode($data);
+                Storage::delete('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+            }else{
+              $image3 = null;
+            }
+            $this->form_params['foto3'] = $image3;
+            
             $data_request = execute_api_json('api/pelatihan/','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat Pascarehabilitasi - Kegiatan';
@@ -3884,7 +4026,7 @@ class RehabilitasiController extends Controller
     }
     public function updateKegiatanPelatihanPasca(Request $request){
         $id = $request->id;
-        $this->form_params = $request->except(['_token', 'id']);
+        $this->form_params = $request->except(['_token', 'id', 'foto1_old', 'foto2_old', 'foto3_old']);
         $file_message = "";
         if($request->tgl_sprint){
             $date = explode('/', $request->tgl_sprint);
@@ -3913,6 +4055,55 @@ class RehabilitasiController extends Controller
                 $file_message = "Dengan File gagal diupload.";
             }
         }
+        
+        $this->form_params['uraian_singkat'] = $request->input('uraian_singkat');
+        
+        //generate image base64
+        if($request->hasFile('foto1')){
+            $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto1')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto1')->storeAs('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi', $fileNameToStore);
+            $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image1 = base64_encode($data);
+            Storage::delete('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+        }else{
+          $image1 = $request->input('foto1_old');
+        }        
+        $this->form_params['foto1'] = $image1;     
+
+        if($request->hasFile('foto2')){
+            $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto2')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto2')->storeAs('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi', $fileNameToStore);
+            $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image2 = base64_encode($data);
+            Storage::delete('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+        }else{
+          $image2 = $request->input('foto2_old');
+        }
+        $this->form_params['foto2'] = $image2;        
+
+        if($request->hasFile('foto3')){
+            $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto3')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto3')->storeAs('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi', $fileNameToStore);
+            $image = public_path('upload/Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image3 = base64_encode($data);
+            Storage::delete('Rehabilitasi/KegiatanPelatihan/Pascarehabilitasi/'.$fileNameToStore);
+        }else{
+          $image3 = $request->input('foto3_old');
+        }
+        $this->form_params['foto3'] = $image3;
+        
         $data_request = execute_api_json('api/pelatihan/'.$id,'PUT',$this->form_params);
 
 				$trail['audit_menu'] = 'Rehabilitasi - Direktorat Pascarehabilitasi - Kegiatan';
