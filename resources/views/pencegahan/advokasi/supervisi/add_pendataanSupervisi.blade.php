@@ -2,6 +2,43 @@
 @section('title', 'Tambah Data Kegiatan Supervisi')
 
 @section('content')
+
+<script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah2').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah3').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+
 	<div class="right_col" role="main">
         <div class="m-t-40">
             <div class="page-title">
@@ -98,7 +135,7 @@
 	        </div>
 
 	        <div class="form-group">
-	            <label for="jumlah_peserta" class="col-md-3 col-sm-3 col-xs-12 control-label">Jumlah Peserta </label>
+	            <label for="jumlah_peserta" class="col-md-3 col-sm-3 col-xs-12 control-label">Total Peserta Kegiatan</label>
 	            <div class="col-md-6 col-sm-6 col-xs-12">
 	                <input value="" id="jumlah_peserta" name="jumlah_peserta" type="text" class="form-control">
 	            </div>
@@ -219,6 +256,31 @@
 	                </span>
 	            </div>
 	        </div>
+
+					<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12"  >Foto</label>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+									<img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah" style="width:100%;height:150px;" />
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+									<img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah2" style="width:100%;height:150px;" />
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+									<img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah3" style="width:100%;height:150px;" />
+							</div>
+					</div>
+					<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12"  >&nbsp;</label>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+									<input type='file' name="foto1" onchange="readURL(this);" />
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+									<input type='file' name="foto2" onchange="readURL2(this);" />
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+									<input type='file' name="foto3" onchange="readURL3(this);" />
+							</div>
+					</div>
 
     </div>
     <div class="form-actions fluid">
