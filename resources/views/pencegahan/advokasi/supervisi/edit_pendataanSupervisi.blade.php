@@ -128,15 +128,22 @@
               </div>
           </div>
 
+	        <div class="form-group">
+	            <label for="jumlah_peserta" class="col-md-3 col-sm-3 col-xs-12 control-label">Jumlah Peserta </label>
+	            <div class="col-md-6 col-sm-6 col-xs-12">
+	                <input value="{{$data_detail['data']['jumlah_peserta']}}" id="jumlah_peserta" name="jumlah_peserta" type="text" class="form-control">
+	            </div>
+	        </div>
+
           <div class="form-group">
-              <label for="lokasi_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Alamat Lokasi Kegiatan </label>
+              <label for="lokasi_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Kegiatan </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <input value="{{$data_detail['data']['lokasi_kegiatan']}}" id="lokasi_kegiatan" name="lokasi_kegiatan" type="text" class="form-control">
               </div>
           </div>
 
           <div class="form-group">
-              <label for="lokasi_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Kegiatan</label>
+              <label for="lokasi_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Kabupaten</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control select2 " name="lokasi_kegiatan_idkabkota">
                     <option value="">-- Pilih Kabupaten --</option>
@@ -206,6 +213,13 @@
                 </div>
             </div>
         </div>
+
+	        <div class="form-group">
+	            <label for="uraian_singkat" class="col-md-3 col-sm-3 col-xs-12 control-label">Uraian Singkat Materi</label>
+	            <div class="col-md-6 col-sm-6 col-xs-12">
+	                <textarea id="uraian_singkat" rows="3" name="uraian_singkat" type="text" class="form-control col-md-7 col-xs-12">{{$data_detail['data']['uraian_singkat']}}</textarea>
+	            </div>
+	        </div>
 
           <div class="form-group">
               <label for="panitia_monev" class="col-md-3 col-sm-3 col-xs-12 control-label">Panitia</label>

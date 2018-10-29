@@ -3295,6 +3295,8 @@ class AdvokasiController extends Controller
         }
 
         $jumlah_instansi = count($request->input('group-c'));
+        $peserta = $request->input('jumlah_peserta');
+        $uraian_singkat_materi = $request->input('uraian_singkat');
         // $peserta = 0;
         // if ($jumlah_instansi > 0) {
         //     foreach ($request->input('group-c') as $c1 => $r1) {
@@ -3329,9 +3331,10 @@ class AdvokasiController extends Controller
                        'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
                        'jumlah_instansi' => $jumlah_instansi,
                        'meta_instansi' => $meta_instansi,
-                       // 'jumlah_peserta' => $peserta,
+                       'jumlah_peserta' => $peserta,
                        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                        'meta_nasum_materi' => $meta_nasum_materi,
+                       'uraian_singkat' => $uraian_singkat_materi,
                        //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                        'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                        // 'narasumber' => $request->input('narasumber'),
@@ -3460,6 +3463,8 @@ class AdvokasiController extends Controller
            }
 
           $jumlah_instansi = count($request->input('group-c'));
+          $peserta = $request->input('jumlah_peserta');
+          $uraian_singkat_materi = $request->input('uraian_singkat');
           // $peserta = 0;
           // if ($jumlah_instansi > 0) {
           //     foreach ($request->input('group-c') as $c1 => $r1) {
@@ -3494,9 +3499,10 @@ class AdvokasiController extends Controller
                            'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
                            'jumlah_instansi' => $jumlah_instansi,
                            'meta_instansi' => $meta_instansi,
-                           // 'jumlah_peserta' => $peserta,
+                           'jumlah_peserta' => $peserta,
                            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                            'meta_nasum_materi' => $meta_nasum_materi,
+                           'uraian_singkat' => $uraian_singkat_materi,
                            //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                            'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                            // 'narasumber' => $request->input('narasumber'),
