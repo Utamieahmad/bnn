@@ -519,6 +519,9 @@ class narkotikaController extends Controller
                                   'rute_transit' => $request->input('ruteTransit'),
                                   'rute_tujuan' => $request->input('ruteTujuan'),
                                   'kasus_jenis' => $request->input('jenisKasus'),
+                                  'foto1' => $image1,
+                                  'foto2' => $image2,
+                                  'foto3' => $image3,
                                   'uraian_singkat' => $request->input('uraian_singkat'),
                                   'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                                   //'kasus_kelompok' => $request->input('kelompokKasus'),
@@ -555,7 +558,56 @@ class narkotikaController extends Controller
         // dd($request->all());
 
         $client = new Client();
+        
+        //generate image base64
+        if($request->hasFile('foto1')){
+            $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto1')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image1 = base64_encode($data);
+            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+//            $form_foto1 = 'foto1 => '.$image1.',';
+        }else{
+            $image1 = $request->input('foto1_old');
+//            $form_foto1 = '';
+        }
 
+        if($request->hasFile('foto2')){
+            $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto2')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image2 = base64_encode($data);
+            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+//            $form_foto2 = 'foto2 => '.$image2.',';
+        }else{
+            $image2 = $request->input('foto2_old');
+//            $form_foto2 = '';
+        }
+
+        if($request->hasFile('foto3')){
+            $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto3')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image3 = base64_encode($data);
+            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+//            $form_foto3 = 'foto3 => '.$image.',';
+        }else{
+            $image3 = $request->input('foto3_old');
+//            $form_foto3 = '';
+        }
+        
         $query = $client->request('PUT', $baseUrl.'/api/kasus/'.$id,
             [
                 'headers' =>
@@ -580,8 +632,11 @@ class narkotikaController extends Controller
                     'rute_transit' => $request->input('ruteTransit'),
                     'rute_tujuan' => $request->input('ruteTujuan'),
                     'kasus_jenis' => $request->input('jenisKasus'),
+                    'foto1' => $image1,
+                    'foto2' => $image2,
+                    'foto3' => $image3,
                     'uraian_singkat' => $request->input('uraian_singkat'),
-                    'keterangan_lainnya' => $request->input('keterangan_lainnya'),
+                    'keterangan_lainnya' => $request->input('keterangan_lainnya'),                    
                     //'kasus_kelompok' => $request->input('kelompokKasus'),
                     'meta_penyidik' => json_encode($request->input('penyidik')),
                     'updated_by' => $request->session()->get('id'),
@@ -628,8 +683,11 @@ class narkotikaController extends Controller
                                   'rute_transit' => $request->input('ruteTransit'),
                                   'rute_tujuan' => $request->input('ruteTujuan'),
                                   'kasus_jenis' => $request->input('jenisKasus'),
+                                  'foto1' => $image1,
+                                  'foto2' => $image2,
+                                  'foto3' => $image3,
                                   'uraian_singkat' => $request->input('uraian_singkat'),
-                                  'keterangan_lainnya' => $request->input('keterangan_lainnya'),
+                                  'keterangan_lainnya' => $request->input('keterangan_lainnya'),                                  
                                   //'kasus_kelompok' => $request->input('kelompokKasus'),
                                   'meta_penyidik' => json_encode($request->input('penyidik')),
                                   'updated_by' => $request->session()->get('id'),
