@@ -16,6 +16,7 @@ use App\Models\Dayamas\AltdevProfesiPeserta;
 use App\Models\Dayamas\MonevKawasanrawanPeserta;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Storage;
 
 class caseController extends Controller
 {
@@ -2208,6 +2209,55 @@ class caseController extends Controller
           $json_lokasi_lahan = "";
         }
         $this->form_params['meta_lokasi_lahan'] =  $json_lokasi_lahan;
+        $this->form_params['lokasi'] = $request->input('lokasi');
+        $this->form_params['keterangan_lainnya'] = $request->input('keterangan_lainnya');
+        
+        //generate image base64
+        if($request->hasFile('foto1')){
+            $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto1')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto1')->storeAs('Pemberdayaan/DirektoratAlternativeDevelopment/alihFungsiLahanGanja', $fileNameToStore);
+            $image = public_path('upload/Pemberdayaan/DirektoratAlternativeDevelopment/alihFungsiLahanGanja/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image1 = base64_encode($data);
+            Storage::delete('Pemberdayaan/DirektoratAlternativeDevelopment/alihFungsiLahanGanja/'.$fileNameToStore);
+        }else{
+          $image1 = null;
+        }
+        $this->form_params['foto1'] = $image1;
+
+        if($request->hasFile('foto2')){
+            $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto2')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto2')->storeAs('Pemberdayaan/DirektoratAlternativeDevelopment', $fileNameToStore);
+            $image = public_path('upload/Pemberdayaan/DirektoratAlternativeDevelopment/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image2 = base64_encode($data);
+            Storage::delete('Pemberdayaan/DirektoratAlternativeDevelopment/'.$fileNameToStore);
+        }else{
+          $image2 = null;
+        }
+        $this->form_params['foto2'] = $image2;
+
+        if($request->hasFile('foto3')){
+            $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto3')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto3')->storeAs('Pemberdayaan/DirektoratAlternativeDevelopment', $fileNameToStore);
+            $image = public_path('upload/Pemberdayaan/DirektoratAlternativeDevelopment/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image3 = base64_encode($data);
+            Storage::delete('Pemberdayaan/DirektoratAlternativeDevelopment/'.$fileNameToStore);
+        }else{
+          $image3 = null;
+        }
+        $this->form_params['foto3'] = $image3;
+        
         $data_request = execute_api_json('api/altdevlahan/','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Fungsi Lahan Ganja';
@@ -2252,7 +2302,7 @@ class caseController extends Controller
 
     public function updateAltdevLahanGanja(Request $request){
         $id = $request->id;
-        $this->form_params = $request->except(['id','_token','lokasi_lahan','kodepenyelenggara','kodekomoditi']);
+        $this->form_params = $request->except(['id','_token','lokasi_lahan','kodepenyelenggara','kodekomoditi', 'foto1_old', 'foto2_old', 'foto3_old']);
         if($request->tgl_kegiatan){
           $date = str_replace('/', '-', $request->tgl_kegiatan);
           $this->form_params['tgl_kegiatan'] = date('Y-m-d',strtotime($date));
@@ -2280,6 +2330,55 @@ class caseController extends Controller
           $json_lokasi_lahan = "";
         }
         $this->form_params['meta_lokasi_lahan'] =  $json_lokasi_lahan;
+        $this->form_params['lokasi'] = $request->input('lokasi');
+        $this->form_params['keterangan_lainnya'] = $request->input('keterangan_lainnya');
+        
+        //generate image base64
+        if($request->hasFile('foto1')){
+            $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto1')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto1')->storeAs('Pemberdayaan/DirektoratAlternativeDevelopment/alihFungsiLahanGanja', $fileNameToStore);
+            $image = public_path('upload/Pemberdayaan/DirektoratAlternativeDevelopment/alihFungsiLahanGanja/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image1 = base64_encode($data);
+            Storage::delete('Pemberdayaan/DirektoratAlternativeDevelopment/alihFungsiLahanGanja/'.$fileNameToStore);
+        }else{
+          $image1 = $request->input('foto1_old');
+        }
+        $this->form_params['foto1'] = $image1;
+
+        if($request->hasFile('foto2')){
+            $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto2')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto2')->storeAs('Pemberdayaan/DirektoratAlternativeDevelopment', $fileNameToStore);
+            $image = public_path('upload/Pemberdayaan/DirektoratAlternativeDevelopment/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image2 = base64_encode($data);
+            Storage::delete('Pemberdayaan/DirektoratAlternativeDevelopment/'.$fileNameToStore);
+        }else{
+          $image2 = $request->input('foto2_old');
+        }
+        $this->form_params['foto2'] = $image2;
+
+        if($request->hasFile('foto3')){
+            $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('foto3')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('foto3')->storeAs('Pemberdayaan/DirektoratAlternativeDevelopment', $fileNameToStore);
+            $image = public_path('upload/Pemberdayaan/DirektoratAlternativeDevelopment/'.$fileNameToStore);
+            $data = file_get_contents($image);
+            $image3 = base64_encode($data);
+            Storage::delete('Pemberdayaan/DirektoratAlternativeDevelopment/'.$fileNameToStore);
+        }else{
+          $image3 = $request->input('foto3_old');
+        }
+        $this->form_params['foto3'] = $image3;
+                
         $data_request = execute_api_json('api/altdevlahan/'.$id,'PUT',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Fungsi Lahan Ganja';
