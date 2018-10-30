@@ -2,6 +2,41 @@
 @section('title', 'Tambah Data Alih Fungsi Lahan Ganja Kawasan Narkotika')
 
 @section('content')
+<script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah2').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah3').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
     <div class="right_col mSelect" role="main">
         <div class="m-t-40">
             <div class="page-title">
@@ -95,6 +130,18 @@
                                            <input type="text" name="bulan_tanam" onkeypress="decimal_number(event,this)" class="form-control"/>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="keterangan_lainnya" class="col-md-3 col-sm-3 col-xs-12 control-label">Keterangan Lainnya</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                           <input type="text" name="keterangan_lainnya" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lokasi" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Peninjauan</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                           <input type="text" name="lokasi" class="form-control"/>
+                                        </div>
+                                    </div>									
                                      <div class="form-group m-t-20">
                                         <label for="Lokasi" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi dan Kepemilikan Lahan</label>
                                         <div class="col-md-8 col-sm-8 col-xs-12 lokasi-alih-fungsi">
@@ -132,7 +179,31 @@
                                             </div>
                                         </div>
                                     </div>
-
+									<div>&nbsp</div>
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"  >Foto</label>
+										<div class="col-md-3 col-sm-3 col-xs-12">                                
+											<img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah" style="width:100%;height:150px;" />
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-12">                                
+											<img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah2" style="width:100%;height:150px;" />
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-12">                                
+											<img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah3" style="width:100%;height:150px;" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"  >&nbsp;</label>
+										<div class="col-md-3 col-sm-3 col-xs-12">
+											<input type='file' name="foto1" onchange="readURL(this);" />
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-12">
+											<input type='file' name="foto2" onchange="readURL2(this);" />
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-12">
+											<input type='file' name="foto3" onchange="readURL3(this);" />
+										</div>
+									</div>
                                 </div>
                                 <div class="form-actions fluid m-t-20">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
