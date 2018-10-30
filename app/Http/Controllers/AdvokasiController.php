@@ -980,6 +980,51 @@ class AdvokasiController extends Controller
 
        $client = new Client();
 
+       //generate image base64
+       if($request->hasFile('foto1')){
+           $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto1')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image1 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image1 = null;
+       }
+
+       if($request->hasFile('foto2')){
+           $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto2')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image2 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image2 = null;
+       }
+
+       if($request->hasFile('foto3')){
+           $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto3')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image3 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image3 = null;
+       }
+       $peserta = $request->input('jumlah_peserta');
+       $uraian_singkat_materi = $request->input('uraian_singkat');
+
        if ($request->input('kodesumberanggaran')=="DIPA") {
            $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                    [
@@ -1045,6 +1090,11 @@ class AdvokasiController extends Controller
                        // 'jumlah_peserta' => $peserta,
                        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                        'meta_nasum_materi' => $meta_nasum_materi,
+                       'jumlah_peserta' => $peserta,
+                       'uraian_singkat' => $uraian_singkat_materi,
+                       'foto1' => $image1,
+                       'foto2' => $image2,
+                       'foto3' => $image3,
                        //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                        'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                        // 'narasumber' => $request->input('narasumber'),
@@ -1074,6 +1124,11 @@ class AdvokasiController extends Controller
        // 'jumlah_peserta' => $peserta,
        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
        'meta_nasum_materi' => $meta_nasum_materi,
+       'jumlah_peserta' => $peserta,
+       'uraian_singkat' => $uraian_singkat_materi,
+       'foto1' => $image1,
+       'foto2' => $image2,
+       'foto3' => $image3,
        //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
        'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
        // 'narasumber' => $request->input('narasumber'),
@@ -1145,6 +1200,57 @@ class AdvokasiController extends Controller
 
           $client = new Client();
 
+          //generate image base64
+          if($request->hasFile('foto1')){
+              $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto1')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image1 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto1 = 'foto1 => '.$image1.',';
+          }else{
+              $image1 = $request->input('foto1_old');
+  //            $form_foto1 = '';
+          }
+
+          if($request->hasFile('foto2')){
+              $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto2')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image2 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto2 = 'foto2 => '.$image2.',';
+          }else{
+              $image2 = $request->input('foto2_old');
+  //            $form_foto2 = '';
+          }
+
+          if($request->hasFile('foto3')){
+              $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto3')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image3 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto3 = 'foto3 => '.$image.',';
+          }else{
+              $image3 = $request->input('foto3_old');
+  //            $form_foto3 = '';
+          }
+          $peserta = $request->input('jumlah_peserta');
+          $uraian_singkat_materi = $request->input('uraian_singkat');
+
           if ($request->input('kodesumberanggaran')=="DIPA") {
               $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                       [
@@ -1207,6 +1313,11 @@ class AdvokasiController extends Controller
                            'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
                            'jumlah_instansi' => $jumlah_instansi,
                            'meta_instansi' => $meta_instansi,
+                           'uraian_singkat' => $uraian_singkat_materi,
+                           'jumlah_peserta' => $peserta,
+                           'foto1' => $image1,
+                           'foto2' => $image2,
+                           'foto3' => $image3,
                            // 'jumlah_peserta' => $peserta,
                            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                            'meta_nasum_materi' => $meta_nasum_materi,
@@ -1236,6 +1347,11 @@ class AdvokasiController extends Controller
            'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
            'jumlah_instansi' => $jumlah_instansi,
            'meta_instansi' => $meta_instansi,
+           'uraian_singkat' => $uraian_singkat_materi,
+           'jumlah_peserta' => $peserta,
+           'foto1' => $image1,
+           'foto2' => $image2,
+           'foto3' => $image3,
            // 'jumlah_peserta' => $peserta,
            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
            'meta_nasum_materi' => $meta_nasum_materi,
@@ -1631,6 +1747,51 @@ class AdvokasiController extends Controller
 
        $client = new Client();
 
+       //generate image base64
+       if($request->hasFile('foto1')){
+           $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto1')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image1 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image1 = null;
+       }
+
+       if($request->hasFile('foto2')){
+           $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto2')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image2 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image2 = null;
+       }
+
+       if($request->hasFile('foto3')){
+           $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto3')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image3 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image3 = null;
+       }
+       $peserta = $request->input('jumlah_peserta');
+       $uraian_singkat_materi = $request->input('uraian_singkat');
+
        if ($request->input('kodesumberanggaran')=="DIPA") {
            $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                    [
@@ -1693,6 +1854,11 @@ class AdvokasiController extends Controller
                        'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
                        'jumlah_instansi' => $jumlah_instansi,
                        'meta_instansi' => $meta_instansi,
+                       'jumlah_peserta' => $peserta,
+                       'uraian_singkat' => $uraian_singkat_materi,
+                       'foto1' => $image1,
+                       'foto2' => $image2,
+                       'foto3' => $image3,
                        // 'jumlah_peserta' => $peserta,
                        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                        'meta_nasum_materi' => $meta_nasum_materi,
@@ -1722,6 +1888,11 @@ class AdvokasiController extends Controller
        'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
        'jumlah_instansi' => $jumlah_instansi,
        'meta_instansi' => $meta_instansi,
+       'jumlah_peserta' => $peserta,
+       'uraian_singkat' => $uraian_singkat_materi,
+       'foto1' => $image1,
+       'foto2' => $image2,
+       'foto3' => $image3,
        // 'jumlah_peserta' => $peserta,
        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
        'meta_nasum_materi' => $meta_nasum_materi,
@@ -1796,6 +1967,57 @@ class AdvokasiController extends Controller
 
           $client = new Client();
 
+          //generate image base64
+          if($request->hasFile('foto1')){
+              $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto1')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image1 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto1 = 'foto1 => '.$image1.',';
+          }else{
+              $image1 = $request->input('foto1_old');
+  //            $form_foto1 = '';
+          }
+
+          if($request->hasFile('foto2')){
+              $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto2')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image2 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto2 = 'foto2 => '.$image2.',';
+          }else{
+              $image2 = $request->input('foto2_old');
+  //            $form_foto2 = '';
+          }
+
+          if($request->hasFile('foto3')){
+              $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto3')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image3 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto3 = 'foto3 => '.$image.',';
+          }else{
+              $image3 = $request->input('foto3_old');
+  //            $form_foto3 = '';
+          }
+          $peserta = $request->input('jumlah_peserta');
+          $uraian_singkat_materi = $request->input('uraian_singkat');
+
           if ($request->input('kodesumberanggaran')=="DIPA") {
               $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                       [
@@ -1858,6 +2080,11 @@ class AdvokasiController extends Controller
                            'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
                            'jumlah_instansi' => $jumlah_instansi,
                            'meta_instansi' => $meta_instansi,
+                           'uraian_singkat' => $uraian_singkat_materi,
+                           'jumlah_peserta' => $peserta,
+                           'foto1' => $image1,
+                           'foto2' => $image2,
+                           'foto3' => $image3,
                            // 'jumlah_peserta' => $peserta,
                            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                            'meta_nasum_materi' => $meta_nasum_materi,
@@ -1887,6 +2114,11 @@ class AdvokasiController extends Controller
            'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
            'jumlah_instansi' => $jumlah_instansi,
            'meta_instansi' => $meta_instansi,
+           'uraian_singkat' => $uraian_singkat_materi,
+           'jumlah_peserta' => $peserta,
+           'foto1' => $image1,
+           'foto2' => $image2,
+           'foto3' => $image3,
            // 'jumlah_peserta' => $peserta,
            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
            'meta_nasum_materi' => $meta_nasum_materi,
@@ -2616,6 +2848,50 @@ class AdvokasiController extends Controller
 
        $client = new Client();
 
+       //generate image base64
+       if($request->hasFile('foto1')){
+           $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto1')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image1 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image1 = null;
+       }
+
+       if($request->hasFile('foto2')){
+           $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto2')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image2 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image2 = null;
+       }
+
+       if($request->hasFile('foto3')){
+           $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto3')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image3 = base64_encode($data);
+           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+       }else{
+         $image3 = null;
+       }
+       $uraian_singkat_materi = $request->input('uraian_singkat');
+
        if ($request->input('kodesumberanggaran')=="DIPA") {
            $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                    [
@@ -2681,6 +2957,10 @@ class AdvokasiController extends Controller
                        'jumlah_peserta' => $peserta,
                        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                        'meta_nasum_materi' => $meta_nasum_materi,
+                       'uraian_singkat' => $uraian_singkat_materi,
+                       'foto1' => $image1,
+                       'foto2' => $image2,
+                       'foto3' => $image3,
                        //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                        'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                        // 'narasumber' => $request->input('narasumber'),
@@ -2710,6 +2990,10 @@ class AdvokasiController extends Controller
        'jumlah_peserta' => $peserta,
        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
        'meta_nasum_materi' => $meta_nasum_materi,
+       'uraian_singkat' => $uraian_singkat_materi,
+       'foto1' => $image1,
+       'foto2' => $image2,
+       'foto3' => $image3,
        //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
        'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
        // 'narasumber' => $request->input('narasumber'),
@@ -2781,6 +3065,56 @@ class AdvokasiController extends Controller
 
           $client = new Client();
 
+          //generate image base64
+          if($request->hasFile('foto1')){
+              $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto1')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image1 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto1 = 'foto1 => '.$image1.',';
+          }else{
+              $image1 = $request->input('foto1_old');
+  //            $form_foto1 = '';
+          }
+
+          if($request->hasFile('foto2')){
+              $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto2')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image2 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto2 = 'foto2 => '.$image2.',';
+          }else{
+              $image2 = $request->input('foto2_old');
+  //            $form_foto2 = '';
+          }
+
+          if($request->hasFile('foto3')){
+              $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto3')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image3 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto3 = 'foto3 => '.$image.',';
+          }else{
+              $image3 = $request->input('foto3_old');
+  //            $form_foto3 = '';
+          }
+          $uraian_singkat_materi = $request->input('uraian_singkat');
+
           if ($request->input('kodesumberanggaran')=="DIPA") {
               $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                       [
@@ -2846,6 +3180,10 @@ class AdvokasiController extends Controller
                            'jumlah_peserta' => $peserta,
                            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                            'meta_nasum_materi' => $meta_nasum_materi,
+                           'uraian_singkat' => $uraian_singkat_materi,
+                           'foto1' => $image1,
+                           'foto2' => $image2,
+                           'foto3' => $image3,
                            //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                            'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                            // 'narasumber' => $request->input('narasumber'),
@@ -2875,6 +3213,10 @@ class AdvokasiController extends Controller
            'jumlah_peserta' => $peserta,
            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
            'meta_nasum_materi' => $meta_nasum_materi,
+           'uraian_singkat' => $uraian_singkat_materi,
+           'foto1' => $image1,
+           'foto2' => $image2,
+           'foto3' => $image3,
            //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
            'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
            // 'narasumber' => $request->input('narasumber'),
@@ -3309,6 +3651,8 @@ class AdvokasiController extends Controller
        }else{
          $image3 = null;
        }
+       $peserta = $request->input('jumlah_peserta');
+       $uraian_singkat_materi = $request->input('uraian_singkat');
 
        if ($request->input('kodesumberanggaran')=="DIPA") {
            $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
@@ -3374,13 +3718,13 @@ class AdvokasiController extends Controller
                        'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
                        'jumlah_instansi' => $jumlah_instansi,
                        'meta_instansi' => $meta_instansi,
-                       'jumlah_peserta' => $peserta,
                        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                        'meta_nasum_materi' => $meta_nasum_materi,
+                       'jumlah_peserta' => $peserta,
+                       'uraian_singkat' => $uraian_singkat_materi,
                        'foto1' => $image1,
                        'foto2' => $image2,
                        'foto3' => $image3,
-                       'uraian_singkat' => $uraian_singkat_materi,
                        //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                        'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                        // 'narasumber' => $request->input('narasumber'),
@@ -3529,6 +3873,8 @@ class AdvokasiController extends Controller
               $image3 = $request->input('foto3_old');
   //            $form_foto3 = '';
           }
+          $peserta = $request->input('jumlah_peserta');
+          $uraian_singkat_materi = $request->input('uraian_singkat');
 
           if ($request->input('kodesumberanggaran')=="DIPA") {
               $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
@@ -3558,8 +3904,6 @@ class AdvokasiController extends Controller
            }
 
           $jumlah_instansi = count($request->input('group-c'));
-          $peserta = $request->input('jumlah_peserta');
-          $uraian_singkat_materi = $request->input('uraian_singkat');
           // $peserta = 0;
           // if ($jumlah_instansi > 0) {
           //     foreach ($request->input('group-c') as $c1 => $r1) {
@@ -3594,13 +3938,13 @@ class AdvokasiController extends Controller
                            'kodesasaran' => ($request->input('sasaran') ? $request->input('sasaran') : ''),
                            'jumlah_instansi' => $jumlah_instansi,
                            'meta_instansi' => $meta_instansi,
-                           'jumlah_peserta' => $peserta,
                            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                            'meta_nasum_materi' => $meta_nasum_materi,
+                           'uraian_singkat' => $uraian_singkat_materi,
+                           'jumlah_peserta' => $peserta,
                            'foto1' => $image1,
                            'foto2' => $image2,
                            'foto3' => $image3,
-                           'uraian_singkat' => $uraian_singkat_materi,
                            //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                            'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                            // 'narasumber' => $request->input('narasumber'),
@@ -4885,6 +5229,57 @@ class AdvokasiController extends Controller
 
           $client = new Client();
 
+          //generate image base64
+          if($request->hasFile('foto1')){
+              $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto1')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image1 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto1 = 'foto1 => '.$image1.',';
+          }else{
+              $image1 = $request->input('foto1_old');
+  //            $form_foto1 = '';
+          }
+
+          if($request->hasFile('foto2')){
+              $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto2')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image2 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto2 = 'foto2 => '.$image2.',';
+          }else{
+              $image2 = $request->input('foto2_old');
+  //            $form_foto2 = '';
+          }
+
+          if($request->hasFile('foto3')){
+              $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto3')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image3 = base64_encode($data);
+              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+  //            $form_foto3 = 'foto3 => '.$image.',';
+          }else{
+              $image3 = $request->input('foto3_old');
+  //            $form_foto3 = '';
+          }
+
+          $uraian_singkat_materi = $request->input('uraian_singkat');
+
           if ($request->input('kodesumberanggaran')=="DIPA") {
               $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                       [
@@ -4950,6 +5345,10 @@ class AdvokasiController extends Controller
                            'jumlah_peserta' => $peserta,
                            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                            'meta_nasum_materi' => $meta_nasum_materi,
+                           'uraian_singkat' => $uraian_singkat_materi,
+                           'foto1' => $image1,
+                           'foto2' => $image2,
+                           'foto3' => $image3,
                            //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                            'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                            // 'narasumber' => $request->input('narasumber'),
@@ -4979,6 +5378,10 @@ class AdvokasiController extends Controller
            'jumlah_peserta' => $peserta,
            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
            'meta_nasum_materi' => $meta_nasum_materi,
+           'uraian_singkat' => $uraian_singkat_materi,
+           'foto1' => $image1,
+           'foto2' => $image2,
+           'foto3' => $image3,
            //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
            'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
            // 'narasumber' => $request->input('narasumber'),
