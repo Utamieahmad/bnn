@@ -1280,7 +1280,7 @@ class SettamaController extends Controller
     			$json_peserta = "";
     		}
 			$this->form_params['meta_peserta'] = $json_peserta;
-
+			
 			$query = execute_api_json('api/settama','POST',$this->form_params);
 
 			$trail['audit_menu'] = 'Sekretariat Utama - Biro Umum';

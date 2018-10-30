@@ -1938,12 +1938,14 @@ function labelPenyelenggara($type,$code){
 }
 
 function execute_api_json($url,$method,$params=array()){
+	// $jsonconvert = json_encode($params);
 	$token = session()->get('token');
 	$headers = ['headers'=>[ 'Accept' => 'application/json' ,'Authorization'=>'Bearer '.$token]];
 	$client = new \GuzzleHttp\Client($headers);
     try {
 		if( (strtolower($method) == 'post') || (strtolower($method) == 'put')|| (strtolower($method) == 'delete')) {
-	        $request = $client->request($method,url($url),[$headers, 'form_params' =>$params]);
+	        // $request = $client->request($method,url($url),[$headers, 'body' =>$jsonconvert]);
+					$request = $client->request($method,url($url),[$headers, 'form_params' =>$params]);
 	        $data = json_decode($request->getBody()->getContents(), false);
 	        return $data;
 	    }else{
