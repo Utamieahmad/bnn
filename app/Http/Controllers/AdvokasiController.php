@@ -256,6 +256,50 @@ class AdvokasiController extends Controller
 
        $client = new Client();
 
+       //generate image base64
+       if($request->hasFile('foto1')){
+           $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto1')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto1')->storeAs('AdvokasiKoordinasi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiKoordinasi/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image1 = base64_encode($data);
+           Storage::delete('AdvokasiKoordinasi/'.$fileNameToStore);
+       }else{
+         $image1 = null;
+       }
+
+       if($request->hasFile('foto2')){
+           $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto2')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto2')->storeAs('AdvokasiKoordinasi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiKoordinasi/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image2 = base64_encode($data);
+           Storage::delete('AdvokasiKoordinasi/'.$fileNameToStore);
+       }else{
+         $image2 = null;
+       }
+
+       if($request->hasFile('foto3')){
+           $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto3')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto3')->storeAs('AdvokasiKoordinasi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiKoordinasi/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image3 = base64_encode($data);
+           Storage::delete('AdvokasiKoordinasi/'.$fileNameToStore);
+       }else{
+         $image3 = null;
+       }
+       $uraian_singkat_materi = $request->input('uraian_singkat');
+
        if ($request->input('kodesumberanggaran')=="DIPA") {
            $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                    [
@@ -339,6 +383,10 @@ class AdvokasiController extends Controller
                        'jumlah_instansi' => $jumlah_instansi,
                        'meta_instansi' => $meta_instansi,
                        'meta_nasum_materi' => $meta_nasum_materi,
+                       'uraian_singkat' => $uraian_singkat_materi,
+                       'foto1' => $image1,
+                       'foto2' => $image2,
+                       'foto3' => $image3,
                        'meta_panitia' => $meta_panitia,
                        'jumlah_peserta' => $peserta,
                        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
@@ -372,6 +420,10 @@ class AdvokasiController extends Controller
        'jumlah_instansi' => $jumlah_instansi,
        'meta_instansi' => $meta_instansi,
        'meta_nasum_materi' => $meta_nasum_materi,
+       'uraian_singkat' => $uraian_singkat_materi,
+       'foto1' => $image1,
+       'foto2' => $image2,
+       'foto3' => $image3,
        'meta_panitia' => $meta_panitia,
        'jumlah_peserta' => $peserta,
        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
@@ -446,6 +498,56 @@ class AdvokasiController extends Controller
           $token = $request->session()->get('token');
 
           $client = new Client();
+
+          //generate image base64
+          if($request->hasFile('foto1')){
+              $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto1')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto1')->storeAs('AdvokasiKoordinasi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiKoordinasi/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image1 = base64_encode($data);
+              Storage::delete('AdvokasiKoordinasi/'.$fileNameToStore);
+  //            $form_foto1 = 'foto1 => '.$image1.',';
+          }else{
+              $image1 = $request->input('foto1_old');
+  //            $form_foto1 = '';
+          }
+
+          if($request->hasFile('foto2')){
+              $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto2')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto2')->storeAs('AdvokasiKoordinasi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiKoordinasi/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image2 = base64_encode($data);
+              Storage::delete('AdvokasiKoordinasi/'.$fileNameToStore);
+  //            $form_foto2 = 'foto2 => '.$image2.',';
+          }else{
+              $image2 = $request->input('foto2_old');
+  //            $form_foto2 = '';
+          }
+
+          if($request->hasFile('foto3')){
+              $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto3')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto3')->storeAs('AdvokasiKoordinasi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiKoordinasi/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image3 = base64_encode($data);
+              Storage::delete('AdvokasiKoordinasi/'.$fileNameToStore);
+  //            $form_foto3 = 'foto3 => '.$image.',';
+          }else{
+              $image3 = $request->input('foto3_old');
+  //            $form_foto3 = '';
+          }
+          $uraian_singkat_materi = $request->input('uraian_singkat');
 
           if ($request->input('kodesumberanggaran')=="DIPA") {
               $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
@@ -545,6 +647,10 @@ class AdvokasiController extends Controller
                            'jumlah_instansi' => $jumlah_instansi,
                            'meta_instansi' => $meta_instansi,
                            'meta_nasum_materi' => $meta_nasum_materi,
+                           'uraian_singkat' => $uraian_singkat_materi,
+                           'foto1' => $image1,
+                           'foto2' => $image2,
+                           'foto3' => $image3,
                            'meta_panitia' => $meta_panitia,
                            'jumlah_peserta' => $peserta,
                            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
@@ -577,6 +683,10 @@ class AdvokasiController extends Controller
            'jumlah_instansi' => $jumlah_instansi,
            'meta_instansi' => $meta_instansi,
            'meta_nasum_materi' => $meta_nasum_materi,
+           'uraian_singkat' => $uraian_singkat_materi,
+           'foto1' => $image1,
+           'foto2' => $image2,
+           'foto3' => $image3,
            'meta_panitia' => $meta_panitia,
            'jumlah_peserta' => $peserta,
            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
@@ -986,11 +1096,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto1')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto1')->storeAs('AdvokasiJejaring', $fileNameToStore);
+           $image = public_path('upload/AdvokasiJejaring/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image1 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiJejaring/'.$fileNameToStore);
        }else{
          $image1 = null;
        }
@@ -1000,11 +1110,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto2')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto2')->storeAs('AdvokasiJejaring', $fileNameToStore);
+           $image = public_path('upload/AdvokasiJejaring/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image2 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiJejaring/'.$fileNameToStore);
        }else{
          $image2 = null;
        }
@@ -1014,11 +1124,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto3')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto3')->storeAs('AdvokasiJejaring', $fileNameToStore);
+           $image = public_path('upload/AdvokasiJejaring/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image3 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiJejaring/'.$fileNameToStore);
        }else{
          $image3 = null;
        }
@@ -1206,11 +1316,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto1')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto1')->storeAs('AdvokasiJejaring', $fileNameToStore);
+              $image = public_path('upload/AdvokasiJejaring/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image1 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiJejaring/'.$fileNameToStore);
   //            $form_foto1 = 'foto1 => '.$image1.',';
           }else{
               $image1 = $request->input('foto1_old');
@@ -1222,11 +1332,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto2')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto2')->storeAs('AdvokasiJejaring', $fileNameToStore);
+              $image = public_path('upload/AdvokasiJejaring/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image2 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiJejaring/'.$fileNameToStore);
   //            $form_foto2 = 'foto2 => '.$image2.',';
           }else{
               $image2 = $request->input('foto2_old');
@@ -1238,11 +1348,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto3')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto3')->storeAs('AdvokasiJejaring', $fileNameToStore);
+              $image = public_path('upload/AdvokasiJejaring/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image3 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiJejaring/'.$fileNameToStore);
   //            $form_foto3 = 'foto3 => '.$image.',';
           }else{
               $image3 = $request->input('foto3_old');
@@ -1753,11 +1863,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto1')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto1')->storeAs('AdvokasiAsistensi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiAsistensi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image1 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiAsistensi/'.$fileNameToStore);
        }else{
          $image1 = null;
        }
@@ -1767,11 +1877,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto2')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto2')->storeAs('AdvokasiAsistensi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiAsistensi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image2 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiAsistensi/'.$fileNameToStore);
        }else{
          $image2 = null;
        }
@@ -1781,11 +1891,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto3')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto3')->storeAs('AdvokasiAsistensi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiAsistensi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image3 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiAsistensi/'.$fileNameToStore);
        }else{
          $image3 = null;
        }
@@ -1973,11 +2083,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto1')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto1')->storeAs('AdvokasiAsistensi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiAsistensi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image1 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiAsistensi/'.$fileNameToStore);
   //            $form_foto1 = 'foto1 => '.$image1.',';
           }else{
               $image1 = $request->input('foto1_old');
@@ -1989,11 +2099,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto2')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto2')->storeAs('AdvokasiAsistensi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiAsistensi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image2 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiAsistensi/'.$fileNameToStore);
   //            $form_foto2 = 'foto2 => '.$image2.',';
           }else{
               $image2 = $request->input('foto2_old');
@@ -2005,11 +2115,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto3')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto3')->storeAs('AdvokasiAsistensi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiAsistensi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image3 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiAsistensi/'.$fileNameToStore);
   //            $form_foto3 = 'foto3 => '.$image.',';
           }else{
               $image3 = $request->input('foto3_old');
@@ -2854,11 +2964,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto1')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto1')->storeAs('AdvokasiIntervensi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiIntervensi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image1 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiIntervensi/'.$fileNameToStore);
        }else{
          $image1 = null;
        }
@@ -2868,11 +2978,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto2')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto2')->storeAs('AdvokasiIntervensi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiIntervensi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image2 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiIntervensi/'.$fileNameToStore);
        }else{
          $image2 = null;
        }
@@ -2882,11 +2992,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto3')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto3')->storeAs('AdvokasiIntervensi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiIntervensi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image3 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiIntervensi/'.$fileNameToStore);
        }else{
          $image3 = null;
        }
@@ -3071,11 +3181,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto1')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto1')->storeAs('AdvokasiIntervensi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiIntervensi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image1 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiIntervensi/'.$fileNameToStore);
   //            $form_foto1 = 'foto1 => '.$image1.',';
           }else{
               $image1 = $request->input('foto1_old');
@@ -3087,11 +3197,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto2')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto2')->storeAs('AdvokasiIntervensi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiIntervensi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image2 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiIntervensi/'.$fileNameToStore);
   //            $form_foto2 = 'foto2 => '.$image2.',';
           }else{
               $image2 = $request->input('foto2_old');
@@ -3103,11 +3213,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto3')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto3')->storeAs('AdvokasiIntervensi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiIntervensi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image3 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiIntervensi/'.$fileNameToStore);
   //            $form_foto3 = 'foto3 => '.$image.',';
           }else{
               $image3 = $request->input('foto3_old');
@@ -3615,11 +3725,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto1')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto1')->storeAs('AdvokasiSupervisi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiSupervisi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image1 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiSupervisi/'.$fileNameToStore);
        }else{
          $image1 = null;
        }
@@ -3629,11 +3739,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto2')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto2')->storeAs('AdvokasiSupervisi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiSupervisi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image2 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiSupervisi/'.$fileNameToStore);
        }else{
          $image2 = null;
        }
@@ -3643,11 +3753,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto3')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto3')->storeAs('AdvokasiSupervisi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiSupervisi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image3 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiSupervisi/'.$fileNameToStore);
        }else{
          $image3 = null;
        }
@@ -3831,11 +3941,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto1')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto1')->storeAs('AdvokasiSupervisi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiSupervisi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image1 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiSupervisi/'.$fileNameToStore);
   //            $form_foto1 = 'foto1 => '.$image1.',';
           }else{
               $image1 = $request->input('foto1_old');
@@ -3847,11 +3957,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto2')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto2')->storeAs('AdvokasiSupervisi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiSupervisi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image2 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiSupervisi/'.$fileNameToStore);
   //            $form_foto2 = 'foto2 => '.$image2.',';
           }else{
               $image2 = $request->input('foto2_old');
@@ -3863,11 +3973,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto3')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto3')->storeAs('AdvokasiSupervisi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiSupervisi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image3 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiSupervisi/'.$fileNameToStore);
   //            $form_foto3 = 'foto3 => '.$image.',';
           }else{
               $image3 = $request->input('foto3_old');
@@ -4365,6 +4475,51 @@ class AdvokasiController extends Controller
 
        $client = new Client();
 
+       //generate image base64
+       if($request->hasFile('foto1')){
+           $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto1')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto1')->storeAs('AdvokasiMonitoring', $fileNameToStore);
+           $image = public_path('upload/AdvokasiMonitoring/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image1 = base64_encode($data);
+           Storage::delete('AdvokasiMonitoring/'.$fileNameToStore);
+       }else{
+         $image1 = null;
+       }
+
+       if($request->hasFile('foto2')){
+           $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto2')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto2')->storeAs('AdvokasiMonitoring', $fileNameToStore);
+           $image = public_path('upload/AdvokasiMonitoring/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image2 = base64_encode($data);
+           Storage::delete('AdvokasiMonitoring/'.$fileNameToStore);
+       }else{
+         $image2 = null;
+       }
+
+       if($request->hasFile('foto3')){
+           $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('foto3')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $path = $request->file('foto3')->storeAs('AdvokasiMonitoring', $fileNameToStore);
+           $image = public_path('upload/AdvokasiMonitoring/'.$fileNameToStore);
+           $data = file_get_contents($image);
+           $image3 = base64_encode($data);
+           Storage::delete('AdvokasiMonitoring/'.$fileNameToStore);
+       }else{
+         $image3 = null;
+       }
+
+       $uraian_singkat_materi = $request->input('uraian_singkat');
+
        if ($request->input('kodesumberanggaran')=="DIPA") {
            $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                    [
@@ -4430,6 +4585,10 @@ class AdvokasiController extends Controller
                        'jumlah_peserta' => $peserta,
                        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                        'meta_nasum_materi' => $meta_nasum_materi,
+                       'uraian_singkat' => $uraian_singkat_materi,
+                       'foto1' => $image1,
+                       'foto2' => $image2,
+                       'foto3' => $image3,
                        //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                        'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                        // 'narasumber' => $request->input('narasumber'),
@@ -4459,6 +4618,10 @@ class AdvokasiController extends Controller
        'jumlah_peserta' => $peserta,
        'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
        'meta_nasum_materi' => $meta_nasum_materi,
+       'uraian_singkat' => $uraian_singkat_materi,
+       'foto1' => $image1,
+       'foto2' => $image2,
+       'foto3' => $image3,
        //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
        'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
        // 'narasumber' => $request->input('narasumber'),
@@ -4530,6 +4693,57 @@ class AdvokasiController extends Controller
 
           $client = new Client();
 
+          //generate image base64
+          if($request->hasFile('foto1')){
+              $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto1')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto1')->storeAs('AdvokasiMonitoring', $fileNameToStore);
+              $image = public_path('upload/AdvokasiMonitoring/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image1 = base64_encode($data);
+              Storage::delete('AdvokasiMonitoring/'.$fileNameToStore);
+  //            $form_foto1 = 'foto1 => '.$image1.',';
+          }else{
+              $image1 = $request->input('foto1_old');
+  //            $form_foto1 = '';
+          }
+
+          if($request->hasFile('foto2')){
+              $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto2')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto2')->storeAs('AdvokasiMonitoring', $fileNameToStore);
+              $image = public_path('upload/AdvokasiMonitoring/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image2 = base64_encode($data);
+              Storage::delete('AdvokasiMonitoring/'.$fileNameToStore);
+  //            $form_foto2 = 'foto2 => '.$image2.',';
+          }else{
+              $image2 = $request->input('foto2_old');
+  //            $form_foto2 = '';
+          }
+
+          if($request->hasFile('foto3')){
+              $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+              $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              $extension = $request->file('foto3')->getClientOriginalExtension();
+              $fileNameToStore= $filename.'_'.time().'.'.$extension;
+              $path = $request->file('foto3')->storeAs('AdvokasiMonitoring', $fileNameToStore);
+              $image = public_path('upload/AdvokasiMonitoring/'.$fileNameToStore);
+              $data = file_get_contents($image);
+              $image3 = base64_encode($data);
+              Storage::delete('AdvokasiMonitoring/'.$fileNameToStore);
+  //            $form_foto3 = 'foto3 => '.$image.',';
+          }else{
+              $image3 = $request->input('foto3_old');
+  //            $form_foto3 = '';
+          }
+
+          $uraian_singkat_materi = $request->input('uraian_singkat');
+
           if ($request->input('kodesumberanggaran')=="DIPA") {
               $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                       [
@@ -4595,6 +4809,10 @@ class AdvokasiController extends Controller
                            'jumlah_peserta' => $peserta,
                            'lokasi_kegiatan' => ($request->input('lokasi_kegiatan') ? $request->input('lokasi_kegiatan') : ''),
                            'meta_nasum_materi' => $meta_nasum_materi,
+                           'uraian_singkat' => $uraian_singkat_materi,
+                           'foto1' => $image1,
+                           'foto2' => $image2,
+                           'foto3' => $image3,
                            //'lokasi_kegiatan_idprovinsi' => $request->input('lokasi_kegiatan_idprovinsi'),
                            'lokasi_kegiatan_idkabkota' => ($request->input('lokasi_kegiatan_idkabkota') ? $request->input('lokasi_kegiatan_idkabkota') : ''),
                            // 'narasumber' => $request->input('narasumber'),
@@ -5021,11 +5239,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto1')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto1')->storeAs('AdvokasiBimbingan', $fileNameToStore);
+           $image = public_path('upload/AdvokasiBimbingan/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image1 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiBimbingan/'.$fileNameToStore);
        }else{
          $image1 = null;
        }
@@ -5035,11 +5253,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto2')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto2')->storeAs('AdvokasiBimbingan', $fileNameToStore);
+           $image = public_path('upload/AdvokasiBimbingan/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image2 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiBimbingan/'.$fileNameToStore);
        }else{
          $image2 = null;
        }
@@ -5049,11 +5267,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto3')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto3')->storeAs('AdvokasiBimbingan', $fileNameToStore);
+           $image = public_path('upload/AdvokasiBimbingan/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image3 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiBimbingan/'.$fileNameToStore);
        }else{
          $image3 = null;
        }
@@ -5235,11 +5453,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto1')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto1')->storeAs('AdvokasiBimbingan', $fileNameToStore);
+              $image = public_path('upload/AdvokasiBimbingan/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image1 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiBimbingan/'.$fileNameToStore);
   //            $form_foto1 = 'foto1 => '.$image1.',';
           }else{
               $image1 = $request->input('foto1_old');
@@ -5251,11 +5469,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto2')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto2')->storeAs('AdvokasiBimbingan', $fileNameToStore);
+              $image = public_path('upload/AdvokasiBimbingan/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image2 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiBimbingan/'.$fileNameToStore);
   //            $form_foto2 = 'foto2 => '.$image2.',';
           }else{
               $image2 = $request->input('foto2_old');
@@ -5267,11 +5485,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto3')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto3')->storeAs('AdvokasiBimbingan', $fileNameToStore);
+              $image = public_path('upload/AdvokasiBimbingan/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image3 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiBimbingan/'.$fileNameToStore);
   //            $form_foto3 = 'foto3 => '.$image.',';
           }else{
               $image3 = $request->input('foto3_old');
@@ -5780,11 +5998,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto1')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto1')->storeAs('AdvokasiSosialisasi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiSosialisasi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image1 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiSosialisasi/'.$fileNameToStore);
        }else{
          $image1 = null;
        }
@@ -5794,11 +6012,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto2')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto2')->storeAs('AdvokasiSosialisasi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiSosialisasi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image2 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiSosialisasi/'.$fileNameToStore);
        }else{
          $image2 = null;
        }
@@ -5808,11 +6026,11 @@ class AdvokasiController extends Controller
            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
            $extension = $request->file('foto3')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-           $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-           $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+           $path = $request->file('foto3')->storeAs('AdvokasiSosialisasi', $fileNameToStore);
+           $image = public_path('upload/AdvokasiSosialisasi/'.$fileNameToStore);
            $data = file_get_contents($image);
            $image3 = base64_encode($data);
-           Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+           Storage::delete('AdvokasiSosialisasi/'.$fileNameToStore);
        }else{
          $image3 = null;
        }
@@ -5999,11 +6217,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto1')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto1')->storeAs('AdvokasiSosialisasi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiSosialisasi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image1 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiSosialisasi/'.$fileNameToStore);
   //            $form_foto1 = 'foto1 => '.$image1.',';
           }else{
               $image1 = $request->input('foto1_old');
@@ -6015,11 +6233,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto2')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto2')->storeAs('AdvokasiSosialisasi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiSosialisasi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image2 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiSosialisasi/'.$fileNameToStore);
   //            $form_foto2 = 'foto2 => '.$image2.',';
           }else{
               $image2 = $request->input('foto2_old');
@@ -6031,11 +6249,11 @@ class AdvokasiController extends Controller
               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
               $extension = $request->file('foto3')->getClientOriginalExtension();
               $fileNameToStore= $filename.'_'.time().'.'.$extension;
-              $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-              $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+              $path = $request->file('foto3')->storeAs('AdvokasiSosialisasi', $fileNameToStore);
+              $image = public_path('upload/AdvokasiSosialisasi/'.$fileNameToStore);
               $data = file_get_contents($image);
               $image3 = base64_encode($data);
-              Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+              Storage::delete('AdvokasiSosialisasi/'.$fileNameToStore);
   //            $form_foto3 = 'foto3 => '.$image.',';
           }else{
               $image3 = $request->input('foto3_old');

@@ -2,6 +2,43 @@
 @section('title', 'Ubah Data Kegiatan Media Online')
 
 @section('content')
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah2').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function readURL3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah3').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+
 <div class="right_col" role="main">
   <div class="m-t-40">
     <div class="page-title">
@@ -140,7 +177,7 @@
               @endif
 
               <div class="form-group">
-                <label for="jumlah_yang_melihat" class="col-md-3 control-label">Jumlah Yang Melihat</label>
+                <label for="jumlah_yang_melihat" class="col-md-3 control-label">Jumlah Orang/Sebaran</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input value="{{$pendataan['jumlah_yang_melihat']}}" id="jumlah_yang_melihat" name="jumlah_yang_melihat" type="text" class="form-control numeric" onkeydown="numeric(event)">
                 </div>
@@ -150,6 +187,24 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input value="{{$pendataan['orang_yang_tertarik']}}" id="orang_yang_tertarik" name="orang_yang_tertarik" type="text" class="form-control numeric" onkeydown="numeric(event)">
                 </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Jenis Kegiatan</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" name="jenis_kegiatan" value="{{$pendataan['jenis_kegiatan']}}" class="form-control col-md-7 col-xs-12">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Lokasi</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" name="lokasi" value="{{$pendataan['lokasi']}}" class="form-control col-md-7 col-xs-12">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Uraian Singkat Materi</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" name="uraian_singkat" value="{{$pendataan['uraian_singkat']}}" class="form-control col-md-7 col-xs-12">
+                  </div>
               </div>
 
               <div class="form-group">
@@ -244,6 +299,46 @@
                         @endif
                     </span>
                   </div>
+                </div>
+                 <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Foto</label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        @if ($pendataan['foto1'])
+                            <img src="data:image/png;base64,{{$pendataan['foto1']}}" id="blah" style="width:100%;height:150px;" />
+                        @else
+                            <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah" style="width:100%;height:150px;" />
+                        @endif                                
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">                                
+                        @if ($pendataan['foto2'])
+                            <img src="data:image/png;base64,{{$pendataan['foto2']}}" id="blah2" style="width:100%;height:150px;" />
+                        @else
+                            <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah2" style="width:100%;height:150px;" />
+                        @endif
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">                                
+                        @if ($pendataan['foto3'])
+                            <img src="data:image/png;base64,{{$pendataan['foto3']}}" id="blah3" style="width:100%;height:150px;" />
+                        @else
+                            <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah3" style="width:100%;height:150px;" />
+                        @endif
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12"  >&nbsp;</label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input type='file' name="foto1" onchange="readURL(this);" />
+                        <input type="text" name="foto1_old" hidden value="{{$pendataan['foto1']}}"/>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input type='file' name="foto2" onchange="readURL2(this);" />
+                        <input type="text" name="foto2_old" hidden value="{{$pendataan['foto2']}}"/>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input type='file' name="foto3" onchange="readURL3(this);" />
+                        <input type="text" name="foto3_old" hidden value="{{$pendataan['foto3']}}"/>
+                    </div>
                 </div>
                 <span class="help-block">
                 </span>
