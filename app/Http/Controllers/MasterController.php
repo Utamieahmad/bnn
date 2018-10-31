@@ -22,7 +22,8 @@ class MasterController extends Controller
 
   public function dataInstansi(Request $request){
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       $kondisi = '';
@@ -211,7 +212,8 @@ class MasterController extends Controller
 
   public function dataPropinsi(Request $request){
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       $kondisi = '';
