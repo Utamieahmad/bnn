@@ -170,14 +170,14 @@
           </div>
 
           <div class="form-group">
-              <label for="lokasi_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Alamat Lokasi Kegiatan </label>
+              <label for="lokasi_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Kegiatan </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <input value="{{$data_detail['data']['lokasi_kegiatan']}}" id="lokasi_kegiatan" name="lokasi_kegiatan" type="text" class="form-control">
               </div>
           </div>
 
           <div class="form-group">
-              <label for="lokasi_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Kegiatan</label>
+              <label for="lokasi_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Kabupaten</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control select2 " name="lokasi_kegiatan_idkabkota">
                     <option value="">-- Pilih Kabupaten --</option>
