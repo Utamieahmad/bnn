@@ -257,6 +257,49 @@ class diseminasiController extends Controller
        $meta_media="";
      }
 
+      //generate image base64
+      if($request->hasFile('foto1')){
+          $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('foto1')->getClientOriginalExtension();
+          $fileNameToStore= $filename.'_'.time().'.'.$extension;
+          $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+          $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+          $data = file_get_contents($image);
+          $image1 = base64_encode($data);
+          Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+      }else{
+        $image1 = null;
+      }
+
+      if($request->hasFile('foto2')){
+          $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('foto2')->getClientOriginalExtension();
+          $fileNameToStore= $filename.'_'.time().'.'.$extension;
+          $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+          $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+          $data = file_get_contents($image);
+          $image2 = base64_encode($data);
+          Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+      }else{
+        $image2 = null;
+      }
+
+      if($request->hasFile('foto3')){
+          $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('foto3')->getClientOriginalExtension();
+          $fileNameToStore= $filename.'_'.time().'.'.$extension;
+          $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+          $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+          $data = file_get_contents($image);
+          $image3 = base64_encode($data);
+          Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+      }else{
+        $image3 = null;
+      }
+
     $requestData = $client->request('POST', $baseUrl.'/api/disemonline',
       [
         'headers' =>
@@ -284,6 +327,12 @@ class diseminasiController extends Controller
           "selesai_publish" => ($request->input('selesai_publish') ? date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $request->input('selesai_publish')))) : ''),
           "jenis_media" => ($request->input('jenis_media') ? $request->input('jenis_media') : ''),
           'anggaran_id' => $anggaran,
+          'jenis_kegiatan' => $request->input('jenis_kegiatan'),
+          'lokasi' => $request->input('lokasi'),
+          'uraian_singkat' => $request->input('uraian_singkat'),
+          'foto1' => $image1,
+          'foto2' => $image2,
+          'foto3' => $image3,
         ]
       ]
     );
@@ -400,6 +449,49 @@ class diseminasiController extends Controller
        $meta_media="";
      }
 
+      //generate image base64
+      if($request->hasFile('foto1')){
+          $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('foto1')->getClientOriginalExtension();
+          $fileNameToStore= $filename.'_'.time().'.'.$extension;
+          $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
+          $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+          $data = file_get_contents($image);
+          $image1 = base64_encode($data);
+          Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+      }else{
+        $image1 = null;
+      }
+
+      if($request->hasFile('foto2')){
+          $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('foto2')->getClientOriginalExtension();
+          $fileNameToStore= $filename.'_'.time().'.'.$extension;
+          $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
+          $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+          $data = file_get_contents($image);
+          $image2 = base64_encode($data);
+          Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+      }else{
+        $image2 = null;
+      }
+
+      if($request->hasFile('foto3')){
+          $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('foto3')->getClientOriginalExtension();
+          $fileNameToStore= $filename.'_'.time().'.'.$extension;
+          $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
+          $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+          $data = file_get_contents($image);
+          $image3 = base64_encode($data);
+          Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+      }else{
+        $image3 = null;
+      }
+
     $requestData = $client->request('PUT', $baseUrl.'/api/disemonline/'.$id,
       [
         'headers' =>
@@ -427,6 +519,12 @@ class diseminasiController extends Controller
           "selesai_publish" => ($request->input('selesai_publish') ? date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $request->input('selesai_publish')))) : ''),
           "jenis_media" => ($request->input('jenis_media') ? $request->input('jenis_media') : ''),
           'anggaran_id' => $anggaran,
+          'jenis_kegiatan' => $request->input('jenis_kegiatan'),
+          'lokasi' => $request->input('lokasi'),
+          'uraian_singkat' => $request->input('uraian_singkat'),
+          'foto1' => $image1,
+          'foto2' => $image2,
+          'foto3' => $image3,   
         ]
       ]
     );
