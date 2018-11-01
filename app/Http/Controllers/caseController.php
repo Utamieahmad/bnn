@@ -28,7 +28,8 @@ class caseController extends Controller
     public function inputNihil(Request $request){
       $user = $request->session()->get('user_data');
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $requestNihil = $client->request('POST', $baseUrl.'/api/monitoringnihil',
           [
@@ -55,7 +56,8 @@ class caseController extends Controller
 
     public function inputTersangka(Request $request){
         $id = $request->input('id');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // dd($request->all());
@@ -154,7 +156,8 @@ class caseController extends Controller
     public function updateTersangka(Request $request){
         $id = $request->input('id');
         $id_tersangka = $request->input('tersangka_id');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // dd($request->all());
@@ -252,7 +255,8 @@ class caseController extends Controller
     }
 
     public function inputBrgBukti(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $id = $request->input('id');
 
@@ -314,7 +318,8 @@ class caseController extends Controller
     }
 
     public function updateBrgBukti(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $id = $request->input('id');
         $bbid = $request->input('bbId');
@@ -378,7 +383,8 @@ class caseController extends Controller
     }
 
     public function inputBrgBuktiPrekursor(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $id = $request->input('id');
 
@@ -441,7 +447,8 @@ class caseController extends Controller
     }
 
     public function updateBrgBuktiPrekursor(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $id = $request->input('bbId');
 
@@ -504,7 +511,8 @@ class caseController extends Controller
     }
 
     public function inputBrgBuktiAdiktif(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $id = $request->input('id');
 
@@ -566,7 +574,8 @@ class caseController extends Controller
     }
 
     public function updateBrgBuktiAdiktif(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $id = $request->input('id');
         $bbid = $request->input('bbId');
@@ -630,7 +639,8 @@ class caseController extends Controller
     }
 
     public function inputBrgBuktiNonNar(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $id = $request->input('id');
 
@@ -693,7 +703,8 @@ class caseController extends Controller
     }
 
     public function updateBrgBuktiNonNar(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $id = $request->input('id');
         $bbid = $request->input('bbId');
@@ -757,7 +768,8 @@ class caseController extends Controller
     }
 
     public function inputBrgBuktiAset(Request $request){
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $id = $request->input('id');
       $nilai_aset = str_replace(",", "", $request->input('nilai_aset'));
@@ -831,7 +843,8 @@ class caseController extends Controller
     }
 
     public function updateBrgBuktiAset(Request $request){
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $id = $request->input('AsetId');
       $nilai_aset = str_replace(",", "", $request->input('nilai_aset'));
@@ -959,7 +972,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvorakor = $client->request('GET', $baseUrl.'/api/advorakor?page='.$page,
@@ -996,7 +1010,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advorakor/'.$id,
@@ -1036,7 +1051,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvojejaring = $client->request('GET', $baseUrl.'/api/advojejaring?page='.$page,
@@ -1073,7 +1089,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advojejaring/'.$id,
@@ -1113,7 +1130,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvoasistensi = $client->request('GET', $baseUrl.'/api/advoasistensi?page='.$page,
@@ -1150,7 +1168,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advoasistensi/'.$id,
@@ -1190,7 +1209,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvoasistensipenguatan = $client->request('GET', $baseUrl.'/api/advoasistensipenguatan?page='.$page,
@@ -1227,7 +1247,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advoasistensipenguatan/'.$id,
@@ -1267,7 +1288,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvointervensi = $client->request('GET', $baseUrl.'/api/advointervensi?page='.$page,
@@ -1304,7 +1326,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advointervensi/'.$id,
@@ -1344,7 +1367,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvosupervisi = $client->request('GET', $baseUrl.'/api/advosupervisi?page='.$page,
@@ -1381,7 +1405,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advosupervisi/'.$id,
@@ -1421,7 +1446,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvomonev = $client->request('GET', $baseUrl.'/api/advomonev?page='.$page,
@@ -1457,7 +1483,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advosupervisi/'.$id,
@@ -1497,7 +1524,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvobimtek = $client->request('GET', $baseUrl.'/api/advobimtek?page='.$page,
@@ -1533,7 +1561,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/advobimtek/'.$id,
@@ -1573,7 +1602,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestAdvososialisasi = $client->request('GET', $baseUrl.'/api/disemsosialisasi?page='.$page,
@@ -1611,7 +1641,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemsosialisasi/'.$id,
@@ -1651,7 +1682,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDisemonline = $client->request('GET', $baseUrl.'/api/disemonline?page='.$page,
@@ -1688,7 +1720,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemonline/'.$id,
@@ -1728,7 +1761,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDisempenyiaran = $client->request('GET', $baseUrl.'/api/disempenyiaran?page='.$page,
@@ -1766,7 +1800,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/disempenyiaran/'.$id,
@@ -1806,7 +1841,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDisemcetak = $client->request('GET', $baseUrl.'/api/disemcetak?page='.$page,
@@ -1843,7 +1879,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemcetak/'.$id,
@@ -1883,7 +1920,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDisemkonven = $client->request('GET', $baseUrl.'/api/disemkonven?page='.$page,
@@ -1920,7 +1958,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemkonven/'.$id,
@@ -1960,7 +1999,8 @@ class caseController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDisemvideotron = $client->request('GET', $baseUrl.'/api/disemvideotron?page='.$page,
@@ -1996,7 +2036,8 @@ class caseController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemvideotron/'.$id,

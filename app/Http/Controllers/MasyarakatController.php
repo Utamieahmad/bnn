@@ -216,7 +216,8 @@ class MasyarakatController extends Controller
     public function editpendataanTesNarkoba(Request $request){
      $id = $request->id;
      $client = new Client();
-     $baseUrl = URL::to('/');
+     $baseUrl = URL::to($this->urlapi());
+//     $baseUrl = URL::to('/');
      $token = $request->session()->get('token');
 
      $requestTest= $client->request('GET', $baseUrl.'/api/tesnarkobaheader/'.$id,
@@ -288,7 +289,8 @@ class MasyarakatController extends Controller
 
     public function inputPendataanTesNarkoba(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        // dd($request->all());
@@ -451,7 +453,8 @@ class MasyarakatController extends Controller
     public function updatePendataanTesNarkoba(Request $request){
        $id = $request->input('id');
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');        
 
         $client = new Client();
@@ -585,7 +588,8 @@ class MasyarakatController extends Controller
 
     public function inputPeserta(Request $request){
        $id = $request->input('id');
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $client = new Client();
 
@@ -660,7 +664,8 @@ class MasyarakatController extends Controller
     public function updatePeserta(Request $request){
        $id = $request->input('id');
        $pesertaid = $request->input('peserta_id');
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -885,7 +890,8 @@ class MasyarakatController extends Controller
 
     public function addpendataanAntiNarkoba(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $this->data['title']="psmpenggiat";
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
@@ -904,7 +910,8 @@ class MasyarakatController extends Controller
     public function editpendataanAntiNarkoba(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
        $requestDataDetail= $client->request('GET', $baseUrl.'/api/psmpenggiat/'.$id,
@@ -934,7 +941,8 @@ class MasyarakatController extends Controller
 
     public function inputpendataanAntiNarkoba(Request $request){
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -1025,7 +1033,8 @@ class MasyarakatController extends Controller
     public function updatependataanAntiNarkoba(Request $request){
       $id = $request->input('id');
 
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       $client = new Client();
@@ -1263,7 +1272,8 @@ class MasyarakatController extends Controller
 
     public function addpendataanPelatihan(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $this->data['title']="psmpelatihan";
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
@@ -1291,7 +1301,8 @@ class MasyarakatController extends Controller
     public function editpendataanPelatihan(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
        $requestDataDetail= $client->request('GET', $baseUrl.'/api/psmpelatihan/'.$id,
@@ -1342,7 +1353,8 @@ class MasyarakatController extends Controller
     }
 
     public function inputpendataanPelatihan(Request $request){
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $anggaran = '';
        $client = new Client();
@@ -1546,7 +1558,8 @@ class MasyarakatController extends Controller
     public function updatependataanPelatihan(Request $request){
         $id = $request->input('id');
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -1696,7 +1709,8 @@ class MasyarakatController extends Controller
        } else {
          $page = 1;
        }
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
 
@@ -1728,7 +1742,8 @@ class MasyarakatController extends Controller
 
     public function addpendataanKapasitas(Request $request){
        $client = new Client();
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $this->data['title']="psmpengembangan";
 
        $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
@@ -1747,7 +1762,8 @@ class MasyarakatController extends Controller
     public function editpendataanKapasitas(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
        $requestDataDetail= $client->request('GET', $baseUrl.'/api/psmpengembangan/'.$id,
@@ -1779,7 +1795,8 @@ class MasyarakatController extends Controller
 
     public function inputpendataanKapasitas(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -1879,7 +1896,8 @@ class MasyarakatController extends Controller
     public function updatependataanKapasitas(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -2099,7 +2117,8 @@ class MasyarakatController extends Controller
     }
     public function addpsmSupervisi(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $this->data['title']="psmsupervisi";
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
@@ -2120,7 +2139,8 @@ class MasyarakatController extends Controller
     public function editpsmSupervisi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
        $requestDataDetail= $client->request('GET', $baseUrl.'/api/psmsupervisi/'.$id,
@@ -2165,7 +2185,8 @@ class MasyarakatController extends Controller
 
     public function inputpsmSupervisi(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $anggaran = '';
        $client = new Client();
@@ -2322,7 +2343,8 @@ class MasyarakatController extends Controller
     public function updatepsmSupervisi(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -2454,7 +2476,8 @@ class MasyarakatController extends Controller
         } else {
          $page = 1;
         }
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
 
@@ -2486,7 +2509,8 @@ class MasyarakatController extends Controller
 
     public function addpsmOrmas(Request $request){
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $this->data['title']="psmsupervisi";
 
       $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
@@ -2505,7 +2529,8 @@ class MasyarakatController extends Controller
     public function editpsmOrmas(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
        $requestDataDetail= $client->request('GET', $baseUrl.'/api/psmlsm/'.$id,
@@ -2533,7 +2558,8 @@ class MasyarakatController extends Controller
 
     public function inputpsmOrmas(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -2580,7 +2606,8 @@ class MasyarakatController extends Controller
     public function updatepsmOrmas(Request $request){
         $id = $request->input('id');
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
