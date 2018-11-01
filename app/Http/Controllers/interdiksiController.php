@@ -226,7 +226,8 @@ class interdiksiController extends Controller
 
        $client = new Client();
 
-           $baseUrl = URL::to('/');
+           $baseUrl = URL::to($this->urlapi());
+//           $baseUrl = URL::to('/');
            $token = $request->session()->get('token');
 
            $LKN = $this->globalLkn($token, $id);
@@ -331,7 +332,8 @@ class interdiksiController extends Controller
       $this->data['title']="Pemberantasan";
       $client = new Client();
 
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       $instansi = $this->globalinstansi($request->session()->get('wilayah'), $token);
@@ -370,7 +372,8 @@ class interdiksiController extends Controller
 
     public function inputPendataanIntDpo(Request $request)
     {
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       // dd($request->all());
@@ -477,7 +480,8 @@ class interdiksiController extends Controller
     {
       $id = $request->input('id');
 
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       // dd($request->all());

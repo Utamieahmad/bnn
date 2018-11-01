@@ -105,7 +105,8 @@ class SettamaController extends Controller
     public function addSekretariatUtama(Request $request){
     	if($request->isMethod('post')){
 			$insertId = "";
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -602,7 +603,8 @@ class SettamaController extends Controller
     public function addSekretariatUtamaKeuangan(Request $request){
     	if($request->isMethod('post')){
     		$insertId = "";
-				$baseUrl = URL::to('/');
+				$baseUrl = URL::to($this->urlapi());
+//				$baseUrl = URL::to('/');
         	$token = $request->session()->get('token');
 
         	$client = new Client();
@@ -755,7 +757,8 @@ class SettamaController extends Controller
 	public function updateSekretariatUtamaKeuangan(Request $request){
     	$id = $request->id;
 
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
     	$token = $request->session()->get('token');
     	$client = new Client();
 			if ($request->input('sumber_anggaran')=="DIPA") {
@@ -1218,7 +1221,8 @@ class SettamaController extends Controller
     public function addSekretariatUtamaUmum(Request $request){
     	if($request->isMethod('post')){
     		$insertId = "";
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
         	$token = $request->session()->get('token');
 
         	$client = new Client();
@@ -1377,7 +1381,8 @@ class SettamaController extends Controller
 	public function updateSekretariatUtamaUmum(Request $request){
     	$id = $request->id;
 
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
     	$token = $request->session()->get('token');
     	$client = new Client();
 			if ($request->input('sumber_anggaran')=="DIPA") {
@@ -1828,7 +1833,8 @@ class SettamaController extends Controller
     public function addSekretariatUtamaPerencanaan(Request $request){
     	if($request->isMethod('post')){
     		$insertId = "";
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
     		$token = $request->session()->get('token');
 
         	$client = new Client();
@@ -1982,7 +1988,8 @@ class SettamaController extends Controller
 	public function updateSekretariatUtamaPerencanaan(Request $request){
     	$id = $request->id;
 
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
     	$token = $request->session()->get('token');
     	$client = new Client();
 			if ($request->input('sumber_anggaran')=="DIPA") {
@@ -2429,7 +2436,8 @@ class SettamaController extends Controller
     public function addSekretariatUtamaKepegawaian(Request $request){
     	if($request->isMethod('post')){
     		$insertId = "";
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
 	        $token = $request->session()->get('token');
 
     		$client = new Client();
@@ -2616,7 +2624,8 @@ class SettamaController extends Controller
 	public function updateSekretariatUtamaKepegawaian(Request $request){
     	$id = $request->id;
 
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
     	$token = $request->session()->get('token');
     	$client = new Client();
 			if ($request->input('sumber_anggaran')=="DIPA") {

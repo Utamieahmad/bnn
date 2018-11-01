@@ -30,7 +30,8 @@ class diseminasiController extends Controller
         $page = 1;
       }
 
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       $kondisi = '';
@@ -168,7 +169,8 @@ class diseminasiController extends Controller
   {
     $id = $request->id;
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemonline/'.$id,
@@ -202,7 +204,8 @@ class diseminasiController extends Controller
 
   public function addpendataanOnline(Request $request)
   {
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
     $client = new Client();
 
@@ -218,7 +221,8 @@ class diseminasiController extends Controller
 
   public function inputpendataanOnline(Request $request)
   {
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $client = new Client();
@@ -409,7 +413,8 @@ class diseminasiController extends Controller
 
   public function updatependataanOnline(Request $request)
   {
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
     // dd($request->all());
     $client = new Client();
@@ -608,7 +613,8 @@ class diseminasiController extends Controller
       $page = 1;
     }
 
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $kondisi = '';
@@ -746,7 +752,8 @@ class diseminasiController extends Controller
   {
     $id = $request->id;
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $requestDataDetail= $client->request('GET', $baseUrl.'/api/disempenyiaran/'.$id,
@@ -782,7 +789,8 @@ class diseminasiController extends Controller
   public function inputpendataanPenyiaran(Request $request)
   {
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         // dd($request->all());
         if ($request->input('kodesumberanggaran')=="DIPA") {
@@ -943,7 +951,8 @@ class diseminasiController extends Controller
   {
         $id = $request->input('id');
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         if ($request->input('kodesumberanggaran')=="DIPA") {
@@ -1105,7 +1114,8 @@ class diseminasiController extends Controller
       $page = 1;
     }
 
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $kondisi = '';
@@ -1246,7 +1256,8 @@ class diseminasiController extends Controller
   public function addpendataanCetak(Request $request)
   {
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $this->data['title']="Pencegahan";
@@ -1263,7 +1274,8 @@ class diseminasiController extends Controller
   public function inputpendataanCetak(Request $request)
   {
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     if ($request->input('kodesumberanggaran')=="DIPA") {
@@ -1409,7 +1421,8 @@ class diseminasiController extends Controller
   {
     $id = $request->id;
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemcetak/'.$id,
@@ -1446,7 +1459,8 @@ class diseminasiController extends Controller
   {
     $id = $request->input('id');
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     if ($request->input('kodesumberanggaran')=="DIPA") {
@@ -1594,7 +1608,8 @@ class diseminasiController extends Controller
       $page = 1;
     }
 
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $kondisi = '';
@@ -1749,7 +1764,8 @@ class diseminasiController extends Controller
   {
     // dd($request->all());
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     if ($request->input('kodesumberanggaran')=="DIPA") {
@@ -1884,7 +1900,8 @@ class diseminasiController extends Controller
   {
     $id = $request->id;
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemkonven/'.$id,
@@ -1915,7 +1932,8 @@ class diseminasiController extends Controller
     // dd($request->all());
     $id = $request->input('id');
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     if ($request->input('kodesumberanggaran')=="DIPA") {
@@ -2052,7 +2070,8 @@ class diseminasiController extends Controller
       $page = 1;
     }
 
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $requestDisemvideotron = $client->request('GET', $baseUrl.'/api/disemvideotron?page='.$page,
@@ -2093,7 +2112,8 @@ class diseminasiController extends Controller
   {
     // dd($request->all());
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     if ($request->input('kodesumberanggaran')=="DIPA") {
@@ -2177,7 +2197,8 @@ class diseminasiController extends Controller
   {
     $id = $request->id;
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $requestDataDetail= $client->request('GET', $baseUrl.'/api/disemvideotron/'.$id,
@@ -2209,7 +2230,8 @@ class diseminasiController extends Controller
     // dd($request->all());
     $id = $request->input('id');
     $client = new Client();
-    $baseUrl = URL::to('/');
+    $baseUrl = URL::to($this->urlapi());
+//    $baseUrl = URL::to('/');
     $token = $request->session()->get('token');
 
     $requestDisemvid = $client->request('PUT', $baseUrl.'/api/disemvideotron/'.$id,
@@ -2261,7 +2283,8 @@ class diseminasiController extends Controller
       $client = new Client();
       $page = $request->input('page');
       $token = $request->session()->get('token');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $get = $request->all();
       $kondisi = "";
@@ -2324,7 +2347,8 @@ class diseminasiController extends Controller
       $client = new Client();
       $page = $request->input('page');
       $token = $request->session()->get('token');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $get = $request->all();
       $kondisi = "";
@@ -2387,7 +2411,8 @@ class diseminasiController extends Controller
       $client = new Client();
       $page = $request->input('page');
       $token = $request->session()->get('token');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $get = $request->all();
       $kondisi = "";
@@ -2451,7 +2476,8 @@ class diseminasiController extends Controller
       $client = new Client();
       $page = $request->input('page');
       $token = $request->session()->get('token');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $get = $request->all();
       $kondisi = "";
@@ -2515,7 +2541,8 @@ class diseminasiController extends Controller
       $client = new Client();
       $page = $request->input('page');
       $token = $request->session()->get('token');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $requestPrintData = $client->request('GET', $baseUrl.'/api/disemvideotron?page='.$page,
           [

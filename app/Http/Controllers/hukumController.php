@@ -33,7 +33,8 @@ class HukumController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestRakoraudiensi = $client->request('GET', $baseUrl.'/api/irtarakoraudiensi?page='.$page,
@@ -81,7 +82,8 @@ class HukumController extends Controller
     public function edithukumRakor(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/irtarakoraudiensi/'.$id,
@@ -102,7 +104,8 @@ class HukumController extends Controller
     }
 
     public function inputhukumRakor(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // dd($request->all());
@@ -156,7 +159,8 @@ class HukumController extends Controller
     }
 
     public function updatehukumRakor(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $token = $request->session()->get('token');
 
@@ -373,7 +377,8 @@ class HukumController extends Controller
         // $this->data['title']="Hukum dan Kerjasama";
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/hukumpendampingan/'.$id,
@@ -439,7 +444,8 @@ class HukumController extends Controller
     }
 
     public function inputhukumPendampingan(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -541,7 +547,8 @@ class HukumController extends Controller
     }
 
     public function updatehukumPendampingan(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -700,7 +707,8 @@ class HukumController extends Controller
     public function printPendampingan(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -897,7 +905,8 @@ class HukumController extends Controller
     public function edithukumPrapradilan(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $url_simpeg = config('app.url_simpeg');
@@ -959,7 +968,8 @@ class HukumController extends Controller
     }
 
     public function inputhukumPrapradilan(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -1085,7 +1095,8 @@ class HukumController extends Controller
     }
 
     public function updatehukumPrapradilan(Request $request){
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $id = $request->input('id');
       // print_r($request->except(['_token']));
@@ -1242,7 +1253,8 @@ class HukumController extends Controller
     public function printPrapradilan(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -1474,7 +1486,8 @@ class HukumController extends Controller
     public function edithukumNonlitigasi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/hukumnonlitigasi/'.$id,
@@ -1506,7 +1519,8 @@ class HukumController extends Controller
     }
 
     public function inputhukumNonlitigasi(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -1627,7 +1641,8 @@ class HukumController extends Controller
     }
 
     public function updatehukumNonlitigasi(Request $request){
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $id = $request->input('id');
       // print_r($request->except(['_token']));
@@ -1807,7 +1822,8 @@ class HukumController extends Controller
     public function printNonlitigasi(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -1980,7 +1996,8 @@ class HukumController extends Controller
     public function addhukumAudiensi(Request $request){
         // $this->data['title']="hukumnonlitigasi";
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -2000,7 +2017,8 @@ class HukumController extends Controller
     public function edithukumAudiensi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/hukumaudiensi/'.$id,
@@ -2032,7 +2050,8 @@ class HukumController extends Controller
     }
 
     public function inputhukumAudiensi(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -2148,7 +2167,8 @@ class HukumController extends Controller
     }
 
     public function updatehukumAudiensi(Request $request){
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $id = $request->input('id');
       // print_r($request->except(['_token']));
@@ -2319,7 +2339,8 @@ class HukumController extends Controller
     public function printAudiensi(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -2518,7 +2539,8 @@ class HukumController extends Controller
     public function edithukumPerka(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail = $client->request('GET', $baseUrl.'/api/hukumperka/'.$id,
@@ -2630,7 +2652,8 @@ class HukumController extends Controller
     }
 
     public function inputhukumPerka(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -2742,7 +2765,8 @@ class HukumController extends Controller
     }
 
     public function updatehukumPerka(Request $request){
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $id = $request->input('id');
       // print_r($request->except(['_token']));
@@ -2916,7 +2940,8 @@ class HukumController extends Controller
     public function printPerka(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -2960,7 +2985,8 @@ class HukumController extends Controller
     }
 
     public function inputPerkaFinalisasi(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -3030,7 +3056,8 @@ class HukumController extends Controller
     }
 
     public function updatePerkaFinalisasi(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -3098,7 +3125,8 @@ class HukumController extends Controller
     }
 
     public function inputPerkaHarmonisasi(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -3168,7 +3196,8 @@ class HukumController extends Controller
     }
 
     public function updatePerkaHarmonisasi(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -3236,7 +3265,8 @@ class HukumController extends Controller
     }
 
     public function inputPerkaDraftAwal(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -3300,7 +3330,8 @@ class HukumController extends Controller
     }
 
     public function updatePerkaDraftAwal(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -3362,7 +3393,8 @@ class HukumController extends Controller
     }
 
     public function updatePerkaPenetapan(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $client = new Client();
@@ -3478,7 +3510,8 @@ class HukumController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestHukumperaturanuu = $client->request('GET', $baseUrl.'/api/sosialisasiperaturan?page='.$page,
@@ -3510,7 +3543,8 @@ class HukumController extends Controller
 
     public function addhukumPeraturanuu(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -3528,7 +3562,8 @@ class HukumController extends Controller
     public function edithukumPeraturanuu(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/sosialisasiperaturan/'.$id,
@@ -3557,7 +3592,8 @@ class HukumController extends Controller
     }
 
     public function inputhukumPeraturanuu(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -3647,7 +3683,8 @@ class HukumController extends Controller
     }
 
     public function updatehukumPeraturanuu(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -3726,7 +3763,8 @@ class HukumController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestMonevperaturanuu = $client->request('GET', $baseUrl.'/api/monevperaturanuu?page='.$page,
@@ -3758,7 +3796,8 @@ class HukumController extends Controller
 
     public function addhukumMonevperaturanuu(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -3780,7 +3819,8 @@ class HukumController extends Controller
         $prefix = explode('/',$request->route()->getPrefix());
         $route = $prefix[0];
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/monevperaturanuu/'.$id,
@@ -3809,7 +3849,8 @@ class HukumController extends Controller
     }
 
     public function inputhukummonevperaturanuu(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -3902,7 +3943,8 @@ class HukumController extends Controller
     }
 
     public function updatehukummonevperaturanuu(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -4110,7 +4152,8 @@ class HukumController extends Controller
     public function addhukumLainnya(Request $request){
         // $this->data['title']="hukumnonlitigasi";
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -4130,7 +4173,8 @@ class HukumController extends Controller
     public function edithukumLainnya(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/hukumlainnya/'.$id,
@@ -4164,7 +4208,8 @@ class HukumController extends Controller
     }
 
     public function inputhukumLainnya(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -4286,7 +4331,8 @@ class HukumController extends Controller
     }
 
     public function updatehukumLainnya(Request $request){
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // print_r($request->except(['_token']));
@@ -4463,7 +4509,8 @@ class HukumController extends Controller
     public function printLainnya(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";

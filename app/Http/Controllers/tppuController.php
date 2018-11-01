@@ -223,7 +223,8 @@ class tppuController extends Controller
       $this->data['title']="Pemberantasan";
       $client = new Client();
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $requestWilayah = $client->request('GET', $baseUrl.'/api/propinsi',
@@ -302,7 +303,8 @@ class tppuController extends Controller
 
     public function inputPendataanTPPU(Request $request){
 
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       // dd($request->all());
@@ -416,7 +418,8 @@ class tppuController extends Controller
 
       $client = new Client();
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $requestLKN = $client->request('GET', $baseUrl.'/api/kasus/'.$id,
@@ -733,7 +736,8 @@ class tppuController extends Controller
     public function updatePendataanTPPU(Request $request){
         $id = $request->input('id');
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // dd($request->all());
@@ -984,7 +988,8 @@ class tppuController extends Controller
       $client = new Client();
       $page = $request->input('page');
       $token = $request->session()->get('token');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $requestKasus = $client->request('GET', $baseUrl.'/api/kasus?page='.$page,
           [

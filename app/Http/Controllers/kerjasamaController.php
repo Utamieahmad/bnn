@@ -33,7 +33,8 @@ class KerjasamaController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestLuarnegeri = $client->request('GET', $baseUrl.'/api/kerjasamaluarnegeri?page='.$page,
@@ -80,7 +81,8 @@ class KerjasamaController extends Controller
     public function editkerjasamaLuarnegeri(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/kerjasamaluarnegeri/'.$id,
@@ -106,7 +108,8 @@ class KerjasamaController extends Controller
 
     public function inputkerjasamaLuarnegeri(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -186,7 +189,8 @@ class KerjasamaController extends Controller
     public function updatekerjasamaLuarnegeri(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -386,7 +390,8 @@ class KerjasamaController extends Controller
     public function editkerjasamaBilateral(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/kerjasamabilateral/'.$id,
@@ -414,7 +419,8 @@ class KerjasamaController extends Controller
 
     public function inputkerjasamaBilateral(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -535,7 +541,8 @@ class KerjasamaController extends Controller
     public function updatekerjasamaBilateral(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -761,7 +768,8 @@ class KerjasamaController extends Controller
     public function printBilateral(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -814,7 +822,8 @@ class KerjasamaController extends Controller
     public function printKesepahaman(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -858,7 +867,8 @@ class KerjasamaController extends Controller
     public function printLainnya(Request $request){
         $client = new Client();
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -901,7 +911,8 @@ class KerjasamaController extends Controller
         $client = new Client();
         $page = $request->input('page');
         $token = $request->session()->get('token');
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $get = $request->all();
         $kondisi = "";
@@ -1113,7 +1124,8 @@ class KerjasamaController extends Controller
     public function editkerjasamaKesepemahaman(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
@@ -1142,7 +1154,8 @@ class KerjasamaController extends Controller
 
     public function inputkerjasamaKesepemahaman(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -1261,7 +1274,8 @@ class KerjasamaController extends Controller
     public function updatekerjasamaKesepemahaman(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -1382,7 +1396,8 @@ class KerjasamaController extends Controller
           $page = 1;
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestsosialisasi = $client->request('GET', $baseUrl.'/api/kerjasamasosialisasi?page='.$page,
@@ -1415,7 +1430,8 @@ class KerjasamaController extends Controller
 
     public function addkerjasamaSosialisasi(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -1433,7 +1449,8 @@ class KerjasamaController extends Controller
     public function editkerjasamaSosialisasi(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/kerjasamasosialisasi/'.$id,
@@ -1465,7 +1482,8 @@ class KerjasamaController extends Controller
 
     public function inputkerjasamaSosialisasi(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -1554,7 +1572,8 @@ class KerjasamaController extends Controller
     public function updatekerjasamaSosialisasi(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -1745,7 +1764,8 @@ class KerjasamaController extends Controller
 
     public function addkerjasamaMonev(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
 
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
@@ -1763,7 +1783,8 @@ class KerjasamaController extends Controller
     public function editkerjasamaMonev(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/kerjasamamonev/'.$id,
@@ -1795,7 +1816,8 @@ class KerjasamaController extends Controller
 
     public function inputkerjasamaMonev(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -1918,7 +1940,8 @@ class KerjasamaController extends Controller
     public function updatekerjasamaMonev(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();
@@ -2182,7 +2205,8 @@ class KerjasamaController extends Controller
     public function editkerjasamaLainnya(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDataDetail= $client->request('GET', $baseUrl.'/api/kerjasamalainnya/'.$id,
@@ -2213,7 +2237,8 @@ class KerjasamaController extends Controller
 
     public function inputkerjasamaLainnya(Request $request){
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
        $client = new Client();
@@ -2332,7 +2357,8 @@ class KerjasamaController extends Controller
     public function updatekerjasamaLainnya(Request $request){
           $id = $request->input('id');
 
-          $baseUrl = URL::to('/');
+          $baseUrl = URL::to($this->urlapi());
+//          $baseUrl = URL::to('/');
           $token = $request->session()->get('token');
 
           $client = new Client();

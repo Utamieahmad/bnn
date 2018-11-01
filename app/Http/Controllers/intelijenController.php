@@ -440,7 +440,8 @@ class intelijenController extends Controller
     public function addPendataanJaringan(Request $request){
 		$client = new Client();
 
-	 	$baseUrl = URL::to('/');
+	 	$baseUrl = URL::to($this->urlapi());
+//	 	$baseUrl = URL::to('/');
 	    $token = $request->session()->get('token');
 
         $user_id = Auth::user()->user_id;
@@ -484,7 +485,8 @@ class intelijenController extends Controller
 
 			$client = new Client();
 
-					$baseUrl = URL::to('/');
+					$baseUrl = URL::to($this->urlapi());
+//					$baseUrl = URL::to('/');
 					$token = $request->session()->get('token');
 
 					$requestLKN = $client->request('GET', $baseUrl.'/api/kasus/'.$id,
@@ -766,7 +768,8 @@ class intelijenController extends Controller
 
 		public function inputPendataanJaringan(Request $request)
 		{
-			$baseUrl = URL::to('/');
+			$baseUrl = URL::to($this->urlapi());
+//			$baseUrl = URL::to('/');
 			$token = $request->session()->get('token');
 
 			// dd($request->all());

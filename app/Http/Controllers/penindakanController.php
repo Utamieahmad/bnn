@@ -212,7 +212,8 @@ class penindakanController extends Controller
      public function editPendataanDpo(Request $request){
         $id = $request->id;
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestDpo = $client->request('GET', $baseUrl.'/api/dpo/'.$id,
@@ -249,7 +250,8 @@ class penindakanController extends Controller
     }
 
     public function inputPendataanDpo(Request $request) {
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $client = new Client();
         if ($request->input('tanggal_lahir') != '') {
@@ -555,7 +557,8 @@ class penindakanController extends Controller
     }
 
     public function updatePendataanDpo(Request $request){
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       $inputId = $request->input('id');

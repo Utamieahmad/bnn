@@ -224,7 +224,8 @@ public function addPsipendataanLKN(Request $request){
   $this->data['title']="Pemberantasan";
   $client = new Client();
 
-  $baseUrl = URL::to('/');
+  $baseUrl = URL::to($this->urlapi());
+//  $baseUrl = URL::to('/');
   $token = $request->session()->get('token');
 
   $requestWilayah = $client->request('GET', $baseUrl.'/api/propinsi',
@@ -283,7 +284,8 @@ public function addPsipendataanLKN(Request $request){
 }
 
 public function inputPsiPendataanLKN(Request $request){
-  $baseUrl = URL::to('/');
+  $baseUrl = URL::to($this->urlapi());
+//  $baseUrl = URL::to('/');
   $token = $request->session()->get('token');
 
   // dd($request->all());
@@ -392,7 +394,8 @@ public function editPsiPendataanLKN(Request $request){
 
   $client = new Client();
 
-  $baseUrl = URL::to('/');
+  $baseUrl = URL::to($this->urlapi());
+//  $baseUrl = URL::to('/');
   $token = $request->session()->get('token');
 
   $requestLKN = $client->request('GET', $baseUrl.'/api/kasus/'.$id,
@@ -716,7 +719,8 @@ public function editPsiPendataanLKN(Request $request){
 public function updatePsiPendataanLKN(Request $request){
   $id = $request->input('id');
 
-  $baseUrl = URL::to('/');
+  $baseUrl = URL::to($this->urlapi());
+//  $baseUrl = URL::to('/');
   $token = $request->session()->get('token');
 
   // dd($request->all());
