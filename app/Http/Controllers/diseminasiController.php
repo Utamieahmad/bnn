@@ -1977,6 +1977,49 @@ class diseminasiController extends Controller
       $anggaran = '';
     }
 
+    //generate image base64
+    if($request->hasFile('foto1')){
+        $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto1')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto1')->storeAs('Diseminfo/Konvensional', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Konvensional/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image1 = base64_encode($data);
+        Storage::delete('Diseminfo/Konvensional/'.$fileNameToStore);
+    }else{
+      $image1 = null;
+    }
+
+    if($request->hasFile('foto2')){
+        $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto2')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto2')->storeAs('Diseminfo/Konvensional', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Konvensional/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image2 = base64_encode($data);
+        Storage::delete('Diseminfo/Konvensional/'.$fileNameToStore);
+    }else{
+      $image2 = null;
+    }
+
+    if($request->hasFile('foto3')){
+        $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto3')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto3')->storeAs('Diseminfo/Konvensional', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Konvensional/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image3 = base64_encode($data);
+        Storage::delete('Diseminfo/Konvensional/'.$fileNameToStore);
+    }else{
+      $image3 = null;
+    }
+
     $requestDisemcetak = $client->request('POST', $baseUrl.'/api/disemkonven',
       [
       'headers' =>
@@ -2005,7 +2048,10 @@ class diseminasiController extends Controller
           'periode_tahun' => date('Y', strtotime(str_replace('/', '-', $request->input('tgl_pelaksanaan')))),
           'periode_bulan' => date('m', strtotime(str_replace('/', '-', $request->input('tgl_pelaksanaan')))),
           'periode_tanggal' => date('d', strtotime(str_replace('/', '-', $request->input('tgl_pelaksanaan')))),
-          'anggaran_id' => $anggaran
+          'anggaran_id' => $anggaran,
+          'foto1' => $image1,
+          'foto2' => $image2,
+          'foto3' => $image3,
         ]
       ]
     );
@@ -2143,6 +2189,49 @@ class diseminasiController extends Controller
       $anggaran = '';
     }
 
+    //generate image base64
+    if($request->hasFile('foto1')){
+        $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto1')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto1')->storeAs('Diseminfo/Konvensional', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Konvensional/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image1 = base64_encode($data);
+        Storage::delete('Diseminfo/Konvensional/'.$fileNameToStore);
+    }else{
+      $image1 = null;
+    }
+
+    if($request->hasFile('foto2')){
+        $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto2')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto2')->storeAs('Diseminfo/Konvensional', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Konvensional/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image2 = base64_encode($data);
+        Storage::delete('Diseminfo/Konvensional/'.$fileNameToStore);
+    }else{
+      $image2 = null;
+    }
+
+    if($request->hasFile('foto3')){
+        $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto3')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto3')->storeAs('Diseminfo/Konvensional', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Konvensional/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image3 = base64_encode($data);
+        Storage::delete('Diseminfo/Konvensional/'.$fileNameToStore);
+    }else{
+      $image3 = null;
+    }
+
     $requestDisemcetak = $client->request('PuT', $baseUrl.'/api/disemkonven/'.$id,
       [
       'headers' =>
@@ -2171,7 +2260,10 @@ class diseminasiController extends Controller
           'periode_tahun' => date('Y', strtotime(str_replace('/', '-', $request->input('tgl_pelaksanaan')))),
           'periode_bulan' => date('m', strtotime(str_replace('/', '-', $request->input('tgl_pelaksanaan')))),
           'periode_tanggal' => date('d', strtotime(str_replace('/', '-', $request->input('tgl_pelaksanaan')))),
-          'anggaran_id' => $anggaran
+          'anggaran_id' => $anggaran,
+          'foto1' => $image1,
+          'foto2' => $image2,
+          'foto3' => $image3,
         ]
       ]
     );
