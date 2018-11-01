@@ -17,7 +17,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
   <!-- Modal Body -->
   <div class="modal-body">
 
-    <form action="{{url('/pemberantasan/dir_wastahti/input_detail_pendataan_brgbukti')}}" method="post" class="form-horizontal" role="form">
+    <form action="{{url('/pemberantasan/dir_wastahti/input_detail_pendataan_brgbukti')}}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data" >
       {{ csrf_field() }}
       <input type="hidden" name="parent_id" value="{{$pemusnahan['id']}}">
       <input type="hidden" id="id" name="id" value="">
@@ -86,6 +86,30 @@ aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="col-sm-9">
           <input type="text" class="form-control" id="lokasi" name="lokasi"/>
         </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Foto</label>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah" style="width:100%;height:150px;" />
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah2" style="width:100%;height:150px;" />
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah3" style="width:100%;height:150px;" />
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12"  >&nbsp;</label>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+              <input type='file' name="foto1" onchange="readURL(this);" />
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+              <input type='file' name="foto2" onchange="readURL2(this);" />
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+              <input type='file' name="foto3" onchange="readURL3(this);" />
+          </div>
       </div>
 
     </div>

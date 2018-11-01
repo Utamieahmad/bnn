@@ -18,6 +18,9 @@ $(document).ready(function(){
     var jumlahDimusnahkan = $(this).attr('data-jumlahDimusnahkan');
     var tglPemusnahan = $(this).attr('data-tglPemusnahan');
     var lokasi = $(this).attr('data-lokasi');
+    var foto1 = $(this).attr('data-foto1');
+    var foto2 = $(this).attr('data-foto2');
+    var foto3 = $(this).attr('data-foto3');
 
     $('#modal_edit_brgbukti').find('#id').val(id);
     $('#modal_edit_brgbukti').find('#id_brgbukti').val(idBrgBukti);
@@ -30,6 +33,9 @@ $(document).ready(function(){
     $('#modal_edit_brgbukti').find('#jumlah_dimusnahkan').val(jumlahDimusnahkan);
     $('#modal_edit_brgbukti').find('#tgl_pemusnahan').val(tglPemusnahan);
     $('#modal_edit_brgbukti').find('#lokasi').val(lokasi);
+    $('#modal_edit_brgbukti').find('#blah').attr('src', foto1);
+    $('#modal_edit_brgbukti').find('#blah2').attr('src', foto2);
+    $('#modal_edit_brgbukti').find('#blah3').attr('src', foto3);
     $('#modal_edit_brgbukti').modal('show');
   });
 });

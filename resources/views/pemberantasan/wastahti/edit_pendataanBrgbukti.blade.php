@@ -2,6 +2,43 @@
 @section('title', 'Ubah Pendataan Barang Bukti')
 
 @section('content')
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah2').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function readURL3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah3').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+
 <div class="right_col" role="main">
 	<div class="m-t-40">
 		<div class="page-title">
@@ -196,7 +233,7 @@
 																<td>{{$brgBukti['keperluan_iptek']}} <br/>( {{$brgBukti['kode_satuan_barang_bukti']}} )</td>
 																<td>{{($brgBukti['jumlah_dimusnahkan'] == "") ? "0" : $brgBukti['jumlah_dimusnahkan']}} <br/> ( {{$brgBukti['kode_satuan_barang_bukti']}} )</td>
 																<td class="actionTable">
-																	<a data-id="{{$brgBukti['id']}}" data-idBrgBukti="{{$brgBukti['id_brgbukti']}}" data-jumlahDimusnahkan="{{($brgBukti['jumlah_dimusnahkan'] == "") ? "0" : $brgBukti['jumlah_dimusnahkan']}}" data-keperluanIptek="{{$brgBukti['keperluan_iptek']}}" data-keperluanDiklat="{{$brgBukti['keperluan_diklat']}}" data-keperluanLab="{{$brgBukti['keperluan_lab']}}" data-nmBrgBukti="{{$brgBukti['nm_brgbukti']}}" data-jmlBrgBukti="{{$brgBukti['jumlah_barang_bukti']}}" data-kodeSatuan="{{$brgBukti['kode_satuan_barang_bukti']}}" data-tglPemusnahan="{{(isset($brgBukti) ? \Carbon\Carbon::parse($brgBukti['tgl_pemusnahan'])->format('d/m/Y') : "")}}" data-lokasi="{{$brgBukti['lokasi']}}" class="wastahtiModalBrgBukti"><i class="fa fa-pencil f-18"></i></a>
+																	<a data-id="{{$brgBukti['id']}}" data-idBrgBukti="{{$brgBukti['id_brgbukti']}}" data-jumlahDimusnahkan="{{($brgBukti['jumlah_dimusnahkan'] == "") ? "0" : $brgBukti['jumlah_dimusnahkan']}}" data-keperluanIptek="{{$brgBukti['keperluan_iptek']}}" data-keperluanDiklat="{{$brgBukti['keperluan_diklat']}}" data-keperluanLab="{{$brgBukti['keperluan_lab']}}" data-nmBrgBukti="{{$brgBukti['nm_brgbukti']}}" data-jmlBrgBukti="{{$brgBukti['jumlah_barang_bukti']}}" data-kodeSatuan="{{$brgBukti['kode_satuan_barang_bukti']}}" data-tglPemusnahan="{{(isset($brgBukti) ? \Carbon\Carbon::parse($brgBukti['tgl_pemusnahan'])->format('d/m/Y') : "")}}" data-lokasi="{{$brgBukti['lokasi']}}" class="wastahtiModalBrgBukti" data-foto1="{{($brgBukti['foto1']) ? 'data:image/png;base64,'.$brgBukti['foto1'] : asset('assets/images/NoImage.gif')}}" data-foto2="{{($brgBukti['foto2']) ? 'data:image/png;base64,'.$brgBukti['foto2'] : asset('assets/images/NoImage.gif')}}" data-foto3="{{($brgBukti['foto3']) ? 'data:image/png;base64,'.$brgBukti['foto3'] : asset('assets/images/NoImage.gif')}}"><i class="fa fa-pencil f-18"></i></a>
 																</td>
 															</tr>
 															@php $i = $i+1; @endphp
