@@ -355,21 +355,21 @@
                   @if ($data_detail['data']['foto1'])
                       <img src="data:image/png;base64,{{$data_detail['data']['foto1']}}" id="blah" style="width:100%;height:150px;" />
                   @else
-                      <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah" style="width:100%;height:150px;" />
+                      <img src="{{asset('assets/images/NoImage.gif')}}" id="blah" style="width:100%;height:150px;" />
                   @endif
               </div>
               <div class="col-md-3 col-sm-3 col-xs-12">
                   @if ($data_detail['data']['foto2'])
                       <img src="data:image/png;base64,{{$data_detail['data']['foto2']}}" id="blah2" style="width:100%;height:150px;" />
                   @else
-                      <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah2" style="width:100%;height:150px;" />
+                      <img src="{{asset('assets/images/NoImage.gif')}}" id="blah2" style="width:100%;height:150px;" />
                   @endif
               </div>
               <div class="col-md-3 col-sm-3 col-xs-12">
                   @if ($data_detail['data']['foto3'])
                       <img src="data:image/png;base64,{{$data_detail['data']['foto3']}}" id="blah3" style="width:100%;height:150px;" />
                   @else
-                      <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah3" style="width:100%;height:150px;" />
+                      <img src="{{asset('assets/images/NoImage.gif')}}" id="blah3" style="width:100%;height:150px;" />
                   @endif
               </div>
           </div>

@@ -2,6 +2,44 @@
 @section('title', 'Tambah Data Kegiatan Media Penyiaran Penyiaran')
 
 @section('content')
+<script>
+    var IDSATKER = '{{Session::get("satker_simpeg")}}';
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah2').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah3').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+
+
 <div class="right_col" role="main">
   <div class="m-t-40">
     <div class="page-title">
@@ -95,7 +133,7 @@
               </div>
 
               <div class="form-group">
-                <label for="materi" class="col-md-3 control-label">Materi Penyiaran</label>
+                <label for="materi" class="col-md-3 control-label">Uraian Singkat Materi</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <textarea id="materi" name="materi" class="form-control"></textarea>
                 </div>
@@ -119,7 +157,7 @@
               </div>
 
               <div class="form-group">
-                <label for="jumlah_instansi" class="col-md-3 control-label">List Media Penyiaran</label>
+                <label for="jumlah_instansi" class="col-md-3 control-label">List Nama Media Penyiaran</label>
                 <div class="col-md-6">
                   <div class="mt-repeater">
                     <div data-repeater-list="group-c">
@@ -157,6 +195,24 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input value="" id="narasumber" name="narasumber" type="text" class="form-control">
                       </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Jenis Kegiatan</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" name="jenis_kegiatan" value="" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Lokasi</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" name="lokasi" value="" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Jumlah Orang/Sebaran</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input value="" id="jumlah" name="jumlah" type="text" class="form-control numeric" onkeydown="numeric(event)">
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -209,6 +265,30 @@
                           <span class="help-block">
                           </span>
                         </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Foto</label>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah" style="width:100%;height:150px;" />
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah2" style="width:100%;height:150px;" />
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah3" style="width:100%;height:150px;" />
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12"  >&nbsp;</label>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                              <input type='file' name="foto1" onchange="readURL(this);" />
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                              <input type='file' name="foto2" onchange="readURL2(this);" />
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                              <input type='file' name="foto3" onchange="readURL3(this);" />
+                          </div>
                       </div>
 
                     </div>

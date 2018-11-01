@@ -2,6 +2,44 @@
 @section('title', 'Tambah Data Kegiatan Media Konvensional')
 
 @section('content')
+<script>
+    var IDSATKER = '{{Session::get("satker_simpeg")}}';
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah2').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah3').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+
+
 <div class="right_col" role="main">
   <div class="m-t-40">
     <div class="page-title">
@@ -149,7 +187,7 @@
 
             </div>
             <div class="form-group">
-              <label for="wkt_kegiatan" class="col-md-3 control-label">Waktu Kegiatan</label>
+              <label for="wkt_kegiatan" class="col-md-3 control-label">Tanggal</label>
               <div class='col-md-6 col-sm-6 col-xs-12 input-group date tanggal'>
                 <input type='text' name="tgl_pelaksanaan" class="form-control" />
                 <span class="input-group-addon">
@@ -159,7 +197,7 @@
             </div>
 
             <div class="form-group">
-              <label for="durasi_penyiaran" class="col-md-3 control-label">Lokasi Kegiatan</label>
+              <label for="durasi_penyiaran" class="col-md-3 control-label">Lokasi Kabupaten</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <select class="form-control select2 selectKabupaten" name="lokasi_kegiatan_idkabkota">
                   <option value="">-- Pilih Kabupaten --</option>
@@ -175,14 +213,14 @@
             </div>
 
             <div class="form-group">
-              <label for="alamatkegiatan" class="col-md-3 control-label">Alamat Kegiatan</label>
+              <label for="alamatkegiatan" class="col-md-3 control-label">Lokasi Kegiatan</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input value="" id="lokasi_kegiatan" name="lokasi_kegiatan" type="text" class="form-control">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="jumlah_peserta" class="col-md-3 control-label">Jumlah Peserta</label>
+              <label for="jumlah_peserta" class="col-md-3 control-label">Jumlah Orang/Sebaran</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input value="" id="jumlah_peserta" name="jumlah_peserta" type="text" class="form-control numeric" onkeydown="numeric(event)">
               </div>
@@ -246,6 +284,30 @@
                   <span class="help-block">
                   </span>
                 </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Foto</label>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                      <img src="{{asset('assets/images/NoImage.gif')}}" id="blah" style="width:100%;height:150px;" />
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                      <img src="{{asset('assets/images/NoImage.gif')}}" id="blah2" style="width:100%;height:150px;" />
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                      <img src="{{asset('assets/images/NoImage.gif')}}" id="blah3" style="width:100%;height:150px;" />
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12"  >&nbsp;</label>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                      <input type='file' name="foto1" onchange="readURL(this);" />
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                      <input type='file' name="foto2" onchange="readURL2(this);" />
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                      <input type='file' name="foto3" onchange="readURL3(this);" />
+                  </div>
               </div>
 
             </div>
