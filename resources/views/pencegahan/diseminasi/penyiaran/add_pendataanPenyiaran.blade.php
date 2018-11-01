@@ -269,13 +269,13 @@
                       <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12"  >Foto</label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
-                              <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah" style="width:100%;height:150px;" />
+                              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah" style="width:100%;height:150px;" />
                           </div>
                           <div class="col-md-3 col-sm-3 col-xs-12">
-                              <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah2" style="width:100%;height:150px;" />
+                              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah2" style="width:100%;height:150px;" />
                           </div>
                           <div class="col-md-3 col-sm-3 col-xs-12">
-                              <img src="https://s3-us-west-2.amazonaws.com/upimg.carused.jp/noImage.gif" id="blah3" style="width:100%;height:150px;" />
+                              <img src="{{asset('assets/images/NoImage.gif')}}" id="blah3" style="width:100%;height:150px;" />
                           </div>
                       </div>
                       <div class="form-group">
