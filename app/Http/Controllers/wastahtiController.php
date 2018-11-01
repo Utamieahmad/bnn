@@ -273,7 +273,8 @@ class wastahtiController extends Controller
 
       $client = new Client();
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
         $user_id = Auth::user()->user_id;
@@ -298,7 +299,8 @@ class wastahtiController extends Controller
     public function addDataPendataanBrgbukti(Request $request)
     {
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $token = $request->session()->get('token');
       $lkn = $this->globalGetByLkn($token, $request->input('kasus_no'));
@@ -472,7 +474,8 @@ class wastahtiController extends Controller
     public function inputDetailPendataanBrgbukti(Request $request)
     {
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       //generate image base64
@@ -929,7 +932,8 @@ class wastahtiController extends Controller
     public function addDataPendataanTahanan(Request $request)
     {
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $token = $request->session()->get('token');
       $lkn = $this->globalGetByLkn($token, $request->input('kasus_no'));
@@ -1090,7 +1094,8 @@ class wastahtiController extends Controller
     public function editPendataanTahanan(Request $request)
     {
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $token = $request->session()->get('token');
 
@@ -1116,7 +1121,8 @@ class wastahtiController extends Controller
     public function addPendataanTahanan(Request $request){
       $client = new Client();
 
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
 
         $user_id = Auth::user()->user_id;
@@ -1141,7 +1147,8 @@ class wastahtiController extends Controller
     public function inputPendataanTahanan(Request $request)
     {
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       // $datediff = \Carbon\Carbon::parse(date('Y-m-d', strtotime(str_replace('/', '-', $request->input('masa_berlaku_penahanan')))))->diff(\Carbon\Carbon::parse(date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_masuk'))))))->format('%y tahun %m bulan %d hari');
 

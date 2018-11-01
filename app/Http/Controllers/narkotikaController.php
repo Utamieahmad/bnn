@@ -243,7 +243,8 @@ class narkotikaController extends Controller
 
         $client = new Client();
 
-            $baseUrl = URL::to('/');
+            $baseUrl = URL::to($this->urlapi());
+//            $baseUrl = URL::to('/');
             $token = $request->session()->get('token');
 
             $LKN = $this->globalLkn($token, $id);
@@ -351,7 +352,8 @@ class narkotikaController extends Controller
     public function addpendataanLKN(Request $request){
       $this->data['title']="Pemberantasan";
       $client = new Client();
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
 
       $instansi = $this->globalinstansi($request->session()->get('wilayah'), $token);
@@ -390,7 +392,8 @@ class narkotikaController extends Controller
 
     public function inputPendataanLKN(Request $request){
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // dd($request->all());
@@ -552,7 +555,8 @@ class narkotikaController extends Controller
     public function updatePendataanLKN(Request $request){
         $id = $request->input('id');
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         // dd($request->all());
@@ -1017,7 +1021,8 @@ class narkotikaController extends Controller
 
     public function addpendataanLadangGanja(Request $request){
         $client = new Client();
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab',
             [
@@ -1042,7 +1047,8 @@ class narkotikaController extends Controller
         // dd(date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_penyelidikan')))));
         $client = new Client();
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $fileName = "";
@@ -1141,7 +1147,8 @@ class narkotikaController extends Controller
         $id = $request->id;
         $client = new Client();
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
 
         $requestPemusnahanLadang = $client->request('GET', $baseUrl.'/api/pemusnahanladang/'.$id,
@@ -1179,7 +1186,8 @@ class narkotikaController extends Controller
         $id = $request->input('id');
         $client = new Client();
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         // dd($request->all());
         $fileName = "";
@@ -1327,7 +1335,8 @@ class narkotikaController extends Controller
       $client = new Client();
       $page = $request->input('page');
       $token = $request->session()->get('token');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $get = $request->all();
       $kondisi = "";
@@ -1400,7 +1409,8 @@ class narkotikaController extends Controller
       $client = new Client();
       $page = $request->input('page');
       $token = $request->session()->get('token');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
 
       $get = $request->all();
       $kondisi = "";

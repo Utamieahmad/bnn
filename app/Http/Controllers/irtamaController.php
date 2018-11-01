@@ -513,7 +513,8 @@ class irtamaController extends Controller
 
     public function updateirtamaPtl(Request $request)
     {
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       $id = $request->input('id');
@@ -732,7 +733,8 @@ class irtamaController extends Controller
 
     public function editirtamaLk(Request $request){
        $id = $request->id;
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $client = new Client();
 
@@ -759,7 +761,8 @@ class irtamaController extends Controller
     public function updateirtamaLk(Request $request)
     {
       $id = $request->input('id');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
 
@@ -863,7 +866,8 @@ class irtamaController extends Controller
     public function inputirtamaLk(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
 
@@ -1113,7 +1117,8 @@ class irtamaController extends Controller
 
      public function editirtamaRkakl(Request $request){
        $id = $request->id;
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $client = new Client();
        $requestpegawai = $client->request('GET', config('app.url_soa').'simpeg/staffBySatker?unit_id=156');
@@ -1140,7 +1145,8 @@ class irtamaController extends Controller
     public function updateirtamaRkakl(Request $request)
     {
       $id = $request->input('id');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
 
@@ -1244,7 +1250,8 @@ class irtamaController extends Controller
 
     public function inputirtamaRkakl(Request $request)
     {
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
 
@@ -1533,7 +1540,8 @@ class irtamaController extends Controller
      public function editirtamaRkbmn(Request $request){
         $id = $request->id;
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $client = new Client();
         $requestpegawai = $client->request('GET', config('app.url_soa').'simpeg/staffBySatker?unit_id=156');
@@ -1561,7 +1569,8 @@ class irtamaController extends Controller
     public function updateirtamaRkbmn(Request $request)
     {
       $id = $request->input('id');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
 
@@ -1713,7 +1722,8 @@ class irtamaController extends Controller
     public function inputirtamaRkbmn(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
 
@@ -2086,7 +2096,8 @@ class irtamaController extends Controller
 
      public function editirtamaLkip(Request $request){
        $id = $request->id;
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $client = new Client();
        $requestpegawai = $client->request('GET', config('app.url_soa').'simpeg/staffBySatker?unit_id=156');
@@ -2113,7 +2124,8 @@ class irtamaController extends Controller
     public function updateirtamaLkip(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       $id = $request->input('id');
@@ -2227,7 +2239,8 @@ class irtamaController extends Controller
     public function inputirtamaLkip(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
 
@@ -2569,7 +2582,8 @@ class irtamaController extends Controller
 
      public function editirtamaSosialisasi(Request $request){
        $id = $request->id;
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $client = new Client();
 
@@ -2599,7 +2613,8 @@ class irtamaController extends Controller
     public function updateirtamaSosialisasi(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       $id = $request->input('id');
@@ -2690,7 +2705,8 @@ class irtamaController extends Controller
 
     public function inputirtamaSosialisasi(Request $request)
     {
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       $requestData = $client->request('POST', $baseUrl.'/api/irtamasosialisasi',
@@ -2922,7 +2938,8 @@ class irtamaController extends Controller
 
      public function editirtamaVerifikasi(Request $request){
        $id = $request->id;
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $client = new Client();
 
@@ -2950,7 +2967,8 @@ class irtamaController extends Controller
     public function updateirtamaVerifikasi(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       $id = $request->input('id');
@@ -3071,7 +3089,8 @@ class irtamaController extends Controller
     public function inputirtamaVerifikasi(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       if ($request->input('pejabat_tgl_skep_diganti') != '') {
@@ -3385,7 +3404,8 @@ class irtamaController extends Controller
 
      public function editirtamaSop(Request $request){
        $id = $request->id;
-       $baseUrl = URL::to('/');
+       $baseUrl = URL::to($this->urlapi());
+//       $baseUrl = URL::to('/');
        $token = $request->session()->get('token');
        $client = new Client();
 
@@ -3408,7 +3428,8 @@ class irtamaController extends Controller
     public function updateirtamaSop(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       $id = $request->input('id');
@@ -3499,7 +3520,8 @@ class irtamaController extends Controller
     public function inputirtamaSop(Request $request)
     {
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       if ($request->input('tgl_sprin') != ''){
@@ -3809,7 +3831,8 @@ class irtamaController extends Controller
 
     public function editirtamaPenegakan(Request $request){
         $id = $request->id;
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $client = new Client();
 
@@ -3837,7 +3860,8 @@ class irtamaController extends Controller
 
     public function inputirtamaPenegakan(Request $request){
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       if($request->input('tgl_laporan') != ''){
@@ -3909,7 +3933,8 @@ class irtamaController extends Controller
 
     public function updateirtamaPenegakan(Request $request){
       $id = $request->input('id');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       if($request->input('tgl_laporan') != ''){
@@ -4198,7 +4223,8 @@ class irtamaController extends Controller
 
     public function editirtamaApel(Request $request){
         $id = $request->id;
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
         $client = new Client();
 
@@ -4226,7 +4252,8 @@ class irtamaController extends Controller
 
     public function inputirtamaApel(Request $request){
       // dd($request->all());
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       if ($request->input('tanggal') != '') {
@@ -4304,7 +4331,8 @@ class irtamaController extends Controller
 
     public function updateirtamaApel(Request $request){
       $id = $request->input('id');
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       if ($request->input('tanggal') != '') {
@@ -4661,7 +4689,8 @@ class irtamaController extends Controller
     {
       $messages = [];
       $fileMessage = "";
-      $baseUrl = URL::to('/');
+      $baseUrl = URL::to($this->urlapi());
+//      $baseUrl = URL::to('/');
       $token = $request->session()->get('token');
       $client = new Client();
       $form_params = $request->except('_token');
