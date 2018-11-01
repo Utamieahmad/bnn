@@ -1399,6 +1399,50 @@ class diseminasiController extends Controller
       $meta_media="";
     }
 
+    //generate image base64
+    if($request->hasFile('foto1')){
+        $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto1')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto1')->storeAs('Diseminfo/Cetak', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Cetak/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image1 = base64_encode($data);
+        Storage::delete('Diseminfo/Cetak/'.$fileNameToStore);
+    }else{
+      $image1 = null;
+    }
+
+    if($request->hasFile('foto2')){
+        $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto2')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto2')->storeAs('Diseminfo/Cetak', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Cetak/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image2 = base64_encode($data);
+        Storage::delete('Diseminfo/Cetak/'.$fileNameToStore);
+    }else{
+      $image2 = null;
+    }
+
+    if($request->hasFile('foto3')){
+        $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto3')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto3')->storeAs('Diseminfo/Cetak', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Cetak/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image3 = base64_encode($data);
+        Storage::delete('Diseminfo/Cetak/'.$fileNameToStore);
+    }else{
+      $image3 = null;
+    }
+
+
     $requestDisemcetak = $client->request('POST', $baseUrl.'/api/disemcetak',
       [
       'headers' =>
@@ -1429,7 +1473,13 @@ class diseminasiController extends Controller
           'periode_tanggal' => date('d', strtotime(str_replace('/', '-', $request->input('tgl_pelaksanaan')))),
           'anggaran_id' => $anggaran,
           'meta_media' => $meta_media,
-          'jumlah_cetak' => ($request->input('jumlah_cetak') ? $request->input('jumlah_cetak') : '')
+          'jumlah_cetak' => ($request->input('jumlah_cetak') ? $request->input('jumlah_cetak') : ''),
+          'jenis_kegiatan' => $request->input('jenis_kegiatan'),
+          'uraian_singkat' => $request->input('uraian_singkat'),
+          'jumlah_peserta' => $request->input('jumlah_peserta'),
+          'foto1' => $image1,
+          'foto2' => $image2,
+          'foto3' => $image3,
         ]
       ]
     );
@@ -1582,6 +1632,49 @@ class diseminasiController extends Controller
       $meta_media="";
     }
 
+    //generate image base64
+    if($request->hasFile('foto1')){
+        $filenameWithExt = $request->file('foto1')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto1')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto1')->storeAs('Diseminfo/Cetak', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Cetak/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image1 = base64_encode($data);
+        Storage::delete('Diseminfo/Cetak/'.$fileNameToStore);
+    }else{
+      $image1 = null;
+    }
+
+    if($request->hasFile('foto2')){
+        $filenameWithExt = $request->file('foto2')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto2')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto2')->storeAs('Diseminfo/Cetak', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Cetak/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image2 = base64_encode($data);
+        Storage::delete('Diseminfo/Cetak/'.$fileNameToStore);
+    }else{
+      $image2 = null;
+    }
+
+    if($request->hasFile('foto3')){
+        $filenameWithExt = $request->file('foto3')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto3')->getClientOriginalExtension();
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto3')->storeAs('Diseminfo/Cetak', $fileNameToStore);
+        $image = public_path('upload/Diseminfo/Cetak/'.$fileNameToStore);
+        $data = file_get_contents($image);
+        $image3 = base64_encode($data);
+        Storage::delete('Diseminfo/Cetak/'.$fileNameToStore);
+    }else{
+      $image3 = null;
+    }
+
     $requestPenyiaran = $client->request('PUT', $baseUrl.'/api/disemcetak/'.$id,
     [
       'headers' =>
@@ -1611,7 +1704,13 @@ class diseminasiController extends Controller
           'periode_tanggal' => date('d', strtotime(str_replace('/', '-', $request->input('tgl_pelaksanaan')))),
           'anggaran_id' => $anggaran,
           'meta_media' => $meta_media,
-          'jumlah_cetak' => ($request->input('jumlah_cetak') ? $request->input('jumlah_cetak') : '')
+          'jumlah_cetak' => ($request->input('jumlah_cetak') ? $request->input('jumlah_cetak') : ''),
+          'jenis_kegiatan' => $request->input('jenis_kegiatan'),
+          'uraian_singkat' => $request->input('uraian_singkat'),
+          'jumlah_peserta' => $request->input('jumlah_peserta'),
+          'foto1' => $image1,
+          'foto2' => $image2,
+          'foto3' => $image3,
         ]
       ]
     );
