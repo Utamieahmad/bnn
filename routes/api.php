@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth:api', 'TokenCheck']], function () {
   Route::post('getintelbylkn', 'Berantas\IntelJaringanAPIController@getIntelByLKN')->name('getIntelByLKN');
   Route::post('getpemusnahanbylkn', 'Berantas\PemusnahanAPIController@getPemusnahanByLKN')->name('getPemusnahanByLKN');
   Route::get('getlistlkn', 'Berantas\KasusAPIController@getListLKN')->name('getListLKN');
-  Route::get('getlistlknmobile', 'Berantas\KasusAPIController@getListLKNMobile')->name('getListLKNMobile');
+  Route::get('getlistlknmobile/{id_kasus}', 'Berantas\KasusAPIController@getListLKNMobile')->name('getListLKNMobile');
 
   //Cegah
   Route::resource('advoasistensi', 'Cegah\AdvokasiAsistensiAPIController');

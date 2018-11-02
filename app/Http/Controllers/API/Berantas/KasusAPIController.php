@@ -285,10 +285,10 @@ class KasusAPIController extends Controller
         }
     }
     
-    public function getListLKNMobile(Request $request)
-    {
+    public function getListLKNMobile(Request $request, $id_kasus)
+    {        
         try {
-            $data = Pemusnahan::where('nomor_lkn', $request->input('kasus_no'))->get();
+            $data = Pemusnahan::where('id_kasus', $id_kasus)->first();            
             if (!$data){
               return response()->json(Json::response(null, 'error', "data kosong", 404), 404);
             } else {
