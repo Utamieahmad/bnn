@@ -215,12 +215,13 @@ function web_token(){
 function execute_api($url,$method,$params=array()){
 
 	if($url=="http://integrasi.bnn.go.id:7001/simpeg/listSatker" || $url=="http://integrasi.bnn.go.id:7001/simpeg/staffBySatker" || $url=="http://integrasi.bnn.go.id:7001/"){
-		$url=$url;
+		// $url=$url;
+		break;
 	}else {
 		$baseUrl = config('app.url_api_local');
 		$url = $baseUrl.'/'.$url;
 	}
-	
+
 	$token = session()->get('token');
 	$headers = ['headers'=>[ 'Accept' => 'application/json' ,'Authorization'=>'Bearer '.$token]];
 	$client = new \GuzzleHttp\Client($headers);
