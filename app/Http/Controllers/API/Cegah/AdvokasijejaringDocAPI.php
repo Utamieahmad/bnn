@@ -91,7 +91,7 @@
         *     name="tgl_pelaksanaan",
         *     in="formData",
         *     description="Tanggal Pelaksanaan",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
@@ -105,34 +105,20 @@
         *     name="idpelaksana",
         *     in="formData",
         *     description="id pelaksana",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="kodesasaran",
         *     in="formData",
         *     description="kode sasaran",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="jumlah_instansi",
         *     in="formData",
         *     description="jumlah instansi",
-        *     required=true,
-        *     type="string"
-        *   ),
-        *   @SWG\Parameter(
-        *     name="meta_instansi",
-        *     in="formData",
-        *     description="meta instansi",
-        *     required=true,
-        *     type="string"
-        *   ),
-        *   @SWG\Parameter(
-        *     name="jumlah_peserta",
-        *     in="formData",
-        *     description="jumlah peserta",
         *     required=false,
         *     type="string"
         *   ),
@@ -140,7 +126,7 @@
         *     name="lokasi_kegiatan",
         *     in="formData",
         *     description="lokasi kegiatan",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
@@ -154,14 +140,14 @@
         *     name="lokasi_kegiatan_idkabkota",
         *     in="formData",
         *     description="lokasi kegiatan idkabkota",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="narasumber",
         *     in="formData",
         *     description="nara sumber",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
@@ -175,56 +161,56 @@
         *     name="materi",
         *     in="formData",
         *     description="materi",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="kodesumberanggaran",
         *     in="formData",
         *     description="kode sumber anggaran",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="file_upload",
         *     in="formData",
         *     description="file upload",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="status_aktif",
         *     in="formData",
         *     description="status aktif",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="periode",
         *     in="formData",
         *     description="periode",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="periode_tahun",
         *     in="formData",
         *     description="periode tahun",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="periode_bulan",
         *     in="formData",
         *     description="periode bulan",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
         *     name="periode_tanggal",
         *     in="formData",
         *     description="periode tanggal",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(
@@ -280,7 +266,7 @@
         *     name="status",
         *     in="formData",
         *     description="status",
-        *     required=true,
+        *     required=false,
         *     type="string"
         *   ),
         *   @SWG\Parameter(

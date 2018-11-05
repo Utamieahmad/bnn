@@ -1128,7 +1128,7 @@ class UserManagementController extends Controller {
         $client = new Client();
         $baseUrl = URL::to('/');
         $token = $request->session()->get('token');
-
+        
         $kondisi = '';
         if ($request->limit) {
             $limit = $request->limit;

@@ -271,7 +271,7 @@ return [
     'bidang_tipe' => ['kinerja','keuangan','sdm','sarana'],
     'url_soa' => 'http://integrasi.bnn.go.id:7001/',
     'url_soadev' => 'http://103.3.70.160:7004/sinapp/',
-    'url_api_local' => 'http://localhost/bnn_api/public',
+    'url_api_local' => 'http://localhost:8888',
     'email_bnn' => '@bnn.go.id',
     /*api balai lab*/
 ];

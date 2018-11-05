@@ -121,7 +121,6 @@ class irtamaController extends Controller
           $total_item = 0;
       }
 
-
       $url_simpeg = config('app.url_simpeg');
       $query  =  execute_api_json($url_simpeg,"GET");
       if($query->code == 200 && ($query->status != 'error')){
