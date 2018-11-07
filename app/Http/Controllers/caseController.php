@@ -93,7 +93,9 @@ class caseController extends Controller
                         "kode_pekerjaan" => $request->input('kode_pekerjaan'),
                         "kode_warga_negara" => $request->input('kode_warga_negara'),
                         "kode_negara" => $request->input('kode_negara'),
-                        "kode_peran_tersangka" => $request->input('kode_peran_tersangka')
+                        "kode_peran_tersangka" => $request->input('kode_peran_tersangka'),
+                        "created_by" => $request->session()->get('id'),
+                        "create_date" => date("Y-m-d H:i:s"),
                     ]
                 ]
             );
@@ -193,7 +195,9 @@ class caseController extends Controller
                         "kode_pekerjaan" => $request->input('kode_pekerjaan'),
                         "kode_warga_negara" => $request->input('kode_warga_negara'),
                         "kode_negara" => $request->input('kode_negara'),
-                        "kode_peran_tersangka" => $request->input('kode_peran_tersangka')
+                        "kode_peran_tersangka" => $request->input('kode_peran_tersangka'),
+                        "updated_by" => $request->session()->get('id'),
+                        "create_date" => date("Y-m-d H:i:s"),
                     ]
                 ]
             );
@@ -275,6 +279,8 @@ class caseController extends Controller
                       "id_brgbukti" => $request->input('jenisKasus'),
                       "jumlah_barang_bukti" => $request->input('jumlah_barang_bukti'),
                       "kode_satuan_barang_bukti" => $request->input('kode_satuan_barang_bukti'),
+                      "created_by" => $request->session()->get('id'),
+                      "create_date" => date("Y-m-d H:i:s"),
                     ]
                 ]
             );
@@ -293,7 +299,7 @@ class caseController extends Controller
             $trail['audit_ip_address'] = $request->ip();
             $trail['audit_user_agent'] = $request->userAgent();
             $trail['audit_message'] = $return->comment;
-            $trail['created_at'] = date("Y-m-d H:i:s");
+            $trail['create_date'] = date("Y-m-d H:i:s");
             $trail['created_by'] = $request->session()->get('id');
 
             $qtrail = $this->inputtrail($token,$trail);
@@ -340,6 +346,8 @@ class caseController extends Controller
                       "id_brgbukti" => $request->input('jenisKasus'),
                       "jumlah_barang_bukti" => $request->input('jumlah_barang_bukti'),
                       "kode_satuan_barang_bukti" => $request->input('kode_satuan_barang_bukti'),
+                      "updated_by" => $request->session()->get('id'),
+                      "update_date" => date("Y-m-d H:i:s"),
                     ]
                 ]
             );
@@ -358,8 +366,8 @@ class caseController extends Controller
             $trail['audit_ip_address'] = $request->ip();
             $trail['audit_user_agent'] = $request->userAgent();
             $trail['audit_message'] = $return->comment;
-            $trail['created_at'] = date("Y-m-d H:i:s");
-            $trail['created_by'] = $request->session()->get('id');
+            $trail['update_date'] = date("Y-m-d H:i:s");
+            $trail['updated_by'] = $request->session()->get('id');
 
             $qtrail = $this->inputtrail($token,$trail);
 
@@ -2252,7 +2260,7 @@ class caseController extends Controller
         $this->form_params['meta_lokasi_lahan'] =  $json_lokasi_lahan;
         $this->form_params['lokasi'] = $request->input('lokasi');
         $this->form_params['keterangan_lainnya'] = $request->input('keterangan_lainnya');
-        
+
         //generate image base64
         if($request->hasFile('foto1')){
             $filenameWithExt = $request->file('foto1')->getClientOriginalName();
@@ -2298,19 +2306,19 @@ class caseController extends Controller
           $image3 = null;
         }
         $this->form_params['foto3'] = $image3;
-        
+
         $data_request = execute_api_json('api/altdevlahan','POST',$this->form_params);
-        
+
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Fungsi Lahan Ganja';
         $trail['audit_event'] = 'post';
         $trail['audit_value'] = json_encode($this->form_params);
         $trail['audit_url'] = $request->url();
         $trail['audit_ip_address'] = $request->ip();
         $trail['audit_user_agent'] = $request->userAgent();
-        
-        $trail['audit_message'] = $data_request->comment;        
+
+        $trail['audit_message'] = $data_request->comment;
         $trail['created_at'] = date("Y-m-d H:i:s");
-        $trail['created_by'] = $request->session()->get('id');        
+        $trail['created_by'] = $request->session()->get('id');
         $qtrail = $this->inputtrail($request->session()->get('token'),$trail);
 
         if(($data_request->code == 200)&& ($data_request->status != "error") ){
@@ -2373,7 +2381,7 @@ class caseController extends Controller
         $this->form_params['meta_lokasi_lahan'] =  $json_lokasi_lahan;
         $this->form_params['lokasi'] = $request->input('lokasi');
         $this->form_params['keterangan_lainnya'] = $request->input('keterangan_lainnya');
-        
+
         //generate image base64
         if($request->hasFile('foto1')){
             $filenameWithExt = $request->file('foto1')->getClientOriginalName();
@@ -2419,7 +2427,7 @@ class caseController extends Controller
           $image3 = $request->input('foto3_old');
         }
         $this->form_params['foto3'] = $image3;
-                
+
         $data_request = execute_api_json('api/altdevlahan/'.$id,'PUT',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Fungsi Lahan Ganja';

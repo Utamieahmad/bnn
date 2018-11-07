@@ -187,7 +187,7 @@ class KasusAPIController extends Controller
     {
 
         try {
-            // $request['created_by'] = $request->user_id_token;
+            $request['created_by'] = $request->session()->get('id');
             $request['create_date'] = date("Y-m-d H:i:s");
             $data = Kasus::create($request->except('api_token'));
             $response['eventID'] = $data->kasus_id;
@@ -284,11 +284,11 @@ class KasusAPIController extends Controller
 
         }
     }
-    
+
     public function getListLKNMobile(Request $request, $id_kasus)
-    {        
+    {
         try {
-            $data = Pemusnahan::where('id_kasus', $id_kasus)->first();            
+            $data = Pemusnahan::where('id_kasus', $id_kasus)->first();
             if (!$data){
               return response()->json(Json::response(null, 'error', "data kosong", 404), 404);
             } else {
