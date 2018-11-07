@@ -250,6 +250,7 @@ class irtamaController extends Controller
 
     public function updateirtamaAudit(Request $request)
     {
+      $token = $request->session()->get('token');
       $id = $request->input('id');
       // $this->form_params = $request->except(['_token','id','satker_id','coll_anggota','meta_anggota','satker_pengendali_mutu','satker_pengendali_teknis','satker_ketua_tim']);
       $this->form_params = $request->except(['_token','id','satker_id','coll_anggota','meta_anggota','satker_pengendali_mutu','satker_pengendali_teknis','satker_ketua_tim','nama_satker','list_satker']);
