@@ -167,7 +167,7 @@
 	        <div class="form-group">
 	            <label for="jumlah_peserta" class="col-md-3 col-sm-3 col-xs-12 control-label">Total Peserta Kegiatan</label>
 	            <div class="col-md-6 col-sm-6 col-xs-12">
-	                <input value="{{$data_detail['data']['jumlah_peserta']}}" id="jumlah_peserta" name="jumlah_peserta" type="text" class="form-control">
+	                <input value="{{$data_detail['data']['jumlah_peserta']}}" id="jumlah_peserta" name="jumlah_peserta" type="text" class="form-control numeric" onKeydown="numeric(event)">
 	            </div>
 	        </div>
 
