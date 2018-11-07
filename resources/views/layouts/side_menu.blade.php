@@ -342,6 +342,13 @@
                                 </ul>
                             </li>
 
+                            <li @php if(!in_array(228, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Keuangan" href="#">
+                              <!-- <i class="fa fa-id-badge"></i> -->
+                              <div class="fa"><img style="margin-left: -3px; height: 24px; width: 18px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/arahan_kepala_bnn.png')}}" class="img-responsive"></div>
+                              <span class="sm-side" style="vertical-align: top;"> Keuangan </span><span class=""></span></a>
+                            <!--a style="vertical-align: top;"> Arahan Pimpinan </span><span class=""></span></a-->
+                            </li>
+
 
                         </ul>
                     </div>
