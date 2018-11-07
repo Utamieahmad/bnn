@@ -1080,7 +1080,7 @@ class RehabilitasiController extends Controller
             }
             $this->form_params['foto3'] = $image3;
             
-            $data_request = execute_api_json('api/pelatihan/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pelatihan','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRKM - Kegiatan';
 						$trail['audit_event'] = 'post';
@@ -2472,7 +2472,7 @@ class RehabilitasiController extends Controller
             }
             $this->form_params['foto3'] = $image3;
 
-            $data_request = execute_api_json('api/pelatihan/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pelatihan','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRIP - Kegiatan';
 						$trail['audit_event'] = 'post';
@@ -3980,7 +3980,7 @@ class RehabilitasiController extends Controller
             }
             $this->form_params['foto3'] = $image3;
 
-            $data_request = execute_api_json('api/pelatihan/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pelatihan','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat Pascarehabilitasi - Kegiatan';
 						$trail['audit_event'] = 'post';
