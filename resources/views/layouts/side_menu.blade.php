@@ -170,6 +170,11 @@
                                           <li @php if(!in_array(63, $menu))  echo 'style="display:none;"'; @endphp><a href="{{url('pencegahan/dir_diseminasi/pendataan_konvensional')}}">Media Konvensional</a></li>
                                       </ul>
                                   </li>
+                                  <li @php if(!in_array(226, $menu))  echo 'style="display:none;"'; @endphp><a href="javascript:;">Deputi Cegah<span class="fa fa-chevron-down"></span></a>
+                                      <ul class="nav child_menu">
+                                          <li @php if(!in_array(227, $menu))  echo 'style="display:none;"'; @endphp><a href="{{url('pencegahan/dep_cegah/data_aktivitas_sebaran')}}">Data Aktivitas Sebaran</a></li>
+                                      </ul>
+                                  </li>                                  
                                 </ul>
                             </li>
                             <li @php if(!in_array(5, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Pemberdayaan Masyarakat" href="javascript:;">

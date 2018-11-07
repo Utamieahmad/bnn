@@ -431,6 +431,10 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/printvideotron', 'diseminasiController@printVideotron');
 
 		});
+                
+                Route::group(['prefix'=>'dep_cegah'],function(){
+                    Route::match(['get', 'post'],'/data_aktivitas_sebaran/{page?}','deputiCegahController@pendataanAktivitasSebaran')->name('pendataan_aktivitasSebaran');
+                });
 	});
 
 	Route::group(['prefix'=>'pemberdayaan'],function(){

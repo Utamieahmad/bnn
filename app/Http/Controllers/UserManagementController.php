@@ -801,7 +801,7 @@ class UserManagementController extends Controller {
         $this->datamenu = [];
         $this->data['datamobile'] = $this->menu_by_parent(0, '', 2);
 
-        $this->data['breadcrumps'] = breadcrumps_master($request->route()->getName());
+        $this->data['breadcrumps'] = breadcrumps_master($request->route()->getName());        
         return view('user_management.group.edit_dataGroup', $this->data);
     }
 
