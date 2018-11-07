@@ -1226,6 +1226,10 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::match(['get','post'],'/loginlog/{page?}','UserManagementController@loginLog')->name('loginLog');
 		Route::match(['get','post'],'/userlog/{page?}','UserManagementController@userLog')->name('userLog');
 	});
+	
+	Route::group(['prefix'=>'omspan'],function(){
+		Route::match(['get','post'],'/omspan','omspanController@omspan')->name('omspan');
+	});
 
 });
 // // homecontroller
