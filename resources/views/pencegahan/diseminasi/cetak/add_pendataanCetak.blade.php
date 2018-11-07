@@ -168,7 +168,8 @@
                 </div>
               </div>
 
-              <div class="form-group">Lokasi</label>
+              <div class="form-group">
+                <label for="narasumber" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi</label>                  
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input value="" id="lokasi_kegiatan" name="lokasi_kegiatan" type="text" class="form-control">
                 </div>

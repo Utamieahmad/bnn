@@ -2307,10 +2307,10 @@ class caseController extends Controller
         $trail['audit_url'] = $request->url();
         $trail['audit_ip_address'] = $request->ip();
         $trail['audit_user_agent'] = $request->userAgent();
-        $trail['audit_message'] = $data_request->comment;
+        dd($data_request->comment);
+        $trail['audit_message'] = $data_request->comment;        
         $trail['created_at'] = date("Y-m-d H:i:s");
-        $trail['created_by'] = $request->session()->get('id');
-
+        $trail['created_by'] = $request->session()->get('id');        
         $qtrail = $this->inputtrail($request->session()->get('token'),$trail);
 
         if(($data_request->code == 200)&& ($data_request->status != "error") ){
