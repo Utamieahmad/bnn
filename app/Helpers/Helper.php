@@ -1952,7 +1952,7 @@ function execute_api_json($url,$method,$params=array()){
 	}else{
 		$baseUrl = config('app.url_api_local');
 		$url = $baseUrl.'/'.$url;
-	}
+	}        
 
 	$token = session()->get('token');
 	$headers = ['headers'=>[ 'Accept' => 'application/json' ,'Authorization'=>'Bearer '.$token]];

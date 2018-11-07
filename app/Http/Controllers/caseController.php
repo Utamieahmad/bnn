@@ -2299,15 +2299,15 @@ class caseController extends Controller
         }
         $this->form_params['foto3'] = $image3;
         
-        $data_request = execute_api_json('api/altdevlahan/','POST',$this->form_params);
-
+        $data_request = execute_api_json('api/altdevlahan','POST',$this->form_params);
+        
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Fungsi Lahan Ganja';
         $trail['audit_event'] = 'post';
         $trail['audit_value'] = json_encode($this->form_params);
         $trail['audit_url'] = $request->url();
         $trail['audit_ip_address'] = $request->ip();
         $trail['audit_user_agent'] = $request->userAgent();
-        dd($data_request->comment);
+        
         $trail['audit_message'] = $data_request->comment;        
         $trail['created_at'] = date("Y-m-d H:i:s");
         $trail['created_by'] = $request->session()->get('id');        
