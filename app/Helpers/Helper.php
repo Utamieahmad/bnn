@@ -214,7 +214,8 @@ function web_token(){
 
 function execute_api($url,$method,$params=array()){
 
-	if($url == "http://integrasi.bnn.go.id:7001/simpeg/listSatker" || $url == "http://integrasi.bnn.go.id:7001/simpeg/staffBySatker" || $url == "http://integrasi.bnn.go.id:7001/"){
+//	if($url == "http://integrasi.bnn.go.id:7001/simpeg/listSatker" || $url == "http://integrasi.bnn.go.id:7001/simpeg/staffBySatker" || $url == "http://integrasi.bnn.go.id:7001/"){
+	if(strpos($url, 'http://integrasi.bnn.go.id:7001/simpeg/listSatker') !== false || strpos($url, 'http://integrasi.bnn.go.id:7001/simpeg/staffBySatker') !== false || strpos($url, 'http://integrasi.bnn.go.id:7001/') !== false){
 			$url=$url;
 	}else{
 		$baseUrl = config('app.url_api_local');
@@ -1946,13 +1947,13 @@ function labelPenyelenggara($type,$code){
 }
 
 function execute_api_json($url,$method,$params=array()){
-	// $jsonconvert = json_encode($params);
-	if($url == "http://integrasi.bnn.go.id:7001/simpeg/listSatker" || $url == "http://integrasi.bnn.go.id:7001/simpeg/staffBySatker" || $url == "http://integrasi.bnn.go.id:7001/"){
+	// $jsonconvert = json_encode($params);    
+	if(strpos($url, 'http://integrasi.bnn.go.id:7001/simpeg/listSatker') !== false || strpos($url, 'http://integrasi.bnn.go.id:7001/simpeg/staffBySatker') !== false || strpos($url, 'http://integrasi.bnn.go.id:7001/') !== false){
 			$url=$url;
 	}else{
 		$baseUrl = config('app.url_api_local');
 		$url = $baseUrl.'/'.$url;
-	}        
+	}                
 
 	$token = session()->get('token');
 	$headers = ['headers'=>[ 'Accept' => 'application/json' ,'Authorization'=>'Bearer '.$token]];
