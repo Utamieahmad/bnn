@@ -2156,7 +2156,7 @@ class AdvokasiController extends Controller
            }
 
           $jumlah_instansi = count($request->input('group-c'));
-          $peserta = 0;
+          // $peserta = 0;
           // if ($jumlah_instansi > 0) {
           //     foreach ($request->input('group-c') as $c1 => $r1) {
           //         $peserta = $peserta + $r1['list_jumlah_peserta'];
