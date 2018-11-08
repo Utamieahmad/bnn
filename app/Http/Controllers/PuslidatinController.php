@@ -2206,7 +2206,7 @@ class PuslidatinController extends Controller
         $this->data['route'] = $request->route()->getName();
 
         $datas = execute_api_json('api/pekerjaanjaringan?'.$limit.'&'.$offset.$kondisi,'get');
-        dd($datas);
+        // dd($datas);
         if($datas->code == 200 && $datas->status != 'error'){
             $this->data['data'] = $datas->data;
             $total_item = $datas->paginate->totalpage * $this->limit;
