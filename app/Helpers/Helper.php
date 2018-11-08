@@ -668,6 +668,28 @@ function breadcrumps_narkotika($route){
 	return $ul;
 }
 
+function breadcrumps_razia($route){
+	$ul = "";
+	if(isset($route)){
+		$dashboard = route('dashboard');
+		$index_razia = 'Pendataan Razia ';
+		$ul = '<ul class="page-breadcrumb breadcrumb">';
+		$ul .= '<li><a href="'.$dashboard.'">Beranda</a></li>';
+		if($route == "razia"){
+			$ul .= '<li class="active">'.$index_razia.'</li>';
+		}else if($route == "edit_razia"){
+			$ul .= '<li><a href="'.route('razia').'"> '.$index_razia.'</a></li>';
+			$ul .= '<li class="active">Ubah</li>';
+		}else if($route == "add_razia"){
+			$ul .= '<li><a href="'.route('razia').'">'.$index_razia.'</a></li>';
+			$ul .= '<li class="active">Tambah</li>';
+		}
+	}else{
+		$ul = "";
+	}
+	return $ul;
+}
+
 function breadcrumps_master($route){
 	$ul = "";
 	if(isset($route)){

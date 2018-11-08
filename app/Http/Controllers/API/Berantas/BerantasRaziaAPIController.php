@@ -93,7 +93,7 @@ class BerantasRaziaAPIController extends Controller
     {
 
         try {
-            $data = BerantasRazia::create($request->except('api_token'));
+            $data = BerantasRazia::create($request->except('api_token', 'created_by'));
             $response['eventID'] = $data->id;
 
             if (!$data){

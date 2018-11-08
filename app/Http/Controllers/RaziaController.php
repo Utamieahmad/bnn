@@ -139,8 +139,8 @@ class RaziaController extends Controller
         $filter = '/';
         $filtering = false;
       }
-      $this->data['pagination'] = paginations($current_page,$total_item, $this->limit, config('app.page_ellipsis'),config('app.url')."/".$request->route()->getPrefix()."/".$request->route()->getName(),$filtering,$filter );
-      $this->data['breadcrumps'] = breadcrumps_narkotika($request->route()->getName());
+      $this->data['pagination'] = paginations($current_page,$total_item, $this->limit, config('app.page_ellipsis'),config('app.url').$request->route()->getPrefix()."/".$request->route()->getName(),$filtering,$filter );
+      $this->data['breadcrumps'] = breadcrumps_razia($request->route()->getName());
 
       return view('pemberantasan.razia.index',$this->data);
     }
@@ -257,44 +257,14 @@ class RaziaController extends Controller
     }
 
     public function addPendataanRazia(Request $request){
-      $this->data['title']="Pemberantasan";
+      $this->data['title']="pemberantasan";
       $client = new Client();
       $baseUrl = URL::to($this->urlapi());
 
       $token = $request->session()->get('token');
 
-      $instansi = $this->globalinstansi($request->session()->get('wilayah'), $token);
-
-      $jenisKasus = $this->globalJnsKasus($token);
-
-      $requestJalur = $client->request('GET', $baseUrl.'/api/lookup/jalur_masuk_narkotika',
-        [
-          'headers' =>
-          [
-            'Authorization' => 'Bearer '.$token
-          ]
-        ]
-      );
-
-      $jalur_masuk = json_decode($requestJalur->getBody()->getContents(), true);
-
-      $requestpenyidik = $client->request('GET', config('app.url_soa').'simpeg/penyidikbysatker?unit_id='.$request->session()->get('satker_simpeg'));
-      $penyidik = json_decode($requestpenyidik->getBody()->getContents(), true);
-      $this->data['penyidik'] = $penyidik;
-
-      $requestsatker = $client->request('GET', config('app.url_soa').'simpeg/listSatker');
-      $satker = json_decode($requestsatker->getBody()->getContents(), true);
-      $this->data['satker'] = $satker['data'];
-
-      $this->data['jalur_masuk'] = $jalur_masuk;
-      $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
-      $this->data['jenisKasus'] = $jenisKasus;
-      $this->data['propinsi'] = MainModel::getPropinsi();
-      $this->data['negara'] = MainModel::getListNegara();
-
-      // dd($jenisKasus);
-      $this->data['breadcrumps'] = breadcrumps_narkotika($request->route()->getName());
-      return view('pemberantasan.narkotika.add_pendataanLKN', $this->data);
+      $this->data['breadcrumps'] = breadcrumps_razia($request->route()->getName());
+      return view('pemberantasan.razia.add_pendataanRazia', $this->data);
     }
 
     public function inputPendataanRazia(Request $request){
@@ -302,8 +272,6 @@ class RaziaController extends Controller
         $baseUrl = URL::to($this->urlapi());
 
         $token = $request->session()->get('token');
-
-        // dd($request->all());
 
         $client = new Client();
 
@@ -350,98 +318,41 @@ class RaziaController extends Controller
           $image3 = null;
         }
 
-        $requestkasus = $client->request('POST', $baseUrl.'/api/kasus',
+        $requestrazia = $client->request('POST', $baseUrl.'/api/berantasrazia',
                 [
                     'headers' =>
                     [
                         'Authorization' => 'Bearer '.$token
                     ],
                     'form_params' => [
-                        // 'kasus_tanggal' => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('kasus_tanggal')))),
-                        'kasus_tanggal' => ( $request->input('kasus_tanggal') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('kasus_tanggal')))) : ''),
-                        'id_instansi' => $request->input('pelaksana'),
-                        'kasus_no' => $request->input('kasus_no'),
-                        //'nama_penyidik' => $request->input('penyidik'),
-                        // 'tgl_kejadian' => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tanggalKejadian')))),
-                        'tgl_kejadian' => ( $request->input('tanggalKejadian') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tanggalKejadian')))) : ''),
-                        'kasus_tkp' => $request->input('tkp'),
-                        'kasus_tkp_idprovinsi' => $request->input('propinsi'),
-                        'kasus_tkp_idkabkota' => $request->input('kabupaten'),
-                        'modus_operandi' => $request->input('modus'),
-                        'kode_negarasumbernarkotika' => $request->input('negaraSumber'),
-                        'jalur_masuk' => $request->input('jalurMasuk'),
-                        'rute_asal' => $request->input('ruteAsal'),
-                        'rute_transit' => $request->input('ruteTransit'),
-                        'rute_tujuan' => $request->input('ruteTujuan'),
-                        'kasus_jenis' => $request->input('jenisKasus'),
-                        //'kasus_kelompok' => $request->input('kelompokKasus'),
+                        'tgl_razia' => ( $request->input('tgl_razia') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_razia')))) : ''),
+                        'lokasi' => $request->input('lokasi'),
+                        'jumlah_dirazia' => $request->input('jumlah_dirazia'),
+                        'jumlah_terindikasi' => $request->input('jumlah_terindikasi'),
+                        'jumlah_ditemukan' => $request->input('jumlah_ditemukan'),
                         'foto1' => $image1,
                         'foto2' => $image2,
                         'foto3' => $image3,
                         'uraian_singkat' => $request->input('uraian_singkat'),
                         'keterangan_lainnya' => $request->input('keterangan_lainnya'),
-                        'meta_penyidik' => json_encode($request->input('penyidik')),
-                        'satker_penyidik' => $request->input('satker'),
-                        'kategori' => 'narkotika',
-                        'created_by' => $request->session()->get('id'),
-                        'create_date' => date("Y-m-d H:i:s"),
                     ]
                 ]
             );
 
-        $result = json_decode($requestkasus->getBody()->getContents(), true);
+        $result = json_decode($requestrazia->getBody()->getContents(), true);
         $id = $result['data']['eventID'];
 
-        if ($request->file('file_upload')){
-            $fileName = date('Y-m-d').'_'.$id.'-'.$request->file('file_upload')->getClientOriginalName();
-            try {
-              $request->file('file_upload')->storeAs('NarkotikaKasus', $fileName);
+        $this->form_params = array('tgl_razia' => ( $request->input('tgl_razia') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_razia')))) : ''),
+                        'jumlah_dirazia' => $request->input('jumlah_dirazia'),
+                        'jumlah_terindikasi' => $request->input('jumlah_terindikasi'),
+                        'jumlah_ditemukan' => $request->input('jumlah_ditemukan'),
+                        'foto1' => $image1,
+                        'foto2' => $image2,
+                        'foto3' => $image3,
+                        'uraian_singkat' => $request->input('uraian_singkat'),
+                        'keterangan_lainnya' => $request->input('keterangan_lainnya'),);
 
-              $requestfile = $client->request('PUT', $baseUrl.'/api/kasus/'.$id,
-                     [
-                         'headers' =>
-                         [
-                             'Authorization' => 'Bearer '.$token
-                         ],
-                         'form_params' => [
-                             'file_upload' => $fileName,
-                         ]
-                     ]
-                 );
-            }catch(\Exception $e){
-              $e->getMessage();
-            }
-        }
-
-        $this->form_params = array('kasus_tanggal' => ( $request->input('kasus_tanggal') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('kasus_tanggal')))) : ''),
-                                  'id_instansi' => $request->input('pelaksana'),
-                                  'kasus_no' => $request->input('kasus_no'),
-                                  //'nama_penyidik' => $request->input('penyidik'),
-                                  // 'tgl_kejadian' => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tanggalKejadian')))),
-                                  'tgl_kejadian' => ( $request->input('tanggalKejadian') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tanggalKejadian')))) : ''),
-                                  'kasus_tkp' => $request->input('tkp'),
-                                  'kasus_tkp_idprovinsi' => $request->input('propinsi'),
-                                  'kasus_tkp_idkabkota' => $request->input('kabupaten'),
-                                  'modus_operandi' => $request->input('modus'),
-                                  'kode_negarasumbernarkotika' => $request->input('negaraSumber'),
-                                  'jalur_masuk' => $request->input('jalurMasuk'),
-                                  'rute_asal' => $request->input('ruteAsal'),
-                                  'rute_transit' => $request->input('ruteTransit'),
-                                  'rute_tujuan' => $request->input('ruteTujuan'),
-                                  'kasus_jenis' => $request->input('jenisKasus'),
-                                  'foto1' => $image1,
-                                  'foto2' => $image2,
-                                  'foto3' => $image3,
-                                  'uraian_singkat' => $request->input('uraian_singkat'),
-                                  'keterangan_lainnya' => $request->input('keterangan_lainnya'),
-                                  //'kasus_kelompok' => $request->input('kelompokKasus'),
-                                  'meta_penyidik' => json_encode($request->input('penyidik')),
-                                  'satker_penyidik' => $request->input('satker'),
-                                  'kategori' => 'narkotika',
-                                  'created_by' => $request->session()->get('id'),
-                                  'create_date' => date("Y-m-d H:i:s"));
-
-        $trail['audit_menu'] = 'Pemberantasan - Direktorat Narkotika - Pendataan LKN';
+        $trail['audit_menu'] = 'Pemberantasan - Pendataan Razia';
         $trail['audit_event'] = 'post';
         $trail['audit_value'] = json_encode($this->form_params);
         $trail['audit_url'] = $request->url();
@@ -453,10 +364,15 @@ class RaziaController extends Controller
 
         $qtrail = $this->inputtrail($token,$trail);
 
-        $this->kelengkapan_PendataanLKN($id);
-
-        $this->data['breadcrumps'] = breadcrumps_narkotika($request->route()->getName());
-        return redirect('pemberantasan/dir_narkotika/edit_pendataan_lkn/'.$id);
+        if($result['code'] == 200 && $result['status'] != 'error'){
+            $this->data['status'] = 'success';
+            $this->data['message'] = 'Data Razia Berhasil Disimpan';
+        }else{
+            $this->data['status'] = 'error';
+            $this->data['message'] = 'Data Razia Gagal Disimpan';
+        }
+        $this->data['breadcrumps'] = breadcrumps_razia($request->route()->getName());
+        return redirect('pemberantasan/razia')->with('status',$this->data);
     }
 
     public function updatePendataanRazia(Request $request){
