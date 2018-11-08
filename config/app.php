@@ -272,7 +272,7 @@ return [
     'url_soa' => 'http://integrasi.bnn.go.id:7001/',
     'url_soadev' => 'http://103.3.70.160:7004/sinapp/',
     'url_soadev2' => 'http://103.3.70.160:7004/',
-    'url_api_local' => 'http://localhost/bnn_api/public',
+    'url_api_local' => env('URL_API_LOCAL', 'http://localhost/bnn_api/public'),
     'email_bnn' => '@bnn.go.id',
     /*api balai lab*/
 ];

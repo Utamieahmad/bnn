@@ -115,6 +115,8 @@
                                             <li @php if(!in_array(27, $menu))  echo 'style="display:none;"'; @endphp><a href="{{url('pemberantasan/dir_interdiksi/pendataan_intdpo')}}">Pendataan LKN (Kasus, tersangka, penerapan pasal, dan barang bukti)</a></li>
                                         </ul>
                                     </li>
+                                    <li @php if(!in_array(153, $menu))  echo 'style="display:none;"'; @endphp><a href="{{url('pemberantasan/razia')}}">Razia</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li @php if(!in_array(3, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Rehabilitasi" href="javascript:;">

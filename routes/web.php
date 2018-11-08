@@ -58,6 +58,13 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('/update_brgbukti_adiktif', 'caseController@updateBrgBuktiAdiktif');
 		Route::post('/input_brgbukti_aset', 'caseController@inputBrgBuktiAset');
 		Route::post('/update_brgbukti_aset', 'caseController@updateBrgBuktiAset');
+		Route::match(['get','post'],'/razia/{page?}', 'RaziaController@pendataanRazia');
+		Route::get('/add_razia', 'RaziaController@addPendataanRazia');
+		Route::get('/edit_razia', 'RaziaController@editPendataanRazia');
+		Route::post('/input_razia', 'RaziaController@inputPendataanRazia');
+		Route::post('/update_razia', 'RaziaController@updatePendataanRazia');
+		Route::post('/delete_razia', 'RaziaController@deletePendataanRazia')->name('delete_razia');
+		Route::get('/print_razia', 'RaziaController@printPendataanRazia');
 
 		Route::group(['prefix'=>'dir_narkotika'],function(){
 
