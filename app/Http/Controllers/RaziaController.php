@@ -150,110 +150,28 @@ class RaziaController extends Controller
 
         $client = new Client();
 
-            $baseUrl = URL::to($this->urlapi());
+        $baseUrl = URL::to($this->urlapi());
 
-            $token = $request->session()->get('token');
+        $token = $request->session()->get('token');
 
-            $LKN = $this->globalLkn($token, $id);
-
-            $wilayah = $this->globalWilayah($token);
-
-            if($LKN['data']['kasus_tkp_idprovinsi'] == "kosong" || $LKN['data']['kasus_tkp_idprovinsi'] == ""){
-                $kotaKab = "kosong";
-            } else {
-                $requestFilterWilayah = $client->request('GET', $baseUrl.'/api/filterwilayah/'.$LKN['data']['kasus_tkp_idprovinsi'],
+        $requestrazia = $client->request('GET', $baseUrl.'/api/berantasrazia/'.$id,
+                [
+                    'headers' =>
                     [
-                        'headers' =>
-                        [
-                            'Authorization' => 'Bearer '.$token
-                        ]
+                        'Authorization' => 'Bearer '.$token
                     ]
-                );
-                $kotaKab = json_decode($requestFilterWilayah->getBody()->getContents(), true);
-            }
+                ]
+            );
 
-            $jalur_masuk = $this->globalJalurMasuk($token);
+        $result = json_decode($requestrazia->getBody()->getContents(), true);
 
-            $instansi = $this->globalinstansi($request->session()->get('wilayah'), $token);
-
-            $jenisKasus = $this->globalJnsKasus($token);
-
-            $tersangka = $this->globalGetTersangka($token, $id);
-
-            $brgBuktiNarkotika = $this->globalBuktiNarkotika($token, $id);
-
-            $brgBuktiPrekursor = $this->globalBuktiPrekursor($token, $id);
-
-            $brgBuktiAsetBarang = $this->globalBuktiAsetBarang($token, $id);
-
-            $brgBuktiAsetTanah = $this->globalBuktiAsetTanah($token, $id);
-
-            $brgBuktiAsetBangunan = $this->globalBuktiAsetBangunan($token, $id);
-
-            $brgBuktiAsetLogam = $this->globalBuktiAsetLogam($token, $id);
-
-            $brgBuktiAsetUang = $this->globalBuktiAsetUang($token, $id);
-
-            $brgBuktiAsetRekening = $this->globalBuktiAsetRekening($token, $id);
-
-            $brgBuktiAsetSurat = $this->globalBuktiAsetSurat($token, $id);
-
-            $brgBuktiNonNarkotika = $this->globalBuktiNonNarkotika($token, $id);
-
-            $jenisBrgBuktiNarkotika = $this->globalJenisBrgBuktiNarkotika($token);
-
-            $jenisBrgBuktiPrekursor = $this->globalJenisBrgBuktiPrekursor($token);
-
-            $brgBuktiAdiktif = $this->globalBuktiAdiktif($token, $id);
-
-            $jenisBrgBuktiAdiktif = $this->globalJenisBrgBuktiAdiktif($token);
-
-            $satuan = $this->globalSatuan($token);
-
-            $propkab = $this->globalPropkab($token);
-            try{
-                $requestpenyidik = $client->request('GET', config('app.url_soa').'simpeg/penyidikbysatker?unit_id='.$LKN['data']['satker_penyidik']);
-                $penyidik = json_decode($requestpenyidik->getBody()->getContents(), true);
-                $this->data['penyidik'] = $penyidik;
-            }catch(\Exception $e){
-                $this->data['penyidik'] = [];
-            }
-
-
-
-        $this->data['jalur_masuk'] = $jalur_masuk;
-        $this->data['wilayah'] = $wilayah;
-        $this->data['instansi'] = $instansi;
-        $this->data['jenisKasus'] = $jenisKasus;
-        $this->data['data_razia'] = $LKN;
-        $this->data['propinsi'] = $wilayah;
-        $this->data['kabupaten'] = $kotaKab;
-        $this->data['negara'] = MainModel::getListNegara();
-        $this->data['jenisKasus'] = $jenisKasus;
-        $this->data['tersangka'] = $tersangka;
-        $this->data['brgBuktiNonNarkotika'] = $brgBuktiNonNarkotika;
-        $this->data['brgBuktiNarkotika'] = $brgBuktiNarkotika;
-        $this->data['brgBuktiAsetBarang'] = $brgBuktiAsetBarang;
-        $this->data['brgBuktiAsetTanah'] = $brgBuktiAsetTanah;
-        $this->data['brgBuktiAsetBangunan'] = $brgBuktiAsetBangunan;
-        $this->data['brgBuktiAsetUang'] = $brgBuktiAsetUang;
-        $this->data['brgBuktiAsetLogam'] = $brgBuktiAsetLogam;
-        $this->data['brgBuktiAsetRekening'] = $brgBuktiAsetRekening;
-        $this->data['brgBuktiAsetSurat'] = $brgBuktiAsetSurat;
-        $this->data['brgBuktiPrekursor'] = $brgBuktiPrekursor;
-        $this->data['brgBuktiAdiktif'] = $brgBuktiAdiktif;
-        $this->data['jenisBrgBuktiAdiktif'] = $jenisBrgBuktiAdiktif;
-        $this->data['jenisBrgBuktiNarkotika'] = $jenisBrgBuktiNarkotika;
-        $this->data['jenisBrgBuktiPrekursor'] = $jenisBrgBuktiPrekursor;
-        $this->data['satuan'] = $satuan;
-        $this->data['propkab'] = $propkab;
+        $this->data['data_razia'] = $result;
 
         $this->data['id'] = $id;
         $this->data['title'] = 'tersangka';
-        // $this->kelengkapan_PendataanLKN($id);
-        // dd($this->data);
-        $this->data['breadcrumps'] = breadcrumps_narkotika($request->route()->getName());
-        return view('pemberantasan.narkotika.edit_pendataanLKN',$this->data);
+
+        $this->data['breadcrumps'] = breadcrumps_razia($request->route()->getName());
+        return view('pemberantasan.razia.edit_pendataanRazia',$this->data);
     }
 
     public function addPendataanRazia(Request $request){
@@ -281,11 +199,11 @@ class RaziaController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('foto1')->getClientOriginalExtension();
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $path = $request->file('foto1')->storeAs('Berantas/Razia', $fileNameToStore);
+            $image = public_path('upload/Berantas/Razia/'.$fileNameToStore);
             $data = file_get_contents($image);
             $image1 = base64_encode($data);
-            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+            Storage::delete('Berantas/Razia/'.$fileNameToStore);
         }else{
           $image1 = null;
         }
@@ -295,11 +213,11 @@ class RaziaController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('foto2')->getClientOriginalExtension();
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $path = $request->file('foto2')->storeAs('Berantas/Razia', $fileNameToStore);
+            $image = public_path('upload/Berantas/Razia/'.$fileNameToStore);
             $data = file_get_contents($image);
             $image2 = base64_encode($data);
-            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+            Storage::delete('Berantas/Razia/'.$fileNameToStore);
         }else{
           $image2 = null;
         }
@@ -309,11 +227,11 @@ class RaziaController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('foto3')->getClientOriginalExtension();
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $path = $request->file('foto3')->storeAs('Berantas/Razia', $fileNameToStore);
+            $image = public_path('upload/Berantas/Razia/'.$fileNameToStore);
             $data = file_get_contents($image);
             $image3 = base64_encode($data);
-            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+            Storage::delete('Berantas/Razia/'.$fileNameToStore);
         }else{
           $image3 = null;
         }
@@ -382,8 +300,6 @@ class RaziaController extends Controller
 
         $token = $request->session()->get('token');
 
-        // dd($request->all());
-
         $client = new Client();
         
         //generate image base64
@@ -392,11 +308,11 @@ class RaziaController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('foto1')->getClientOriginalExtension();
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            $path = $request->file('foto1')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $path = $request->file('foto1')->storeAs('Berantas/Razia', $fileNameToStore);
+            $image = public_path('upload/Berantas/Razia/'.$fileNameToStore);
             $data = file_get_contents($image);
             $image1 = base64_encode($data);
-            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+            Storage::delete('Berantas/Razia/'.$fileNameToStore);
 
         }else{
             $image1 = $request->input('foto1_old');
@@ -408,11 +324,11 @@ class RaziaController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('foto2')->getClientOriginalExtension();
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            $path = $request->file('foto2')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $path = $request->file('foto2')->storeAs('Berantas/Razia', $fileNameToStore);
+            $image = public_path('upload/Berantas/Razia/'.$fileNameToStore);
             $data = file_get_contents($image);
             $image2 = base64_encode($data);
-            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+            Storage::delete('Berantas/Razia/'.$fileNameToStore);
 
         }else{
             $image2 = $request->input('foto2_old');
@@ -424,103 +340,52 @@ class RaziaController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('foto3')->getClientOriginalExtension();
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            $path = $request->file('foto3')->storeAs('Berantas/Narkotika', $fileNameToStore);
-            $image = public_path('upload/Berantas/Narkotika/'.$fileNameToStore);
+            $path = $request->file('foto3')->storeAs('Berantas/Razia', $fileNameToStore);
+            $image = public_path('upload/Berantas/Razia/'.$fileNameToStore);
             $data = file_get_contents($image);
             $image3 = base64_encode($data);
-            Storage::delete('Berantas/Narkotika/'.$fileNameToStore);
+            Storage::delete('Berantas/Razia/'.$fileNameToStore);
 
         }else{
             $image3 = $request->input('foto3_old');
 
         }
         
-        $query = $client->request('PUT', $baseUrl.'/api/kasus/'.$id,
+        $query = $client->request('PUT', $baseUrl.'/api/berantasrazia/'.$id,
             [
                 'headers' =>
                 [
                     'Authorization' => 'Bearer '.$token
                 ],
                 'form_params' => [
-                    // 'kasus_tanggal' => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('kasus_tanggal')))),
-                    'kasus_tanggal' => ( $request->input('kasus_tanggal') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('kasus_tanggal')))) : ''),
-                    'id_instansi' => $request->input('pelaksana'),
-                    'kasus_no' => $request->input('kasus_no'),
-                    //'nama_penyidik' => $request->input('penyidik'),
-                    // 'tgl_kejadian' => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tanggalKejadian')))),
-                    'tgl_kejadian' => ( $request->input('tanggalKejadian') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tanggalKejadian')))) : ''),
-                    'kasus_tkp' => $request->input('tkp'),
-                    'kasus_tkp_idprovinsi' => $request->input('propinsi'),
-                    'kasus_tkp_idkabkota' => $request->input('kabupaten'),
-                    'modus_operandi' => $request->input('modus'),
-                    'kode_negarasumbernarkotika' => $request->input('negaraSumber'),
-                    'jalur_masuk' => $request->input('jalurMasuk'),
-                    'rute_asal' => $request->input('ruteAsal'),
-                    'rute_transit' => $request->input('ruteTransit'),
-                    'rute_tujuan' => $request->input('ruteTujuan'),
-                    'kasus_jenis' => $request->input('jenisKasus'),
-                    'foto1' => $image1,
-                    'foto2' => $image2,
-                    'foto3' => $image3,
-                    'uraian_singkat' => $request->input('uraian_singkat'),
-                    'keterangan_lainnya' => $request->input('keterangan_lainnya'),                    
-                    //'kasus_kelompok' => $request->input('kelompokKasus'),
-                    'meta_penyidik' => json_encode($request->input('penyidik')),
-                    'updated_by' => $request->session()->get('id'),
-                    'update_date' => date("Y-m-d H:i:s"),
+                        'tgl_razia' => ( $request->input('tgl_razia') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_razia')))) : ''),
+                        'lokasi' => $request->input('lokasi'),
+                        'jumlah_dirazia' => $request->input('jumlah_dirazia'),
+                        'jumlah_terindikasi' => $request->input('jumlah_terindikasi'),
+                        'jumlah_ditemukan' => $request->input('jumlah_ditemukan'),
+                        'foto1' => $image1,
+                        'foto2' => $image2,
+                        'foto3' => $image3,
+                        'uraian_singkat' => $request->input('uraian_singkat'),
+                        'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                 ]
             ]
         );
         $result = json_decode($query->getBody()->getContents(), true);
 
-        if ($request->file('file_upload')){
-            $fileName = date('Y-m-d').'_'.$id.'-'.$request->file('file_upload')->getClientOriginalName();
-            try {
-              $request->file('file_upload')->storeAs('NarkotikaKasus', $fileName);
+        $this->form_params = array(
+                        'tgl_razia' => ( $request->input('tgl_razia') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_razia')))) : ''),
+                        'lokasi' => $request->input('lokasi'),
+                        'jumlah_dirazia' => $request->input('jumlah_dirazia'),
+                        'jumlah_terindikasi' => $request->input('jumlah_terindikasi'),
+                        'jumlah_ditemukan' => $request->input('jumlah_ditemukan'),
+                        'foto1' => $image1,
+                        'foto2' => $image2,
+                        'foto3' => $image3,
+                        'uraian_singkat' => $request->input('uraian_singkat'),
+                        'keterangan_lainnya' => $request->input('keterangan_lainnya'),);
 
-              $requestfile = $client->request('PUT', $baseUrl.'/api/kasus/'.$id,
-                     [
-                         'headers' =>
-                         [
-                             'Authorization' => 'Bearer '.$token
-                         ],
-                         'form_params' => [
-                             'file_upload' => $fileName,
-                         ]
-                     ]
-                 );
-            }catch(\Exception $e){
-              $e->getMessage();
-            }
-        }
-
-        $this->form_params = array('kasus_tanggal' => ( $request->input('kasus_tanggal') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('kasus_tanggal')))) : ''),
-                                  'id_instansi' => $request->input('pelaksana'),
-                                  'kasus_no' => $request->input('kasus_no'),
-                                  //'nama_penyidik' => $request->input('penyidik'),
-                                  // 'tgl_kejadian' => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tanggalKejadian')))),
-                                  'tgl_kejadian' => ( $request->input('tanggalKejadian') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tanggalKejadian')))) : ''),
-                                  'kasus_tkp' => $request->input('tkp'),
-                                  'kasus_tkp_idprovinsi' => $request->input('propinsi'),
-                                  'kasus_tkp_idkabkota' => $request->input('kabupaten'),
-                                  'modus_operandi' => $request->input('modus'),
-                                  'kode_negarasumbernarkotika' => $request->input('negaraSumber'),
-                                  'jalur_masuk' => $request->input('jalurMasuk'),
-                                  'rute_asal' => $request->input('ruteAsal'),
-                                  'rute_transit' => $request->input('ruteTransit'),
-                                  'rute_tujuan' => $request->input('ruteTujuan'),
-                                  'kasus_jenis' => $request->input('jenisKasus'),
-                                  'foto1' => $image1,
-                                  'foto2' => $image2,
-                                  'foto3' => $image3,
-                                  'uraian_singkat' => $request->input('uraian_singkat'),
-                                  'keterangan_lainnya' => $request->input('keterangan_lainnya'),                                  
-                                  //'kasus_kelompok' => $request->input('kelompokKasus'),
-                                  'meta_penyidik' => json_encode($request->input('penyidik')),
-                                  'updated_by' => $request->session()->get('id'),
-                                  'update_date' => date("Y-m-d H:i:s"));
-
-        $trail['audit_menu'] = 'Pemberantasan - Direktorat Narkotika - Pendataan LKN';
+        $trail['audit_menu'] = 'Pemberantasan - Pendataan Razia';
         $trail['audit_event'] = 'put';
         $trail['audit_value'] = json_encode($this->form_params);
         $trail['audit_url'] = $request->url();
@@ -532,13 +397,12 @@ class RaziaController extends Controller
 
         $qtrail = $this->inputtrail($token,$trail);
 
-        $this->kelengkapan_PendataanLKN($id);
         if($result['code'] == 200 && $result['status'] != 'error'){
             $this->data['status'] = 'success';
-            $this->data['message'] = 'Data Pendataan LKN Berhasil Diperbarui';
+            $this->data['message'] = 'Data Razia Berhasil Diperbarui';
         }else{
             $this->data['status'] = 'error';
-            $this->data['message'] = 'Data Pendataan LKN Gagal Diperbarui';
+            $this->data['message'] = 'Data Razia Gagal Diperbarui';
         }
         return back()->with('status',$this->data);
     }
@@ -549,7 +413,7 @@ class RaziaController extends Controller
             if($id){
                 $data_request = execute_api('api/kasus/'.$id,'DELETE');
                 $this->form_params['delete_id'] = $id;
-                $trail['audit_menu'] = 'Pemberantasan - Direktorat Narkotika - Pendataan LKN';
+                $trail['audit_menu'] = 'Pemberantasan - Pendataan Razia';
                 $trail['audit_event'] = 'delete';
                 $trail['audit_value'] = json_encode($this->form_params);
                 $trail['audit_url'] = $request->url();

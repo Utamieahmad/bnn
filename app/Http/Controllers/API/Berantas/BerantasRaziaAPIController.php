@@ -112,7 +112,7 @@ class BerantasRaziaAPIController extends Controller
 
         try {
             $data = BerantasRazia::findOrFail($id);
-            $data->update($request->except(['api_token', 'id']));
+            $data->update($request->except(['api_token', 'id', 'created_by']));
 
             if (!$data){
               return response()->json(Json::response(null, 'error', "data kosong", 404), 404);
