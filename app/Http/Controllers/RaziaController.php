@@ -411,7 +411,7 @@ class RaziaController extends Controller
         if ($request->ajax()) {
             $id = $request->id;
             if($id){
-                $data_request = execute_api('api/kasus/'.$id,'DELETE');
+                $data_request = execute_api('api/berantasrazia/'.$id,'DELETE');
                 $this->form_params['delete_id'] = $id;
                 $trail['audit_menu'] = 'Pemberantasan - Pendataan Razia';
                 $trail['audit_event'] = 'delete';
@@ -461,7 +461,7 @@ class RaziaController extends Controller
 
       $i = $start_number;
 
-      $requestKasus = $client->request('GET', $baseUrl.'/api/kasus'.$kondisi,
+      $requestKasus = $client->request('GET', $baseUrl.'/api/berantasrazia'.$kondisi,
           [
               'headers' =>
               [
@@ -476,33 +476,18 @@ class RaziaController extends Controller
 
       foreach ($kasus['data'] as $key => $value) {
         $kasusArray[$key]['No'] = $i;
-        $kasusArray[$key]['Instansi'] = $value['instansi'];
-        $kasusArray[$key]['Tanggal LKN'] = ( $value['kasus_tanggal'] ? date('d/m/Y', strtotime($value['kasus_tanggal'])) : '');
-        $kasusArray[$key]['Nomor Kasus'] = $value['no_lap'];
-
-        if ($value['tersangka'] != ''){
-          $temp = [];
-          foreach($value['tersangka'] as $keyTersangka => $valueTersangka){
-            $temp[$keyTersangka] = $valueTersangka['tersangka_nama'].' ('.$valueTersangka['kode_jenis_kelamin'].')';
-          }
-          $kasusArray[$key]['Tersangka'] = implode("\n", $temp);
-        } else {
-          $kasusArray[$key]['Tersangka'] = '';
-        }
-        if ($value['tersangka'] != ''){
-          $temp = [];
-          foreach($value['BrgBukti'] as $keyBrgBukti => $valueBrgBukti){
-            $temp[$keyBrgBukti] = $valueBrgBukti['nm_brgbukti'].' ('.$valueBrgBukti['jumlah_barang_bukti'].' '.$valueBrgBukti['nm_satuan'].')';
-          }
-          $kasusArray[$key]['Barang Bukti'] = implode("\n", $temp);
-        } else {
-          $kasusArray[$key]['Barang Bukti'] = '';
-        }
+        $kasusArray[$key]['Tanggal Razia'] = ( $value['tgl_razia'] ? date('d/m/Y', strtotime($value['tgl_razia'])) : '');
+        $kasusArray[$key]['Lokasi'] = $value['lokasi'];
+        $kasusArray[$key]['Uraian Singkat'] = $value['uraian_singkat'];
+        $kasusArray[$key]['Jumlah Dirazia'] = $value['jumlah_dirazia'];
+        $kasusArray[$key]['Jumlah Terindikasi'] = $value['jumlah_terindikasi'];
+        $kasusArray[$key]['Jumlah Ditemukan'] = $value['jumlah_ditemukan'];
+        $kasusArray[$key]['Keterangan Lainnya'] = $value['keterangan_lainnya'];
         $i += 1;
       }
       // dd($kasusArray);
       $data = $kasusArray;
-      $name = 'Data LKN '.$request->kategori.' '.Carbon::now()->format('Y-m-d H:i:s');
+      $name = 'Data Razia '.$request->kategori.' '.Carbon::now()->format('Y-m-d H:i:s');
       $this->printData($data, $name);
     }
 
