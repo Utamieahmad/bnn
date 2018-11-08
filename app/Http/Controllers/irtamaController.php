@@ -385,11 +385,10 @@ class irtamaController extends Controller
     }
     public function addirtamaAudit(Request $request){
         $client = new Client();
-        $url_satker = config('app.url_satker');
-        $satker_irtama = config('app.satker_irtama');
+        $url_satker = config('app.url_satker');        
+        $satker_irtama = config('app.satker_irtama');                
         try {
-          $satker = execute_api_json($url_satker.'?unit_id='.$satker_irtama,'GET');
-
+          $satker = execute_api_json($url_satker.'?unit_id='.$satker_irtama,'GET');           
           if(($satker->code == 200) && ($satker->status != 'error')){
 
             $this->data['pegawai'] = $satker->data->pegawai;
