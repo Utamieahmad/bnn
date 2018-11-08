@@ -169,11 +169,11 @@
               <div class="form-group">
                 <label for="kodesasaran" class="col-md-3 control-label">Sasaran</label>
                 <div class="col-md-4">
-                  <label class="mt-radio col-md-12"> <input {{($pendataan['kodesasaran'] == "LINGKUNGAN_MASYARAKAT") ? "checked" : ""}} type="radio" value="INSTITUSI_MASYARAKAT" name="kodesasaran">
+                  <label class="mt-radio col-md-12"> <input {{($pendataan['kodesasaran'] == "LINGKUNGAN_MASYARAKAT") ? "checked" : ""}} type="radio" value="LINGKUNGAN_MASYARAKAT" name="kodesasaran">
                     <span>Masyarakat</span>
                   </label>
 
-                  <label class="mt-radio col-md-12"> <input {{($pendataan['kodesasaran'] == "LINGKUNGAN_KELUARGA") ? "checked" : ""}} type="radio" value="INSTITUSI_KELUARGA" name="kodesasaran">
+                  <label class="mt-radio col-md-12"> <input {{($pendataan['kodesasaran'] == "LINGKUNGAN_KELUARGA") ? "checked" : ""}} type="radio" value="LINGKUNGAN_KELUARGA" name="kodesasaran">
                     <span>Keluarga</span>
                   </label>
 
