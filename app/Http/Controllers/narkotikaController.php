@@ -11,6 +11,9 @@ use App\Models\BrgBukti;
 use URL;
 use DateTime;
 use Carbon\Carbon;
+use App\Models\Berantas\ViewKasus;
+use App\Models\Berantas\ViewKasusTersangka as VTersangka;
+use App\Models\Berantas\ViewKasusBrgBukti as VBrgBukti;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
@@ -1457,6 +1460,115 @@ class narkotikaController extends Controller
       // dd($ladangArray);
       $data = $ladangArray;
       $name = 'Data Pemusnahan Ladang '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($data, $name);
+    }
+
+
+    public function downloadLkn(Request $request){
+      // $client = new Client();
+      // // $page = $request->input('page');
+      // $token = $request->session()->get('token');
+      // $baseUrl = URL::to($this->urlapi());
+
+      // $get = $request->all();
+      // $kondisi = "";
+      // if(count($get)>0){
+      //   foreach($get as $key=>$val){
+      //     $kondisi .= $key.'='.$val.'&';
+      //   }
+      //   $kondisi = rtrim($kondisi,'&');
+      //   $kondisi = '?'.$kondisi;
+      // }else{
+      //   $kondisi = '?page='.$request->page;
+      // }
+
+      // $page = $request->page;
+      // if($page){
+      //   $start_number = ($request->limit * ($request->page -1 )) + 1;
+      // }else{
+      //   $start_number = 1;
+      // }
+      // $segment = $request->segment;
+
+      // $i = $start_number;
+
+      // $requestKasus = $client->request('GET', $baseUrl.'/api/kasus'.$kondisi,
+      //     [
+      //         'headers' =>
+      //         [
+      //             'Authorization' => 'Bearer '.$token
+      //         ]
+      //     ]
+      // );
+
+      // $kasus = json_decode($requestKasus->getBody()->getContents(), true);
+
+      $i = 1;
+      $response = array();
+      // dd($request->all());
+      $kasusqry = DB::table('v_berantas_kasus');
+      if ($request->date_from != '') {
+          $kasusqry->where('kasus_tanggal', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+          $kasusqry->where('kasus_tanggal', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $kasusqry  = $kasusqry->where(function ($query) {
+              $query->where('kategori', '=', 'narkotika')->orWhere('kategori', '=', null);
+          });
+
+      $kasus = $kasusqry->orderBy('kasus_tanggal', 'desc')->get();
+
+      foreach ($kasus as $row) {
+        $data['eventID']    = $row->kasus_id;
+        $data['no_lap']     = $row->kasus_no;
+        $data['instansi']   = $row->nm_instansi;
+        $data['kasus_tanggal']   = $row->kasus_tanggal;
+        // $data['periode']    = $row->periode_bulan.' '.$row->periode_tahun;
+        $data['kasus_jenis']   = $row->nm_jnskasus;
+        $data['kelompok']   = $row->nm_brgbukti;
+        $data['tgl']        = $row->kasus_tanggal;
+        $data['tkp']        = $row->kasus_tkp;
+        $data['status_kelengkapan']        = $row->status_kelengkapan;
+        $data['tersangka']  = VTersangka::select('tersangka_id', 'tersangka_nama', 'kode_jenis_kelamin', 'no_identitas', 'nama_negara', 'tersangka_tempat_lahir', 'tersangka_tanggal_lahir')->where('kasus_id', $row->kasus_id)->get();
+        $data['BrgBukti']   = VBrgBukti::select('kasus_barang_bukti_id', 'nm_brgbukti', 'jumlah_barang_bukti', 'nm_satuan', 'keterangan')->where('kasus_id', $row->kasus_id)->get();
+
+        array_push($response, $data);
+      }
+
+
+      $kasusArray = [];
+
+      foreach ($response as $key => $value) {
+        $kasusArray[$key]['No'] = $i;
+        $kasusArray[$key]['Instansi'] = $value['instansi'];
+        $kasusArray[$key]['Tanggal LKN'] = ( $value['kasus_tanggal'] ? date('d/m/Y', strtotime($value['kasus_tanggal'])) : '');
+        $kasusArray[$key]['Nomor Kasus'] = $value['no_lap'];
+
+        if ($value['tersangka'] != ''){
+          $temp = [];
+          foreach($value['tersangka'] as $keyTersangka => $valueTersangka){
+            $temp[$keyTersangka] = $valueTersangka['tersangka_nama'].' ('.$valueTersangka['kode_jenis_kelamin'].')';
+          }
+          $kasusArray[$key]['Tersangka'] = implode("\n", $temp);
+        } else {
+          $kasusArray[$key]['Tersangka'] = '';
+        }
+        if ($value['tersangka'] != ''){
+          $temp = [];
+          foreach($value['BrgBukti'] as $keyBrgBukti => $valueBrgBukti){
+            $temp[$keyBrgBukti] = $valueBrgBukti['nm_brgbukti'].' ('.$valueBrgBukti['jumlah_barang_bukti'].' '.$valueBrgBukti['nm_satuan'].')';
+          }
+          $kasusArray[$key]['Barang Bukti'] = implode("\n", $temp);
+        } else {
+          $kasusArray[$key]['Barang Bukti'] = '';
+        }
+        $i += 1;
+      }
+      // dd($kasusArray);
+      $data = $kasusArray;
+      $name = 'Export Data LKN Narkotika '.Carbon::now()->format('Y-m-d H:i:s');
       $this->printData($data, $name);
     }
 

@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_lkn','narkotikaController@updatePendataanLKN');
 			Route::post('/delete_pendataan_lkn','narkotikaController@deletePendataanLKN')->name('delete_pendataan_lkn');
 			Route::get('/print_pendataan_lkn','narkotikaController@printLkn');
+			Route::post('/download_pendataan_lkn','narkotikaController@downloadLkn');
 			Route::get('/view','narkotikaController@view');
 
 			Route::match(['get','post'],'/pendataan_pemusnahan_ladangganja/{page?}','narkotikaController@pendataanLadangGanja')->name('pendataan_pemusnahan_ladangganja');

@@ -3858,3 +3858,11 @@ function save_password2(ev,e){
     });
   }
 }
+
+function reportExcel(ev,e){
+  var url  = $(e).data('url');
+  console.log(url);
+
+  $('#form_report_excel').attr('action', url);
+  // $('#modal_report_excel').modal('show');
+}
