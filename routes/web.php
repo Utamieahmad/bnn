@@ -726,6 +726,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::group(['prefix'=>'irtama'],function(){
 			Route::get('print_page_irtama/{segment}/{page?}','irtamaController@printPage')->name('print_page_irtama');
+                        Route::post('/download_laporan/{segment}','irtamaController@downloadLaporan')->name('download_laporan');
 			Route::group(['prefix'=>'audit'],function(){
 
 				Route::match(['get', 'post'] ,'/irtama_audit/{page?}','irtamaController@irtamaAudit')->name('irtama_audit');
@@ -734,7 +735,7 @@ Route::group(['middleware' => ['auth']], function () {
 				Route::post('/update_irtama_audit','irtamaController@updateirtamaAudit')->name('update_irtama_audit');
 				Route::get('/add_irtama_audit','irtamaController@addirtamaAudit')->name('add_irtama_audit');
 				Route::post('/input_irtama_audit','irtamaController@inputirtamaAudit')->name('input_irtama_audit');
-				Route::post('/delete_irtama_audit','irtamaController@deleteIrtamaAudit')->name('delete_irtama_audit');
+				Route::post('/delete_irtama_audit','irtamaController@deleteIrtamaAudit')->name('delete_irtama_audit');				
 				// Route::get('/view','irtamaController@view');
 			});
 

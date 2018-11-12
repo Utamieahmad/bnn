@@ -2692,7 +2692,7 @@ class irtamaController extends Controller
 
     public function addirtamaSosialisasi(Request $request){
       $url_simpeg = config('app.url_simpeg');
-      $query  =  execute_api_json($url_simpeg,"GET");
+      $query  =  execute_api_json($url_simpeg,"GET");      
       if($query->code == 200 && ($query->status != 'error')){
         $this->data['satker'] = $query->data;
       }else{
@@ -5655,6 +5655,515 @@ class irtamaController extends Controller
             $this->printData($result, $name);
           }else{
             echo 'data tidak ada ';
+          }
+        }else{
+          echo 'tidak ada';
+        }
+    }
+    
+    public function downloadLaporan(Request $request){         
+        $array_segments = [
+            'irtama_audit'=>'auditlha',
+            'irtama_ptl'=>'irtamaptl',
+            'irtama_riktu'=>'rikturiksus',
+            'irtama_sosialisasi'=>'irtamasosialisasi',
+            'irtama_verifikasi'=>'irtamaverifikasi',
+            'irtama_sop'=>'sopkebijakan',
+            'irtama_penegakan'=>'penegakandisiplin',
+            'irtama_apel'=>'apelupacara',
+            'irtama_lk'=>'reviulk',
+            'irtama_rkakl'=>'reviurkakl',
+            'irtama_rkbmn'=>'reviurkbmn',
+            'irtama_lkip'=>'reviulkip',
+        ];
+        $array_titles=[
+            'irtama_audit'=>'Download Irtama Audit LHA',
+            'irtama_ptl'=>'Download Irtama Audit PTL',
+            'irtama_riktu'=>'Download Irtama Audit Dengan Tujuan Tertentu',
+            'irtama_sosialisasi'=>'Download Irtama Sosialisasi',
+            'irtama_verifikasi'=>'Download Irtama Verifikasi',
+            'irtama_sop'=>'Download Irtama Sop Kebijakan',
+            'irtama_penegakan'=>'Download Irtama Penegakan Disiplin',
+            'irtama_apel'=>'Download Irtama Apel Senin dan Upacara Lainnya',
+            'irtama_lk'=>'Download Reviu Laporan Keuangan',
+            'irtama_rkakl'=>'Download Reviu Rencana Kerja Anggaran Kementerian/Lembaga',
+            'irtama_rkbmn'=>'Download Reviu Rencana Kebutuhan Barang Milik Negara',
+            'irtama_lkip'=>'Download Reviu Laporan Kinerja Instansi Pemerintah',
+        ];
+
+        $get = $request->all();
+
+        $result= [];
+
+        $segment = $request->segment;        
+        if ($segment == 'irtama_audit') {
+            $data_request = DB::table('v_irtama_lha');            
+            if ($request->date_from != '') {
+                $data_request->where('tanggal_lha', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tanggal_lha', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tanggal_lha', 'desc')->get();
+            if(count($data)>=1){                                    
+                if(count($data) >0){
+                    $i =  1;                    
+                    foreach($data as $key=>$d){
+                        $result[$key]['No'] =  $i;
+                        $result[$key]['No LHA'] =$d->nomor_lha;
+                        $result[$key]['Tanggal LHA'] =$d->tanggal_lha;
+                        $result[$key]['Periode Audit'] =($d->tgl_mulai ? date('d/m/Y',strtotime($d->tgl_mulai)) : '') .' - '. ($d->tgl_selesai ? date('d/m/Y',strtotime($d->tgl_selesai)) : '');
+                        $nama_satker = $d->nama_satker;
+                        if($nama_satker){
+                            $j = json_decode($nama_satker);
+                            $satker = $j->satker;
+                        }else{
+                          $satker = "";
+                        }
+                        $result[$key]['Nama Satker'] =  $satker;
+                        
+                        $mutu = "";
+                        $nama = [];
+                        $coll_nama = "";
+
+                        $mutu = $d->pengendali_mutu;
+                        if($mutu){
+                          $json = json_decode($mutu,true);
+                          if(count($json)> 0 ){
+                            foreach ($json as $j){
+                              $nama[] = $j['nama'];
+                            }
+                          }
+                        }
+                        if($nama){
+                          $coll_nama = implode("\n",$nama);
+                        }
+                        $result[$key]['Pengendali Mutu'] = $coll_nama;
+                        $mutu = $d->pengendali_teknis;
+                        $nama = [];
+                        if($mutu){
+                          $json = json_decode($mutu,true);
+                          if(count($json)> 0 ){
+                            foreach ($json as $j){
+                              $nama[] = $j['nama'];
+                            }
+                          }
+                        }
+                        if($nama){
+                          $coll_nama = implode("\n",$nama);
+                        }
+                        $result[$key]['Pengendali Teknis'] =$coll_nama ;
+
+                        $mutu = $d->ketua_tim;
+                        $nama = [];
+                        if($mutu){
+                          $json = json_decode($mutu,true);
+                          if(count($json)> 0 ){
+                            foreach ($json as $j){
+                              $nama[] = $j['nama'];
+                            }
+                          }
+                        }
+                        if($nama){
+                          $coll_nama = implode("\n",$nama);
+                        }
+
+
+                        $result[$key]['Ketua Tim'] =$coll_nama;
+
+                        $mutu = $d->meta_tim_anggota;
+                        if($mutu){
+                          $json = json_decode($mutu,true);
+                          if(count($json)> 0 ){
+                            foreach ($json as $j){
+                              $nama[] = $j['nama'];
+                            }
+                          }
+                        }
+                        if($nama){
+                          $coll_nama = implode("\n",$nama);
+                        }
+                        $result[$key]['Anggota'] = $coll_nama;
+                        
+                        $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
+
+                        $i = $i+1;
+                    }
+                }else{
+                    $result= [];
+                }
+                $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+
+                $this->printData($result, $name);
+            }else{
+                return false;
+            }
+        }else if ($segment == 'irtama_ptl') {            
+            $data_request = DB::table('v_irtama_ptl');             
+            if ($request->date_from != '') {
+                $data_request->where('tanggal_lha', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tanggal_lha', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tanggal_lha', 'desc')->get();
+            if(count($data)>=1){   
+            $param = $data;
+
+            $excel = Excel::create('Download Irtama Audit PTL'.' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to)), function($excel) use($param) {
+              foreach($param as $d){
+                $id = $d->id_ptl;
+                $rekomendasi = execute_api_json('/api/ptlbidang/'.$id,'GET');
+                if($rekomendasi->code == 200 && $rekomendasi->status != 'error'){
+                  $r  = $rekomendasi->data;
+                    $excel->sheet( 'ID - '.$id, function($sheet) use($r) {
+
+                        $sheet->loadView('irtama.ptl.print_template.irtama_ptl', array('data' => $r));
+                    });
+                }
+              }
+            })->export('xls');
+
+          }
+        }else if($segment == 'irtama_riktu'){
+            $data_request = DB::table('irtama_rikturiksus');
+            if ($request->date_from != '') {
+                $data_request->where('tgl_hasil_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tgl_hasil_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tgl_hasil_laporan', 'desc')->get();
+            
+            if(count($data)>=1){
+//            $data = $data_request->data;
+             $i = 1;
+             foreach($data as $key=>$d){
+                $result[$key]['No'] = $i;
+                $result[$key]['No Surat Perintah'] =$d->no_sprint;
+                $result[$key]['No Hasil Laporan'] =$d->no_hasil_laporan;
+                $result[$key]['Tanggal Hasil Laporan'] =($d->tgl_hasil_laporan ? date('d/m/Y',strtotime($d->tgl_hasil_laporan)) : '');
+                $result[$key]['Judul Hasil Laporan']  =$d->judul_hasil_laporan ;
+                $result[$key]['Jenis Pelanggaran'] =$d->jenis_pelanggaran;
+                $result[$key]['Tempat Kejadian'] = getWilayahName($d->tempatkejadian);
+                $result[$key]['Jumlah Terperiksa'] =$d->jumlah_terperiksa;
+                $result[$key]['Jumlah Saksi'] =$d->jumlah_saksi;
+                $result[$key]['Kriteria Perka'] =$d->kriteria_perka;
+                $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
+                $i = $i+1;
+              }
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+              $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+        }else if($segment == 'irtama_sosialisasi'){            
+            $data_request = DB::table('irtama_sosialisasi');
+            if ($request->date_from != '') {
+                $data_request->where('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
+            
+            if(count($data)>=1){
+//          if($data_request->code == 200 && $data_request->status != 'error'){
+//            $data = $data_request->data;
+             $i = 1;
+             foreach($data as $key=>$d){
+                $result[$key]['No'] = $i;
+                $result[$key]['No Surat Perintah'] =$d->sprin;
+                $result[$key]['Lokasi'] =$d->lokasi;
+
+                $data_satker = $d->kode_satker;
+                $id_satker = "";
+                if($data_satker){
+                  $j = json_decode($data_satker,true);
+                  $nama_satker = $j['nama'];
+                }else{
+                  $nama_satker = "";
+                }
+
+                $result[$key]['Satker'] =  $nama_satker;
+                $result[$key]['No Laporan']  =$d->no_laporan ;
+                $result[$key]['Tanggal Laporan'] = ($d->tgl_laporan ? date('d/m/Y',strtotime($d->tgl_laporan)) : '');
+                $result[$key]['Jumlah Peserta'] = $d->jumlah_peserta;
+                $result[$key]['Pemapar'] =$d->pemapar;
+                $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
+                $i = $i+1;
+              }
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+
+        }else if($segment == 'irtama_verifikasi'){            
+            $data_request = DB::table('irtama_verifikasi');
+            if ($request->date_from != '') {
+                $data_request->where('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
+            
+            if(count($data)>=1){
+//          if($data_request->code == 200 && $data_request->status != 'error'){
+//            $data = $data_request->data;
+                $i = 1;
+             foreach($data as $key=>$d){
+                $result[$key]['No'] = $i;
+                $result[$key]['Surat Perintah'] =$d->sprin;
+                $result[$key]['Lokasi'] =$d->lokasi;
+                $data_satker = $d->kode_satker;
+                $id_satker = "";
+                if($data_satker){
+                  $j = json_decode($data_satker,true);
+                  $nama_satker = $j['nama'];
+                }else{
+                  $nama_satker = "";
+                }
+
+                $result[$key]['Satker'] =  $nama_satker;
+                $result[$key]['Pejabat yang Diganti']  =$d->pejabat_diganti ;
+                $result[$key]['Pejabat yang Baru'] = $d->pejabat_baru;
+                $result[$key]['Tanggal laporan'] = ($d->tgl_laporan ? date('d/m/Y',strtotime($d->tgl_laporan)) : '');
+                $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
+                $i = $i+1;
+              }
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+        }else if($segment == 'irtama_sop'){
+            $data_request = DB::table('irtama_sop_kebijakan');
+            if ($request->date_from != '') {
+                $data_request->where('tgl_sop', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tgl_sop', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tgl_sop', 'desc')->get();
+            
+            if(count($data)>=1){
+//          if($data_request->code == 200 && $data_request->status != 'error'){
+//            $data = $data_request->data;
+            $i = 1;
+             foreach($data as $key=>$d){
+                $result[$key]['No'] = $i;
+                $result[$key]['Surat Perintah'] =$d->sprin;
+                $result[$key]['Tgl Surat Perintah'] = ($d->tgl_sprin? date('d/m/Y',strtotime($d->tgl_sprin)) : '');
+                $result[$key]['Nama SOP &amp; kebijakan'] = $d->nama_sop_kebijakan ;
+                $result[$key]['Jenis SOP &amp; kebijakan']  =$d->jenis_sop_kebijakan ;
+                $result[$key]['Tgl SOP'] = ($d->tgl_sop? date('d/m/Y',strtotime($d->tgl_sop)) : '');
+                $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
+                $i = $i+1;
+              }
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+
+        }else if($segment == 'irtama_penegakan'){
+            $data_request = DB::table('irtama_penegakan_disiplin');
+            if ($request->date_from != '') {
+                $data_request->where('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
+            
+            if(count($data)>=1){
+//          if($data_request->code == 200 && $data_request->status != 'error'){
+            $query  =  execute_api('api/lookup/irtama_satker',"GET");
+            if($query['code'] == 200 && ($query['status'] != 'error')){
+              $satker= $query['data'];
+            }else{
+              $satker= [];
+            }
+//            $data = $data_request->data;
+            $i = 1;
+             foreach($data as $key=>$d){
+                $result[$key]['No'] = $i;
+                $result[$key]['No Laporan'] =$d->no_laporan;
+                $result[$key]['Tanggal Laporan'] = ($d->tgl_laporan? date('d/m/Y',strtotime($d->tgl_laporan)) : '');
+                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$d->kode_satker ) : '') ;
+                $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
+                $i = $i+1;
+              }
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+
+        }else if($segment == 'irtama_apel'){
+            $data_request = DB::table('irtama_apel_upacara');
+            if ($request->date_from != '') {
+                $data_request->where('tanggal', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tanggal', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tanggal', 'desc')->get();
+            
+            if(count($data)>=1){
+//          if($data_request->code == 200 && $data_request->status != 'error'){
+            $query  =  execute_api('api/lookup/irtama_satker',"GET");
+            if($query['code'] == 200 && ($query['status'] != 'error')){
+              $satker= $query['data'];
+            }else{
+              $satker= [];
+            }
+//            $data = $data_request->data;
+            $i = 1;
+             foreach($data as $key=>$d){
+                $result[$key]['No'] = $i;
+                $result[$key]['Tanggal'] = ($d->tanggal ? date('d/m/Y',strtotime($d->tanggal)) : '');
+                $result[$key]['Jenis kegiatan'] =$d->jenis_kegiatan;
+                $data_satker = $d->kode_satker;
+                $id_satker = "";
+                if($data_satker){
+                  $j = json_decode($data_satker,true);
+                  $nama_satker = $j['nama'];
+                }else{
+                  $nama_satker = "";
+                }
+
+                $result[$key]['Satker'] =  $nama_satker;
+                $result[$key]['Jumlah Hadir'] = $d->jumlah_hadir;
+                $result[$key]['Jumlah Tidak Hadir'] = $d->jumlah_tidak_hadir;
+                $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
+                $i = $i+1;
+              }
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+        }else if($segment == 'irtama_lk'){            
+            $data_request = DB::table('irtama_reviu_lk');             
+            if ($request->date_from != '') {
+                $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
+            if(count($data)>=1){                        
+            $i = 1;
+             foreach($data as $key=>$d){
+                $result[$key]['No'] = $i;
+                $result[$key]['Objek Reviu'] = 'UAPPA : '.$d->uappa."\n".
+                                              'UAPPA-E1 : '.$d->uappa_e1."\n".
+                                              'UAPPA-W : '.$d->uappa_w."\n".
+                                              'UAKPA : '.$d->uappa_w."\n";
+                $result[$key]['Surat Perintah'] =$d->no_sprint;
+                $result[$key]['Ketua Tim'] =  $d->ketua_tim;
+                $result[$key]['Hasil reviu'] ='Hasil Reviu LRA:'. $d->lap_realisasi."\n".
+                                              'Hasil Reviu Neraca:'. $d->neraca."\n".
+                                              'Hasil Reviu LO:'. $d->lap_operasional."\n".
+                                              'Hasil Reviu LPE:'. $d->lap_perubahan."\n".
+                                              'Hasil Reviu CaLK:'. $d->catatan_lap;
+                $result[$key]['Tanggal Laporan'] = ($d->tanggal_lap ? date('d/m/Y',strtotime($d->tanggal_lap)) :'');
+                $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
+                $i = $i+1;
+              }
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+        }else if($segment == 'irtama_rkakl'){                     
+            $data_request = DB::table('irtama_reviu_rkakl');             
+            if ($request->date_from != '') {
+                $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();            
+            if(count($data)>=1){            
+            $i = 1;
+            foreach($data as $key=>$d){
+               $result[$key]['No'] = $i;
+               $result[$key]['Ketua Tim'] = $d->ketua_tim;
+               $result[$key]['Surat Perintah'] = $d->no_sprint;
+               $result[$key]['Tanggal Laporan'] = date('d-m-Y', strtotime($d->tanggal_lap));
+               $result[$key]['Tahun Anggaran'] = $d->tahun_anggaran;
+               $result[$key]['Status'] = $d->status == 'Y' ? 'Lengkap' : 'Belum Lengkap';
+               $i = $i +1;
+            }
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+        }else if($segment == 'irtama_rkbmn'){            
+            $data_request = DB::table('irtama_reviu_rkbmn');             
+            if ($request->date_from != '') {
+                $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();            
+            if(count($data)>=1){                        
+            $i = 1;
+            foreach($data as $key=>$d){
+               $result[$key]['No'] = $i;
+               $result[$key]['No Surat Perintah'] = $d->no_sprint;
+               $result[$key]['Ketua Tim'] = $d->ketua_tim;
+               $result[$key]['Tanggal Laporan'] = ($d->tanggal_lap ? date('d/m/Y', strtotime(str_replace('/', ',', $d->tanggal_lap))) : '');
+               $result[$key]['Tahun Anggaran'] = $d->tahun_anggaran;
+               $result[$key]['Status'] = $d->status == 'Y' ? 'Lengkap' : 'Belum Lengkap';
+               $i = $i +1;
+            }
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }
+        }else if($segment == 'irtama_lkip'){            
+            $data_request = DB::table('irtama_reviu_lkip');             
+            if ($request->date_from != '') {
+                $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            }
+            if ($request->date_to != '' ) {
+                $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            }
+            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();            
+            if(count($data)>=1){          
+//            $data = $data_request->data;
+            $i = 1;
+            foreach($data as $key=>$d){
+               $result[$key]['No'] = $i;
+               $result[$key]['No Surat Perintah'] = $d->no_sprint;
+               $result[$key]['Tanggal Laporan'] = ($d->tanggal_lap ? date('d/m/Y', strtotime(str_replace('/', ',', $d->tanggal_lap))) : '');
+               $result[$key]['Tahun Anggaran'] = $d->tahun_anggaran;
+               $result[$key]['Sasaran'] = $d->sasaran;
+               $result[$key]['Status'] = $d->status == 'Y' ? 'Lengkap' : 'Belum Lengkap';
+               $i = $i +1;
+            }
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
+          }else{
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $this->printData($result, $name);
           }
         }else{
           echo 'tidak ada';
