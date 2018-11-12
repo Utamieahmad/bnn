@@ -8,6 +8,8 @@ use Auth;
 use App\MainModel;
 use App\Tr_BrgBukti;
 use App\Models\BrgBukti;
+use App\Models\Berantas\ViewKasusTersangka as VTersangka;
+use App\Models\Berantas\ViewKasusBrgBukti as VBrgBukti;
 use URL;
 use DateTime;
 use Carbon\Carbon;
@@ -645,6 +647,77 @@ class interdiksiController extends Controller
       }catch(\Exception $e){
           $status_kelengkapan=false;
       }
+    }
+
+
+    public function downloadPagePendataanIntDpo(Request $request){
+      $i = 1;
+      $response = array();
+      // dd($request->all());
+      $kasusqry = DB::table('v_berantas_kasus');
+      if ($request->date_from != '') {
+          $kasusqry->where('kasus_tanggal', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+          $kasusqry->where('kasus_tanggal', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $kasusqry  = $kasusqry->where(function ($query) {
+              $query->where('kategori', '=', 'interdiksi')->orWhere('kategori', '=', null);
+          });
+
+      $kasus = $kasusqry->orderBy('kasus_tanggal', 'desc')->get();
+
+      foreach ($kasus as $row) {
+        $data['eventID']    = $row->kasus_id;
+        $data['no_lap']     = $row->kasus_no;
+        $data['instansi']   = $row->nm_instansi;
+        $data['kasus_tanggal']   = $row->kasus_tanggal;
+        // $data['periode']    = $row->periode_bulan.' '.$row->periode_tahun;
+        $data['kasus_jenis']   = $row->nm_jnskasus;
+        $data['kelompok']   = $row->nm_brgbukti;
+        $data['tgl']        = $row->kasus_tanggal;
+        $data['tkp']        = $row->kasus_tkp;
+        $data['status_kelengkapan']        = $row->status_kelengkapan;
+        $data['tersangka']  = VTersangka::select('tersangka_id', 'tersangka_nama', 'kode_jenis_kelamin', 'no_identitas', 'nama_negara', 'tersangka_tempat_lahir', 'tersangka_tanggal_lahir')->where('kasus_id', $row->kasus_id)->get();
+        $data['BrgBukti']   = VBrgBukti::select('kasus_barang_bukti_id', 'nm_brgbukti', 'jumlah_barang_bukti', 'nm_satuan', 'keterangan')->where('kasus_id', $row->kasus_id)->get();
+
+        array_push($response, $data);
+      }
+
+
+      $kasusArray = [];
+
+      foreach ($response as $key => $value) {
+        $kasusArray[$key]['No'] = $i;
+        $kasusArray[$key]['Instansi'] = $value['instansi'];
+        $kasusArray[$key]['Tanggal LKN'] = ( $value['kasus_tanggal'] ? date('d/m/Y', strtotime($value['kasus_tanggal'])) : '');
+        $kasusArray[$key]['Nomor Kasus'] = $value['no_lap'];
+
+        if ($value['tersangka'] != ''){
+          $temp = [];
+          foreach($value['tersangka'] as $keyTersangka => $valueTersangka){
+            $temp[$keyTersangka] = $valueTersangka['tersangka_nama'].' ('.$valueTersangka['kode_jenis_kelamin'].')';
+          }
+          $kasusArray[$key]['Tersangka'] = implode("\n", $temp);
+        } else {
+          $kasusArray[$key]['Tersangka'] = '';
+        }
+        if ($value['tersangka'] != ''){
+          $temp = [];
+          foreach($value['BrgBukti'] as $keyBrgBukti => $valueBrgBukti){
+            $temp[$keyBrgBukti] = $valueBrgBukti['nm_brgbukti'].' ('.$valueBrgBukti['jumlah_barang_bukti'].' '.$valueBrgBukti['nm_satuan'].')';
+          }
+          $kasusArray[$key]['Barang Bukti'] = implode("\n", $temp);
+        } else {
+          $kasusArray[$key]['Barang Bukti'] = '';
+        }
+        $i += 1;
+      }
+      // dd($kasusArray);
+      $data = $kasusArray;
+      $name = 'Export Data LKN Interdiksi '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($data, $name);
     }
 
     // private function kelengkapan_PendataanIntDpo($id){

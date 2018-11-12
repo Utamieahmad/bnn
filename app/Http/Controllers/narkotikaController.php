@@ -1465,44 +1465,6 @@ class narkotikaController extends Controller
 
 
     public function downloadLkn(Request $request){
-      // $client = new Client();
-      // // $page = $request->input('page');
-      // $token = $request->session()->get('token');
-      // $baseUrl = URL::to($this->urlapi());
-
-      // $get = $request->all();
-      // $kondisi = "";
-      // if(count($get)>0){
-      //   foreach($get as $key=>$val){
-      //     $kondisi .= $key.'='.$val.'&';
-      //   }
-      //   $kondisi = rtrim($kondisi,'&');
-      //   $kondisi = '?'.$kondisi;
-      // }else{
-      //   $kondisi = '?page='.$request->page;
-      // }
-
-      // $page = $request->page;
-      // if($page){
-      //   $start_number = ($request->limit * ($request->page -1 )) + 1;
-      // }else{
-      //   $start_number = 1;
-      // }
-      // $segment = $request->segment;
-
-      // $i = $start_number;
-
-      // $requestKasus = $client->request('GET', $baseUrl.'/api/kasus'.$kondisi,
-      //     [
-      //         'headers' =>
-      //         [
-      //             'Authorization' => 'Bearer '.$token
-      //         ]
-      //     ]
-      // );
-
-      // $kasus = json_decode($requestKasus->getBody()->getContents(), true);
-
       $i = 1;
       $response = array();
       // dd($request->all());
@@ -1569,6 +1531,34 @@ class narkotikaController extends Controller
       // dd($kasusArray);
       $data = $kasusArray;
       $name = 'Export Data LKN Narkotika '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($data, $name);
+    }
+
+    public function downloadLadang(Request $request){
+      
+      $pemusnahanladang = DB::table('berantas_narkotika_pemusnahan_ladang_ganja');
+      if ($request->date_from != '') {
+          $pemusnahanladang->where('tgl_penyelidikan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+          $pemusnahanladang->where('tgl_penyelidikan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $pemusnahanladang = $pemusnahanladang->orderBy('tgl_penyelidikan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $ladangArray = [];
+      $i = 1;
+      foreach ($pemusnahanladang as $key => $value) {
+        $ladangArray[$key]['No'] = $i;
+        $ladangArray[$key]['Nomor Sprint'] = $value->nomor_sprint_penyelidikan;
+        $ladangArray[$key]['Tanggal Penyelidikan'] = $value->tgl_penyelidikan;
+        $ladangArray[$key]['Luas Lahan Ganja'] = $value->luas_lahan_ganja;
+        $ladangArray[$key]['Luas Lahan Dimusnahkan'] = $value->luas_lahan_ganja_dimusnahkan;
+        $i = $i +1;
+      }
+      // dd($ladangArray);
+      $data = $ladangArray;
+      $name = 'Export Data Pemusnahan Ladang '.Carbon::now()->format('Y-m-d H:i:s');
       $this->printData($data, $name);
     }
 

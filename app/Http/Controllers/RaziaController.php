@@ -491,4 +491,35 @@ class RaziaController extends Controller
       $this->printData($data, $name);
     }
 
+    public function downloadPendataanRazia(Request $request){
+      $dataqry = DB::table('v_razia');
+      if ($request->date_from != '') {
+          $dataqry->where('tgl_razia', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+          $dataqry->where('tgl_razia', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $dataqry = $dataqry->orderBy('tgl_razia', 'desc')->get();
+      // dd($pemusnahanladang);
+      $kasusArray = [];
+      $i = 1;
+
+      foreach ($dataqry as $key => $value) {
+        $kasusArray[$key]['No'] = $i;
+        $kasusArray[$key]['Tanggal Razia'] = ( $value->tgl_razia ? date('d/m/Y', strtotime($value->tgl_razia)) : '');
+        $kasusArray[$key]['Lokasi'] = $value->lokasi;
+        $kasusArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+        $kasusArray[$key]['Jumlah Dirazia'] = $value->jumlah_dirazia;
+        $kasusArray[$key]['Jumlah Terindikasi'] = $value->jumlah_terindikasi;
+        $kasusArray[$key]['Jumlah Ditemukan'] = $value->jumlah_ditemukan;
+        $kasusArray[$key]['Keterangan Lainnya'] = $value->keterangan_lainnya;
+        $i += 1;
+      }
+      // dd($kasusArray);
+      $data = $kasusArray;
+      $name = 'Export Data Razia '.$request->kategori.' '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($data, $name);
+    }
+
 }

@@ -1079,7 +1079,7 @@ class RehabilitasiController extends Controller
               $image3 = null;
             }
             $this->form_params['foto3'] = $image3;
-            
+
             $data_request = execute_api_json('api/pelatihan','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRKM - Kegiatan';
@@ -4726,5 +4726,51 @@ class RehabilitasiController extends Controller
                 return false;
             }
         }
+    }
+
+		public function downloadPlrip(Request $request){
+
+      $i = 1;
+      $response = array();
+      // dd($request->all());
+      $infoumumlembaga = DB::table('rehab_infoumumlembaga');
+      if ($request->date_from != '') {
+          $infoumumlembaga->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+          $infoumumlembaga->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $infoumumlembaga  = $infoumumlembaga->where(function ($query) {
+              $query->where('kategori', '=', 'plrip')->orWhere('kategori', '=', null);
+          });
+
+      $infoumumPlrip = $infoumumlembaga->orderBy('created_at', 'desc')->get();
+			// dd($infoumumPlrip);
+			foreach ($infoumumPlrip as $row) {
+        $data['eventID']    = $row->id;
+        $data['nama']     = $row->nama;
+        $data['alamat']   = $row->alamat;
+        $data['cp_nama']   = $row->cp_nama;
+				$data['bentuk_layanan'] = $row->bentuk_layanan;
+				$data['status'] = $row->status;
+        array_push($response, $data);
+      }
+
+			$infoumumPlripArray = [];
+			foreach ($response as $key => $value) {
+				// dd($value['nama']);
+        // $kasusArray[$key]['No'] = $i;
+				$infoumumPlripArray[$key]['No'] = $i;
+				$infoumumPlripArray[$key]['Nama Lembaga'] = $value['nama'];
+				$infoumumPlripArray[$key]['Alamat'] = $value['alamat'];
+				$infoumumPlripArray[$key]['Contact Person'] = $value['cp_nama'];
+				$infoumumPlripArray[$key]['Bentuk Layanan'] = ( $value['bentuk_layanan'] ? getBentukLayananPrint(json_decode($value['bentuk_layanan'],true)) : '');
+				$infoumumPlripArray[$key]['Status'] = ($value['status'] == 'Y'  ? 'Lengkap' : 'Belum Lengkap');
+				$i = $i+1;
+			}
+
+      $name = 'Export Data Informasi Lembaga Umum PLRIP '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($infoumumPlripArray, $name);
     }
 }

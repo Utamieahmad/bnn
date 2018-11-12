@@ -996,4 +996,35 @@ class penindakanController extends Controller
 
     }
 
+    public function downloadPagePendataanDpo(Request $request){
+      
+      $data = DB::table('v_berantas_dpo');
+      if ($request->date_from != '') {
+          $data->where('created_date', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+          $data->where('created_date', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('created_date', 'desc')->get();
+      // dd($pemusnahanladang);
+      $ladangArray = [];
+      $i = 1;
+      
+      foreach($data as $key=>$d){
+          $metas = [];
+          $result[$key]['No'] = $i;
+          $result[$key]['Nomor Surat Perintah'] =$d->nomor_sprint_dpo;
+          $result[$key]['Nomor Identitas'] = $d->no_identitas;
+          $result[$key]['Alamat'] = $d->alamat;
+          $result[$key]['Jenis Kelamin'] = $d->kode_jenis_kelamin;
+
+          $i = $i+1;
+      }
+      $name = 'Export Pendataan DPO '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($result, $name);
+          
+
+    }
+
 }

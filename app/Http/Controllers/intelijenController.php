@@ -1070,6 +1070,7 @@ class intelijenController extends Controller
 			return response()->json($this->data);
 			// return view('pemberantasan.intelijen.modal_viewTersangka');
 		}
+
 	public function printIntelijen(Request $request){
 		$client = new Client();
 		$page = $request->input('page');
@@ -1127,6 +1128,33 @@ class intelijenController extends Controller
         }
 
 	}
+    
+  public function downloadIntelijen(Request $request){
+    $i = 1;
+    $data = DB::table('v_berantas_intel_jaringan');
+    if ($request->date_from != '') {
+        $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+    }
+    if ($request->date_to != '' ) {
+        $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+    }
+
+    $data = $data->orderBy('created_at', 'desc')->get();
+
+    foreach($data as $key=>$d){
+        $result[$key]['No'] = $i;
+        $result[$key]['Nomor LKN'] = $d->nomor_lkn;
+        $result[$key]['Jenis Jaringan'] = $d->kode_jenisjaringan;
+        $result[$key]['Keterlibatan Jaringan'] = ( $d->keterlibatan_jaringan ?( $d->keterlibatan_jaringan == 'Y' ? "Ya" : "Tidak") : '');
+        $result[$key]['Nama Jaringan'] = $d->nama_jaringan;
+        $result[$key]['Tanggal'] = date('Y-m-d', strtotime($d->created_at));
+        $i = $i+1;
+    }
+    $name = 'Pendataan Jaringan Intelijen '.Carbon::now()->format('Y-m-d H:i:s');
+          $this->printData($result, $name);
+            
+
+  }
 
 	public function deletePendataanJaringan(Request $request){
         if ($request->ajax()) {
