@@ -23,7 +23,7 @@ Route::post('/forgot_password_process','AuthenticationController@forgot_password
 Route::get('/reset_password/{token}', 'AuthenticationController@reset_password')->name('reset_password');
 Route::post('/reset_password_process', 'AuthenticationController@reset_password')->name('reset_password_process');
 Route::get('/reset_email/{token}', 'AuthenticationController@reset_email')->name('reset_email');
-Route::get('/api/documentation',function(){ //redirect to web SIN 
+Route::get('/api/documentation',function(){ //redirect to web SIN
 	return redirect('/login');
 });
 
@@ -318,7 +318,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 		});
 		Route::get('/print_page_pascarehabilitasi/{segment?}/{page?}','RehabilitasiController@printPage')->name("print_page_pascarehabilitasi");
-
+		Route::post('/print_page_rehabilitasi/downloadPlrip','RehabilitasiController@downloadPlrip')->name("print_page_rehabilitasi");
 	});
 
 
@@ -448,7 +448,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/printvideotron', 'diseminasiController@printVideotron');
 
 		});
-                
+
                 Route::group(['prefix'=>'dep_cegah'],function(){
                     Route::match(['get', 'post'],'/data_aktivitas_sebaran/{page?}','deputiCegahController@pendataanAktivitasSebaran')->name('pendataan_aktivitasSebaran');
                 });
@@ -1243,7 +1243,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::match(['get','post'],'/loginlog/{page?}','UserManagementController@loginLog')->name('loginLog');
 		Route::match(['get','post'],'/userlog/{page?}','UserManagementController@userLog')->name('userLog');
 	});
-	
+
 	Route::group(['prefix'=>'omspan'],function(){
 		Route::match(['get','post'],'/omspan','omspanController@omspan')->name('omspan');
 	});
