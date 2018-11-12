@@ -10,6 +10,7 @@ use App\Tr_BrgBukti;
 use App\Models\BrgBukti;
 use App\Models\Berantas\Pemusnahan;
 use App\Models\Berantas\PemusnahanDetail;
+use App\Models\Berantas\ViewPemusnahanDetail;
 use App\Models\Berantas\Tahanan;
 use App\Models\Berantas\TahananHeader;
 use URL;
@@ -1514,6 +1515,77 @@ class wastahtiController extends Controller
     }else{
       echo 'data tidak tersedia';
     }
+
+  }
+
+  public function downloadPendataanBrgbukti(Request $request){
+    $data = DB::table('v_berantas_pemusnahan_barangbukti_wilayah');
+    if ($request->date_from != '') {
+        $data->where('tgl_tap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+    }
+    if ($request->date_to != '' ) {
+        $data->where('tgl_tap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+    }
+
+    $data = $data->orderBy('tgl_tap', 'desc')->get();
+    // dd($pemusnahanladang);
+    $result = [];
+    $i = 1;
+    foreach($data as $key=>$d){
+        $metas = [];
+        $result[$key]['No'] = $i;
+        $result[$key]['Nomor LKN'] =$d->nomor_lkn;
+        $result[$key]['Nama Penyidik'] = $d->nama_penyidik;
+        $result[$key]['Tanggal Ketetapan'] =( $d->tgl_tap ? date('d/m/Y', strtotime($d->tgl_tap)) : '');
+        $result[$key]['Nomor Tap'] = $d->nomor_tap;
+        $meta = ViewPemusnahanDetail::select('nm_brgbukti', 'jumlah_dimusnahkan', 'nm_satuan')->where('parent_id', $d->id)->get();
+
+        $string_meta = $meta;
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+              $metas[]  = $meta[$j]['nm_brgbukti'].'('.$meta[$j]['jumlah_dimusnahkan'].' '.$meta[$j]['nm_satuan'].')';
+            }
+          }else{
+            $metas = [];
+          }
+        if(count($metas)>0 ){
+          $string_meta = implode(',', $metas);
+        }
+        $result[$key]['Barang bukti dimusnahkan'] = $string_meta ;
+        $i = $i+1;
+    }
+    $name = 'Export Pendataan Pemusnahan Barang Bukti '.Carbon::now()->format('Y-m-d H:i:s');
+    $this->printData($result, $name);
+        
+
+  }
+
+  public function downloadPendataanTahanan(Request $request){
+    $data = DB::table('v_berantas_tahanan_wilayah');
+    if ($request->date_from != '') {
+        $data->where('tgl_masuk', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+    }
+    if ($request->date_to != '' ) {
+        $data->where('tgl_masuk', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+    }
+
+    $data = $data->orderBy('tgl_masuk', 'desc')->get();
+    // dd($pemusnahanladang);
+    $result = [];
+    $i = 1;
+    foreach($data as $key=>$d){
+        $metas = [];
+        $result[$key]['No'] = $i;
+        $result[$key]['Jenis Tahanan'] =$d->kode_jenistahanan;
+        $result[$key]['No. Kasus'] = $d->nomor_kasus;
+        $result[$key]['Tanggal Tahanan'] = ( $d->tgl_masuk ? date('d/m/Y', strtotime($d->tgl_masuk)) : '');
+        $result[$key]['Alamat Tahanan'] = $d->alamatdomisili;
+
+        $i = $i+1;
+    }
+    $name = 'Export Pendataan Tahanan '.Carbon::now()->format('Y-m-d H:i:s');
+    $this->printData($result, $name);
+        
 
   }
 

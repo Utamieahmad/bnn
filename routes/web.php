@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('/update_razia', 'RaziaController@updatePendataanRazia');
 		Route::post('/delete_razia', 'RaziaController@deletePendataanRazia')->name('delete_razia');
 		Route::get('/print_razia', 'RaziaController@printPendataanRazia');
+		Route::post('/download_razia', 'RaziaController@downloadPendataanRazia');
 
 		Route::group(['prefix'=>'dir_narkotika'],function(){
 
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_pemusnahan_ladangganja','narkotikaController@inputPendataanLadangGanja')->name('input_pendataan_pemusnahan_ladangganja');
 			Route::post('/delete_pendataan_pemusnahan_ladangganja','narkotikaController@deletePendataanLadangGanja')->name('delete_pendataan_pemusnahan_ladangganja');
 			Route::get('/print_ladang', 'narkotikaController@printLadang');
+			Route::post('/download_pemusnahan_ladang', 'narkotikaController@downloadLadang');
 			// Route::get('/view','narkotikaController@view');
 		});
 
@@ -97,6 +99,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_psi_pendataan_lkn','psikotropikaController@updatePsiPendataanLKN');
 			Route::post('/delete_psi_pendataan_lkn','psikotropikaController@deletePsiPendataanLKN')->name('delete_psi_pendataan_lkn');
 			Route::get('/print_psi_pendataan_lkn','psikotropikaController@printPagePsiPendataanLKN');
+			Route::post('/download_psi_pendataan_lkn','psikotropikaController@downloadPsiPendataanLKN');
 			Route::get('/view','psikotropikaController@view');
 			// Route::get('/print_psi_lkn', 'psikotropikaController@printPsiLkn');
 		});
@@ -111,6 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_tppu','tppuController@updatePendataanTPPU');
 			Route::post('/delete_pendataan_tppu','tppuController@deletePendataanTPPU')->name('delete_pendataan_tppu');
 			Route::get('/print_pendataan_tppu','tppuController@printPagePendataanTPPU');
+			Route::post('/download_pendataan_tppu','tppuController@downloadPendataanTPPU');
 			Route::get('/view','tppuController@view');
 			// Route::get('/print_tppu', 'tppuController@printTppu');
 		});
@@ -126,6 +130,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_jaringan','intelijenController@updatePendataanJaringan')->name('update_pendataan_jaringan');
 			Route::post('/delete_pendataan_jaringan','intelijenController@deletePendataanJaringan')->name('delete_pendataan_jaringan');
 			Route::get('/print_pendataan_jaringan','intelijenController@printIntelijen');
+			Route::post('/download_pendataan_jaringan','intelijenController@downloadIntelijen');
 			// Route::get('/print_intelijen/{current_page?}', 'intelijenController@printIntelijen')->name('print_intelijen');
 		});
 
@@ -143,6 +148,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_brgbukti','wastahtiController@updatePendataanBrgbukti');
 			Route::post('/delete_pendataan_brgbukti','wastahtiController@deletePendataanBrgbukti')->name('delete_pendataan_brgbukti');
 			Route::get('/print_pendataan_brgbukti','wastahtiController@printPendataanBrgbukti');
+			Route::post('/download_pendataan_brgbukti','wastahtiController@downloadPendataanBrgbukti');
 			// Route::get('/print_pendataan_brgbukti/{current_page?}','wastahtiController@printPendataanBrgbukti')->name('print_pendataan_brgbukti');
 
 			Route::match(['get','post'],'/pendataan_tahanan/{page?}','wastahtiController@pendataanTahanan')->name('pendataan_tahanan');
@@ -154,6 +160,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_tahanan','wastahtiController@inputPendataanTahanan');
 			Route::post('/delete_pendataan_tahanan','wastahtiController@deletePendataanTahanan')->name('delete_pendataan_tahanan');
 			Route::get('/print_pendataan_tahanan','wastahtiController@printPendataanTahanan');
+			Route::post('/download_pendataan_tahanan','wastahtiController@downloadPendataanTahanan');
 			// Route::get('/view','caseController@view');
 			Route::get('/view','wastahtiController@view');
 		});
@@ -167,6 +174,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_dpo','penindakanController@inputPendataanDpo');
 			Route::post('/delete_pendataan_dpo','penindakanController@deletePendataanDpo')->name('delete_pendataan_dpo');
 			Route::get('/print_pendataan_dpo','penindakanController@printPagePendataanDpo');
+			Route::post('/download_pendataan_dpo','penindakanController@downloadPagePendataanDpo');
 			Route::get('/view','penindakanController@view');
 		});
 
@@ -180,6 +188,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_intdpo','interdiksiController@inputPendataanIntDpo');
 			Route::post('/delete_pendataan_intdpo','interdiksiController@deletePendataanIntDpo')->name('delete_pendataan_intdpo');
 			Route::get('/print_pendataan_intdpo','interdiksiController@printPagePendataanIntDpo');
+			Route::post('/download_pendataan_intdpo','interdiksiController@downloadPagePendataanIntDpo');
 			Route::get('/view','caseController@view');
 		});
 	});
