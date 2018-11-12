@@ -1592,6 +1592,178 @@ class SettamaController extends Controller
         }
 
     }
+	public function downloadPageUmum(Request $request){
+  
+		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '1');
+		if ($request->date_from != '') {
+		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		}
+		if ($request->date_to != '' ) {
+		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		}
+
+		$data = $data->orderBy('created_at', 'desc')->get();
+		// dd($pemusnahanladang);
+		$result = [];
+		$i = 1;
+      	foreach($data as $key=>$value){
+					$result[$key]['No'] = $i;
+        	$result[$key]['No Rujukan'] = $value->no_rujukan ;
+        	$result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : ''). ( $value->tgl_selesai ? ' - '.date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+        	$result[$key]['Jenis Kegiatan'] =$value->nama_jenis_kegiatan;
+        	$result[$key]['Sumber Anggaran'] = $value->sumber_anggaran;
+        	$result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
+        	$peserta = "";
+        	$meta_peserta = $value->meta_peserta;
+        	if($meta_peserta){
+        		$meta = json_decode($meta_peserta,true);
+        		if(count($meta) > 0 ){
+        			for($i = 0 ; $i < count($meta); $i ++ ){
+        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        				$peserta .= "\n";
+        			}
+        			$peserta = rtrim($peserta);
+        		}
+        	}
+        	$result[$key]['Peserta']= $peserta;
+
+        	$i = $i +1;
+      	}
+     	$name = 'Export Sekretariat Utama Biro Umum '.date('Y-m-d H:i:s');
+
+      	$this->printData($result, $name);
+    
+
+    }
+	public function downloadPageKeuangan(Request $request){
+  
+		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '2');
+		if ($request->date_from != '') {
+		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		}
+		if ($request->date_to != '' ) {
+		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		}
+
+		$data = $data->orderBy('created_at', 'desc')->get();
+		// dd($pemusnahanladang);
+		$result = [];
+		$i = 1;
+      	foreach($data as $key=>$value){
+					$result[$key]['No'] = $i;
+        	$result[$key]['No Rujukan'] = $value->no_rujukan ;
+        	$result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : ''). ( $value->tgl_selesai ? ' - '.date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+        	$result[$key]['Jenis Kegiatan'] =$value->nama_jenis_kegiatan;
+        	$result[$key]['Sumber Anggaran'] = $value->sumber_anggaran;
+        	$result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
+        	$peserta = "";
+        	$meta_peserta = $value->meta_peserta;
+        	if($meta_peserta){
+        		$meta = json_decode($meta_peserta,true);
+        		if(count($meta) > 0 ){
+        			for($i = 0 ; $i < count($meta); $i ++ ){
+        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        				$peserta .= "\n";
+        			}
+        			$peserta = rtrim($peserta);
+        		}
+        	}
+        	$result[$key]['Peserta']= $peserta;
+
+        	$i = $i +1;
+      	}
+     	$name = 'Export Sekretariat Utama Biro Keuangan '.date('Y-m-d H:i:s');
+
+      	$this->printData($result, $name);
+    
+
+    }
+	public function downloadPagePerencanaan(Request $request){
+  
+		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '4');
+		if ($request->date_from != '') {
+		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		}
+		if ($request->date_to != '' ) {
+		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		}
+
+		$data = $data->orderBy('created_at', 'desc')->get();
+		// dd($pemusnahanladang);
+		$result = [];
+		$i = 1;
+      	foreach($data as $key=>$value){
+					$result[$key]['No'] = $i;
+        	$result[$key]['No Rujukan'] = $value->no_rujukan ;
+        	$result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : ''). ( $value->tgl_selesai ? ' - '.date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+        	$result[$key]['Jenis Kegiatan'] =$value->nama_jenis_kegiatan;
+        	$result[$key]['Sumber Anggaran'] = $value->sumber_anggaran;
+        	$result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
+        	$peserta = "";
+        	$meta_peserta = $value->meta_peserta;
+        	if($meta_peserta){
+        		$meta = json_decode($meta_peserta,true);
+        		if(count($meta) > 0 ){
+        			for($i = 0 ; $i < count($meta); $i ++ ){
+        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        				$peserta .= "\n";
+        			}
+        			$peserta = rtrim($peserta);
+        		}
+        	}
+        	$result[$key]['Peserta']= $peserta;
+
+        	$i = $i +1;
+      	}
+     	$name = 'Export Sekretariat Utama Biro Perencanaan '.date('Y-m-d H:i:s');
+
+      	$this->printData($result, $name);
+    
+
+    }
+	public function downloadPageKepegawaian(Request $request){
+  
+		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '3');
+		if ($request->date_from != '') {
+		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		}
+		if ($request->date_to != '' ) {
+		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		}
+
+		$data = $data->orderBy('created_at', 'desc')->get();
+		// dd($pemusnahanladang);
+		$result = [];
+		$i = 1;
+      	foreach($data as $key=>$value){
+					$result[$key]['No'] = $i;
+        	$result[$key]['No Rujukan'] = $value->no_rujukan ;
+        	$result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : ''). ( $value->tgl_selesai ? ' - '.date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+        	$result[$key]['Jenis Kegiatan'] =$value->nama_jenis_kegiatan;
+        	$result[$key]['Sumber Anggaran'] = $value->sumber_anggaran;
+        	$result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
+        	$peserta = "";
+        	$meta_peserta = $value->meta_peserta;
+        	if($meta_peserta){
+        		$meta = json_decode($meta_peserta,true);
+        		if(count($meta) > 0 ){
+        			for($i = 0 ; $i < count($meta); $i ++ ){
+        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        				$peserta .= "\n";
+        			}
+        			$peserta = rtrim($peserta);
+        		}
+        	}
+        	$result[$key]['Peserta']= $peserta;
+
+        	$i = $i +1;
+      	}
+     	$name = 'Export Sekretariat Utama Biro Kepegawaian '.date('Y-m-d H:i:s');
+
+      	$this->printData($result, $name);
+    
+
+    }
 
 	public function sekretariatUtamaPerencanaan(Request $request){
 		/* filter*/
