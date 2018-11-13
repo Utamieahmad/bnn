@@ -1093,6 +1093,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_sekretariat_utama','settamaController@updateSekretariatUtamaKeuangan')->name('update_settama_keuangan');
 			Route::post('/delete_sekretariat_utama','settamaController@deleteSekretariatUtamaKeuangan')->name('delete_settama_keuangan');
 			Route::get('print_settama/{segment}/{page?}','settamaController@printPageKeuangan')->name('print_settama_keuangan');
+			Route::post('download_settama_keuangan','settamaController@downloadPageKeuangan');
 		});
 
 		Route::group(['prefix'=>'umum'],function(){
@@ -1105,6 +1106,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_sekretariat_utama','settamaController@updateSekretariatUtamaUmum')->name('update_settama_umum');
 			Route::post('/delete_sekretariat_utama','settamaController@deleteSekretariatUtamaUmum')->name('delete_settama_umum');
 			Route::get('print_settama/{segment}/{page?}','settamaController@printPageUmum')->name('print_settama_umum');
+			Route::post('download_settama_umum','settamaController@downloadPageUmum');
 		});
 
 		Route::group(['prefix'=>'perencanaan'],function(){
@@ -1116,6 +1118,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_sekretariat_utama','settamaController@updateSekretariatUtamaPerencanaan')->name('update_settama_perencanaan');
 			Route::post('/delete_sekretariat_utama','settamaController@deleteSekretariatUtamaPerencanaan')->name('delete_settama_perencanaan');
 			Route::get('print_settama/{segment}/{page?}','settamaController@printPagePerencanaan')->name('print_settama_perencanaan');
+			Route::post('download_settama_perencanaan','settamaController@downloadPagePerencanaan');
 		});
 
 		Route::group(['prefix'=>'kepegawaian'],function(){
@@ -1127,6 +1130,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_sekretariat_utama','settamaController@updateSekretariatUtamaKepegawaian')->name('update_settama_kepegawaian');
 			Route::post('/delete_sekretariat_utama','settamaController@deleteSekretariatUtamaKepegawaian')->name('delete_settama_kepegawaian');
 			Route::get('print_settama/{segment}/{page?}','settamaController@printPageKepegawaian')->name('print_settama_kepegawaian');
+			Route::post('download_settama_kepegawaian','settamaController@downloadPageKepegawaian');
 		});
 
 
