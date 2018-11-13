@@ -315,7 +315,7 @@ class RehabilitasiController extends Controller
             }
 
             $this->form_params['kategori'] = 'plrkm';
-            $data_request = execute_api_json('api/infolembaga/','POST',$this->form_params);
+            $data_request = execute_api_json('api/infolembaga','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRKM - Informasi Umum Lembaga';
 						$trail['audit_event'] = 'post';
@@ -1804,7 +1804,7 @@ class RehabilitasiController extends Controller
             }
 
              $this->form_params['kategori'] = 'plrip';
-            $data_request = execute_api_json('api/infolembaga/','POST',$this->form_params);
+            $data_request = execute_api_json('api/infolembaga','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRIP - Informasi Umum Lembaga';
 						$trail['audit_event'] = 'post';
@@ -1822,10 +1822,10 @@ class RehabilitasiController extends Controller
                 $id = $data_request->data->eventID;
                 $this->kelengkapan_LembagaUmumPlrip($id);
                 $this->messages['status'] = 'success';
-                $this->messages['message'] = 'Data Info Lembaga Umum PLRIP Berhasil Diperbarui';
+                $this->messages['message'] = 'Data Info Lembaga Umum PLRIP Berhasil Ditambahkan';
             }else{
                 $this->messages['status'] = 'error';
-                $this->messages['message'] = 'Data Info Lembaga Umum PLRIP Gagal Diperbarui';
+                $this->messages['message'] = 'Data Info Lembaga Umum PLRIP Gagal Ditambahkan';
             }
 
             return redirect(route('informasi_lembaga_umum_plrip'))->with('status', $this->messages);
@@ -3244,7 +3244,7 @@ class RehabilitasiController extends Controller
                 $this->form_params['bentuk_layanan'] = json_encode($request->bentuk_layanan);
             }
 
-            $data_request = execute_api_json('api/infolembaga/','POST',$this->form_params);
+            $data_request = execute_api_json('api/infolembaga','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PascaRehabilitasi - Informasi Umum Lembaga';
 						$trail['audit_event'] = 'post';

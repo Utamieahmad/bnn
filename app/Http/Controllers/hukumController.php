@@ -1864,6 +1864,59 @@ class HukumController extends Controller
         $name = 'Data Kegiatan Konsultasi Hukum (Non Litigasi) '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
+    
+    public function downloadNonlitigasi(Request $request){        
+//        $client = new Client();
+//        $token = $request->session()->get('token');
+//        $baseUrl = URL::to($this->urlapi());
+//        $baseUrl = URL::to('/');
+
+//        $get = $request->all();
+//        $kondisi = "";
+//        if(count($get)>0){
+//          foreach($get as $key=>$val){
+//            $kondisi .= $key.'='.$val.'&';
+//          }
+//          $kondisi = rtrim($kondisi,'&');
+//        }
+//
+//        $requestPrintData = $client->request('GET', $baseUrl.'/api/hukumnonlitigasi?'.$kondisi,
+//            [
+//                'headers' =>
+//                [
+//                    'Authorization' => 'Bearer '.$token
+//                ]
+//            ]
+//        );
+        $data_request = DB::table('huker_hukumnonlitigasi');             
+        if ($request->date_from != '') {
+            $data_request->where('tgl_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->where('tgl_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_mulai', 'desc')->get();
+                        
+        // dd($pemusnahanladang);
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Jenis Kegiatan'] = $value->jenis_kegiatan;
+          $DataArray[$key]['Tema'] = $value->tema;
+          $DataArray[$key]['No Sprint Kepala'] = $value->no_sprint_kepala;
+          $DataArray[$key]['No Sprint Deputi'] = $value->no_sprint_deputi;
+          $DataArray[$key]['Tanggal Mulai'] = date('d-m-Y', strtotime($value->tgl_mulai));
+          $DataArray[$key]['Tanggal Selesai'] = date('d-m-Y', strtotime($value->tgl_selesai));
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Download Data Kegiatan Konsultasi Hukum (Non Litigasi) '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+        $this->printData($data, $name);
+    }
 
     public function hukumAudiensi(Request $request){
         //filter
@@ -2386,6 +2439,70 @@ class HukumController extends Controller
          //dd($DataArray);
         $data = $DataArray;
         $name = 'Data Kegiatan Konsultasi Hukum (Audiensi) '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+    
+    public function downloadAudiensi(Request $request){        
+//        $client = new Client();
+//        $token = $request->session()->get('token');
+//        $baseUrl = URL::to($this->urlapi());
+//////        $baseUrl = URL::to('/');
+////
+//        $get = $request->all();
+//        $kondisi = "";
+//        if(count($get)>0){
+//          foreach($get as $key=>$val){
+//            $kondisi .= $key.'='.$val.'&';
+//          }
+//          $kondisi = rtrim($kondisi,'&');
+//        }
+//
+//        $requestPrintData = $client->request('GET', $baseUrl.'/api/hukumaudiensi?'.$kondisi,
+//            [
+//                'headers' =>
+//                [
+//                    'Authorization' => 'Bearer '.$token
+//                ]
+//            ]
+//        );
+//
+//        $PrintData = json_decode($requestPrintData->getBody()->getContents(), true);
+        // dd($pemusnahanladang);
+        $data_request = DB::table('huker_hukumaudiensi');             
+        if ($request->date_from != '') {
+            $data_request->where('tgl_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->where('tgl_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_mulai', 'desc')->get();
+        
+        $DataArray = [];
+
+        $instansi = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+
+        //Display nama instansi di tabel - Tommy
+
+        $nm_instansi = array();
+
+        foreach($instansi as $i)
+            $nm_instansi[$i['id_instansi']] = $i['nm_instansi'];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Pelaksana'] = $nm_instansi[$value->pelaksana];
+          $DataArray[$key]['No Surat Perintah BNN'] = $value->no_sprint_kepala;
+          $DataArray[$key]['No Surat Perintah Deputi'] = $value->no_sprint_deputi;
+          $DataArray[$key]['Tempat Kegiatan'] = $value->tempat_kegiatan;
+          $DataArray[$key]['Tanggal Mulai'] = date('d-m-y', strtotime($value->tgl_mulai));
+          $DataArray[$key]['Tanggal Selesai'] = date('d-m-y', strtotime($value->tgl_selesai));
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Download Data Kegiatan Konsultasi Hukum (Audiensi) '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
         $this->printData($data, $name);
     }
 

@@ -610,6 +610,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_nonlitigasi','hukumController@deleteHukumNonlitigasi')->name('delete_hukum_nonlitigasi');
 			Route::get('/print_hukum_nonlitigasi/{segment?}/{page?}','hukumController@printNonlitigasi')->name("print_hukum_nonlitigasi");
+			Route::post('/download_hukum_nonlitigasi','hukumController@downloadNonlitigasi')->name("download_hukum_nonlitigasi");
 
 			Route::match(['get', 'post'], '/hukum_audiensi/{page?}','hukumController@hukumAudiensi')->name('hukum_audiensi');
 			Route::get('/edit_hukum_audiensi/{id}','hukumController@edithukumAudiensi')->name('edit_hukum_audiensi');
@@ -619,6 +620,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_audiensi','hukumController@deleteHukumAudiensi')->name('delete_hukum_audiensi');
 			Route::get('/print_hukum_audiensi/{segment?}/{page?}','hukumController@printAudiensi')->name("print_hukum_audiensi");
+			Route::post('/download_hukum_audiensi','hukumController@downloadAudiensi')->name("download_hukum_audiensi");
 
 			Route::match(['get', 'post'], '/hukum_pendampingan/{page?}','hukumController@hukumPendampingan')->name('hukum_pendampingan');
 			Route::get('/edit_hukum_pendampingan/{id}','hukumController@edithukumPendampingan')->name('edit_hukum_pendampingan');
