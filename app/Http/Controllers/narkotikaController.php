@@ -1483,17 +1483,29 @@ class narkotikaController extends Controller
       $kasus = $kasusqry->orderBy('kasus_tanggal', 'desc')->get();
 
       foreach ($kasus as $row) {
-        $data['eventID']    = $row->kasus_id;
-        $data['no_lap']     = $row->kasus_no;
-        $data['instansi']   = $row->nm_instansi;
-        $data['kasus_tanggal']   = $row->kasus_tanggal;
-        // $data['periode']    = $row->periode_bulan.' '.$row->periode_tahun;
-        $data['kasus_jenis']   = $row->nm_jnskasus;
-        $data['kelompok']   = $row->nm_brgbukti;
-        $data['tgl']        = $row->kasus_tanggal;
-        $data['tkp']        = $row->kasus_tkp;
-        $data['status_kelengkapan']        = $row->status_kelengkapan;
+        $data['eventID']              = $row->kasus_id;
+        $data['kasus_tanggal']        = $row->kasus_tanggal;
+        $data['instansi']             = $row->nm_instansi;
+        $data['no_lap']               = $row->kasus_no;
+        $data['meta_penyidik']        = $row->meta_penyidik;
+        $data['tgl_kejadian']         = $row->tgl_kejadian;
+        $data['tkp']                  = $row->kasus_tkp;
+        $data['propinsi']             = $row->propinsi;
+        $data['kabupaten']            = $row->kabupaten;
+        $data['modus_operandi']       = $row->modus_operandi;
+        $data['nm_kasus_negara']      = $row->nm_kasus_negara;
+        $data['jalur_masuk']          = $row->jalur_masuk;
+        $data['rute_asal']            = $row->rute_asal;
+        $data['rute_transit']         = $row->rute_transit;
+        $data['rute_tujuan']          = $row->rute_tujuan;
+        $data['kasus_jenis']          = $row->nm_jnskasus;
+        $data['kelompok']             = $row->nm_brgbukti;
+        $data['uraian_singkat']       = $row->uraian_singkat;
+        $data['keterangan_lainnya']   = $row->keterangan_lainnya;
+        $data['status_kelengkapan']   = $row->status_kelengkapan;
+
         $data['tersangka']  = VTersangka::select('tersangka_id', 'tersangka_nama', 'kode_jenis_kelamin', 'no_identitas', 'nama_negara', 'tersangka_tempat_lahir', 'tersangka_tanggal_lahir')->where('kasus_id', $row->kasus_id)->get();
+
         $data['BrgBukti']   = VBrgBukti::select('kasus_barang_bukti_id', 'nm_brgbukti', 'jumlah_barang_bukti', 'nm_satuan', 'keterangan')->where('kasus_id', $row->kasus_id)->get();
 
         array_push($response, $data);
@@ -1501,12 +1513,38 @@ class narkotikaController extends Controller
 
 
       $kasusArray = [];
+      $penyidikArray = [];
 
       foreach ($response as $key => $value) {
         $kasusArray[$key]['No'] = $i;
-        $kasusArray[$key]['Instansi'] = $value['instansi'];
         $kasusArray[$key]['Tanggal LKN'] = ( $value['kasus_tanggal'] ? date('d/m/Y', strtotime($value['kasus_tanggal'])) : '');
+        $kasusArray[$key]['Instansi'] = $value['instansi'];
         $kasusArray[$key]['Nomor Kasus'] = $value['no_lap'];
+
+        $meta = json_decode($value['meta_penyidik'],true);
+        if(count($meta)){
+          foreach($meta as $mm){
+              $penyidikArray[$key]['ssr'][] = $mm['nama_penyidik'];
+          }
+          // dd($penyidikArray[$key]['ssr']);
+          $kasusArray[$key]['Penyidik'] = implode("\n", $penyidikArray[$key]['ssr']);
+        } else {
+          $kasusArray[$key]['Penyidik'] = '';
+        }
+
+        $kasusArray[$key]['Tanggal Kejadian'] = ( $value['tgl_kejadian'] ? date('d/m/Y', strtotime($value['tgl_kejadian'])) : '');
+        $kasusArray[$key]['TKP'] = $value['tkp'];
+        $kasusArray[$key]['Propinsi'] = $value['propinsi'];
+        $kasusArray[$key]['Kabupaten'] = $value['kabupaten'];
+        $kasusArray[$key]['Modus Operandi'] = $value['modus_operandi'];
+        $kasusArray[$key]['Negara Sumber'] = $value['nm_kasus_negara'];
+        $kasusArray[$key]['Jalur Masuk'] = $value['jalur_masuk'];
+        $kasusArray[$key]['Rute Asal'] = $value['rute_asal'];
+        $kasusArray[$key]['Rute Transit'] = $value['rute_transit'];
+        $kasusArray[$key]['Rute Tujuan'] = $value['rute_tujuan'];
+        $kasusArray[$key]['Jenis Kasus'] = $value['kasus_jenis'];
+        $kasusArray[$key]['Uraian Singkat'] = $value['uraian_singkat'];
+        $kasusArray[$key]['Keterangan Lainnya'] = $value['keterangan_lainnya'];
 
         if ($value['tersangka'] != ''){
           $temp = [];
@@ -1536,7 +1574,7 @@ class narkotikaController extends Controller
 
     public function downloadLadang(Request $request){
       
-      $pemusnahanladang = DB::table('berantas_narkotika_pemusnahan_ladang_ganja');
+      $pemusnahanladang = DB::table('v_berantas_pemusnahan_ladang');
       if ($request->date_from != '') {
           $pemusnahanladang->where('tgl_penyelidikan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
       }
@@ -1550,9 +1588,17 @@ class narkotikaController extends Controller
       $i = 1;
       foreach ($pemusnahanladang as $key => $value) {
         $ladangArray[$key]['No'] = $i;
-        $ladangArray[$key]['Nomor Sprint'] = $value->nomor_sprint_penyelidikan;
-        $ladangArray[$key]['Tanggal Penyelidikan'] = $value->tgl_penyelidikan;
+        $ladangArray[$key]['No Sprin Penyelidikan'] = $value->nomor_sprint_penyelidikan;
+        $ladangArray[$key]['Tanggal Penyelidikan'] = ( $value->tgl_penyelidikan ? date('d/m/Y', strtotime($value->tgl_penyelidikan)) : '');
+        $ladangArray[$key]['Kabupaten'] = $value->kabupaten;
+        $ladangArray[$key]['kecamatan'] = $value->lokasi_idkecamatan;
+        $ladangArray[$key]['Kelurahan'] = $value->lokasi_kelurahan;
+        $ladangArray[$key]['Desa'] = $value->lokasi_desadusun;
+        $ladangArray[$key]['Latitude'] = $value->koordinat_lat;
+        $ladangArray[$key]['Longitude'] = $value->koordinat_lot;
         $ladangArray[$key]['Luas Lahan Ganja'] = $value->luas_lahan_ganja;
+        $ladangArray[$key]['No Sprin Pemusnahan'] = $value->nomor_sprint_pemusnahan;
+        $ladangArray[$key]['Tanggal Pemusnahan'] = ( $value->tgl_pemusnahan ? date('d/m/Y', strtotime($value->tgl_pemusnahan)) : '');
         $ladangArray[$key]['Luas Lahan Dimusnahkan'] = $value->luas_lahan_ganja_dimusnahkan;
         $i = $i +1;
       }

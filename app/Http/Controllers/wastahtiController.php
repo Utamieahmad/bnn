@@ -1536,8 +1536,11 @@ class wastahtiController extends Controller
         $result[$key]['No'] = $i;
         $result[$key]['Nomor LKN'] =$d->nomor_lkn;
         $result[$key]['Nama Penyidik'] = $d->nama_penyidik;
+        $result[$key]['Tanggal Penitipan'] =( $d->tgl_penitipan ? date('d/m/Y', strtotime($d->tgl_penitipan)) : '');
+        $result[$key]['Tanggal Pengambilan'] =( $d->tgl_penitipan_ambil ? date('d/m/Y', strtotime($d->tgl_penitipan_ambil)) : '');
+        $result[$key]['Nomor Ketetapan'] = $d->nomor_tap;
         $result[$key]['Tanggal Ketetapan'] =( $d->tgl_tap ? date('d/m/Y', strtotime($d->tgl_tap)) : '');
-        $result[$key]['Nomor Tap'] = $d->nomor_tap;
+        $result[$key]['Nama Kejari'] = $d->nama_kejari;
         $meta = ViewPemusnahanDetail::select('nm_brgbukti', 'jumlah_dimusnahkan', 'nm_satuan')->where('parent_id', $d->id)->get();
 
         $string_meta = $meta;
@@ -1574,12 +1577,49 @@ class wastahtiController extends Controller
     $result = [];
     $i = 1;
     foreach($data as $key=>$d){
+        if($d->kode_peran_tersangka==1){
+          $peran = 'Kultivasi';
+        }else if($d->kode_peran_tersangka==2){
+          $peran = 'Produksi';
+        }else if($d->kode_peran_tersangka==3){
+          $peran = 'Distribusi';
+        }else if($d->kode_peran_tersangka==4){
+          $peran = 'Konsumsi';
+        }
         $metas = [];
         $result[$key]['No'] = $i;
         $result[$key]['Jenis Tahanan'] =$d->kode_jenistahanan;
         $result[$key]['No. Kasus'] = $d->nomor_kasus;
-        $result[$key]['Tanggal Tahanan'] = ( $d->tgl_masuk ? date('d/m/Y', strtotime($d->tgl_masuk)) : '');
-        $result[$key]['Alamat Tahanan'] = $d->alamatdomisili;
+        $result[$key]['Jenis Identitas'] = $d->kode_jenisidentitas;
+        $result[$key]['No. Identitas'] = $d->no_identitas;
+        $result[$key]['Nama Asli'] = $d->tersangka_nama;
+        $result[$key]['Nama Alias'] = $d->tersangka_nama_alias;
+        $result[$key]['Alamat KTP'] = $d->tersangka_alamat;
+        $result[$key]['Kodepos KTP'] = $d->alamatktp_kodepos;
+        $result[$key]['Alamat Domisili'] = $d->alamatdomisili;
+        $result[$key]['Kodepos Domisili'] = $d->alamatdomisili_kodepos;
+        $result[$key]['Alamat Lainnya'] = $d->alamatlainnya;
+        $result[$key]['Kodepos Lainnya'] = $d->alamatlainnya_kodepos;
+        $result[$key]['Jenis Kelamin'] = $d->kode_jenis_kelamin;
+        $result[$key]['Tempat Lahir'] = $d->tersangka_tempat_lahir;
+        $result[$key]['Tanggal Lahir'] = ( $d->tersangka_tanggal_lahir ? date('d/m/Y', strtotime($d->tersangka_tanggal_lahir)) : '');
+        $result[$key]['Umur'] = $d->tersangka_usia;
+        $result[$key]['Pendidikan Akhir'] = $d->kode_pendidikan_akhir;
+        $result[$key]['Pekerjaan'] = $d->kode_pekerjaan;
+        $result[$key]['Warga Negara'] = $d->kode_warga_negara;
+        $result[$key]['Peran'] = $peran;
+        $result[$key]['Negara'] = $d->nama_negara;
+
+        $result[$key]['Pasal Penahanan'] = $d->pasal_dikenakan;
+        $result[$key]['Tanggal Masuk'] = ( $d->tgl_masuk ? date('d/m/Y', strtotime($d->tgl_masuk)) : '');
+        $result[$key]['Tanggal Keluar'] = ( $d->tgl_keluar ? date('d/m/Y', strtotime($d->tgl_keluar)) : '');
+        $result[$key]['Lama Penahanan'] = $d->masa_berlaku_penahanan;
+        $result[$key]['no SP Penahanan'] = $d->nomor_sp_penahanan;
+        $result[$key]['Asal Tahanan'] = $d->asal_tahanan;
+        $result[$key]['Nama Penyidik'] = $d->nama_penyidik;
+        $result[$key]['No SP Perpanjangan 1'] = $d->nomor_sp_perpanjangan_penahanan_01;
+        $result[$key]['No SP Perpanjangan 2'] = $d->nomor_sp_perpanjangan_penahanan_02;
+        $result[$key]['No SP Perpanjangan 3'] = $d->nomor_sp_perpanjangan_penahanan_03;
 
         $i = $i+1;
     }
