@@ -22,14 +22,11 @@
 						</div>
 						<div class="x_content">
 							<div>
-								<?php
-								//echo "<pre>";
-								//print_r($datadipa);
-								//echo "</pre>";
-								//echo "<pre>";
-								//print_r($retursp2d);
-								//echo "</pre>";
-								?>
+								<!--?php
+								echo "<pre>";
+								print_r($rekap);
+								echo "</pre>";
+								?-->
 							</div>
 							<table id="datatable-responsive" class="table table-striped dt-omspan nowrap" cellspacing="0" width="100%">
 								<thead>
@@ -57,6 +54,63 @@
 									</tr>
 								</thead>
 								<tbody>
+									@php
+									$i = 1;
+									@endphp
+									@foreach ($rekap as $row)
+										<tr>
+											<td rowspan="3">{{$i++}}</td>
+											<td rowspan="3"></td>
+											<td rowspan="3">{{$row['kdInstansi']}}</td>
+											<td rowspan="3">{{$row['instansiName']}}</td>
+											<td>Nilai</td>
+											<td>{{round($row['up'],2)}}</td>
+											<td>{{round($row['dkon'],2)}}</td>
+											<td></td>
+											<td>{{round($row['retur'],2)}}</td>
+											<td></td>
+											<td>{{round($row['revisi'],2)}}</td>
+											<td>{{round($row['ptagih'],2)}}</td>
+											<td>{{round($row['rekon'],2)}}</td>
+											<td>{{round($row['renkas'],2)}}</td>
+											<td></td>
+											<td>0</td>
+											<td>0</td>
+											<td rowspan="3">{{$row['na_up'] + $row['na_dkon'] + $row['na_retur'] + $row['na_revisi'] + $row['na_ptagih'] + $row['na_rekon'] + $row['na_renkas']}}</td>
+											<td rowspan="3">{{$row['bobot_up'] + $row['bobot_dkon'] + $row['bobot_retur'] + $row['bobot_revisi'] + $row['bobot_ptagih'] + $row['bobot_rekon'] + $row['bobot_renkas']}}</td>
+											<td rowspan="3"></td>
+										</tr>
+										<tr>
+											<td>Bobot(%)</td>
+											<td>{{$row['bobot_up']}}</td>
+											<td>{{$row['bobot_dkon']}}</td>
+											<td></td>
+											<td>{{$row['bobot_retur']}}</td>
+											<td></td>
+											<td>{{$row['bobot_revisi']}}</td>
+											<td>{{$row['bobot_ptagih']}}</td>
+											<td>{{$row['bobot_rekon']}}</td>
+											<td>{{$row['bobot_renkas']}}</td>
+											<td></td>
+											<td>0</td>
+											<td>0</td>
+										</tr>
+										<tr>
+											<td>Nilai Akhir</td>
+											<td>{{$row['na_up']}}</td>
+											<td>{{$row['na_dkon']}}</td>
+											<td></td>
+											<td>{{$row['na_retur']}}</td>
+											<td></td>
+											<td>{{$row['na_revisi']}}</td>
+											<td>{{$row['na_ptagih']}}</td>
+											<td>{{$row['na_rekon']}}</td>
+											<td>{{$row['na_renkas']}}</td>
+											<td></td>
+											<td>0</td>
+											<td>0</td>
+										</tr>
+									@endforeach
 								</tbody>
 							</table>
 						</div>

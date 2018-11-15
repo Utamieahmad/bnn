@@ -25,8 +25,10 @@
 				color: black;
 				font-size: 10px;
 			}
-			.dt-omspan thead tr th {
+			.dt-omspan tbody tr td {
+				padding: 2px;
 			}
+			
 		</style>
     </head>
 
@@ -185,6 +187,6 @@
         <script type="text/javascript" src="{{asset('/assets/js/popper.js')}}"></script>
         <script src="{{asset('assets/js/custom.js') }}"> </script>
         <script src="{{asset('assets/js/script.js') }}"> </script>
-        <script src="{{asset('assets/js/script2.js') }}"> </script>
+        <!--script src="{{asset('assets/js/script2.js') }}"> </script-->
     </footer>
 </html>
