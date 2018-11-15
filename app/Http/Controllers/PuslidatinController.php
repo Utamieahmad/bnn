@@ -325,7 +325,7 @@ class PuslidatinController extends Controller
             }
             $this->form_params['meta_narkoba'] = $json_data_narkoba;
             $this->form_params['meta_data_provinsi'] = $json_data_provinsi;
-            $data_request = execute_api_json('api/surveypenyalahguna/','POST',$this->form_params);
+            $data_request = execute_api_json('api/surveypenyalahguna','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Puslitdatin - Bidang Litbang - Survey';
             $trail['audit_event'] = 'post';
