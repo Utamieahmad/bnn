@@ -56,6 +56,10 @@ AS SELECT a.kasus_id,
     a.kategori,
     a.status_kelengkapan,
     a.meta_penyidik,
+    a.tgl_kejadian,
+    w1.nm_wilayah AS propinsi,
+    w2.nm_wilayah AS kabupaten,
+    a.jalur_masuk,
     a.deleted_at
    FROM berantas_kasus a
      LEFT JOIN tr_brgbukti b ON a.kasus_jenis = b.id_brgbukti
@@ -64,7 +68,9 @@ AS SELECT a.kasus_id,
      LEFT JOIN tr_peran e ON a.kasus_peran = e.kd_peran
      LEFT JOIN tr_countries f ON a.kasus_negara::text = f.country_code::text
      LEFT JOIN rbac_users ru ON a.created_by = ru.user_id
-     LEFT JOIN tr_jnskasus k ON a.kasus_jenis = k.id;
+     LEFT JOIN tr_jnskasus k ON a.kasus_jenis = k.id
+     LEFT JOIN tr_wilayah w1 ON a.kasus_tkp_idprovinsi = w1.id_wilayah
+     LEFT JOIN tr_wilayah w2 ON a.kasus_tkp_idkabkota = w2.id_wilayah;
 
 
 CREATE OR REPLACE VIEW public.v_berantas_pemusnahan_ladang
