@@ -1,0 +1,11 @@
+INSERT INTO public.rbac_menu_appl (menu_id,menu_id_parent,modul_app,menu_position,menu_title,menu_order,active,"type")
+VALUES (153,2,'berantas','2>153','Razia',8,'Y',1);
+
+INSERT INTO public.rbac_menu_appl (menu_id,menu_id_parent,modul_app,menu_position,menu_title,menu_order,active,"type")
+VALUES (228,0,'keuangan','228>','Keuangan',16,'Y',1);
+
+INSERT INTO public.rbac_menu_appl (menu_id,menu_id_parent,modul_app,menu_position,menu_title,menu_order,active,"type")
+VALUES (227,226,'cegah','4>226>227>','Data Aktivitas Sebaran',1,'Y',1);
+
+INSERT INTO public.rbac_menu_appl (menu_id,menu_id_parent,modul_app,menu_position,menu_title,menu_uri,menu_order,active,"type")
+VALUES (226,4,'cegah','4>226>','Deputi Cegah','#',1,'Y',1);
