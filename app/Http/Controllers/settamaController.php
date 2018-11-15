@@ -1608,11 +1608,16 @@ class SettamaController extends Controller
 		$i = 1;
       	foreach($data as $key=>$value){
 					$result[$key]['No'] = $i;
+        	$result[$key]['Jenis Rujukan'] = $value->jns_rujukan ;
         	$result[$key]['No Rujukan'] = $value->no_rujukan ;
         	$result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : ''). ( $value->tgl_selesai ? ' - '.date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+        	$result[$key]['Pelaksana'] =$value->nama_pelaksana;
+        	$result[$key]['Bagian'] =$value->nama_bagian;
         	$result[$key]['Jenis Kegiatan'] =$value->nama_jenis_kegiatan;
+        	$result[$key]['Tempat Kegiatan'] =$value->tempat_kegiatan;
+        	$result[$key]['Tujuan Kegiatan'] =$value->tujuan_kegiatan;
         	$result[$key]['Sumber Anggaran'] = $value->sumber_anggaran;
-        	$result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
+        	// $result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
         	$peserta = "";
         	$meta_peserta = $value->meta_peserta;
         	if($meta_peserta){
@@ -1651,11 +1656,16 @@ class SettamaController extends Controller
 		$i = 1;
       	foreach($data as $key=>$value){
 					$result[$key]['No'] = $i;
+        	$result[$key]['Jenis Rujukan'] = $value->jns_rujukan ;
         	$result[$key]['No Rujukan'] = $value->no_rujukan ;
         	$result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : ''). ( $value->tgl_selesai ? ' - '.date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+        	$result[$key]['Pelaksana'] =$value->nama_pelaksana;
+        	$result[$key]['Bagian'] =$value->nama_bagian;
         	$result[$key]['Jenis Kegiatan'] =$value->nama_jenis_kegiatan;
+        	$result[$key]['Tempat Kegiatan'] =$value->tempat_kegiatan;
+        	$result[$key]['Tujuan Kegiatan'] =$value->tujuan_kegiatan;
         	$result[$key]['Sumber Anggaran'] = $value->sumber_anggaran;
-        	$result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
+        	// $result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
         	$peserta = "";
         	$meta_peserta = $value->meta_peserta;
         	if($meta_peserta){
@@ -1694,11 +1704,16 @@ class SettamaController extends Controller
 		$i = 1;
       	foreach($data as $key=>$value){
 					$result[$key]['No'] = $i;
+        	$result[$key]['Jenis Rujukan'] = $value->jns_rujukan ;
         	$result[$key]['No Rujukan'] = $value->no_rujukan ;
         	$result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : ''). ( $value->tgl_selesai ? ' - '.date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+        	$result[$key]['Pelaksana'] =$value->nama_pelaksana;
+        	$result[$key]['Bagian'] =$value->nama_bagian;
         	$result[$key]['Jenis Kegiatan'] =$value->nama_jenis_kegiatan;
+        	$result[$key]['Tempat Kegiatan'] =$value->tempat_kegiatan;
+        	$result[$key]['Tujuan Kegiatan'] =$value->tujuan_kegiatan;
         	$result[$key]['Sumber Anggaran'] = $value->sumber_anggaran;
-        	$result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
+        	// $result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
         	$peserta = "";
         	$meta_peserta = $value->meta_peserta;
         	if($meta_peserta){
@@ -1737,11 +1752,16 @@ class SettamaController extends Controller
 		$i = 1;
       	foreach($data as $key=>$value){
 					$result[$key]['No'] = $i;
+        	$result[$key]['Jenis Rujukan'] = $value->jns_rujukan ;
         	$result[$key]['No Rujukan'] = $value->no_rujukan ;
         	$result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : ''). ( $value->tgl_selesai ? ' - '.date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+        	$result[$key]['Pelaksana'] =$value->nama_pelaksana;
+        	$result[$key]['Bagian'] =$value->nama_bagian;
         	$result[$key]['Jenis Kegiatan'] =$value->nama_jenis_kegiatan;
+        	$result[$key]['Tempat Kegiatan'] =$value->tempat_kegiatan;
+        	$result[$key]['Tujuan Kegiatan'] =$value->tujuan_kegiatan;
         	$result[$key]['Sumber Anggaran'] = $value->sumber_anggaran;
-        	$result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
+        	// $result[$key]['Status'] = (($value->status == "Y") ? 'Lengkap' : (($value->status == 'N') ? 'Tidak lengkap' : ''));
         	$peserta = "";
         	$meta_peserta = $value->meta_peserta;
         	if($meta_peserta){
