@@ -80,7 +80,7 @@ class RehabilitasiController extends Controller
         if($request->isMethod('post')){
             $this->form_params   = $request->except(['_token']);
             $this->form_params['tipe'] = 'plrkm';
-            $data_request = execute_api_json('api/penilaianlembaga/','POST',$this->form_params);
+            $data_request = execute_api_json('api/penilaianlembaga','POST',$this->form_params);
 
             if(($data_request->code == 200)&& ($data_request->status != "error") ){
                 $this->messages['status'] = 'success';
@@ -659,7 +659,7 @@ class RehabilitasiController extends Controller
                 }
             }
             $this->form_params['kategori'] = 'plrkm';
-            $data_request = execute_api_json('api/nspk/','POST',$this->form_params);
+            $data_request = execute_api_json('api/nspk','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRKM - Dokumen NSPK';
 						$trail['audit_event'] = 'post';
@@ -1400,7 +1400,7 @@ class RehabilitasiController extends Controller
             $id = $request->id_header;
             $data_request = "";
             $this->form_params = $request->except(['_token','parent_id']);
-            $data_request = execute_api_json('api/pelatihanpeserta/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pelatihanpeserta','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRKM - Kegiatan Peserta';
 						$trail['audit_event'] = 'post';
@@ -2097,7 +2097,7 @@ class RehabilitasiController extends Controller
                 }
             }
             $this->form_params['kategori'] = 'plrip';
-            $data_request = execute_api_json('api/nspk/','POST',$this->form_params);
+            $data_request = execute_api_json('api/nspk','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRIP - Dokumen NSPK';
 						$trail['audit_event'] = 'post';
@@ -2837,7 +2837,7 @@ class RehabilitasiController extends Controller
             $id = $request->id_header;
             $data_request = "";
             $this->form_params = $request->except(['_token','parent_id']);
-            $data_request = execute_api_json('api/pelatihanpeserta/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pelatihanpeserta','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRIP - Kegiatan Peserta';
 						$trail['audit_event'] = 'post';
@@ -3038,7 +3038,7 @@ class RehabilitasiController extends Controller
         if($request->isMethod('post')){
             $this->form_params   = $request->except(['_token']);
             $this->form_params['tipe'] = 'plrip';
-            $data_request = execute_api_json('api/penilaianlembaga/','POST',$this->form_params);
+            $data_request = execute_api_json('api/penilaianlembaga','POST',$this->form_params);
             if(($data_request->code == 200)&& ($data_request->status != "error") ){
                 $this->messages['status'] = 'success';
                 $this->messages['message'] = 'Data Info Lembaga Umum PLRIP Berhasil Diperbarui';
@@ -3561,7 +3561,7 @@ class RehabilitasiController extends Controller
                 }
             }
             $this->form_params['kategori'] = 'pasca';
-            $data_request = execute_api_json('api/nspk/','POST',$this->form_params);
+            $data_request = execute_api_json('api/nspk','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat Pascarehabilitasi - Dokumen NSPK';
 						$trail['audit_event'] = 'post';
@@ -4307,7 +4307,7 @@ class RehabilitasiController extends Controller
             $id = $request->id_header;
             $data_request = "";
             $this->form_params = $request->except(['_token','parent_id']);
-            $data_request = execute_api_json('api/pelatihanpeserta/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pelatihanpeserta','POST',$this->form_params);
 
 						$trail['audit_menu'] = 'Rehabilitasi - Direktorat Pascarehabilitasi - Kegiatan Peserta';
 						$trail['audit_event'] = 'post';
@@ -4541,7 +4541,7 @@ class RehabilitasiController extends Controller
         if($request->isMethod('post')){
             $this->form_params   = $request->except(['_token']);
             $this->form_params['tipe'] = 'pasca';
-            $data_request = execute_api_json('api/penilaianlembaga/','POST',$this->form_params);
+            $data_request = execute_api_json('api/penilaianlembaga','POST',$this->form_params);
             if(($data_request->code == 200)&& ($data_request->status != "error") ){
                 $this->messages['status'] = 'success';
                 $this->messages['message'] = 'Data Info Lembaga Umum PascaRehabilitasi Berhasil Diperbarui';
