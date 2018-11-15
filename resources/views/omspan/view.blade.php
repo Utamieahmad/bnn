@@ -20,7 +20,7 @@
 						<div class="x_title">
 							<h2>Indikator Pelaksanaan Anggaran</h2>
 						</div>
-						<div class="x_content">
+						<div class="x_content overflow-tbl">
 							<div>
 								<!--?php
 								echo "<pre>";
@@ -28,7 +28,8 @@
 								echo "</pre>";
 								?-->
 							</div>
-							<table id="datatable-responsive" class="table table-striped dt-omspan nowrap" cellspacing="0" width="100%">
+							<!-- <table id="datatable-responsive" class="table table-striped dt-responsive nowrap col-left" cellspacing="0" width="100%"> -->
+							<table id="datatable-responsive" class="table table-striped dt-omspan dt-responsive nowrap" cellspacing="0" width="100%">
 								<thead>
 									<tr>
 										<th>No</th>

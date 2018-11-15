@@ -22,13 +22,16 @@
     		</script>
 		<style>
 			.dt-omspan {
-				color: black;
-				font-size: 10px;
+				font-size: 12px;
 			}
 			.dt-omspan tbody tr td {
 				padding: 2px;
 			}
-			
+      .overflow-tbl{
+        overflow-x: scroll;
+        width: 100%;
+      }
+
 		</style>
     </head>
 
@@ -170,7 +173,7 @@
         <script>
             var TOTAL_PAGES = {{$page['totalpage']}};
             var CURRENT_PAGE = {{$page['page']}};
-        </script>   
+        </script>
         @endif
         <script src="{{asset('assets/jquery/dist/jquery.min.js') }}"> </script>
         <script src="{{asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"> </script>
