@@ -92,7 +92,7 @@ class AdvokasiJejaringAPIController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $data = AdvokasiJejaring::where('id', $id)->first();
+            $data = AdvokasiJejaring::join('tr_wilayah', 'cegahadvokasi_jejaring.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahadvokasi_jejaring.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
             // $data = AdvokasiJejaring::where([['status', 1], ['tersangka_id', $id]])->first();
 
             if (!$data){
