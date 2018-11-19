@@ -1014,10 +1014,31 @@ class penindakanController extends Controller
       foreach($data as $key=>$d){
           $metas = [];
           $result[$key]['No'] = $i;
+          $result[$key]['Pelaksana'] =$d->nm_instansi;
           $result[$key]['Nomor Surat Perintah'] =$d->nomor_sprint_dpo;
+          $result[$key]['Jenis Identitas'] = $d->kode_jenisidentitas;
           $result[$key]['Nomor Identitas'] = $d->no_identitas;
-          $result[$key]['Alamat'] = $d->alamat;
+          $result[$key]['Nama Asli'] = $d->nama;
+          $result[$key]['Alamat Domisili'] = $d->alamatdomisili;
+          $result[$key]['Kodepos Domisili'] = $d->alamatdomisili_kodepos;
+          $result[$key]['Alamat Lainnya'] = $d->alamatlainnya;
+          $result[$key]['Kodepos lainnya'] = $d->alamatlainnya_kodepos;
           $result[$key]['Jenis Kelamin'] = $d->kode_jenis_kelamin;
+          $result[$key]['Tempat Lahir'] = $d->tempat_lahir;
+          $result[$key]['Tanggal Lahir'] = $d->tanggal_lahir;
+          $result[$key]['Umur'] = $d->usia;
+          $result[$key]['Pendidikan Akhir'] = $d->kode_pendidikan_akhir;
+          $result[$key]['Pekerjaan'] = $d->kode_pekerjaan;
+          $result[$key]['Warga Negara'] = $d->kode_warga_negara;
+          $result[$key]['Peran'] = $d->kode_peran_tersangka;
+          $result[$key]['Negara'] = $d->nama_negara;
+          $result[$key]['Tinggi Badan'] = $d->fisik_tinggi_badan;
+          $result[$key]['Warna Kulit'] = str_replace('fisik_warna_kulit_', '', $d->fisik_warna_kulit);
+          $result[$key]['Bentuk Tubuh'] = str_replace('fisik_perawakan_', '', $d->fisik_perawakan);
+          $result[$key]['Bentuk Kepala'] = str_replace('fisik_lohat_bahasa_', '', $d->fisik_lohat_bahasa);
+          $result[$key]['Warna Rambut'] = str_replace('fisik_warna_rambut_', '', $d->fisik_warna_rambut);
+          $result[$key]['Jenis Rambut'] = str_replace('fisik_tipikal_rambut_', '', $d->fisik_tipikal_rambut);
+          $result[$key]['Bentuk Muka'] = str_replace('fisik_bentuk_wajah_', '', $d->fisik_bentuk_wajah);
 
           $i = $i+1;
       }

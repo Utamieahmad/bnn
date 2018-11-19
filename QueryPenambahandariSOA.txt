@@ -1,0 +1,95 @@
+name = v_soa_datakasus
+
+SELECT
+	A .kasus_id AS id_kasus,
+	C .id_wilayah,
+	b.id_instansi,
+	A .kasus_no AS nomor_kasus,
+	b.nm_instansi AS nama_instansi,
+	C .nm_wilayah AS nama_wilayah,
+	A .kasus_tanggal AS tanggal_kasus
+FROM
+	berantas_kasus A,
+	tr_instansi b,
+	tr_wilayah C
+WHERE
+	(
+		(
+			(
+				A .id_instansi = b.id_instansi
+			)
+			AND (b.id_wilayah = C .id_wilayah)
+		)
+		AND (b.kd_jnsinst = '11' :: bpchar)
+	);
+
+
+name = v_soa_datapeserta
+
+SELECT
+	b.peserta_id AS id_peserta,
+	A .header_id AS id_header,
+	A .id_instansi,
+	d.id_wilayah,
+	b.peserta_inisial AS nama_peserta,
+	b.kode_jenis_kelamin AS jenis_kelamin,
+	C .nm_instansi AS nama_instansi,
+	d.nm_wilayah AS nama_wilayah,
+	A .tgl_test AS tanggal_tes
+FROM
+	dayamas_tes_uji_narkoba_header A,
+	dayamas_test_uji_narkoba_peserta b,
+	tr_instansi C,
+	tr_wilayah d
+WHERE
+	(
+		(
+			(
+				(A .header_id = b.header_id)
+				AND (
+					A .id_instansi = C .id_instansi
+				)
+			)
+			AND (C .id_wilayah = d.id_wilayah)
+		)
+		AND (C .kd_jnsinst = '11' :: bpchar)
+	);
+
+  name = v_soa_datatersangka
+
+  SELECT
+	A .tersangka_id AS id_tersangka,
+	A .kasus_id AS id_kasus,
+	C .id_instansi,
+	d.id_wilayah,
+	C .nm_instansi AS nama_instansi,
+	d.nm_wilayah AS nama_wilayah,
+	e.nm_jnswilayah AS jenis_wilayah,
+	b.kasus_no AS nomor_kasus,
+	b.kasus_tanggal AS tanggal_kasus,
+	A .tersangka_nama AS nama_tersangka,
+	A .kode_jenis_kelamin AS jenis_kelamin
+FROM
+	berantas_kasus_tersangka A,
+	berantas_kasus b,
+	tr_instansi C,
+	tr_wilayah d,
+	tr_jnswilayah e
+WHERE
+	(
+		(
+			(
+				(
+					(A .kasus_id = b.kasus_id)
+					AND (
+						b.id_instansi = C .id_instansi
+					)
+				)
+				AND (C .id_wilayah = d.id_wilayah)
+			)
+			AND (
+				d.kd_jnswilayah = e.kd_jnswilayah
+			)
+		)
+		AND (C .kd_jnsinst = '11' :: bpchar)
+	);

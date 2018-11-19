@@ -325,7 +325,7 @@ class PuslidatinController extends Controller
             }
             $this->form_params['meta_narkoba'] = $json_data_narkoba;
             $this->form_params['meta_data_provinsi'] = $json_data_provinsi;
-            $data_request = execute_api_json('api/surveypenyalahguna/','POST',$this->form_params);
+            $data_request = execute_api_json('api/surveypenyalahguna','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Puslitdatin - Bidang Litbang - Survey';
             $trail['audit_event'] = 'post';
@@ -704,7 +704,7 @@ class PuslidatinController extends Controller
             }else{
                 $json_data_provinsi  = "";
             }
-            $data_request = execute_api_json('api/surveypenyalahgunanarkoba/','POST',$this->form_params);
+            $data_request = execute_api_json('api/surveypenyalahgunanarkoba','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Puslitdatin - Bidang Litbang - Survey Nasional Penyalahgunaan Narkoba';
             $trail['audit_event'] = 'post';
@@ -1073,7 +1073,7 @@ class PuslidatinController extends Controller
             }else{
                 $json_data_provinsi  = "";
             }
-            $data_request = execute_api_json('api/surveypenyalahgunaketergantungan/','POST',$this->form_params);
+            $data_request = execute_api_json('api/surveypenyalahgunaketergantungan','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Puslitdatin - Bidang Litbang - Survey Nasional Berdasarkan Tingkat Ketergantungan';
             $trail['audit_event'] = 'post';
@@ -1989,7 +1989,7 @@ class PuslidatinController extends Controller
                 $json_meta_lokasi = "";
             }
 
-            $data_request = execute_api_json('api/riset/','POST',$this->form_params);
+            $data_request = execute_api_json('api/riset','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Puslitdatin - Bidang Litbang - Riset Operasional Penyalahgunaan Narkoba';
             $trail['audit_event'] = 'post';

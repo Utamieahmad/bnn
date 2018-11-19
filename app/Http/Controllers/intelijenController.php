@@ -1144,10 +1144,21 @@ class intelijenController extends Controller
     foreach($data as $key=>$d){
         $result[$key]['No'] = $i;
         $result[$key]['Nomor LKN'] = $d->nomor_lkn;
+        $result[$key]['Nama Jaringan'] = $d->nama_jaringan;
+        $result[$key]['Nama Komandan Jaringan'] = $d->nama_komandan_jaringan;
         $result[$key]['Jenis Jaringan'] = $d->kode_jenisjaringan;
         $result[$key]['Keterlibatan Jaringan'] = ( $d->keterlibatan_jaringan ?( $d->keterlibatan_jaringan == 'Y' ? "Ya" : "Tidak") : '');
-        $result[$key]['Nama Jaringan'] = $d->nama_jaringan;
         $result[$key]['Tanggal'] = date('Y-m-d', strtotime($d->created_at));
+        $meta = json_decode($d->meta_jaringan_terkait,true);
+        if(count($meta)){
+          foreach($meta as $mm){
+              $metaArray[] = $mm['nama_jaringan'].' ('.$mm['peran_jaringan'].')';
+          }
+          // dd($penyidikArray[$key]['ssr']);
+          $result[$key]['Penyidik'] = implode("\n", $metaArray);
+        } else {
+          $result[$key]['Penyidik'] = '';
+        }
         $i = $i+1;
     }
     $name = 'Pendataan Jaringan Intelijen '.Carbon::now()->format('Y-m-d H:i:s');
