@@ -23,7 +23,7 @@ class deputiCegahController extends Controller {
 
     public function pendataanAktivitasSebaran(Request $request) {        
 //        dd($request->limit);        
-        $url_cegah = 'http://103.3.70.160:7004/cegah/react/activityquery/getFiltered';
+        $url_cegah = 'http://10.210.84.11:7004/cegah/react/activityquery/getFiltered';
         $client = new Client();
         if($request->page){
             $page = $request->page;

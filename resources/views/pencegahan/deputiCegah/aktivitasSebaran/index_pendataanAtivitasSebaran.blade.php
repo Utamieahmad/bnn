@@ -54,9 +54,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Pembuat</th>
-                                        <th style="width: 50%;">Satker</th>
-                                        <th style="width: 50%;">Wilayah</th>
-                                        <th style="width: 20%;">Tanggal</th>
+                                        <th>Satker</th>
+                                        <th>Wilayah</th>
+                                        <th style="width: 10%;">Tanggal</th>
                                         <th>Media</th>
                                         <th>Paket</th>
                                         <th>Anggaran</th>

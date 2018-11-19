@@ -9,3 +9,8 @@ bug database :
 penambahan kolom untuk menambahkan menu deputi cegah -> aktivitas sebaran
 1. tambahkan data di tabel rbac_menu_appl
 2. tambahkan data di tabel rbac_role_group
+
+
+Penambahan kolom untuk tabel hukerkerjasama_lainnya
+1. tambahkan field kolom dengan nama updated_by type int4
+2. tambahkan field kolom dengan nama updated_at type timestamp
