@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title')</title>
         <link href="{{asset('assets/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{asset('assets/bootstrap/dist/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{asset('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{asset('assets/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css') }}" rel="stylesheet">
         <link href="{{asset('assets/css/select2.min.css') }}" rel="stylesheet">

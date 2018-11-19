@@ -2458,8 +2458,7 @@ class KerjasamaController extends Controller
                    );
             }
 
-            $this->kelengkapan_kerjasamaLainnya($id);
-
+            $this->kelengkapan_kerjasamaLainnya($id);            
         if(($result['code'] == 200)&& ($result['status'] != "error") ){
             $this->messages['status'] = 'success';
             $this->messages['message'] = 'Data Kegiatan Kerjasama Lainnya Berhasil Diperbarui';

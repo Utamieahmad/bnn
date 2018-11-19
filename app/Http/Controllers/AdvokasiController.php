@@ -301,23 +301,25 @@ class AdvokasiController extends Controller
        $uraian_singkat_materi = $request->input('uraian_singkat');
 
        if ($request->input('kodesumberanggaran')=="DIPA") {
-           $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
-                   [
-                       'headers' =>
-                       [
-                           'Authorization' => 'Bearer '.$token
-                       ],
-                       'form_params' => [
-                           'kode_anggaran' => $request->input('akode_anggaran'),
+//           dd('gemes');
+           $array = array(
+               'kode_anggaran' => $request->input('akode_anggaran'),
                            'sasaran' => $request->input('asasaran'),
                            'pagu' => $request->input('apagu'),
                            'target_output' => $request->input('atarget_output'),
                            'satuan_output' => $request->input('asatuan_output'),
                            'tahun' => $request->input('atahun'),
                            'satker_code' => $request->input('asatker_code'),
-                           'refid_anggaran' => $request->input('arefid_anggaran'),
-
-                       ]
+                           'refid_anggaran' => $request->input('arefid_anggaran')
+           );
+           $json_encode = json_encode($array); 
+           $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
+                   [
+                       'headers' =>
+                       [
+                           'Authorization' => 'Bearer '.$token
+                       ],
+                       'body' => $json_encode
                    ]
                );
 
