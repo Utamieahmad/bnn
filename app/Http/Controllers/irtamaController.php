@@ -122,7 +122,9 @@ class irtamaController extends Controller
       }
 
       $url_simpeg = config('app.url_simpeg');
+      // dd($url_simpeg);
       $query  =  execute_api_json($url_simpeg,"GET");
+      // dd($query);
       if($query->code == 200 && ($query->status != 'error')){
         $this->data['satker'] = $query->data;
       }else{
@@ -385,10 +387,10 @@ class irtamaController extends Controller
     }
     public function addirtamaAudit(Request $request){
         $client = new Client();
-        $url_satker = config('app.url_satker');        
-        $satker_irtama = config('app.satker_irtama');                
+        $url_satker = config('app.url_satker');
+        $satker_irtama = config('app.satker_irtama');
         try {
-          $satker = execute_api_json($url_satker.'?unit_id='.$satker_irtama,'GET');           
+          $satker = execute_api_json($url_satker.'?unit_id='.$satker_irtama,'GET');
           if(($satker->code == 200) && ($satker->status != 'error')){
 
             $this->data['pegawai'] = $satker->data->pegawai;
@@ -2692,7 +2694,7 @@ class irtamaController extends Controller
 
     public function addirtamaSosialisasi(Request $request){
       $url_simpeg = config('app.url_simpeg');
-      $query  =  execute_api_json($url_simpeg,"GET");      
+      $query  =  execute_api_json($url_simpeg,"GET");
       if($query->code == 200 && ($query->status != 'error')){
         $this->data['satker'] = $query->data;
       }else{
@@ -5660,8 +5662,8 @@ class irtamaController extends Controller
           echo 'tidak ada';
         }
     }
-    
-    public function downloadLaporan(Request $request){         
+
+    public function downloadLaporan(Request $request){
         $array_segments = [
             'irtama_audit'=>'auditlha',
             'irtama_ptl'=>'irtamaptl',
@@ -5695,9 +5697,9 @@ class irtamaController extends Controller
 
         $result= [];
 
-        $segment = $request->segment;        
+        $segment = $request->segment;
         if ($segment == 'irtama_audit') {
-            $data_request = DB::table('v_irtama_lha');            
+            $data_request = DB::table('v_irtama_lha');
             if ($request->date_from != '') {
                 $data_request->where('tanggal_lha', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
@@ -5705,9 +5707,9 @@ class irtamaController extends Controller
                 $data_request->where('tanggal_lha', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lha', 'desc')->get();
-            if(count($data)>=1){                                    
+            if(count($data)>=1){
                 if(count($data) >0){
-                    $i =  1;                    
+                    $i =  1;
                     foreach($data as $key=>$d){
                         $result[$key]['No'] =  $i;
                         $result[$key]['No LHA'] =$d->nomor_lha;
@@ -5721,7 +5723,7 @@ class irtamaController extends Controller
                           $satker = "";
                         }
                         $result[$key]['Nama Satker'] =  $satker;
-                        
+
                         $mutu = "";
                         $nama = [];
                         $coll_nama = "";
@@ -5784,7 +5786,7 @@ class irtamaController extends Controller
                           $coll_nama = implode("\n",$nama);
                         }
                         $result[$key]['Anggota'] = $coll_nama;
-                        
+
                         $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
 
                         $i = $i+1;
@@ -5798,8 +5800,8 @@ class irtamaController extends Controller
             }else{
                 return false;
             }
-        }else if ($segment == 'irtama_ptl') {            
-            $data_request = DB::table('v_irtama_ptl');             
+        }else if ($segment == 'irtama_ptl') {
+            $data_request = DB::table('v_irtama_ptl');
             if ($request->date_from != '') {
                 $data_request->where('tanggal_lha', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
@@ -5807,7 +5809,7 @@ class irtamaController extends Controller
                 $data_request->where('tanggal_lha', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lha', 'desc')->get();
-            if(count($data)>=1){   
+            if(count($data)>=1){
             $param = $data;
 
             $excel = Excel::create('Download Irtama Audit PTL'.' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to)), function($excel) use($param) {
@@ -5834,7 +5836,7 @@ class irtamaController extends Controller
                 $data_request->where('tgl_hasil_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_hasil_laporan', 'desc')->get();
-            
+
             if(count($data)>=1){
 //            $data = $data_request->data;
              $i = 1;
@@ -5855,10 +5857,10 @@ class irtamaController extends Controller
               $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
-        }else if($segment == 'irtama_sosialisasi'){            
+        }else if($segment == 'irtama_sosialisasi'){
             $data_request = DB::table('irtama_sosialisasi');
             if ($request->date_from != '') {
                 $data_request->where('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
@@ -5867,7 +5869,7 @@ class irtamaController extends Controller
                 $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
-            
+
             if(count($data)>=1){
 //          if($data_request->code == 200 && $data_request->status != 'error'){
 //            $data = $data_request->data;
@@ -5894,14 +5896,14 @@ class irtamaController extends Controller
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
 
-        }else if($segment == 'irtama_verifikasi'){            
+        }else if($segment == 'irtama_verifikasi'){
             $data_request = DB::table('irtama_verifikasi');
             if ($request->date_from != '') {
                 $data_request->where('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
@@ -5910,7 +5912,7 @@ class irtamaController extends Controller
                 $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
-            
+
             if(count($data)>=1){
 //          if($data_request->code == 200 && $data_request->status != 'error'){
 //            $data = $data_request->data;
@@ -5935,10 +5937,10 @@ class irtamaController extends Controller
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
         }else if($segment == 'irtama_sop'){
@@ -5950,7 +5952,7 @@ class irtamaController extends Controller
                 $data_request->where('tgl_sop', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_sop', 'desc')->get();
-            
+
             if(count($data)>=1){
 //          if($data_request->code == 200 && $data_request->status != 'error'){
 //            $data = $data_request->data;
@@ -5965,10 +5967,10 @@ class irtamaController extends Controller
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
 
@@ -5981,7 +5983,7 @@ class irtamaController extends Controller
                 $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
-            
+
             if(count($data)>=1){
 //          if($data_request->code == 200 && $data_request->status != 'error'){
             $query  =  execute_api('api/lookup/irtama_satker',"GET");
@@ -6000,10 +6002,10 @@ class irtamaController extends Controller
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
 
@@ -6016,7 +6018,7 @@ class irtamaController extends Controller
                 $data_request->where('tanggal', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal', 'desc')->get();
-            
+
             if(count($data)>=1){
 //          if($data_request->code == 200 && $data_request->status != 'error'){
             $query  =  execute_api('api/lookup/irtama_satker',"GET");
@@ -6046,14 +6048,14 @@ class irtamaController extends Controller
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
-        }else if($segment == 'irtama_lk'){            
-            $data_request = DB::table('irtama_reviu_lk');             
+        }else if($segment == 'irtama_lk'){
+            $data_request = DB::table('irtama_reviu_lk');
             if ($request->date_from != '') {
                 $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
@@ -6061,7 +6063,7 @@ class irtamaController extends Controller
                 $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
-            if(count($data)>=1){                        
+            if(count($data)>=1){
             $i = 1;
              foreach($data as $key=>$d){
                 $result[$key]['No'] = $i;
@@ -6080,22 +6082,22 @@ class irtamaController extends Controller
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
-        }else if($segment == 'irtama_rkakl'){                     
-            $data_request = DB::table('irtama_reviu_rkakl');             
+        }else if($segment == 'irtama_rkakl'){
+            $data_request = DB::table('irtama_reviu_rkakl');
             if ($request->date_from != '') {
                 $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
                 $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
-            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();            
-            if(count($data)>=1){            
+            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
+            if(count($data)>=1){
             $i = 1;
             foreach($data as $key=>$d){
                $result[$key]['No'] = $i;
@@ -6106,22 +6108,22 @@ class irtamaController extends Controller
                $result[$key]['Status'] = $d->status == 'Y' ? 'Lengkap' : 'Belum Lengkap';
                $i = $i +1;
             }
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
-        }else if($segment == 'irtama_rkbmn'){            
-            $data_request = DB::table('irtama_reviu_rkbmn');             
+        }else if($segment == 'irtama_rkbmn'){
+            $data_request = DB::table('irtama_reviu_rkbmn');
             if ($request->date_from != '') {
                 $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
                 $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
-            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();            
-            if(count($data)>=1){                        
+            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
+            if(count($data)>=1){
             $i = 1;
             foreach($data as $key=>$d){
                $result[$key]['No'] = $i;
@@ -6132,22 +6134,22 @@ class irtamaController extends Controller
                $result[$key]['Status'] = $d->status == 'Y' ? 'Lengkap' : 'Belum Lengkap';
                $i = $i +1;
             }
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
-        }else if($segment == 'irtama_lkip'){            
-            $data_request = DB::table('irtama_reviu_lkip');             
+        }else if($segment == 'irtama_lkip'){
+            $data_request = DB::table('irtama_reviu_lkip');
             if ($request->date_from != '') {
                 $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
                 $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
-            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();            
-            if(count($data)>=1){          
+            $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
+            if(count($data)>=1){
 //            $data = $data_request->data;
             $i = 1;
             foreach($data as $key=>$d){
@@ -6159,10 +6161,10 @@ class irtamaController extends Controller
                $result[$key]['Status'] = $d->status == 'Y' ? 'Lengkap' : 'Belum Lengkap';
                $i = $i +1;
             }
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));              
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
             $this->printData($result, $name);
           }
         }else{
