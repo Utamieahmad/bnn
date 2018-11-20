@@ -732,7 +732,7 @@ class HukumController extends Controller
         // dd($pemusnahanladang);
         $DataArray = [];
 
-        print_r($PrintData); exit;
+//        print_r($PrintData); exit;
 
         $i = 1;
         foreach ($PrintData['data'] as $key => $value) {
@@ -1525,7 +1525,7 @@ class HukumController extends Controller
 
         // print_r($request->except(['_token']));
 
-        $client = new Client();
+        $client = new Client();        
 
        if ($request->input('sumberanggaran')=="DIPA") {
 
@@ -1687,11 +1687,11 @@ class HukumController extends Controller
                   'form_params' =>  [
                     "pelaksana" => $request->input('pelaksana'),
                     "jenis_kegiatan" => $request->input('jenis_kegiatan'),
-                    "no_sprint_kepala" => $request->input('nomor_surat_perintah'),
-                    "no_sprint_deputi" => $request->input('sprint_deputi'),
+                    "no_sprint_kepala" => $request->input('no_sprint_kepala'),
+                    "no_sprint_deputi" => $request->input('no_sprint_deputi'),
                     "tgl_mulai" => ($request->input('tgl_mulai') != '') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_mulai')))) : '',
                     "tgl_selesai" => ($request->input('tgl_selesai') != '') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_selesai')))) : '',
-                    "tema" => $request->input('tema_kegiatan'),
+                    "tema" => $request->input('tema'),
                     "meta_narasumber" => json_encode($request->input('meta_narasumber')),
                     "meta_peserta" => json_encode($request->input('meta_peserta')),
                     "tempat_kegiatan" => $request->input('tempat_kegiatan'),
@@ -1707,11 +1707,11 @@ class HukumController extends Controller
 
       $this->form_params = array("pelaksana" => $request->input('pelaksana'),
       "jenis_kegiatan" => $request->input('jenis_kegiatan'),
-      "no_sprint_kepala" => $request->input('nomor_surat_perintah'),
-      "no_sprint_deputi" => $request->input('sprint_deputi'),
+      "no_sprint_kepala" => $request->input('no_sprint_kepala'),
+      "no_sprint_deputi" => $request->input('no_sprint_deputi'),
       "tgl_mulai" => ($request->input('tgl_mulai') != '') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_mulai')))) : '',
       "tgl_selesai" => ($request->input('tgl_selesai') != '') ? date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_selesai')))) : '',
-      "tema" => $request->input('tema_kegiatan'),
+      "tema" => $request->input('tema'),
       "meta_narasumber" => json_encode($request->input('meta_narasumber')),
       "meta_peserta" => json_encode($request->input('meta_peserta')),
       "tempat_kegiatan" => $request->input('tempat_kegiatan'),
