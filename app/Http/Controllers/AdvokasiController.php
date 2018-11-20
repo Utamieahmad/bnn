@@ -858,6 +858,70 @@ class AdvokasiController extends Controller
         $this->printData($data, $name);
     }
 
+    public function downloadKoordinasi(Request $request){
+  
+        $data = DB::table('v_cegahadvokasi_rakor');
+        if ($request->date_from != '') {
+          $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        if ($request->session()->get('wilayah') != '') {
+          $data  = $data->where(function ($query) use ($request) {
+              $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+          });
+        }
+
+        $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+        $DataArray = [];
+        $result = [];
+        $i = 1;
+        foreach ($PrintData['data'] as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['No Sprint'] = $value->no_sprint;
+          $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+          $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
+          
+          $meta = json_decode($value->meta_sasaran,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['ssr'][$j] = $meta[$j];
+            }
+            $DataArray[$key]['Sasaran'] = implode("\n", $InstansiArray[$key]['ssr']);
+          } else {
+            $DataArray[$key]['Sasaran'] = '';
+          }
+
+          $meta = json_decode($value->meta_sasaran,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['ssr'][$j] = $meta[$j];
+            }
+            $DataArray[$key]['Sasaran'] = implode("\n", $InstansiArray[$key]['ssr']);
+          } else {
+            $DataArray[$key]['Sasaran'] = '';
+          }
+
+          $meta = json_decode($value->meta_instansi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_nama_instansi'].'('.$meta[$j]['list_jumlah_peserta'].')';
+            }
+            $DataArray[$key]['Instansi/Peserta'] = implode("\n", $InstansiArray[$key]['Instansi']);
+          } else {
+            $DataArray[$key]['Instansi/Peserta'] = '-';
+          }
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Export Data Kegiatan Rapat Koordinasi '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+
     private function kelengkapan_Koordinasi($id){
       $status_kelengkapan = true;
       try{
