@@ -2882,7 +2882,7 @@ class MasyarakatController extends Controller
           $anggaran = '';
         }
         $form_params['anggaran_id'] = $anggaran;
-        $query = execute_api_json('/api/rapatKerjaPemetaan/','POST',$form_params);
+        $query = execute_api_json('/api/rapatKerjaPemetaan','POST',$form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Peran Serta Masyarakat - Rapat Kerja Pemetaan';
         $trail['audit_event'] = 'post';
@@ -3252,7 +3252,7 @@ class MasyarakatController extends Controller
           $anggaran = '';
         }
         $form_params['anggaran_id'] = $anggaran;
-        $query = execute_api_json('/api/rapatKerjaPemetaan/','POST',$form_params);
+        $query = execute_api_json('/api/rapatKerjaPemetaan','POST',$form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Rapat Kerja Pemetaan';
         $trail['audit_event'] = 'post';
@@ -3515,7 +3515,7 @@ class MasyarakatController extends Controller
               $materi_name =  $d->materi;
             }
             $result[$key]['Materi'] = $materi_name;
-            $result[$key]['Status'] = ($d['status'] == 'Y' ? 'Lengkap' : ($d['status'] == 'N' ? 'Tidak lengkap' : 'Tidak lengkap' ) );
+            $result[$key]['Status'] = ($d->status == 'Y' ? 'Lengkap' : ($d->status == 'N' ? 'Tidak lengkap' : 'Tidak lengkap' ) );
             $i = $i+1;
           }
           $name = $array_titles[$segment].' '.Carbon::now()->format('Y-m-d H:i:s');

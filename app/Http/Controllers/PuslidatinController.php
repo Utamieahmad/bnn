@@ -1181,7 +1181,7 @@ class PuslidatinController extends Controller
 
             $this->form_params['populasi'] = $populasi;
             $this->form_params['jumlah_penyalahguna'] = $jumlah_penyalahguna;
-            $data_request = execute_api_json('api/cobapakai/','POST',$this->form_params);
+            $data_request = execute_api_json('api/cobapakai','POST',$this->form_params);
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $this->messages['status'] = 'success';
                 $this->messages['message'] = 'Data Survey Penyalahgunaan Narkoba Berhasil Ditambahkan';
@@ -1292,7 +1292,7 @@ class PuslidatinController extends Controller
             $jumlah_penyalahguna = str_replace(',', '', $jumlah_penyalahguna);
             $this->form_params['populasi'] = $populasi;
             $this->form_params['jumlah_penyalahguna'] = $jumlah_penyalahguna;
-            $data_request = execute_api_json('api/teraturpakai/','POST',$this->form_params);
+            $data_request = execute_api_json('api/teraturpakai','POST',$this->form_params);
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $this->messages['status'] = 'success';
                 $this->messages['message'] = 'Data Survey Penyalahgunaan Narkoba Teratur Pakai Berhasil Ditambahkan';
@@ -1404,7 +1404,7 @@ class PuslidatinController extends Controller
             $jumlah_penyalahguna = str_replace(',', '', $jumlah_penyalahguna);
             $this->form_params['populasi'] = $populasi;
             $this->form_params['jumlah_penyalahguna'] = $jumlah_penyalahguna;
-            $data_request = execute_api_json('api/pecandunonsuntik/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pecandunonsuntik','POST',$this->form_params);
 
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $this->messages['status'] = 'success';
@@ -1516,7 +1516,7 @@ class PuslidatinController extends Controller
 
             $this->form_params['populasi'] = $populasi;
             $this->form_params['jumlah_penyalahguna'] = $jumlah_penyalahguna;
-            $data_request = execute_api_json('api/pecandusuntik/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pecandusuntik','POST',$this->form_params);
 
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $this->messages['status'] = 'success';
@@ -1633,7 +1633,7 @@ class PuslidatinController extends Controller
             $this->form_params['populasi'] = $populasi;
             $this->form_params['jumlah_penyalahguna'] = $jumlah_penyalahguna;
             $this->form_params['prevalensi'] = $prevalensi;
-            $data_request = execute_api_json('api/setahunpakai/','POST',$this->form_params);
+            $data_request = execute_api_json('api/setahunpakai','POST',$this->form_params);
 
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $this->messages['status'] = 'success';
@@ -1737,7 +1737,7 @@ class PuslidatinController extends Controller
         if ($request->isMethod('post')) {
             $token = $request->session()->get('token');
             $this->form_params = $request->except(['_token']);
-            $data_request = execute_api_json('api/permintaandata/','POST',$this->form_params);
+            $data_request = execute_api_json('api/permintaandata','POST',$this->form_params);
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $this->messages['status'] = 'success';
                 $this->messages['message'] = 'Data Survey Penyalahgunaan Narkoba Setahun Pakai Berhasil Ditambahkan';
@@ -2206,7 +2206,7 @@ class PuslidatinController extends Controller
         $this->data['route'] = $request->route()->getName();
 
         $datas = execute_api_json('api/pekerjaanjaringan?'.$limit.'&'.$offset.$kondisi,'get');
-        // dd($datas);
+        
         if($datas->code == 200 && $datas->status != 'error'){
             $this->data['data'] = $datas->data;
             $total_item = $datas->paginate->totalpage * $this->limit;
@@ -2287,7 +2287,7 @@ class PuslidatinController extends Controller
             }
 
             $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
-            $data_request = execute_api_json('api/pekerjaanjaringan/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pekerjaanjaringan','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Puslitdatin - Bidang TIK - Pekerjaan Jaringan';
             $trail['audit_event'] = 'post';
@@ -2569,7 +2569,7 @@ class PuslidatinController extends Controller
                 $this->form_params['tgl_pelaporan'] = date('Y-m-d',strtotime(str_replace('/', '-', $request->tgl_pelaporan)));
             }
             $this->form_params['email'] = $request->email.config('app.email_bnn');
-            $data_request = execute_api_json('api/pengadaanemail/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pengadaanemail','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Puslitdatin - Bidang TIK - Pembuatan Email BNN';
             $trail['audit_event'] = 'post';
@@ -2851,7 +2851,7 @@ class PuslidatinController extends Controller
                 $this->form_params['tgl_selesai'] = date('Y-m-d',strtotime(str_replace('/', '-', $request->tgl_selesai)));
             }
 
-            $data_request = execute_api_json('api/pengecekanjaringan/','POST',$this->form_params);
+            $data_request = execute_api_json('api/pengecekanjaringan','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Puslitdatin - Bidang TIK - Pengecekan dan Pemeliharaan Jaringan LAN';
             $trail['audit_event'] = 'post';
@@ -3163,7 +3163,7 @@ class PuslidatinController extends Controller
                 $date = explode('/', $request->tgl_dibuat);
                 $this->form_params['tgl_dibuat'] = $date[2].'-'.$date[1].'-'.$date[0];
             }
-            $data_request = execute_api_json('api/callcenter/','POST',$this->form_params);
+            $data_request = execute_api_json('api/callcenter','POST',$this->form_params);
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $id = $data_request->data->eventID;
                 $this->kelengkapan_infocallcenter($id);
@@ -3268,7 +3268,7 @@ class PuslidatinController extends Controller
                 $date = explode('/', $request->tgl_close);
                 $this->form_params['tgl_close'] = $date[2].'-'.$date[1].'-'.$date[0];
             }
-            $data_request = execute_api_json('api/tindakcallcenter/','POST',$this->form_params);
+            $data_request = execute_api_json('api/tindakcallcenter','POST',$this->form_params);
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $this->messages['status'] = 'success';
                 $this->messages['message'] = 'Informasi Melalui Contact Center Berhasil Ditambahkan';
@@ -3373,7 +3373,7 @@ class PuslidatinController extends Controller
                 $this->form_params['tgl_dibuat'] = $date[2].'-'.$date[1].'-'.$date[0];
             }
 
-            $data_request = execute_api_json('api/tindakcallcenterbnnp/','POST',$this->form_params);
+            $data_request = execute_api_json('api/tindakcallcenterbnnp','POST',$this->form_params);
             if( ($data_request->code == 200) && ($data_request->status != 'error') ){
                 $this->messages['status'] = 'success';
                 $this->messages['message'] = 'Informasi Melalui Contact Center Berhasil Ditambahkan';
@@ -3600,7 +3600,7 @@ class PuslidatinController extends Controller
                     $result[$key]['Pengirim'] = $d->pengirim;
                     $result[$key]['Penerima'] = $d->penerima;
                     $result[$key]['Subject'] = $d->subjek;
-                    $result[$key]['Isi Konten'] =  $d->konten;
+                    $result[$key]['Isi Konten'] =  ' '.$d->konten;
                     $result[$key]['Lampiran'] =  $d->lampiran;
                     $result[$key]['Tanggal Terima'] =  ( $d->waktuterima ? date('d/m/Y H:i:s',strtotime($d->waktuterima)) : ''  );
                     $result[$key]['Tanggal Input'] = ( $d->waktuinput ? date('d/m/Y H:i:s',strtotime($d->waktuinput)) : ''  );

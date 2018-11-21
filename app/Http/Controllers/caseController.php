@@ -2695,7 +2695,7 @@ class caseController extends Controller
           $this->form_params['tgl_kegiatan'] = $date[2].'-'.$date[1].'-'.$date[0];
         }
         $this->form_params['meta_kode_pelatihan'] = json_encode($request->kode_pelatihan);
-        $data_request = execute_api_json('api/altdevprofesi/','POST',$this->form_params);
+        $data_request = execute_api_json('api/altdevprofesi','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Jenis Profesi/Usaha';
         $trail['audit_event'] = 'post';
@@ -2968,7 +2968,7 @@ class caseController extends Controller
         if(count($request->meta_kriminalitas)>= 1){
           $this->form_params['meta_kriminalitas'] = implode(',',$request->meta_kriminalitas);
         }
-        $data_request = execute_api_json('api/altdevkawasan/','POST',$this->form_params);
+        $data_request = execute_api_json('api/altdevkawasan','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Kawasan Rawan Narkoba';
         $trail['audit_event'] = 'post';
@@ -3534,7 +3534,7 @@ class caseController extends Controller
             $date = explode('/', $request->tgl_pelaksanaan);
             $this->form_params['tgl_pelaksanaan'] = $date[2].'-'.$date[1].'-'.$date[0];
           }
-          $data_request = execute_api_json('api/psmsinergitas/','POST',$this->form_params);
+          $data_request = execute_api_json('api/psmsinergitas','POST',$this->form_params);
 
           $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Sinergi';
           $trail['audit_event'] = 'post';
@@ -3724,7 +3724,7 @@ class caseController extends Controller
           $date = explode('/', $request->tgl_lahir);
           $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
         }
-        $data_request = execute_api_json('api/altdevprofesipeserta/','POST',$this->form_params);
+        $data_request = execute_api_json('api/altdevprofesipeserta','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Jenis Profesi/Usaha Peserta';
         $trail['audit_event'] = 'post';
@@ -3860,7 +3860,7 @@ class caseController extends Controller
           $date = explode('/', $request->tgl_lahir);
           $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
         }
-        $data_request = execute_api_json('api/monevkawasanpeserta/','POST',$this->form_params);
+        $data_request = execute_api_json('api/monevkawasanpeserta','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Monitoring dan Evaluasi Kawasan Rawan Narkotika Peserta';
         $trail['audit_event'] = 'post';

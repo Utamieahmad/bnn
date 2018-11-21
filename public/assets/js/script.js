@@ -615,7 +615,7 @@ $(document).ready(function(){
         $('#add_modaltersangka').find('#tersangka_tanggal_lahir').val(tersangka_tanggal_lahir);
         $('#add_modaltersangka').find('#kode_pendidikan_akhir_'+data.data.kode_pendidikan_akhir).attr('checked', 'true');
         $('#add_modaltersangka').find('#kode_pekerjaan_'+data.data.kode_pekerjaan).attr('checked', 'true');
-        $('#add_modaltersangka').find('#kode_warga_negara_'+data.data.kode_warga_negara).val(data.data.kode_warga_negara).trigger('change');
+        $('#add_modaltersangka').find('#kode_warga_negara_'+data.data.kode_warga_negara).attr('checked', 'true');
         $('#add_modaltersangka').find('#kode_negara').val(data.data.kode_negara).trigger('change');
         $('#add_modaltersangka').find('#kode_peran_tersangka_'+data.data.kode_peran_tersangka).attr('checked', 'true');
         $('#add_modaltersangka').modal('show');
