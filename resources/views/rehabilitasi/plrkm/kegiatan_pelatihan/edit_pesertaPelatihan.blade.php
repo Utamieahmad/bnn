@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3" >Nama Peserta</label>
                         <div class="col-sm-9">
-                            <input name="nama_peserta" value="" type="text" fclass="form-control nama_peserta"/>
+                            <input name="nama_peserta" value="" type="text" class="form-control nama_peserta"/>
                         </div>
                     </div>
                     <div class="form-group">

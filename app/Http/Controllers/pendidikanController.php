@@ -500,7 +500,7 @@ class pendidikanController extends Controller
         $parent_id = $request->parent_id;
 
         $this->form_params['header_id'] = $request['parent_id'];
-        $data_request = execute_api_json('api/kegiatanpeserta/','POST',$this->form_params);
+        $data_request = execute_api_json('api/kegiatanpeserta','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Balai Diklat - Pendidikan dan Pelatihan Peserta';
         $trail['audit_event'] = 'post';
