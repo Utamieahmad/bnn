@@ -244,6 +244,7 @@ Route::group(['middleware' => ['auth:api', 'TokenCheck']], function () {
   Route::resource('settama','Settama\SettamaAPIController');
 
   Route::resource('arahan', 'Arahan\ArahanAPIController');
+  
 });
 
 
