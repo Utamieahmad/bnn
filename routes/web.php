@@ -422,6 +422,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_online','diseminasiController@inputpendataanOnline');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printonline', 'diseminasiController@printOnline');
+			Route::post('/downloadonline', 'diseminasiController@downloadOnline');
 
 			Route::match(['get', 'post'] ,'/pendataan_penyiaran/{page?}','diseminasiController@pendataanPenyiaran')->name('pendataan_penyiaran');
 			Route::get('/edit_pendataan_penyiaran/{id}','diseminasiController@editpendataanPenyiaran')->name('edit_pendataan_penyiaran');
@@ -430,6 +431,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_penyiaran','diseminasiController@inputpendataanPenyiaran');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printpenyiaran', 'diseminasiController@printPenyiaran');
+			Route::post('/downloadpenyiaran', 'diseminasiController@downloadPenyiaran');
 
 			Route::match(['get', 'post'] ,'/pendataan_cetak/{page?}','diseminasiController@pendataanCetak')->name('pendataan_cetak');
 			Route::get('/edit_pendataan_cetak/{id}','diseminasiController@editpendataanCetak')->name('edit_pendataan_cetak');
@@ -438,6 +440,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_cetak','diseminasiController@inputpendataanCetak');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printcetak', 'diseminasiController@printCetak');
+			Route::post('/downloadcetak', 'diseminasiController@downloadCetak');
 
 			Route::match(['get', 'post'] ,'/pendataan_konvensional/{page?}','diseminasiController@pendataanKonvensional')->name('pendataan_konvensional');
 			Route::get('/edit_pendataan_konvensional/{id}','diseminasiController@editpendataanKonvensional')->name('edit_pendataan_konvensional');
@@ -446,6 +449,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_konvensional','diseminasiController@inputpendataanKonvensional');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printkonvensional', 'diseminasiController@printKonvensional');
+			Route::post('/downloadkonvensional', 'diseminasiController@downloadKonvensional');
 
 			Route::get('/pendataan_videotron','diseminasiController@pendataanVideotron')->name('pendataan_videotron');
 			Route::get('/edit_pendataan_videotron/{id}','diseminasiController@editpendataanVideotron')->name('edit_pendataan_videotron');
