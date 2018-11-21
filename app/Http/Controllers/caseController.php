@@ -3633,6 +3633,7 @@ class caseController extends Controller
       }
     }
     public function addPesertaAlihFngsi(Request $request){
+//        dd('peserta alih fungsi');
       if($request->ajax()){
         $token = $request->session()->get('token');
         $this->form_params = $request->except(['_token']);
@@ -3718,6 +3719,7 @@ class caseController extends Controller
       }
     }
     public function addPesertaAlihProfesi(Request $request){
+//        dd('peserta alih profesi');
         $token = $request->session()->get('token');
         $this->form_params = $request->except(['_token','index']);
         if($request->tgl_lahir){
@@ -3854,6 +3856,7 @@ class caseController extends Controller
       }
     }
     public function addPesertaMonev(Request $request){
+//        dd('peserta monev');
         $token = $request->session()->get('token');
         $this->form_params = $request->except(['_token']);
         if($request->tgl_lahir){
