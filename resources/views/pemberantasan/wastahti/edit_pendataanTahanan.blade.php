@@ -156,7 +156,7 @@
 			<div class="form-group">
 				<label for="alamatktp_kodepos" class="col-md-3 control-label">Kodepos Alamat KTP</label>
 				<div class="'col-md-6 col-sm-6 col-xs-12">
-					<input id="alamatktp_kodepos" name="alamatktp_kodepos" type="text" class="form-control" value="{{$tahanan['alamatktp_kodepos']}}">
+					<input id="alamatktp_kodepos" name="alamatktp_kodepos" type="text" class="form-control" onkeydown="numeric_only(event,this)" value="{{$tahanan['alamatktp_kodepos']}}">
 				</div>
 			</div>
 
@@ -184,7 +184,7 @@
 			<div class="form-group">
 				<label for="alamatdomisili_kodepos" class="col-md-3 control-label">Kodepos Alamat Domisili</label>
 				<div class="'col-md-6 col-sm-6 col-xs-12">
-					<input id="alamatdomisili_kodepos" name="alamatdomisili_kodepos" type="text" class="form-control" value="{{$tahanan['alamatdomisili_kodepos']}}">
+					<input id="alamatdomisili_kodepos" name="alamatdomisili_kodepos" type="text" class="form-control" onkeydown="numeric_only(event,this)" value="{{$tahanan['alamatdomisili_kodepos']}}">
 				</div>
 			</div>
 
@@ -212,7 +212,7 @@
 			<div class="form-group">
 				<label for="alamatlainnya_kodepos" class="col-md-3 control-label">Kodepos Alamat Lainnya</label>
 				<div class="'col-md-6 col-sm-6 col-xs-12">
-					<input id="alamatlainnya_kodepos" name="alamatlainnya_kodepos" type="text" class="form-control" value="{{$tahanan['alamatlainnya_kodepos']}}">
+					<input id="alamatlainnya_kodepos" name="alamatlainnya_kodepos" type="text" class="form-control" onkeydown="numeric_only(event,this)" value="{{$tahanan['alamatlainnya_kodepos']}}">
 				</div>
 			</div>
 
