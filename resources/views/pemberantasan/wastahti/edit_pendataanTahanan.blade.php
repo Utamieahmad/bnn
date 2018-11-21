@@ -369,7 +369,11 @@
 					<select name="kode_negara" class="form-control select2" placeholder="Pilih Negara">
 						<option value=""> Pilih Negara </option>
 						@foreach($negara as $n)
-						<option value="{{$n['kode']}}">{{$n['nama_negara']}}</option>
+							@if($tahanan['kode_negara']==$n['kode'])
+							<option value="{{$n['kode']}}" selected='selected'>{{$n['nama_negara']}}</option>
+							@else
+							<option value="{{$n['kode']}}">{{$n['nama_negara']}}</option>
+							@endif
 						@endforeach
 					</select>
 

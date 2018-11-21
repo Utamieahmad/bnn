@@ -1559,7 +1559,7 @@ class wastahtiController extends Controller
     }
     $name = 'Export Pendataan Pemusnahan Barang Bukti '.Carbon::now()->format('Y-m-d H:i:s');
     $this->printData($result, $name);
-        
+
 
   }
 
@@ -1625,7 +1625,7 @@ class wastahtiController extends Controller
     }
     $name = 'Export Pendataan Tahanan '.Carbon::now()->format('Y-m-d H:i:s');
     $this->printData($result, $name);
-        
+
 
   }
 

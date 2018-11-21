@@ -997,7 +997,7 @@ class penindakanController extends Controller
     }
 
     public function downloadPagePendataanDpo(Request $request){
-      
+
       $data = DB::table('v_berantas_dpo');
       if ($request->date_from != '') {
           $data->where('created_date', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
@@ -1010,7 +1010,7 @@ class penindakanController extends Controller
       // dd($pemusnahanladang);
       $ladangArray = [];
       $i = 1;
-      
+
       foreach($data as $key=>$d){
           $metas = [];
           $result[$key]['No'] = $i;
@@ -1044,7 +1044,7 @@ class penindakanController extends Controller
       }
       $name = 'Export Pendataan DPO '.Carbon::now()->format('Y-m-d H:i:s');
       $this->printData($result, $name);
-          
+
 
     }
 
