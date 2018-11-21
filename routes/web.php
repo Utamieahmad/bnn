@@ -342,6 +342,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_jejaring','AdvokasiController@deletependataanJejaring')->name('delete_pendataan_jejaring');
 			Route::get('/view','caseController@view');
 			Route::get('/printjejaring', 'AdvokasiController@printJejaring');
+			Route::post('/downloadjejaring', 'AdvokasiController@downloadJejaring');
 
 			Route::match(['get', 'post'] ,'/pendataan_asistensi/{page?}','AdvokasiController@pendataanAsistensi')->name('pendataan_asistensi');
 			Route::get('/edit_pendataan_asistensi/{id}','AdvokasiController@editpendataanAsistensi')->name('edit_pendataan_asistensi');
@@ -351,6 +352,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_asistensi','AdvokasiController@deletependataanAsistensi')->name('delete_pendataan_asistensi');
 			Route::get('/view','caseController@view');
 			Route::get('/printasistensi', 'AdvokasiController@printAsistensi');
+			Route::post('/downloadasistensi', 'AdvokasiController@downloadAsistensi');
 
 			Route::get('/penguatan_asistensi','AdvokasiController@penguatanAsistensi')->name('penguatan_asistensi');
 			Route::get('/edit_penguatan_asistensi/{id}','AdvokasiController@editpenguatanAsistensi')->name('edit_penguatan_asistensi');

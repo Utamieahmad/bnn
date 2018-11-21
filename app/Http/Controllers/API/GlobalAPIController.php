@@ -281,15 +281,16 @@ class GlobalAPIController extends Controller
     public function getKabupaten(Request $request)
     {
         try {
-            $kab = DB::table('tr_wilayah')
+            $data = DB::table('tr_wilayah')
                      ->where('kd_jnswilayah', 2)
                      ->orWhere('kd_jnswilayah', 6)
+                     ->select('id_wilayah', 'nm_wilayah')
                      ->get();
 
-            $data = [];
-            foreach ($kab as $row) {
-              $data[$row->id_wilayah] = $row->nm_wilayah;
-            }
+            // $data = [];
+            // foreach ($kab as $row) {
+            //   $data[$row->id_wilayah] = $row->nm_wilayah;
+            // }
              if (!$data){
                return response()->json(Json::response(null, 'error', "data kosong", 404), 404);
              } else {
