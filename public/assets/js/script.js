@@ -2246,6 +2246,7 @@ function submit_modal_update(ev,e,idmodal="",type=""){
             $(e).attr('disabled',false);
 
          }
+         location.reload();
       },
       'error':function(e){
          console.log('error '+JSON.stringify(e));
@@ -2599,7 +2600,7 @@ function open_modalEditPesertaPelatihan(ev,e,$uri ="",$id=""){
                 $('.'+i).val(val);
               });
               $('#modal_edit_peserta').modal('show');
-              $('#modal_edit_form').show();              
+              $('#modal_edit_form').show();
             }else{
               $('.loading-content').html('<div class="alert alert-warning">Data Gagal Ditampilkan.</div>');
             }
