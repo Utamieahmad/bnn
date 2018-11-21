@@ -2632,6 +2632,48 @@ class diseminasiController extends Controller
       $this->printData($data, $name);
   }
 
+  public function downloadOnline(Request $request){
+
+      $data = DB::table('v_cegahdiseminfo_mediaonline');
+      if ($request->date_from != '') {
+        $data->where('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      if ($request->session()->get('wilayah') != '') {
+        $data  = $data->where(function ($query) use ($request) {
+            $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+        });
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      $DataArray = [];
+      $result = [];
+      $i = 1;
+      foreach ($data as $key => $value) {
+        $DataArray[$key]['No'] = $i;
+        $DataArray[$key]['Dasar Kegiatan'] = $value->dasar_kegiatan;
+        $DataArray[$key]['Waktu Publish'] = ( $value->waktu_publish ? date('d/m/Y H:i:s', strtotime($value->waktu_publish)) :'' );
+        $DataArray[$key]['Waktu Selesai'] = ( $value->selesai_publish ? date('d/m/Y H:i:s', strtotime($value->selesai_publish)) :'' );
+        $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+        $DataArray[$key]['Konten'] = $value->materi;
+        $DataArray[$key]['Jenis Media Online'] = $value->jenis_media;
+        $DataArray[$key]['Jumlah Orang/Sebaran'] = $value->jumlah_yang_melihat;
+        $DataArray[$key]['Orang yang tertarik'] = $value->orang_yang_tertarik;
+        $DataArray[$key]['Jenis Kegiatan'] = $value->jenis_kegiatan;
+        $DataArray[$key]['Lokasi'] = $value->lokasi;
+        $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+        $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+        $i = $i +1;
+      }
+       //dd($DataArray);
+      $data = $DataArray;
+      $name = 'Export Data Media Online '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($data, $name);
+  }
+
   public function printPenyiaran(Request $request){
       $client = new Client();
       $page = $request->input('page');
@@ -2693,6 +2735,60 @@ class diseminasiController extends Controller
        //dd($DataArray);
       $data = $DataArray;
       $name = 'Data Penyebarluasan Informasi P4GN Melalui Penyiaran '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($data, $name);
+  }
+
+  public function downloadPenyiaran(Request $request){
+
+      $data = DB::table('v_cegahdiseminfo_mediapenyiaran');
+      if ($request->date_from != '') {
+        $data->where('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      if ($request->session()->get('wilayah') != '') {
+        $data  = $data->where(function ($query) use ($request) {
+            $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+        });
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      $DataArray = [];
+      $result = [];
+      $i = 1;
+      foreach ($data as $key => $value) {
+        $DataArray[$key]['No'] = $i;
+        $DataArray[$key]['Dasar Kegiatan'] = $value->dasar_kegiatan;
+        $DataArray[$key]['Waktu Publish'] = ( $value->waktu_publish ? date('d/m/Y H:i:s', strtotime($value->waktu_publish)) :'' );
+        $DataArray[$key]['Waktu Selesai'] = ( $value->selesai_publish ? date('d/m/Y H:i:s', strtotime($value->selesai_publish)) :'' );
+        $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+        $DataArray[$key]['Materi'] = $value->materi;
+        $DataArray[$key]['Jenis Media Penyiaran'] = $value->jenis_media;
+
+        $meta = json_decode($value->meta_media,true);
+        if(count($meta)){
+          for($j = 0 ; $j < count($meta); $j++){
+              $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_media_nama'];
+          }
+          $DataArray[$key]['List Media Penyiaran'] = implode("\n", $InstansiArray[$key]['Instansi']);
+        } else {
+          $DataArray[$key]['List Media Penyiaran'] = '-';
+        }
+
+        $DataArray[$key]['Jumlah Penonton'] = $value->penonton;
+        $DataArray[$key]['Narasumber'] = $value->narasumber;
+        $DataArray[$key]['Jumlah Penonton'] = $value->penonton;
+        $DataArray[$key]['Jenis Kegiatan'] = $value->jenis_kegiatan;
+        $DataArray[$key]['Lokasi'] = $value->lokasi;
+        $DataArray[$key]['Jumlah Orang/Sebaran'] = $value->jumlah;
+        $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+        $i = $i +1;
+      }
+       //dd($DataArray);
+      $data = $DataArray;
+      $name = 'Export Data Media Penyiaran '.Carbon::now()->format('Y-m-d H:i:s');
       $this->printData($data, $name);
   }
 
@@ -2761,6 +2857,61 @@ class diseminasiController extends Controller
       $this->printData($data, $name);
   }
 
+  public function downloadCetak(Request $request){
+
+      $data = DB::table('v_cegahdiseminfo_mediacetak');
+      if ($request->date_from != '') {
+        $data->where('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      if ($request->session()->get('wilayah') != '') {
+        $data  = $data->where(function ($query) use ($request) {
+            $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+        });
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      $DataArray = [];
+      $result = [];
+      $i = 1;
+      foreach ($data as $key => $value) {
+        $DataArray[$key]['No'] = $i;
+        $DataArray[$key]['Dasar Kegiatan'] = $value->dasar_kegiatan;
+        $DataArray[$key]['Waktu Publish'] = ( $value->waktu_publish ? date('d/m/Y H:i:s', strtotime($value->waktu_publish)) :'' );
+        $DataArray[$key]['Waktu Selesai'] = ( $value->selesai_publish ? date('d/m/Y H:i:s', strtotime($value->selesai_publish)) :'' );
+        $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+        $DataArray[$key]['Materi'] = $value->materi;
+        $DataArray[$key]['Jenis Media Cetak'] = $value->kode_jenis_media;
+
+        $meta = json_decode($value->meta_media,true);
+        if(count($meta)){
+          for($j = 0 ; $j < count($meta); $j++){
+              $InstansiArray[$key]['Instansi'][$j] = $meta[$j];
+          }
+          $DataArray[$key]['Jenis Media luar Ruang'] = implode("\n", $InstansiArray[$key]['Instansi']);
+        } else {
+          $DataArray[$key]['Jenis Media luar Ruang'] = '-';
+        }
+
+        $DataArray[$key]['Nama Media Cetak'] = $value->nama_media;
+        $DataArray[$key]['Jumlah Cetak'] = $value->jumlah_cetak;
+        $DataArray[$key]['Lokasi'] = $value->lokasi_kegiatan;
+        $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+        $DataArray[$key]['Jenis Kegiatan'] = $value->jenis_kegiatan;
+        $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+        $DataArray[$key]['Jumlah Orang/Sebaran'] = $value->jumlah_peserta;
+        $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+        $i = $i +1;
+      }
+       //dd($DataArray);
+      $data = $DataArray;
+      $name = 'Export Data Media Cetak '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($data, $name);
+  }
+
   public function printKonvensional(Request $request){
       $client = new Client();
       $page = $request->input('page');
@@ -2823,6 +2974,49 @@ class diseminasiController extends Controller
        //dd($DataArray);
       $data = $DataArray;
       $name = 'Data Kegiatan Penyebarluasan Informasi P4GN Melalui Media Konvensional '.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($data, $name);
+  }
+
+  public function downloadKonvensional(Request $request){
+
+      $data = DB::table('v_cegahdiseminfo_mediakonvensional');
+      if ($request->date_from != '') {
+        $data->where('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      if ($request->session()->get('wilayah') != '') {
+        $data  = $data->where(function ($query) use ($request) {
+            $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+        });
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      $DataArray = [];
+      $result = [];
+      $i = 1;
+      foreach ($data as $key => $value) {
+        $DataArray[$key]['No'] = $i;
+        $DataArray[$key]['Jenis Kegiatan'] = $value->jenis_kegiatan;
+        $DataArray[$key]['Dasar Kegiatan'] = $value->dasar_kegiatan;
+        $DataArray[$key]['Waktu Publish'] = ( $value->waktu_publish ? date('d/m/Y H:i:s', strtotime($value->waktu_publish)) :'' );
+        $DataArray[$key]['Waktu Selesai'] = ( $value->selesai_publish ? date('d/m/Y H:i:s', strtotime($value->selesai_publish)) :'' );
+        $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+        $DataArray[$key]['Materi'] = $value->materi;
+        $DataArray[$key]['Narasumber'] = $value->narasumber;
+        $DataArray[$key]['Sasaran'] = $value->kodesasaran;
+        $DataArray[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_pelaksanaan ? date('d/m/Y H:i:s', strtotime($value->tgl_pelaksanaan)) :'' );
+        $DataArray[$key]['Lokasi'] = $value->lokasi_kegiatan;
+        $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+        $DataArray[$key]['Jumlah Orang/Sebaran'] = $value->jumlah_peserta;
+        $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+        $i = $i +1;
+      }
+       //dd($DataArray);
+      $data = $DataArray;
+      $name = 'Export Data Media Konvensional '.Carbon::now()->format('Y-m-d H:i:s');
       $this->printData($data, $name);
   }
 
