@@ -278,6 +278,29 @@ class GlobalAPIController extends Controller
         }
     }
 
+    public function getKabupaten(Request $request)
+    {
+        try {
+            $kab = DB::table('tr_wilayah')
+                     ->where('kd_jnswilayah', 2)
+                     ->orWhere('kd_jnswilayah', 6)
+                     ->get();
+
+            $data = [];
+            foreach ($kab as $row) {
+              $data[$row->id_wilayah] = $row->nm_wilayah;
+            }
+             if (!$data){
+               return response()->json(Json::response(null, 'error', "data kosong", 404), 404);
+             } else {
+               return response()->json(Json::response($data, 'sukses', null), 200);
+             }
+        } catch(\Exception $e) {
+            return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
+
+        }
+    }
+
     public function getSatuan(Request $request)
     {
         try {

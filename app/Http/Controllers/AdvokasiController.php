@@ -880,20 +880,20 @@ class AdvokasiController extends Controller
         $DataArray = [];
         $result = [];
         $i = 1;
-        foreach ($PrintData['data'] as $key => $value) {
+        foreach ($data as $key => $value) {
           $DataArray[$key]['No'] = $i;
           $DataArray[$key]['No Sprint'] = $value->no_sprint;
           $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
           $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
           
-          $meta = json_decode($value->meta_sasaran,true);
+          $meta = json_decode($value->meta_panitia,true);
           if(count($meta)){
             for($j = 0 ; $j < count($meta); $j++){
                 $InstansiArray[$key]['ssr'][$j] = $meta[$j];
             }
-            $DataArray[$key]['Sasaran'] = implode("\n", $InstansiArray[$key]['ssr']);
+            $DataArray[$key]['Panitia'] = implode("\n", $InstansiArray[$key]['ssr']);
           } else {
-            $DataArray[$key]['Sasaran'] = '';
+            $DataArray[$key]['Panitia'] = '';
           }
 
           $meta = json_decode($value->meta_sasaran,true);
@@ -915,6 +915,21 @@ class AdvokasiController extends Controller
           } else {
             $DataArray[$key]['Instansi/Peserta'] = '-';
           }
+
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
           $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
           $i = $i +1;
         }
