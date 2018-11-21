@@ -2567,6 +2567,53 @@ function open_modalEditPeserta(ev,e,$uri ="",$id=""){
   });
 
 }
+function open_modalEditPesertaPelatihan(ev,e,$uri ="",$id=""){
+   ev.preventDefault();
+   $id = $(e).data('target');
+
+   if($uri){
+    $uri = $uri;
+   }else{
+    $uri = '/get_detail_tersangka';
+   }
+   $_token = $('input[name="_token"]').val();
+   $.ajax({
+      'url': $uri, // diganti pakai url api yang ditentukan
+      'type':'GET',
+      'data' : {'id':$id},
+      'headers': {'X-CSRF-TOKEN': $_token},
+      'complete': function(){
+         $('.loading-content').hide('fast');
+      },
+      'beforeSend': function(){
+         $('.loading-content').show('fast');
+      },
+      'success' : function(data){
+          console.log(data.data);
+          if(data.status == 'success'){
+            if(data.data ){
+              $d = data.data;
+
+              $.each($d, function(i,val){
+                console.log(val);
+                $('.'+i).val(val);
+              });
+              $('#modal_edit_peserta').modal('show');
+              $('#modal_edit_form').show();              
+            }else{
+              $('.loading-content').html('<div class="alert alert-warning">Data Gagal Ditampilkan.</div>');
+            }
+
+          }else{
+            $('.loading-content').html('<div class="alert alert-warning">Data Gagal Ditampilkan.</div>');
+          }
+      },
+    'error':function(e){
+      console.log('error '+JSON.stringify(e));
+    }
+  });
+
+}
 
 function show_text(e){
   $checked = $(e).prop('checked');

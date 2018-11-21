@@ -311,7 +311,7 @@ class pendidikanController extends Controller
             }
 
 
-            $data_request = execute_api_json('api/kegiatan/','POST',$this->form_params);
+            $data_request = execute_api_json('api/kegiatan','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Balai Diklat - Pendidikan dan Pelatihan';
             $trail['audit_event'] = 'post';

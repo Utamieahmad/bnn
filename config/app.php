@@ -263,16 +263,16 @@ return [
     'magang_file_path'=>'upload/BalaiBesar/Magang',
     'berantas_ladang_ganja'=>'upload/Berantas/PemusnahanLadangGanja',
 
-    'url_simpeg'=>'http://integrasi.bnn.go.id/simpeg/listSatker/',
-    'url_satker'=>'http://integrasi.bnn.go.id/simpeg/staffBySatker/',
+    'url_simpeg'=>'https://integrasi.bnn.go.id/simpeg/listSatker/',
+    'url_satker'=>'https://integrasi.bnn.go.id/simpeg/staffBySatker/',
     /*id satker*/
     'satker_irtama' => 156,
 
     'bidang_tipe' => ['kinerja','keuangan','sdm','sarana'],
-    'url_soa' => 'http://integrasi.bnn.go.id/',
+    'url_soa' => 'https://integrasi.bnn.go.id/',
     // 'url_soadev' => 'http://103.3.70.160:7004/sinapp/',
     // 'url_soadev2' => 'http://103.3.70.160:7004/',
-    'url_soakemenkeu' => 'http://10.210.84.13:8080/kemenkeu/api/data/',//'url_soakemenkeu' => 'http://103.3.70.167:8080/kemenkeu/api/data/',
+    'url_soakemenkeu' => 'https://10.210.84.13:8080/kemenkeu/api/data/',//'url_soakemenkeu' => 'http://103.3.70.167:8080/kemenkeu/api/data/',
     'url_api_local' => env('URL_API_LOCAL', 'http://localhost/bnn_api/public'),
     'email_bnn' => '@bnn.go.id',
     /*api balai lab*/

@@ -221,7 +221,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_peserta_pelatihan_plrip','RehabilitasiController@deletePesertaPelatihanPlrip')->name('delete_peserta_pelatihan_plrip');
 			Route::post('/update_peserta_pelatihan_plrip','RehabilitasiController@updatePesertaPelatihanPlrip')->name('update_peserta_pelatihan_plrip');
 			Route::post('/add_peserta_pelatihan_plrip','RehabilitasiController@addPesertaPelatihanPlrip')->name('add_peserta_pelatihan_plrip');
-			Route::get('/edit_peserta_pelatihan_plrip/{id}','RehabilitasiController@editPesertaPelatihanPlrip')->name('edit_peserta_pelatihan_plrip');
+			Route::get('/edit_peserta_pelatihan_plrip/{id?}','RehabilitasiController@editPesertaPelatihanPlrip')->name('edit_peserta_pelatihan_plrip');
 			Route::GET('/index_peserta_pelatihan_plrip/{parent_id}/{page?}','RehabilitasiController@indexPesertaKegiatanPelatihanPlrip')->name('index_peserta_pelatihan_plrip');
 
 			Route::get('/penilaian_lembaga_plrip','RehabilitasiController@penilaianLembagaPlrip')->name('penilaian_lembaga_plrip');
@@ -746,7 +746,7 @@ Route::group(['middleware' => ['auth']], function () {
 				Route::post('/update_irtama_audit','irtamaController@updateirtamaAudit')->name('update_irtama_audit');
 				Route::get('/add_irtama_audit','irtamaController@addirtamaAudit')->name('add_irtama_audit');
 				Route::post('/input_irtama_audit','irtamaController@inputirtamaAudit')->name('input_irtama_audit');
-				Route::post('/delete_irtama_audit','irtamaController@deleteIrtamaAudit')->name('delete_irtama_audit');				
+				Route::post('/delete_irtama_audit','irtamaController@deleteIrtamaAudit')->name('delete_irtama_audit');
 				// Route::get('/view','irtamaController@view');
 			});
 
