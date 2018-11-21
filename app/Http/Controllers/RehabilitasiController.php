@@ -2736,7 +2736,7 @@ class RehabilitasiController extends Controller
 						$qtrail = $this->inputtrail($request->session()->get('token'),$trail);
 
             if(($data_request->code == 200)&& ($data_request->status != "error") ){
-                $html .= "<tr>";
+                $html = "<tr>";
                 $html .= '<td></td>';
                 $html .= '<td>'.$request->nama_peserta.'</td>';
                 $html .= '<td>'.$request->nomor_identitas.'</td>';

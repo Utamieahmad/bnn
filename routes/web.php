@@ -260,7 +260,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_peserta_pelatihan_plrkm','RehabilitasiController@deletePesertaPelatihanPlrkm')->name('delete_peserta_pelatihan_plrkm');
 			Route::post('/update_peserta_pelatihan_plrkm','RehabilitasiController@updatePesertaPelatihanPlrkm')->name('update_peserta_pelatihan_plrkm');
 			Route::post('/add_peserta_pelatihan_plrkm','RehabilitasiController@addPesertaPelatihanPlrkm')->name('add_peserta_pelatihan_plrkm');
-			Route::get('/edit_peserta_pelatihan_plrkm/{id}','RehabilitasiController@editPesertaPelatihanPlrkm')->name('edit_peserta_pelatihan_plrkm');
+			Route::get('/edit_peserta_pelatihan_plrkm/{id?}','RehabilitasiController@editPesertaPelatihanPlrkm')->name('edit_peserta_pelatihan_plrkm');
 			Route::GET('/index_peserta_pelatihan_plrkm/{parent_id}/{page?}','RehabilitasiController@indexPesertaKegiatanPelatihanPlrkm')->name('index_peserta_pelatihan_plrkm');
 
 
@@ -305,7 +305,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::POST('/delete_kegiatan_pelatihan_pascarehabilitasi','RehabilitasiController@deleteKegiatanPelatihanPasca')->name('delete_kegiatan_pelatihan_pascarehabilitasi');
 			Route::POST('/delete_peserta_pelatihan_pascarehabilitasi','RehabilitasiController@deletePesertaKegiatanPelatihanPasca')->name('delete_peserta_pelatihan_pascarehabilitasi');
 			Route::GET('/index_peserta_pelatihan_pascarehabilitasi/{parent_id}/{page?}','RehabilitasiController@indexPesertaKegiatanPelatihanPasca')->name('edit_peserta_pelatihan_pascarehabilitasi');
-			Route::GET('/edit_peserta_pelatihan_pascarehabilitasi/{id}','RehabilitasiController@editPesertaKegiatanPelatihanPasca')->name('edit_peserta_pelatihan_pascarehabilitasi');
+			Route::GET('/edit_peserta_pelatihan_pascarehabilitasi/{id?}','RehabilitasiController@editPesertaKegiatanPelatihanPasca')->name('edit_peserta_pelatihan_pascarehabilitasi');
 			Route::POST('/update_peserta_pelatihan_pascarehabilitasi','RehabilitasiController@updatePesertaKegiatanPelatihanPasca')->name('update_peserta_pelatihan_pascarehabilitasi');
 			Route::POST('/add_peserta_pelatihan_pascarehabilitasi','RehabilitasiController@addPesertaKegiatanPelatihanPasca')->name('add_peserta_pelatihan_pascarehabilitasi');
 
