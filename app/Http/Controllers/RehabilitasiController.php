@@ -2719,23 +2719,6 @@ class RehabilitasiController extends Controller
     public function updatePesertaPelatihanPlrip(Request $request){
         if($request->ajax()){
 
-									// $id = $request->id_header;
-									// $data_request = "";
-									// $this->form_params = $request->except(['_token','parent_id']);
-									// $data_request = execute_api_json('api/pelatihanpeserta','POST',$this->form_params);
-									//
-									// $trail['audit_menu'] = 'Rehabilitasi - Direktorat PLRIP - Kegiatan Peserta';
-									// $trail['audit_event'] = 'post';
-									// $trail['audit_value'] = json_encode($this->form_params);
-									// $trail['audit_url'] = $request->url();
-									// $trail['audit_ip_address'] = $request->ip();
-									// $trail['audit_user_agent'] = $request->userAgent();
-									// $trail['audit_message'] = $data_request->comment;
-									// $trail['created_at'] = date("Y-m-d H:i:s");
-									// $trail['created_by'] = $request->session()->get('id');
-									//
-									// $qtrail = $this->inputtrail($request->session()->get('token'),$trail);
-
             $id = $request->id_detail;
             $this->form_params = $request->except(['_token','id_detail','index']);
             $data_request = execute_api_json('api/pelatihanpeserta/'.$id,'PUT',$this->form_params);
@@ -2752,79 +2735,26 @@ class RehabilitasiController extends Controller
 
 						$qtrail = $this->inputtrail($request->session()->get('token'),$trail);
 
-						if(($data_request->code == 200)&& ($data_request->status != "error") ){
-                $id_detail = $data_request->data->id;
-                $current_page = 1;
-                $parent_id = $id;
-                $offset = 'page=1';
-                $kategori = 'parent_id='.$parent_id;
-                $limit = 'limit='.config('app.limit');
-                $start_number = $current_page;
-                $current_data = execute_api_json('api/pelatihanpeserta?'.$kategori.'&'.$limit.'&'.$offset,'get');
-                if($current_data->code == 200 && $current_data->status != 'error'){
-                    $datas = $current_data->data;
-                    if(count($datas)>0){
-                        $j = $start_number;
-                        $html = "";
-                        foreach($datas as $d){
-                            $html .= "<tr>";
-                            $html .= "<td>".$j."</td>";
-                            $html .= "<td>".$d->nama_peserta."</td>";
-                            $html .= "<td>".$d->nomor_identitas."</td>";
-                            $html .= '<td>'.( ($d->kode_jeniskelamin == "P") ? 'Perempuan' : ( ($d->kode_jeniskelamin == "L") ? 'Laki-Laki' : '')).'</td>';
-                            $html .= "<td>".$d->asal_instansilembaga."</td>";
-                            $html .= '<td class="actionTable">
-                                        <button type="button" class="btn btn-primary button-edit" data-target="'.$d->id_detail.'" onClick="open_modalEditPeserta(event,this,\'/rehabilitasi/dir_plrip/edit_peserta_pelatihan_plrip/\',\'modal_edit_form\')"><i class="fa fa-pencil"></i></button>
-                                        <button type="button" class="btn btn-primary button-action" data-target="'.$d->id_detail.'" onClick="delete_row_peserta(event,this)"><i class="fa fa-trash"></i></button>
-                                    </td>';
-                            $html .= "</tr>";
-                            $j = $j+1;
-                        }
-                        $total_item = $current_data->paginate->totalpage * config('app.limit');
-                        if($total_item > config('app.limit')) {
-                            $paginate = ajax_pagination($current_page,$total_item, config('app.limit'), config('app.page_ellipsis'),"/".$request->route()->getPrefix()."/index_peserta_pelatihan_plrip/".$parent_id."/%d");
-                        }else{
-                            $paginate = "";
-                        }
-
-                    }
-                    else{
-                        $html = "<tr><td colspan=6> <p class='alert-warning'>Data Peserta Kegiatan Pendidikan dan Pelatihan Pada Balai Belum Tersedia </p></td> </tr>";
-                    }
-                }else{
-                      $html = "<tr><td colspan=6> <p class='alert-warning'>Data Peserta Kegiatan Pendidikan dan Pelatihan Pada Balai Belum Tersedia </p></td> </tr>";
-                }
+            if(($data_request->code == 200)&& ($data_request->status != "error") ){
+                $html = "<tr>";
+                $html .= '<td></td>';
+                $html .= '<td>'.$request->nama_peserta.'</td>';
+                $html .= '<td>'.$request->nomor_identitas.'</td>';
+                $html .= '<td>'.( ($request->kode_jeniskelamin == "P") ? 'Perempuan' : ( ($request->kode_jeniskelamin == "L") ? 'Laki-Laki' : '')).'</td>';
+                $html .= '<td>'.$request->asal_instansilembaga.'</td>';
+                $html .= '<td class="actionTable">
+                            <button type="button" class="btn btn-primary button-edit" data-target="'.$id.'" onClick="open_modalEditPeserta(event,this,\'/rehabilitasi/dir_plrip/edit_peserta_pelatihan_plrip/\',\'modal_edit_form\')"><i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-primary button-action" data-target="'.$id.'" onClick="delete_row_peserta(event,this)"><i class="fa fa-trash"></i></button>
+                        </td>';
+                $html  .= "</tr>";
                 $this->messages['status'] = 'success';
-                $this->messages['message'] = 'Data Peserta Pelatihan PLRIP Berhasil Ditambahkan';
+                $this->messages['message'] = 'Data Peserta Pelatihan DIR PLRIP Berhasil Diperbarui';
                 $this->messages['data_return'] = $html;
-                $this->messages['pagination'] = $paginate;
-
-
             }else{
                 $this->messages['status'] = 'error';
-                $this->messages['message'] = 'Data Peserta Pelatihan PLRIP Gagal Ditambahkan';
+                $this->messages['message'] = 'Data Peserta Pelatihan DIR PLRIP Gagal Diperbarui';
                 $this->messages['data_return'] = null;
             }
-            // if(($data_request->code == 200)&& ($data_request->status != "error") ){
-            //     $html  = "<tr>";
-            //     $html .= '<td></td>';
-            //     $html .= '<td>'.$request->nama_peserta.'</td>';
-            //     $html .= '<td>'.$request->nomor_identitas.'</td>';
-            //     $html .= '<td>'.( ($request->kode_jeniskelamin == "P") ? 'Perempuan' : ( ($request->kode_jeniskelamin == "L") ? 'Laki-Laki' : '')).'</td>';
-            //     $html .= '<td>'.$request->asal_instansilembaga.'</td>';
-            //     $html .= '<td class="actionTable">
-            //                 <button type="button" class="btn btn-primary button-edit" data-target="'.$id.'" onClick="open_modalEditPeserta(event,this,\'/rehabilitasi/dir_plrip/edit_peserta_pelatihan_plrip/\',\'modal_edit_form\')"><i class="fa fa-pencil"></i></button>
-            //                 <button type="button" class="btn btn-primary button-action" data-target="'.$id.'" onClick="delete_row_peserta(event,this)"><i class="fa fa-trash"></i></button>
-            //             </td>';
-            //     $html  .= "</tr>";
-            //     $this->messages['status'] = 'success';
-            //     $this->messages['message'] = 'Data Peserta Pelatihan DIR PLRIP Berhasil Diperbarui';
-            //     $this->messages['data_return'] = $html;
-            // }else{
-            //     $this->messages['status'] = 'error';
-            //     $this->messages['message'] = 'Data Peserta Pelatihan DIR PLRIP Gagal Diperbarui';
-            //     $this->messages['data_return'] = null;
-            // }
             return response()->json($this->messages);
         }
     }

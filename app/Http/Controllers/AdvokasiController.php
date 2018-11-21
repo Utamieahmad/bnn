@@ -880,20 +880,20 @@ class AdvokasiController extends Controller
         $DataArray = [];
         $result = [];
         $i = 1;
-        foreach ($PrintData['data'] as $key => $value) {
+        foreach ($data as $key => $value) {
           $DataArray[$key]['No'] = $i;
           $DataArray[$key]['No Sprint'] = $value->no_sprint;
           $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
           $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
           
-          $meta = json_decode($value->meta_sasaran,true);
+          $meta = json_decode($value->meta_panitia,true);
           if(count($meta)){
             for($j = 0 ; $j < count($meta); $j++){
                 $InstansiArray[$key]['ssr'][$j] = $meta[$j];
             }
-            $DataArray[$key]['Sasaran'] = implode("\n", $InstansiArray[$key]['ssr']);
+            $DataArray[$key]['Panitia'] = implode("\n", $InstansiArray[$key]['ssr']);
           } else {
-            $DataArray[$key]['Sasaran'] = '';
+            $DataArray[$key]['Panitia'] = '';
           }
 
           $meta = json_decode($value->meta_sasaran,true);
@@ -915,6 +915,21 @@ class AdvokasiController extends Controller
           } else {
             $DataArray[$key]['Instansi/Peserta'] = '-';
           }
+
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
           $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
           $i = $i +1;
         }
@@ -1689,6 +1704,67 @@ class AdvokasiController extends Controller
         $this->printData($data, $name);
     }
 
+    public function downloadJejaring(Request $request){
+  
+        $data = DB::table('v_cegahadvokasi_jejaring');
+        if ($request->date_from != '') {
+          $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        if ($request->session()->get('wilayah') != '') {
+          $data  = $data->where(function ($query) use ($request) {
+              $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+          });
+        }
+
+        $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+        $DataArray = [];
+        $result = [];
+        $i = 1;
+        foreach ($data as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
+          $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+          $DataArray[$key]['Sasaran'] = $value->kodesasaran;
+          
+          $meta = json_decode($value->meta_instansi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_nama_instansi'];
+            }
+            $DataArray[$key]['Instansi'] = implode("\n", $InstansiArray[$key]['Instansi']);
+          } else {
+            $DataArray[$key]['Instansi'] = '-';
+          }
+
+          $DataArray[$key]['Total Peserta'] = $value->jumlah_peserta;
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+          $DataArray[$key]['Panitia'] = $value->panitia_monev;
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Export Data Kegiatan Membangun Jejaring '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+
     private function kelengkapan_Jejaring($id){
       $status_kelengkapan = true;
       try{
@@ -2453,6 +2529,68 @@ class AdvokasiController extends Controller
          //dd($DataArray);
         $data = $DataArray;
         $name = 'Data Kegiatan Asistensi '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+
+    public function downloadAsistensi(Request $request){
+  
+        $data = DB::table('v_cegahadvokasi_asistensi');
+        if ($request->date_from != '') {
+          $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        if ($request->session()->get('wilayah') != '') {
+          $data  = $data->where(function ($query) use ($request) {
+              $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+          });
+        }
+
+        $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+        $DataArray = [];
+        $result = [];
+        $i = 1;
+        foreach ($data as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
+          $DataArray[$key]['Jenis Asistensi'] = $value->jenis_kegiatan;
+          $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+          $DataArray[$key]['Sasaran'] = $value->kodesasaran;
+          
+          $meta = json_decode($value->meta_instansi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_nama_instansi'];
+            }
+            $DataArray[$key]['Instansi'] = implode("\n", $InstansiArray[$key]['Instansi']);
+          } else {
+            $DataArray[$key]['Instansi'] = '-';
+          }
+
+          $DataArray[$key]['Total Peserta'] = $value->jumlah_peserta;
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+          $DataArray[$key]['Panitia'] = $value->panitia_monev;
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Export Data Kegiatan Asistensi '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 

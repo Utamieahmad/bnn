@@ -260,7 +260,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_peserta_pelatihan_plrkm','RehabilitasiController@deletePesertaPelatihanPlrkm')->name('delete_peserta_pelatihan_plrkm');
 			Route::post('/update_peserta_pelatihan_plrkm','RehabilitasiController@updatePesertaPelatihanPlrkm')->name('update_peserta_pelatihan_plrkm');
 			Route::post('/add_peserta_pelatihan_plrkm','RehabilitasiController@addPesertaPelatihanPlrkm')->name('add_peserta_pelatihan_plrkm');
-			Route::get('/edit_peserta_pelatihan_plrkm/{id}','RehabilitasiController@editPesertaPelatihanPlrkm')->name('edit_peserta_pelatihan_plrkm');
+			Route::get('/edit_peserta_pelatihan_plrkm/{id?}','RehabilitasiController@editPesertaPelatihanPlrkm')->name('edit_peserta_pelatihan_plrkm');
 			Route::GET('/index_peserta_pelatihan_plrkm/{parent_id}/{page?}','RehabilitasiController@indexPesertaKegiatanPelatihanPlrkm')->name('index_peserta_pelatihan_plrkm');
 
 
@@ -305,7 +305,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::POST('/delete_kegiatan_pelatihan_pascarehabilitasi','RehabilitasiController@deleteKegiatanPelatihanPasca')->name('delete_kegiatan_pelatihan_pascarehabilitasi');
 			Route::POST('/delete_peserta_pelatihan_pascarehabilitasi','RehabilitasiController@deletePesertaKegiatanPelatihanPasca')->name('delete_peserta_pelatihan_pascarehabilitasi');
 			Route::GET('/index_peserta_pelatihan_pascarehabilitasi/{parent_id}/{page?}','RehabilitasiController@indexPesertaKegiatanPelatihanPasca')->name('edit_peserta_pelatihan_pascarehabilitasi');
-			Route::GET('/edit_peserta_pelatihan_pascarehabilitasi/{id}','RehabilitasiController@editPesertaKegiatanPelatihanPasca')->name('edit_peserta_pelatihan_pascarehabilitasi');
+			Route::GET('/edit_peserta_pelatihan_pascarehabilitasi/{id?}','RehabilitasiController@editPesertaKegiatanPelatihanPasca')->name('edit_peserta_pelatihan_pascarehabilitasi');
 			Route::POST('/update_peserta_pelatihan_pascarehabilitasi','RehabilitasiController@updatePesertaKegiatanPelatihanPasca')->name('update_peserta_pelatihan_pascarehabilitasi');
 			Route::POST('/add_peserta_pelatihan_pascarehabilitasi','RehabilitasiController@addPesertaKegiatanPelatihanPasca')->name('add_peserta_pelatihan_pascarehabilitasi');
 
@@ -332,6 +332,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_koordinasi','AdvokasiController@deletependataanKoordinasi')->name('delete_pendataan_koordinasi');
 			Route::get('/view','caseController@view');
 			Route::get('/printkoordinasi', 'AdvokasiController@printKoordinasi');
+			Route::post('/downloadkoordinasi', 'AdvokasiController@downloadKoordinasi');
 
 			Route::match(['get', 'post'] ,'/pendataan_jejaring/{page?}','AdvokasiController@pendataanJejaring')->name('pendataan_jejaring');
 			Route::get('/edit_pendataan_jejaring/{id}','AdvokasiController@editpendataanJejaring')->name('edit_pendataan_jejaring');
@@ -341,6 +342,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_jejaring','AdvokasiController@deletependataanJejaring')->name('delete_pendataan_jejaring');
 			Route::get('/view','caseController@view');
 			Route::get('/printjejaring', 'AdvokasiController@printJejaring');
+			Route::post('/downloadjejaring', 'AdvokasiController@downloadJejaring');
 
 			Route::match(['get', 'post'] ,'/pendataan_asistensi/{page?}','AdvokasiController@pendataanAsistensi')->name('pendataan_asistensi');
 			Route::get('/edit_pendataan_asistensi/{id}','AdvokasiController@editpendataanAsistensi')->name('edit_pendataan_asistensi');
@@ -350,6 +352,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_asistensi','AdvokasiController@deletependataanAsistensi')->name('delete_pendataan_asistensi');
 			Route::get('/view','caseController@view');
 			Route::get('/printasistensi', 'AdvokasiController@printAsistensi');
+			Route::post('/downloadasistensi', 'AdvokasiController@downloadAsistensi');
 
 			Route::get('/penguatan_asistensi','AdvokasiController@penguatanAsistensi')->name('penguatan_asistensi');
 			Route::get('/edit_penguatan_asistensi/{id}','AdvokasiController@editpenguatanAsistensi')->name('edit_penguatan_asistensi');
