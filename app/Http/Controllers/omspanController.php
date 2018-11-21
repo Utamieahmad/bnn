@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Transformers\Json;
 use Auth;
 use App\MainModel;
 use URL;
@@ -29,37 +30,41 @@ class omspanController extends Controller
 
 			if($get['periode']) {
 				$filter = $get['periode'];
+				$filter2 = $get['periode'];
+				$filter3 = '';
 				if($get['kode_satker']) {
 					$filter = $get['kode_satker'] . '/' . $get['periode'];
+					$filter2 = $get['periode'] . '/' . $get['kode_satker'];
+					$filter3 = '/' . $get['kode_satker'];
 				}
 
 				//$params['headers'] = ['Content-Type' => 'application/json', 'Accept' => 'application/json'];
 				//$params['body'] = '{ "KDSATKER" : "", "KPPN" : "", "BA" : "", "BAES1" : "", "AKUN" : "", "PROGRAM" : "", "KEGIATAN" : "", "OUTPUT" : "", "KEWENANGAN" : "", "SUMBER_DANA" : "", "LOKASI" : "", "BUDGET_TYPE" : "", "AMOUNT" : "", "Limit" : "10", "Page" : "" }';
 				//$requestdatadipa = $client->request('POST', config('app.url_soadev2').'KemenkeuDataDipa/DataDipaQueryRS', $params);
 				//$datadipa = json_decode($requestdatadipa->getBody()->getContents(), true);
-
-				$req_data_satker = $client->request('GET','http://10.210.84.13:8080/masterdata/api/view/list/satker');//$req_data_satker = $client->request('GET','http://103.3.70.167:8080/masterdata/api/view/list/satker');
+				
+				$req_data_satker = $client->request('GET','http://10.210.84.13:8080/masterdata/api/view/list/satker'.$filter3);
 				$data_satker = json_decode($req_data_satker->getBody()->getContents(), true);
 
 				$req_pengelolaan_up = $client->request('GET', config('app.url_soakemenkeu').'status_up/'.$filter);
 				$pengelolaan_up = json_decode($req_pengelolaan_up->getBody()->getContents(), true);
-
-				$req_data_kontrak = $client->request('GET', config('app.url_soakemenkeu').'p_datakontrak');
+				
+				$req_data_kontrak = $client->request('GET', config('app.url_soakemenkeu').'p_datakontrak/'.$filter2);
 				$data_kontrak = json_decode($req_data_kontrak->getBody()->getContents(), true);
-
-				$req_pen_tagihan = $client->request('GET', config('app.url_soakemenkeu').'kemajuan');
+				
+				$req_pen_tagihan = $client->request('GET', config('app.url_soakemenkeu').'kemajuan/'.$filter);
 				$pen_tagihan = json_decode($req_pen_tagihan->getBody()->getContents(), true);
-
-				$req_rekon = $client->request('GET', config('app.url_soakemenkeu').'rekonLPJ');
+				
+				$req_rekon = $client->request('GET', config('app.url_soakemenkeu').'rekonLPJ/'.$filter);
 				$rekon = json_decode($req_rekon->getBody()->getContents(), true);
-
-				$req_renkas = $client->request('GET', config('app.url_soakemenkeu').'renkas');
+				
+				$req_renkas = $client->request('GET', config('app.url_soakemenkeu').'renkas/'.$filter);
 				$renkas = json_decode($req_renkas->getBody()->getContents(), true);
-
-				$req_revisi = $client->request('GET', config('app.url_soakemenkeu').'revisidipa');
+				
+				$req_revisi = $client->request('GET', config('app.url_soakemenkeu').'revisidipa/'.$filter);
 				$revisi = json_decode($req_revisi->getBody()->getContents(), true);
-
-				$req_retur = $client->request('GET', config('app.url_soakemenkeu').'rekapretur');
+				
+				$req_retur = $client->request('GET', config('app.url_soakemenkeu').'rekapretur/'.$filter);
 				$retur = json_decode($req_retur->getBody()->getContents(), true);
 
 				$up_count = 0;
@@ -286,11 +291,56 @@ class omspanController extends Controller
 				//print_r($revisi_dipa);
 				//echo "</pre>";
 				$this->data['rekap'] = $data_satker['data'];
+				$this->data['periode'] = $get['periode'];
 				return view('omspan.view', $this->data);
 				//die;
 			}
 		}
 
 		return view('omspan.index');
+	}
+	
+	//public function getpengelolaanup(Request $request, $kdsatker, $periode) {
+	//	
+	//	echo "<pre>";
+	//	print_r($request);
+	//	echo "</pre>";
+	//	echo $kdsatker;
+	//	echo $periode;
+	//}
+	
+	public function getpengelolaanup(Request $request) {
+		$client = new Client();
+		try {
+			$kdSatker = $request['kdSatker'];
+			$periode = $request['periode'];
+			
+			$req_pengelolaan_up = $client->request('GET', config('app.url_soakemenkeu').'status_up/'.$kdSatker . '/' . $periode);
+			$data = json_decode($req_pengelolaan_up->getBody()->getContents(), true);
+			
+			return $data;
+			//if (!$data){
+            //  return response()->json(Json::response(null, 'error', "data kosong", 404), 200);
+            //} else {
+            //  return response()->json(Json::response($data, 'sukses', null), 200);
+            //}
+        } catch(\Exception $e) {
+			return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
+        }
+	}
+	
+	public function getdatakontrak(Request $request) {
+		$client = new Client();
+		try {
+			$kdSatker = $request['kdSatker'];
+			$periode = $request['periode'];
+			
+			$req_data_kontrak = $client->request('GET', config('app.url_soakemenkeu').'p_datakontrak/'.$periode . '/'. $kdSatker);
+			$data = json_decode($req_data_kontrak->getBody()->getContents(), true);
+			
+			return $data;
+        } catch(\Exception $e) {
+			return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
+        }
 	}
 }

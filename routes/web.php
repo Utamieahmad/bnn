@@ -1266,6 +1266,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::group(['prefix'=>'omspan'],function(){
 		Route::match(['get','post'],'/omspan','omspanController@omspan')->name('omspan');
+		//Route::get('getpengelolaanup/{kdsatker}/{periode}', 'omspanController@getpengelolaanup')->name('getpengelolaanup');
+		Route::match(['get','post'],'/getpengelolaanup','omspanController@getpengelolaanup')->name('getpengelolaanup');
+		Route::match(['get','post'],'/getdatakontrak','omspanController@getdatakontrak')->name('getdatakontrak');
+		//Route::post('/getpengelolaanup', 'omspanController@getpengelolaanup')->name('getpengelolaanup');
 	});
 
 });
