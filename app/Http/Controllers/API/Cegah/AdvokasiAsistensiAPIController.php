@@ -92,7 +92,7 @@ class AdvokasiAsistensiAPIController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $data = AdvokasiAsistensi::join('tr_wilayah', 'cegahadvokasi_asistensi.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahadvokasi_asistensi.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
+            $data = AdvokasiAsistensi::leftjoin('tr_wilayah', 'cegahadvokasi_asistensi.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahadvokasi_asistensi.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
             // $data = AdvokasiAsistensi::where([['status', 1], ['tersangka_id', $id]])->first();
 
             if (!$data){
