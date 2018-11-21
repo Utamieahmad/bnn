@@ -1093,6 +1093,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 		});
 		Route::get('print_balai_besar/{segment}/{page?}','balaiBesarController@printPage')->name('print_balai_besar');
+		Route::post('/downloadbalaibesar', 'balaiBesarController@downloadBalaibesar');
 	});
 
 	Route::group(['prefix'=>'settama'],function(){

@@ -2802,7 +2802,7 @@ class PuslidatinController extends Controller
 
             if(count($request->meta_tim) > 0){
               foreach($request->meta_tim as $m => $p){
-                if($p['c'] || $p['teknisi']){
+                if(isset($p['c']) || isset($p['teknisi'])){
                   $meta_tim[] = ['penanggung_jawab'=> $p['penanggung_jawab'], 'teknisi'=> $p['teknisi']];
                 }
               }
