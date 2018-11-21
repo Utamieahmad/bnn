@@ -312,7 +312,7 @@ class AdvokasiController extends Controller
                            'satker_code' => $request->input('asatker_code'),
                            'refid_anggaran' => $request->input('arefid_anggaran')
            );
-           $json_encode = json_encode($array); 
+           $json_encode = json_encode($array);
            $requestAnggaran = $client->request('POST', $baseUrl.'/api/anggaran',
                    [
                        'headers' =>
