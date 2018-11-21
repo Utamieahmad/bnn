@@ -26,42 +26,42 @@ class omspanController extends Controller
 			//echo "<pre>";
 			//print_r($get);
 			//echo "</pre>";
-			
+
 			if($get['periode']) {
 				$filter = $get['periode'];
 				if($get['kode_satker']) {
 					$filter = $get['kode_satker'] . '/' . $get['periode'];
 				}
-				
+
 				//$params['headers'] = ['Content-Type' => 'application/json', 'Accept' => 'application/json'];
 				//$params['body'] = '{ "KDSATKER" : "", "KPPN" : "", "BA" : "", "BAES1" : "", "AKUN" : "", "PROGRAM" : "", "KEGIATAN" : "", "OUTPUT" : "", "KEWENANGAN" : "", "SUMBER_DANA" : "", "LOKASI" : "", "BUDGET_TYPE" : "", "AMOUNT" : "", "Limit" : "10", "Page" : "" }';
 				//$requestdatadipa = $client->request('POST', config('app.url_soadev2').'KemenkeuDataDipa/DataDipaQueryRS', $params);
 				//$datadipa = json_decode($requestdatadipa->getBody()->getContents(), true);
-				
-				$req_data_satker = $client->request('GET','http://103.3.70.167:8080/masterdata/api/view/list/satker');
+
+				$req_data_satker = $client->request('GET','http://10.210.84.13:8080/masterdata/api/view/list/satker');//$req_data_satker = $client->request('GET','http://103.3.70.167:8080/masterdata/api/view/list/satker');
 				$data_satker = json_decode($req_data_satker->getBody()->getContents(), true);
-				
+
 				$req_pengelolaan_up = $client->request('GET', config('app.url_soakemenkeu').'status_up/'.$filter);
 				$pengelolaan_up = json_decode($req_pengelolaan_up->getBody()->getContents(), true);
-				
+
 				$req_data_kontrak = $client->request('GET', config('app.url_soakemenkeu').'p_datakontrak');
 				$data_kontrak = json_decode($req_data_kontrak->getBody()->getContents(), true);
-				
+
 				$req_pen_tagihan = $client->request('GET', config('app.url_soakemenkeu').'kemajuan');
 				$pen_tagihan = json_decode($req_pen_tagihan->getBody()->getContents(), true);
-				
+
 				$req_rekon = $client->request('GET', config('app.url_soakemenkeu').'rekonLPJ');
 				$rekon = json_decode($req_rekon->getBody()->getContents(), true);
-				
+
 				$req_renkas = $client->request('GET', config('app.url_soakemenkeu').'renkas');
 				$renkas = json_decode($req_renkas->getBody()->getContents(), true);
-				
+
 				$req_revisi = $client->request('GET', config('app.url_soakemenkeu').'revisidipa');
 				$revisi = json_decode($req_revisi->getBody()->getContents(), true);
-				
+
 				$req_retur = $client->request('GET', config('app.url_soakemenkeu').'rekapretur');
 				$retur = json_decode($req_retur->getBody()->getContents(), true);
-				
+
 				$up_count = 0;
 				$up_count_tepat_waktu = 0;
 				$dkon_count = 0;
@@ -75,7 +75,7 @@ class omspanController extends Controller
 				$revisi_count = 0;
 				$retur_count = 0;
 				foreach($data_satker['data'] as $key => $row) {
-					
+
 					//***Rekap Data Pengelolaan UP***\\
 					foreach($pengelolaan_up['data'] as $up) {
 						if(trim($row['kdInstansi']) == $up['kdsatker']) {
@@ -89,7 +89,7 @@ class omspanController extends Controller
 					}
 					//$data_satker['data'][$key]['total'] = $up_count;
 					//$data_satker['data'][$key]['tepat_waktu'] = $up_count_tepat_waktu;
-					if($up_count != 0) {					
+					if($up_count != 0) {
 						$data_satker['data'][$key]['up'] = ($up_count_tepat_waktu / $up_count) * 100;
 					} else {
 						$data_satker['data'][$key]['up'] = 0;
@@ -106,7 +106,7 @@ class omspanController extends Controller
 					}
 					$up_count = 0;
 					$up_count_tepat_waktu = 0;
-					
+
 					//***Rekap Data Data Kontrak***\\
 					foreach($data_kontrak['data'] as $dkon) {
 						if(trim($row['kdInstansi']) == $dkon['kdsatker']) {
@@ -118,7 +118,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($dkon_count != 0) {					
+					if($dkon_count != 0) {
 						$data_satker['data'][$key]['dkon'] = ($dkon_count_tepat_waktu / $dkon_count) * 100;
 					} else {
 						$data_satker['data'][$key]['dkon'] = 0;
@@ -135,7 +135,7 @@ class omspanController extends Controller
 					}
 					$dkon_count = 0;
 					$dkon_count_tepat_waktu = 0;
-					
+
 					//***Rekap Data Penyelesaian Tagihan***\\
 					foreach($pen_tagihan['data'] as $ptagih) {
 						if(trim($row['kdInstansi']) == $ptagih['kdsatker']) {
@@ -147,7 +147,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($ptagih_count != 0) {					
+					if($ptagih_count != 0) {
 						$data_satker['data'][$key]['ptagih'] = ($ptagih_count_tepat / $ptagih_count) * 100;
 					} else {
 						$data_satker['data'][$key]['ptagih'] = 0;
@@ -164,7 +164,7 @@ class omspanController extends Controller
 					}
 					$ptagih_count = 0;
 					$ptagih_count_tepat = 0;
-					
+
 					//***Rekap Rekon LPJ***\\
 					foreach($rekon['data'] as $rk) {
 						if(trim($row['kdInstansi']) == $rk['kdsatker']) {
@@ -176,7 +176,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($rekon_count != 0) {					
+					if($rekon_count != 0) {
 						$data_satker['data'][$key]['rekon'] = ($rekon_count_tepat / $rekon_count) * 100;
 					} else {
 						$data_satker['data'][$key]['rekon'] = 0;
@@ -193,7 +193,7 @@ class omspanController extends Controller
 					}
 					$rekon_count = 0;
 					$rekon_count_tepat = 0;
-					
+
 					//***Rekap Renkas***\\
 					foreach($renkas['data'] as $rks) {
 						if(trim($row['kdInstansi']) == $rks['kdsatker']) {
@@ -205,7 +205,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($renkas_count != 0) {					
+					if($renkas_count != 0) {
 						$data_satker['data'][$key]['renkas'] = ($renkas_count_tepat / $renkas_count) * 100;
 					} else {
 						$data_satker['data'][$key]['renkas'] = 0;
@@ -222,7 +222,7 @@ class omspanController extends Controller
 					}
 					$renkas_count = 0;
 					$renkas_count_tepat = 0;
-					
+
 					//***Rekap Revisi DIPA***\\
 					foreach($revisi['data'] as $rvs) {
 						if(trim($row['kdInstansi']) == $rvs['kdsatker']) {
@@ -231,7 +231,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($revisi_count != 0) {					
+					if($revisi_count != 0) {
 						$data_satker['data'][$key]['revisi'] = 100;
 					} else {
 						$data_satker['data'][$key]['revisi'] = 0;
@@ -247,7 +247,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['na_revisi'] = 0;
 					}
 					$revisi_count = 0;
-					
+
 					//***Rekap Retur SP2D***\\
 					$jml_retur = 0;
 					$jml_sp2d = 0;
@@ -279,7 +279,7 @@ class omspanController extends Controller
 					}
 					$retur_count = 0;
 				}
-				
+
 				//$req_revisi_dipa = $client->request('GET', config('app.url_soakemenkeu').'revisidipa');
 				//$revisi_dipa = json_decode($req_revisi_dipa->getBody()->getContents(), true);
 				//echo "3386 row<pre>";
