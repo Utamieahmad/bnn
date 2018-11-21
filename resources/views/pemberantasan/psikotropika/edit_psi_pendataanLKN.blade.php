@@ -46,7 +46,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 
 								<select class="form-control select2" id="pelaksana" name="pelaksana">
-									@foreach($instansi['data'] as $wil)
+									@foreach($instansi as $wil)
 									<option value="{{$wil['id_instansi']}}" {{($wil['id_instansi'] == $data_kasus['data']['id_instansi']) ? 'selected="selected"':""}} >{{$wil['nm_instansi']}}</option>
 									@endforeach
 								</select>
