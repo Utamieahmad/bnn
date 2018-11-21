@@ -3802,7 +3802,7 @@ class irtamaController extends Controller
 
         $this->data['path'] = $request->path();
         $url_simpeg = config('app.url_simpeg');
-        $query  =  execute_api_json($url_simpeg,"GET");
+        $query  =  execute_api_json($url_simpeg,"GET");        
         if($query->code == 200 && ($query->status != 'error')){
           $this->data['satker'] = $query->data;
         }else{
