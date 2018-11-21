@@ -332,6 +332,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_koordinasi','AdvokasiController@deletependataanKoordinasi')->name('delete_pendataan_koordinasi');
 			Route::get('/view','caseController@view');
 			Route::get('/printkoordinasi', 'AdvokasiController@printKoordinasi');
+			Route::post('/downloadkoordinasi', 'AdvokasiController@downloadKoordinasi');
 
 			Route::match(['get', 'post'] ,'/pendataan_jejaring/{page?}','AdvokasiController@pendataanJejaring')->name('pendataan_jejaring');
 			Route::get('/edit_pendataan_jejaring/{id}','AdvokasiController@editpendataanJejaring')->name('edit_pendataan_jejaring');

@@ -257,6 +257,7 @@ Route::post('jnsbrgbuktimobile', 'GlobalAPIController@getJnsBrgBuktiMobile')->na
 Route::get('jnskasus', 'GlobalAPIController@getJnsKasus')->name('getJnsKasus');
 Route::get('propinsi', 'GlobalAPIController@getPropinsi')->name('getPropinsi');
 Route::get('getpropkab', 'GlobalAPIController@getPropKab')->name('getPropKab');
+Route::get('getkabupaten', 'GlobalAPIController@getKabupaten')->name('getKabupaten');
 Route::get('filterwilayah/{parent?}', 'GlobalAPIController@getWilayahByParent')->name('getWilayahByParent');
 Route::get('getsatker', 'GlobalAPIController@getSatkerList')->name('getSatkerList');
 Route::get('getsatkerbyid/{id}', 'GlobalAPIController@getSatkerById')->name('getSatkerById');
