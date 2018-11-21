@@ -263,7 +263,7 @@ return [
     'magang_file_path'=>'upload/BalaiBesar/Magang',
     'berantas_ladang_ganja'=>'upload/Berantas/PemusnahanLadangGanja',
 
-    'url_simpeg'=>'https://integrasi.bnn.go.id/simpeg/listSatker/',
+    'url_simpeg'=>'https://integrasi.bnn.go.id/simpeg/listSatker',
     'url_satker'=>'https://integrasi.bnn.go.id/simpeg/staffBySatker/',
     /*id satker*/
     'satker_irtama' => 156,
