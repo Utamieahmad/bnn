@@ -5533,8 +5533,11 @@ class irtamaController extends Controller
              foreach($data as $key=>$d){
                 $result[$key]['No'] = $i;
                 $result[$key]['No Laporan'] =$d->no_laporan;
-                $result[$key]['Tanggal Laporan'] = ($d->tgl_laporan? date('d/m/Y',strtotime($d->tgl_laporan)) : '');
-                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$d->kode_satker ) : '') ;
+                $result[$key]['Tanggal Laporan'] = ($d->tgl_laporan? date('d/m/Y',strtotime($d->tgl_laporan)) : '');                
+                $a = json_decode($d->kode_satker,true);
+                $nama_satker = $a['nama'];                                
+                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$nama_satker ) : '') ;
+//                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$d->kode_satker ) : '') ;
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
@@ -5998,7 +6001,10 @@ class irtamaController extends Controller
                 $result[$key]['No'] = $i;
                 $result[$key]['No Laporan'] =$d->no_laporan;
                 $result[$key]['Tanggal Laporan'] = ($d->tgl_laporan? date('d/m/Y',strtotime($d->tgl_laporan)) : '');
-                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$d->kode_satker ) : '') ;
+                $a = json_decode($d->kode_satker,true);
+                $nama_satker = $a['nama'];                                
+                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$nama_satker ) : '') ;
+//                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$d->kode_satker ) : '') ;
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
