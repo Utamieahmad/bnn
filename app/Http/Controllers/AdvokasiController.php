@@ -3689,6 +3689,66 @@ class AdvokasiController extends Controller
         $this->printData($data, $name);
     }
 
+    public function downloadIntervensi(Request $request){
+  
+        $data = DB::table('v_cegahadvokasi_intervensi');
+        if ($request->date_from != '') {
+          $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        if ($request->session()->get('wilayah') != '') {
+          $data  = $data->where(function ($query) use ($request) {
+              $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+          });
+        }
+
+        $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+        $DataArray = [];
+        $result = [];
+        $i = 1;
+        foreach ($data as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
+          $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+          $DataArray[$key]['Sasaran'] = $value->kodesasaran;
+          
+          $meta = json_decode($value->meta_instansi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_nama_instansi'];
+            }
+            $DataArray[$key]['Instansi'] = implode("\n", $InstansiArray[$key]['Instansi']);
+          } else {
+            $DataArray[$key]['Instansi'] = '-';
+          }
+
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+          $DataArray[$key]['Panitia'] = $value->panitia_monev;
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Export Data Intervensi '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+
     private function kelengkapan_Intervensi($id){
       $status_kelengkapan = true;
       try{
@@ -4443,6 +4503,66 @@ class AdvokasiController extends Controller
          //dd($DataArray);
         $data = $DataArray;
         $name = 'Data Kegiatan Supervisi '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+
+    public function downloadSupervisi(Request $request){
+  
+        $data = DB::table('v_cegahadvokasi_supervisi');
+        if ($request->date_from != '') {
+          $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        if ($request->session()->get('wilayah') != '') {
+          $data  = $data->where(function ($query) use ($request) {
+              $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+          });
+        }
+
+        $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+        $DataArray = [];
+        $result = [];
+        $i = 1;
+        foreach ($data as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
+          $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+          $DataArray[$key]['Sasaran'] = $value->kodesasaran;
+          
+          $meta = json_decode($value->meta_instansi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_nama_instansi'];
+            }
+            $DataArray[$key]['Instansi'] = implode("\n", $InstansiArray[$key]['Instansi']);
+          } else {
+            $DataArray[$key]['Instansi'] = '-';
+          }
+
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+          $DataArray[$key]['Panitia'] = $value->panitia_monev;
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Export Data Supervisi '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 
@@ -5204,6 +5324,66 @@ class AdvokasiController extends Controller
         $this->printData($data, $name);
     }
 
+    public function downloadMonitoring(Request $request){
+  
+        $data = DB::table('v_cegahadvokasi_monev');
+        if ($request->date_from != '') {
+          $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        if ($request->session()->get('wilayah') != '') {
+          $data  = $data->where(function ($query) use ($request) {
+              $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+          });
+        }
+
+        $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+        $DataArray = [];
+        $result = [];
+        $i = 1;
+        foreach ($data as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
+          $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+          $DataArray[$key]['Sasaran'] = $value->kodesasaran;
+          
+          $meta = json_decode($value->meta_instansi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_nama_instansi'];
+            }
+            $DataArray[$key]['Instansi'] = implode("\n", $InstansiArray[$key]['Instansi']);
+          } else {
+            $DataArray[$key]['Instansi'] = '-';
+          }
+
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+          $DataArray[$key]['Panitia'] = $value->panitia_monev;
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Export Data Advokasi Monitoring Evaluasi '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+
     private function kelengkapan_Monitoring($id){
       $status_kelengkapan = true;
       try{
@@ -5959,6 +6139,66 @@ class AdvokasiController extends Controller
          //dd($DataArray);
         $data = $DataArray;
         $name = 'Data Kegiatan Bimbingan Teknis '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+
+    public function downloadBimbingan(Request $request){
+  
+        $data = DB::table('v_cegahadvokasi_bimtek');
+        if ($request->date_from != '') {
+          $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        if ($request->session()->get('wilayah') != '') {
+          $data  = $data->where(function ($query) use ($request) {
+              $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+          });
+        }
+
+        $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+        $DataArray = [];
+        $result = [];
+        $i = 1;
+        foreach ($data as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
+          $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+          $DataArray[$key]['Sasaran'] = $value->kodesasaran;
+          
+          $meta = json_decode($value->meta_instansi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_nama_instansi'];
+            }
+            $DataArray[$key]['Instansi'] = implode("\n", $InstansiArray[$key]['Instansi']);
+          } else {
+            $DataArray[$key]['Instansi'] = '-';
+          }
+
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+          $DataArray[$key]['Panitia'] = $value->panitia_monev;
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Export Data Bimbingan Teknis '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 
@@ -6722,7 +6962,67 @@ class AdvokasiController extends Controller
         }
          //dd($DataArray);
         $data = $DataArray;
-        $name = 'Data Kegiatan Sosialisasi '.Carbon::now()->format('Y-m-d H:i:s');
+        $name = 'Data Kegiatan KIE '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+
+    public function downloadSosialisasi(Request $request){
+  
+        $data = DB::table('v_cegahdiseminfo_sosialisasi');
+        if ($request->date_from != '') {
+          $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        if ($request->session()->get('wilayah') != '') {
+          $data  = $data->where(function ($query) use ($request) {
+              $query->where('id_wilayah', '=', $request->session()->get('wilayah'))->orWhere('wil_id_wilayah', '=', $request->session()->get('wilayah'));
+          });
+        }
+
+        $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+        $DataArray = [];
+        $result = [];
+        $i = 1;
+        foreach ($data as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal'] = ($value->tgl_pelaksanaan ? date('d-m-Y', strtotime($value->tgl_pelaksanaan)) : '');
+          $DataArray[$key]['Pelaksana'] = $value->nm_instansi;
+          $DataArray[$key]['Sasaran'] = $value->kodesasaran;
+          
+          $meta = json_decode($value->meta_instansi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['list_nama_instansi'];
+            }
+            $DataArray[$key]['Instansi'] = implode("\n", $InstansiArray[$key]['Instansi']);
+          } else {
+            $DataArray[$key]['Instansi'] = '-';
+          }
+
+          $DataArray[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+          $meta = json_decode($value->meta_nasum_materi,true);
+          if(count($meta)){
+            for($j = 0 ; $j < count($meta); $j++){
+                $InstansiArray[$key]['materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['materi'].')';
+            }
+            $DataArray[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['materi']);
+          } else {
+            $DataArray[$key]['Narsum/Materi'] = '-';
+          }
+
+          $DataArray[$key]['Uraian Singkat'] = $value->uraian_singkat;
+          $DataArray[$key]['Panitia'] = $value->panitia_monev;
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Export Data Kegiatan KIE '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 

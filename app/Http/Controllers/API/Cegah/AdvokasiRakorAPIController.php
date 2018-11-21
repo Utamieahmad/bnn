@@ -92,7 +92,7 @@ class AdvokasiRakorAPIController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $data = AdvokasiRakor::join('tr_wilayah', 'cegahadvokasi_rakor.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahadvokasi_rakor.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
+            $data = AdvokasiRakor::leftjoin('tr_wilayah', 'cegahadvokasi_rakor.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahadvokasi_rakor.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
             // $data = AdvokasiRakor::where([['status', 1], ['tersangka_id', $id]])->first();
 
             if (!$data){

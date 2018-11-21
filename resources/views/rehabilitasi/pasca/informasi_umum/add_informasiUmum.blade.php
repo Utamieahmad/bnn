@@ -38,7 +38,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" > Nama Lembaga </label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" name="nama" value=""  class="form-control col-md-7 col-xs-12" required> 
+								<input type="text" name="nama" value=""  class="form-control col-md-7 col-xs-12" required>
 							</div>
 						</div>
 
@@ -52,7 +52,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" >Kodepos Alamat</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" name="alamat_kodepos" value=""  class="form-control col-md-7 col-xs-12 ">
+								<input name="alamat_kodepos" value=""  type="text" onKeydown="numeric_only(event,this)" class="form-control col-md-7 col-xs-12">
 							</div>
 						</div>
 
@@ -115,11 +115,11 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" ><li>Periode Rawatan</li></label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<div class="radio">
-										
+
 										@if(isset($periode_rawatan))
 											@if(count($periode_rawatan) > 0)
 												@foreach ($periode_rawatan as $prkey => $prval)
-													<label class="mt-radio col-md-9"> 
+													<label class="mt-radio col-md-9">
 														<input type="radio" value="{{$prkey}}" name="periode_rawatan"/>
 														<span>{{$prval}}</span>
 													</label>
@@ -136,7 +136,7 @@
 										@if(isset($bentuk_layanan))
 											@if(count($bentuk_layanan) > 0)
 												@foreach ($bentuk_layanan as $brkey => $brval)
-													<label class="mt-radio col-md-9"> 
+													<label class="mt-radio col-md-9">
 														<input type="checkbox" name="bentuk_layanan[]" value="{{$brkey}}"/>
 														<span>{{$brval}}</span>
 													</label>
@@ -487,7 +487,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"><li>Tatalaksana medis terkait napza</li></label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" name="pelatihan_tatalaksana" value=""  class="form-control col-md-7 col-xs-12" onKeydown="numeric_only(event,this)"> 
+									<input type="text" name="pelatihan_tatalaksana" value=""  class="form-control col-md-7 col-xs-12" onKeydown="numeric_only(event,this)">
 								</div>
 							</div>
 

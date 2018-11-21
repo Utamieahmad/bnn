@@ -370,6 +370,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_intervensi','AdvokasiController@deletependataanIntervensi')->name('delete_pendataan_intervensi');
 			Route::get('/view','caseController@view');
 			Route::get('/printintervensi', 'AdvokasiController@printIntervensi');
+			Route::post('/downloadintervensi', 'AdvokasiController@downloadIntervensi');
 
 			Route::match(['get', 'post'] ,'/pendataan_supervisi/{page?}','AdvokasiController@pendataanSupervisi')->name('pendataan_supervisi');
 			Route::get('/edit_pendataan_supervisi/{id}','AdvokasiController@editpendataanSupervisi')->name('edit_pendataan_supervisi');
@@ -379,6 +380,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_supervisi','AdvokasiController@deletependataanSupervisi')->name('delete_pendataan_supervisi');
 			Route::get('/view','caseController@view');
 			Route::get('/printsupervisi', 'AdvokasiController@printSupervisi');
+			Route::post('/downloadsupervisi', 'AdvokasiController@downloadSupervisi');
 
 			Route::match(['get', 'post'] ,'/pendataan_monitoring/{page?}','AdvokasiController@pendataanMonitoring')->name('pendataan_monitoring');
 			Route::get('/edit_pendataan_monitoring/{id}','AdvokasiController@editpendataanMonitoring')->name('edit_pendataan_monitoring');
@@ -388,6 +390,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_monitoring','AdvokasiController@deletependataanMonitoring')->name('delete_pendataan_monitoring');
 			Route::get('/view','caseController@view');
 			Route::get('/printmonitoring', 'AdvokasiController@printMonitoring');
+			Route::post('/downloadmonitoring', 'AdvokasiController@downloadMonitoring');
 
 			Route::match(['get', 'post'] ,'/pendataan_bimbingan/{page?}','AdvokasiController@pendataanBimbingan')->name('pendataan_bimbingan');
 			Route::get('/edit_pendataan_bimbingan/{id}','AdvokasiController@editpendataanBimbingan')->name('edit_pendataan_bimbingan');
@@ -397,6 +400,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_bimbingan','AdvokasiController@deletependataanBimbingan')->name('delete_pendataan_bimbingan');
 			Route::get('/view','caseController@view');
 			Route::get('/printbimbingan', 'AdvokasiController@printBimbingan');
+			Route::post('/downloadbimbingan', 'AdvokasiController@downloadBimbingan');
 
 			Route::match(['get', 'post'] ,'/pendataan_sosialisasi/{page?}','AdvokasiController@pendataanSosialisasi')->name('pendataan_sosialisasi');
 			Route::get('/edit_pendataan_sosialisasi/{id}','AdvokasiController@editpendataanSosialisasi')->name('edit_pendataan_sosialisasi');
@@ -406,6 +410,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_pendataan_sosialisasi','AdvokasiController@deletependataanSosialisasi')->name('delete_pendataan_sosialisasi');
 			Route::get('/view','caseController@view');
 			Route::get('/printsosialisasi', 'AdvokasiController@printSosialisasi');
+			Route::post('/downloadsosialisasi', 'AdvokasiController@downloadSosialisasi');
 
 		});
 
@@ -417,6 +422,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_online','diseminasiController@inputpendataanOnline');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printonline', 'diseminasiController@printOnline');
+			Route::post('/downloadonline', 'diseminasiController@downloadOnline');
 
 			Route::match(['get', 'post'] ,'/pendataan_penyiaran/{page?}','diseminasiController@pendataanPenyiaran')->name('pendataan_penyiaran');
 			Route::get('/edit_pendataan_penyiaran/{id}','diseminasiController@editpendataanPenyiaran')->name('edit_pendataan_penyiaran');
@@ -425,6 +431,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_penyiaran','diseminasiController@inputpendataanPenyiaran');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printpenyiaran', 'diseminasiController@printPenyiaran');
+			Route::post('/downloadpenyiaran', 'diseminasiController@downloadPenyiaran');
 
 			Route::match(['get', 'post'] ,'/pendataan_cetak/{page?}','diseminasiController@pendataanCetak')->name('pendataan_cetak');
 			Route::get('/edit_pendataan_cetak/{id}','diseminasiController@editpendataanCetak')->name('edit_pendataan_cetak');
@@ -433,6 +440,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_cetak','diseminasiController@inputpendataanCetak');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printcetak', 'diseminasiController@printCetak');
+			Route::post('/downloadcetak', 'diseminasiController@downloadCetak');
 
 			Route::match(['get', 'post'] ,'/pendataan_konvensional/{page?}','diseminasiController@pendataanKonvensional')->name('pendataan_konvensional');
 			Route::get('/edit_pendataan_konvensional/{id}','diseminasiController@editpendataanKonvensional')->name('edit_pendataan_konvensional');
@@ -441,6 +449,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_pendataan_konvensional','diseminasiController@inputpendataanKonvensional');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printkonvensional', 'diseminasiController@printKonvensional');
+			Route::post('/downloadkonvensional', 'diseminasiController@downloadKonvensional');
 
 			Route::get('/pendataan_videotron','diseminasiController@pendataanVideotron')->name('pendataan_videotron');
 			Route::get('/edit_pendataan_videotron/{id}','diseminasiController@editpendataanVideotron')->name('edit_pendataan_videotron');
@@ -1084,6 +1093,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 		});
 		Route::get('print_balai_besar/{segment}/{page?}','balaiBesarController@printPage')->name('print_balai_besar');
+		Route::post('/downloadbalaibesar', 'balaiBesarController@downloadBalaibesar');
 	});
 
 	Route::group(['prefix'=>'settama'],function(){

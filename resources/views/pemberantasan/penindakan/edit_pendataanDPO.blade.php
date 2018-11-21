@@ -129,7 +129,7 @@
 								<div class="form-group">
 									<label for="alamatktp_kodepos" class="col-md-3 control-label">Kodepos Alamat KTP</label>
 									<div class="col-md-6 col-sm-6 col-xs-12">
-										<input id="alamatktp_kodepos" name="alamatktp_kodepos" type="text" class="form-control" value="{{$dpo['alamatktp_kodepos']}}">
+										<input id="alamatktp_kodepos" name="alamatktp_kodepos" type="number" class="form-control numeric" onkeydown="numeric(event)" value="{{$dpo['alamatktp_kodepos']}}">
 									</div>
 								</div>
 								<div class="form-group">
@@ -153,7 +153,7 @@
 								<div class="form-group">
 									<label for="alamatdomisili_kodepos" class="col-md-3 control-label">Kodepos Alamat Domisili</label>
 									<div class="col-md-6 col-sm-6 col-xs-12">
-										<input id="alamatdomisili_kodepos" name="alamatdomisili_kodepos" type="text" class="form-control" value="{{$dpo['alamatdomisili_kodepos']}}">
+										<input id="alamatdomisili_kodepos" name="alamatdomisili_kodepos" type="number" class="form-control numeric" onkeydown="numeric(event)" value="{{$dpo['alamatdomisili_kodepos']}}">
 									</div>
 								</div>
 								<div class="form-group">
@@ -340,7 +340,11 @@
 										<select name="kode_negara" class="form-control select2">
 											<option value="" >-- Pilih Negara --</option>
 											@foreach($negara as $n)
-											<option value="{{$n['kode']}}">{{$n['nama_negara']}}</option>
+												@if($n['kode']==$dpo['kode_negara'])
+												<option value="{{$n['kode']}}" selected='selected'>{{$n['nama_negara']}}</option>
+												@else
+												<option value="{{$n['kode']}}">{{$n['nama_negara']}}</option>
+												@endif
 											@endforeach
 										</select>
 

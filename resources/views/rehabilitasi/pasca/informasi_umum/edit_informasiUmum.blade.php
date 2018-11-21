@@ -43,7 +43,7 @@
 							</div>
 						</div>
 
-						
+
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" >Alamat Lembaga</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
@@ -54,7 +54,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" >Kodepos Alamat</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" name="alamat_kodepos" value="{{$data->alamat_kodepos}}"  class="form-control col-md-7 col-xs-12 " onKeydown="numeric_only(event,this)">
+								<input name="alamat_kodepos" value="{{$data->alamat_kodepos}}"  class="form-control col-md-7 col-xs-12 " onKeydown="numeric_only(event,this)">
 							</div>
 						</div>
 
@@ -120,7 +120,7 @@
 										@if(isset($periode_rawatan))
 											@if(count($periode_rawatan) > 0)
 												@foreach ($periode_rawatan as $prkey => $prval)
-													<label class="mt-radio col-md-9"> 
+													<label class="mt-radio col-md-9">
 														<input type="radio" value="{{$prkey}}" name="periode_rawatan" {{(  ($prkey == $data->periode_rawatan) ? 'checked=checked' : '')}}/>
 														<span>{{$prval}}</span>
 													</label>
@@ -156,7 +156,7 @@
 										@if(isset($bentuk_layanan))
 											@if(count($bentuk_layanan) > 0)
 												@foreach ($bentuk_layanan as $brkey => $brval)
-													<label class="mt-radio col-md-9"> 
+													<label class="mt-radio col-md-9">
 														<input type="checkbox" name="bentuk_layanan[]" value="{{$brkey}}" {{(in_array($brkey,$array_layanan) ? 'checked=checked':'')}}/>
 														<span>{{$brval}}</span>
 													</label>
@@ -194,7 +194,7 @@
 								</div>
 							</div>
 						</ul>
-						
+
 
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" >Pola Tarif Resmi Pelayanan</label>

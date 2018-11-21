@@ -47,11 +47,13 @@
                 </div>
               </div>
 
-
               <div class="form-group">
                 <label for="thn_anggaran" class="col-md-3 col-sm-3 col-xs-12 control-label">Tahun Anggaran</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input value="{{$reviurkakl['tahun_anggaran']}}" id="thn_anggaran" name="thn_anggaran" type="text" class="form-control">
+                <div class='col-md-6 col-sm-6 col-xs-12 input-group date year-only'>
+                  <input type='text' value="{{$reviurkakl['tahun_anggaran']}}" name="tahun_anggaran" class="form-control col-md-7 col-xs-12" />
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
                 </div>
               </div>
 

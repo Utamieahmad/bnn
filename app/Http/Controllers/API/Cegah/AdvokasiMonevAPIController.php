@@ -92,7 +92,7 @@ class AdvokasiMonevAPIController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $data = AdvokasiMonev::join('tr_wilayah', 'cegahadvokasi_monev.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahadvokasi_monev.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
+            $data = AdvokasiMonev::leftjoin('tr_wilayah', 'cegahadvokasi_monev.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahadvokasi_monev.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
             // $data = AdvokasiMonev::where([['status', 1], ['tersangka_id', $id]])->first();
 
             if (!$data){

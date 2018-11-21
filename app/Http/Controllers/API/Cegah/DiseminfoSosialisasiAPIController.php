@@ -92,7 +92,7 @@ class DiseminfoSosialisasiAPIController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $data = DiseminfoSosialisasi::join('tr_wilayah', 'cegahdiseminfo_sosialisasi.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahdiseminfo_sosialisasi.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
+            $data = DiseminfoSosialisasi::leftjoin('tr_wilayah', 'cegahdiseminfo_sosialisasi.lokasi_kegiatan_idkabkota', '=', 'tr_wilayah.id_wilayah')->select('cegahdiseminfo_sosialisasi.*', 'tr_wilayah.nm_wilayah AS lokasi_kegiatan_namakabkota')->where('id', $id)->first();
             // $data = DiseminfoSosialisasi::where([['status', 1], ['tersangka_id', $id]])->first();
 
             if (!$data){

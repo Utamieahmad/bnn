@@ -1,0 +1,636 @@
+CREATE OR REPLACE VIEW public.v_cegahadvokasi_rakor
+AS SELECT cegahadvokasi_rakor.id,
+    cegahadvokasi_rakor.tgl_pelaksanaan,
+    cegahadvokasi_rakor.jenis_kegiatan,
+    cegahadvokasi_rakor.idpelaksana,
+    cegahadvokasi_rakor.kodesasaran,
+    cegahadvokasi_rakor.jumlah_instansi,
+    cegahadvokasi_rakor.meta_instansi,
+    cegahadvokasi_rakor.jumlah_peserta,
+    cegahadvokasi_rakor.lokasi_kegiatan,
+    cegahadvokasi_rakor.lokasi_kegiatan_idprovinsi,
+    cegahadvokasi_rakor.lokasi_kegiatan_idkabkota,
+    cegahadvokasi_rakor.narasumber,
+    cegahadvokasi_rakor.panitia_monev,
+    cegahadvokasi_rakor.materi,
+    cegahadvokasi_rakor.kodesumberanggaran,
+    cegahadvokasi_rakor.file_upload,
+    cegahadvokasi_rakor.created_at,
+    cegahadvokasi_rakor.created_by,
+    cegahadvokasi_rakor.created_by_username,
+    cegahadvokasi_rakor.updated_at,
+    cegahadvokasi_rakor.updated_by,
+    cegahadvokasi_rakor.updated_by_username,
+    cegahadvokasi_rakor.status_aktif,
+    cegahadvokasi_rakor.periode,
+    cegahadvokasi_rakor.periode_tahun,
+    cegahadvokasi_rakor.periode_bulan,
+    cegahadvokasi_rakor.periode_tanggal,
+    sasaran.lookup_name AS nama_sasaran,
+    anggaran.lookup_name AS nama_anggaran,
+    tr_instansi.nm_instansi,
+    t1.nm_wilayah AS lokasi_kegiatan_namaprovinsi,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    tr_jnswilayah.nm_jnswilayah,
+    t3.posisi,
+    t3.nm_wilayah,
+    cegahadvokasi_rakor.no_sprint,
+    t3.id_wilayah,
+    t3.wil_id_wilayah,
+    cegahadvokasi_rakor.asal_peserta,
+    cegahadvokasi_rakor.meta_sasaran,
+    cegahadvokasi_rakor.status,
+    cegahadvokasi_rakor.bentuk_kegiatan,
+    cegahadvokasi_rakor.deleted_at,
+    cegahadvokasi_rakor.meta_nasum_materi,
+    cegahadvokasi_rakor.meta_panitia,
+    cegahadvokasi_rakor.uraian_singkat
+   FROM cegahadvokasi_rakor
+     LEFT JOIN sin_lookup_values sasaran ON cegahadvokasi_rakor.kodesasaran::text = sasaran.lookup_value::text
+     LEFT JOIN sin_lookup_values anggaran ON cegahadvokasi_rakor.kodesumberanggaran::text = anggaran.lookup_value::text
+     LEFT JOIN tr_instansi ON cegahadvokasi_rakor.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah t1 ON cegahadvokasi_rakor.lokasi_kegiatan_idprovinsi = t1.id_wilayah
+     LEFT JOIN tr_wilayah t2 ON cegahadvokasi_rakor.lokasi_kegiatan_idkabkota = t2.id_wilayah
+     LEFT JOIN tr_jnswilayah ON t2.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t3 ON tr_instansi.id_wilayah = t3.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahadvokasi_jejaring
+AS SELECT cegahadvokasi_jejaring.id,
+    cegahadvokasi_jejaring.tgl_pelaksanaan,
+    cegahadvokasi_jejaring.jenis_kegiatan,
+    cegahadvokasi_jejaring.idpelaksana,
+    cegahadvokasi_jejaring.kodesasaran,
+    cegahadvokasi_jejaring.jumlah_instansi,
+    cegahadvokasi_jejaring.meta_instansi,
+    cegahadvokasi_jejaring.jumlah_peserta,
+    cegahadvokasi_jejaring.lokasi_kegiatan,
+    cegahadvokasi_jejaring.lokasi_kegiatan_idprovinsi,
+    cegahadvokasi_jejaring.lokasi_kegiatan_idkabkota,
+    cegahadvokasi_jejaring.narasumber,
+    cegahadvokasi_jejaring.panitia_monev,
+    cegahadvokasi_jejaring.materi,
+    cegahadvokasi_jejaring.kodesumberanggaran,
+    cegahadvokasi_jejaring.file_upload,
+    cegahadvokasi_jejaring.created_at,
+    cegahadvokasi_jejaring.created_by,
+    cegahadvokasi_jejaring.created_by_username,
+    cegahadvokasi_jejaring.updated_at,
+    cegahadvokasi_jejaring.updated_by,
+    cegahadvokasi_jejaring.updated_by_username,
+    cegahadvokasi_jejaring.status_aktif,
+    cegahadvokasi_jejaring.periode,
+    cegahadvokasi_jejaring.periode_tahun,
+    cegahadvokasi_jejaring.periode_bulan,
+    cegahadvokasi_jejaring.periode_tanggal,
+    sasaran.lookup_name AS nama_sasaran,
+    anggaran.lookup_name AS nama_anggaran,
+    tr_instansi.nm_instansi,
+    t1.nm_wilayah AS lokasi_kegiatan_namaprovinsi,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    tr_jnswilayah.nm_jnswilayah,
+    t3.posisi,
+    t3.nm_wilayah,
+    t3.id_wilayah,
+    t3.wil_id_wilayah,
+    cegahadvokasi_jejaring.asal_peserta,
+    cegahadvokasi_jejaring.status,
+    cegahadvokasi_jejaring.bentuk_kegiatan,
+    cegahadvokasi_jejaring.deleted_at,
+    cegahadvokasi_jejaring.meta_nasum_materi,
+    cegahadvokasi_jejaring.uraian_singkat
+   FROM cegahadvokasi_jejaring
+     LEFT JOIN sin_lookup_values sasaran ON cegahadvokasi_jejaring.kodesasaran::text = sasaran.lookup_value::text
+     LEFT JOIN sin_lookup_values anggaran ON cegahadvokasi_jejaring.kodesumberanggaran::text = anggaran.lookup_value::text
+     LEFT JOIN tr_instansi ON cegahadvokasi_jejaring.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah t1 ON cegahadvokasi_jejaring.lokasi_kegiatan_idprovinsi = t1.id_wilayah
+     LEFT JOIN tr_wilayah t2 ON cegahadvokasi_jejaring.lokasi_kegiatan_idkabkota = t2.id_wilayah
+     LEFT JOIN tr_jnswilayah ON t2.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t3 ON tr_instansi.id_wilayah = t3.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahadvokasi_asistensi
+AS SELECT cegahadvokasi_asistensi.id,
+    cegahadvokasi_asistensi.tgl_pelaksanaan,
+    cegahadvokasi_asistensi.jenis_kegiatan,
+    cegahadvokasi_asistensi.idpelaksana,
+    cegahadvokasi_asistensi.kodesasaran,
+    cegahadvokasi_asistensi.jumlah_instansi,
+    cegahadvokasi_asistensi.meta_instansi,
+    cegahadvokasi_asistensi.jumlah_peserta,
+    cegahadvokasi_asistensi.lokasi_kegiatan,
+    cegahadvokasi_asistensi.lokasi_kegiatan_idprovinsi,
+    cegahadvokasi_asistensi.lokasi_kegiatan_idkabkota,
+    cegahadvokasi_asistensi.narasumber,
+    cegahadvokasi_asistensi.panitia_monev,
+    cegahadvokasi_asistensi.materi,
+    cegahadvokasi_asistensi.kodesumberanggaran,
+    cegahadvokasi_asistensi.file_upload,
+    cegahadvokasi_asistensi.created_at,
+    cegahadvokasi_asistensi.created_by,
+    cegahadvokasi_asistensi.created_by_username,
+    cegahadvokasi_asistensi.updated_at,
+    cegahadvokasi_asistensi.updated_by,
+    cegahadvokasi_asistensi.updated_by_username,
+    cegahadvokasi_asistensi.status_aktif,
+    cegahadvokasi_asistensi.periode,
+    cegahadvokasi_asistensi.periode_tahun,
+    cegahadvokasi_asistensi.periode_bulan,
+    cegahadvokasi_asistensi.periode_tanggal,
+    sasaran.lookup_name AS nama_sasaran,
+    anggaran.lookup_name AS nama_anggaran,
+    tr_instansi.nm_instansi,
+    t1.nm_wilayah AS lokasi_kegiatan_namaprovinsi,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    tr_jnswilayah.nm_jnswilayah,
+    t3.posisi,
+    t3.nm_wilayah,
+    t3.id_wilayah,
+    t3.wil_id_wilayah,
+    cegahadvokasi_asistensi.asal_peserta,
+    cegahadvokasi_asistensi.status,
+    cegahadvokasi_asistensi.bentuk_kegiatan,
+    cegahadvokasi_asistensi.deleted_at,
+    cegahadvokasi_asistensi.meta_nasum_materi,
+    cegahadvokasi_asistensi.uraian_singkat
+   FROM cegahadvokasi_asistensi
+     LEFT JOIN sin_lookup_values sasaran ON cegahadvokasi_asistensi.kodesasaran::text = sasaran.lookup_value::text
+     LEFT JOIN sin_lookup_values anggaran ON cegahadvokasi_asistensi.kodesumberanggaran::text = anggaran.lookup_value::text
+     LEFT JOIN tr_instansi ON cegahadvokasi_asistensi.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah t1 ON cegahadvokasi_asistensi.lokasi_kegiatan_idprovinsi = t1.id_wilayah
+     LEFT JOIN tr_wilayah t2 ON cegahadvokasi_asistensi.lokasi_kegiatan_idkabkota = t2.id_wilayah
+     LEFT JOIN tr_jnswilayah ON t2.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t3 ON tr_instansi.id_wilayah = t3.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahadvokasi_intervensi
+AS SELECT cegahadvokasi_intervensi.id,
+    cegahadvokasi_intervensi.tgl_pelaksanaan,
+    cegahadvokasi_intervensi.jenis_kegiatan,
+    cegahadvokasi_intervensi.idpelaksana,
+    cegahadvokasi_intervensi.kodesasaran,
+    cegahadvokasi_intervensi.jumlah_instansi,
+    cegahadvokasi_intervensi.meta_instansi,
+    cegahadvokasi_intervensi.jumlah_peserta,
+    cegahadvokasi_intervensi.lokasi_kegiatan,
+    cegahadvokasi_intervensi.lokasi_kegiatan_idprovinsi,
+    cegahadvokasi_intervensi.lokasi_kegiatan_idkabkota,
+    cegahadvokasi_intervensi.narasumber,
+    cegahadvokasi_intervensi.panitia_monev,
+    cegahadvokasi_intervensi.materi,
+    cegahadvokasi_intervensi.kodesumberanggaran,
+    cegahadvokasi_intervensi.file_upload,
+    cegahadvokasi_intervensi.created_at,
+    cegahadvokasi_intervensi.created_by,
+    cegahadvokasi_intervensi.created_by_username,
+    cegahadvokasi_intervensi.updated_at,
+    cegahadvokasi_intervensi.updated_by,
+    cegahadvokasi_intervensi.updated_by_username,
+    cegahadvokasi_intervensi.status_aktif,
+    cegahadvokasi_intervensi.periode,
+    cegahadvokasi_intervensi.periode_tahun,
+    cegahadvokasi_intervensi.periode_bulan,
+    cegahadvokasi_intervensi.periode_tanggal,
+    sasaran.lookup_name AS nama_sasaran,
+    anggaran.lookup_name AS nama_anggaran,
+    tr_instansi.nm_instansi,
+    t1.nm_wilayah AS lokasi_kegiatan_namaprovinsi,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    tr_jnswilayah.nm_jnswilayah,
+    t3.posisi,
+    t3.nm_wilayah,
+    t3.id_wilayah,
+    t3.wil_id_wilayah,
+    cegahadvokasi_intervensi.asal_peserta,
+    cegahadvokasi_intervensi.status,
+    cegahadvokasi_intervensi.bentuk_kegiatan,
+    cegahadvokasi_intervensi.deleted_at,
+    cegahadvokasi_intervensi.meta_nasum_materi,
+    cegahadvokasi_intervensi.uraian_singkat
+   FROM cegahadvokasi_intervensi
+     LEFT JOIN sin_lookup_values sasaran ON cegahadvokasi_intervensi.kodesasaran::text = sasaran.lookup_value::text
+     LEFT JOIN sin_lookup_values anggaran ON cegahadvokasi_intervensi.kodesumberanggaran::text = anggaran.lookup_value::text
+     LEFT JOIN tr_instansi ON cegahadvokasi_intervensi.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah t1 ON cegahadvokasi_intervensi.lokasi_kegiatan_idprovinsi = t1.id_wilayah
+     LEFT JOIN tr_wilayah t2 ON cegahadvokasi_intervensi.lokasi_kegiatan_idkabkota = t2.id_wilayah
+     LEFT JOIN tr_jnswilayah ON t2.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t3 ON tr_instansi.id_wilayah = t3.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahadvokasi_supervisi
+AS SELECT cegahadvokasi_supervisi.id,
+    cegahadvokasi_supervisi.tgl_pelaksanaan,
+    cegahadvokasi_supervisi.jenis_kegiatan,
+    cegahadvokasi_supervisi.idpelaksana,
+    cegahadvokasi_supervisi.kodesasaran,
+    cegahadvokasi_supervisi.jumlah_instansi,
+    cegahadvokasi_supervisi.meta_instansi,
+    cegahadvokasi_supervisi.jumlah_peserta,
+    cegahadvokasi_supervisi.lokasi_kegiatan,
+    cegahadvokasi_supervisi.lokasi_kegiatan_idprovinsi,
+    cegahadvokasi_supervisi.lokasi_kegiatan_idkabkota,
+    cegahadvokasi_supervisi.narasumber,
+    cegahadvokasi_supervisi.panitia_monev,
+    cegahadvokasi_supervisi.materi,
+    cegahadvokasi_supervisi.kodesumberanggaran,
+    cegahadvokasi_supervisi.file_upload,
+    cegahadvokasi_supervisi.created_at,
+    cegahadvokasi_supervisi.created_by,
+    cegahadvokasi_supervisi.created_by_username,
+    cegahadvokasi_supervisi.updated_at,
+    cegahadvokasi_supervisi.updated_by,
+    cegahadvokasi_supervisi.updated_by_username,
+    cegahadvokasi_supervisi.status_aktif,
+    cegahadvokasi_supervisi.periode,
+    cegahadvokasi_supervisi.periode_tahun,
+    cegahadvokasi_supervisi.periode_bulan,
+    cegahadvokasi_supervisi.periode_tanggal,
+    sasaran.lookup_name AS nama_sasaran,
+    anggaran.lookup_name AS nama_anggaran,
+    tr_instansi.nm_instansi,
+    t1.nm_wilayah AS lokasi_kegiatan_namaprovinsi,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    tr_jnswilayah.nm_jnswilayah,
+    t3.posisi,
+    t3.nm_wilayah,
+    t3.id_wilayah,
+    t3.wil_id_wilayah,
+    cegahadvokasi_supervisi.asal_peserta,
+    cegahadvokasi_supervisi.status,
+    cegahadvokasi_supervisi.bentuk_kegiatan,
+    cegahadvokasi_supervisi.deleted_at,
+    cegahadvokasi_supervisi.meta_nasum_materi,
+    cegahadvokasi_supervisi.uraian_singkat
+   FROM cegahadvokasi_supervisi
+     LEFT JOIN sin_lookup_values sasaran ON cegahadvokasi_supervisi.kodesasaran::text = sasaran.lookup_value::text
+     LEFT JOIN sin_lookup_values anggaran ON cegahadvokasi_supervisi.kodesumberanggaran::text = anggaran.lookup_value::text
+     LEFT JOIN tr_instansi ON cegahadvokasi_supervisi.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah t1 ON cegahadvokasi_supervisi.lokasi_kegiatan_idprovinsi = t1.id_wilayah
+     LEFT JOIN tr_wilayah t2 ON cegahadvokasi_supervisi.lokasi_kegiatan_idkabkota = t2.id_wilayah
+     LEFT JOIN tr_jnswilayah ON t2.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t3 ON tr_instansi.id_wilayah = t3.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahadvokasi_monev
+AS SELECT cegahadvokasi_monev.id,
+    cegahadvokasi_monev.tgl_pelaksanaan,
+    cegahadvokasi_monev.jenis_kegiatan,
+    cegahadvokasi_monev.idpelaksana,
+    cegahadvokasi_monev.kodesasaran,
+    cegahadvokasi_monev.jumlah_instansi,
+    cegahadvokasi_monev.meta_instansi,
+    cegahadvokasi_monev.jumlah_peserta,
+    cegahadvokasi_monev.lokasi_kegiatan,
+    cegahadvokasi_monev.lokasi_kegiatan_idprovinsi,
+    cegahadvokasi_monev.lokasi_kegiatan_idkabkota,
+    cegahadvokasi_monev.narasumber,
+    cegahadvokasi_monev.panitia_monev,
+    cegahadvokasi_monev.materi,
+    cegahadvokasi_monev.kodesumberanggaran,
+    cegahadvokasi_monev.file_upload,
+    cegahadvokasi_monev.created_at,
+    cegahadvokasi_monev.created_by,
+    cegahadvokasi_monev.created_by_username,
+    cegahadvokasi_monev.updated_at,
+    cegahadvokasi_monev.updated_by,
+    cegahadvokasi_monev.updated_by_username,
+    cegahadvokasi_monev.status_aktif,
+    cegahadvokasi_monev.periode,
+    cegahadvokasi_monev.periode_tahun,
+    cegahadvokasi_monev.periode_bulan,
+    cegahadvokasi_monev.periode_tanggal,
+    sasaran.lookup_name AS nama_sasaran,
+    anggaran.lookup_name AS nama_anggaran,
+    tr_instansi.nm_instansi,
+    t1.nm_wilayah AS lokasi_kegiatan_namaprovinsi,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    tr_jnswilayah.nm_jnswilayah,
+    t3.posisi,
+    t3.nm_wilayah,
+    t3.id_wilayah,
+    t3.wil_id_wilayah,
+    cegahadvokasi_monev.asal_peserta,
+    cegahadvokasi_monev.status,
+    cegahadvokasi_monev.bentuk_kegiatan,
+    cegahadvokasi_monev.deleted_at,
+    cegahadvokasi_monev.meta_nasum_materi,
+    cegahadvokasi_monev.uraian_singkat
+   FROM cegahadvokasi_monev
+     LEFT JOIN sin_lookup_values sasaran ON cegahadvokasi_monev.kodesasaran::text = sasaran.lookup_value::text
+     LEFT JOIN sin_lookup_values anggaran ON cegahadvokasi_monev.kodesumberanggaran::text = anggaran.lookup_value::text
+     LEFT JOIN tr_instansi ON cegahadvokasi_monev.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah t1 ON cegahadvokasi_monev.lokasi_kegiatan_idprovinsi = t1.id_wilayah
+     LEFT JOIN tr_wilayah t2 ON cegahadvokasi_monev.lokasi_kegiatan_idkabkota = t2.id_wilayah
+     LEFT JOIN tr_jnswilayah ON t2.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t3 ON tr_instansi.id_wilayah = t3.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahadvokasi_bimtek
+AS SELECT cegahadvokasi_bimtek.id,
+    cegahadvokasi_bimtek.tgl_pelaksanaan,
+    cegahadvokasi_bimtek.jenis_kegiatan,
+    cegahadvokasi_bimtek.idpelaksana,
+    cegahadvokasi_bimtek.kodesasaran,
+    cegahadvokasi_bimtek.jumlah_instansi,
+    cegahadvokasi_bimtek.meta_instansi,
+    cegahadvokasi_bimtek.jumlah_peserta,
+    cegahadvokasi_bimtek.lokasi_kegiatan,
+    cegahadvokasi_bimtek.lokasi_kegiatan_idprovinsi,
+    cegahadvokasi_bimtek.lokasi_kegiatan_idkabkota,
+    cegahadvokasi_bimtek.narasumber,
+    cegahadvokasi_bimtek.panitia_monev,
+    cegahadvokasi_bimtek.materi,
+    cegahadvokasi_bimtek.kodesumberanggaran,
+    cegahadvokasi_bimtek.file_upload,
+    cegahadvokasi_bimtek.created_at,
+    cegahadvokasi_bimtek.created_by,
+    cegahadvokasi_bimtek.created_by_username,
+    cegahadvokasi_bimtek.updated_at,
+    cegahadvokasi_bimtek.updated_by,
+    cegahadvokasi_bimtek.updated_by_username,
+    cegahadvokasi_bimtek.status_aktif,
+    cegahadvokasi_bimtek.periode,
+    cegahadvokasi_bimtek.periode_tahun,
+    cegahadvokasi_bimtek.periode_bulan,
+    cegahadvokasi_bimtek.periode_tanggal,
+    sasaran.lookup_name AS nama_sasaran,
+    anggaran.lookup_name AS nama_anggaran,
+    tr_instansi.nm_instansi,
+    t1.nm_wilayah AS lokasi_kegiatan_namaprovinsi,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    tr_jnswilayah.nm_jnswilayah,
+    t3.posisi,
+    t3.nm_wilayah,
+    t3.id_wilayah,
+    t3.wil_id_wilayah,
+    cegahadvokasi_bimtek.asal_peserta,
+    cegahadvokasi_bimtek.status,
+    cegahadvokasi_bimtek.bentuk_kegiatan,
+    cegahadvokasi_bimtek.deleted_at,
+    cegahadvokasi_bimtek.meta_nasum_materi,
+    cegahadvokasi_bimtek.uraian_singkat
+   FROM cegahadvokasi_bimtek
+     LEFT JOIN sin_lookup_values sasaran ON cegahadvokasi_bimtek.kodesasaran::text = sasaran.lookup_value::text
+     LEFT JOIN sin_lookup_values anggaran ON cegahadvokasi_bimtek.kodesumberanggaran::text = anggaran.lookup_value::text
+     LEFT JOIN tr_instansi ON cegahadvokasi_bimtek.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah t1 ON cegahadvokasi_bimtek.lokasi_kegiatan_idprovinsi = t1.id_wilayah
+     LEFT JOIN tr_wilayah t2 ON cegahadvokasi_bimtek.lokasi_kegiatan_idkabkota = t2.id_wilayah
+     LEFT JOIN tr_jnswilayah ON t2.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t3 ON tr_instansi.id_wilayah = t3.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahdiseminfo_sosialisasi
+AS SELECT cegahdiseminfo_sosialisasi.id,
+    cegahdiseminfo_sosialisasi.tgl_pelaksanaan,
+    cegahdiseminfo_sosialisasi.jenis_kegiatan,
+    cegahdiseminfo_sosialisasi.idpelaksana,
+    cegahdiseminfo_sosialisasi.kodesasaran,
+    cegahdiseminfo_sosialisasi.jumlah_instansi,
+    cegahdiseminfo_sosialisasi.meta_instansi,
+    cegahdiseminfo_sosialisasi.jumlah_peserta,
+    cegahdiseminfo_sosialisasi.lokasi_kegiatan,
+    cegahdiseminfo_sosialisasi.lokasi_kegiatan_idprovinsi,
+    cegahdiseminfo_sosialisasi.lokasi_kegiatan_idkabkota,
+    cegahdiseminfo_sosialisasi.narasumber,
+    cegahdiseminfo_sosialisasi.panitia_monev,
+    cegahdiseminfo_sosialisasi.materi,
+    cegahdiseminfo_sosialisasi.kodesumberanggaran,
+    cegahdiseminfo_sosialisasi.file_upload,
+    cegahdiseminfo_sosialisasi.created_at,
+    cegahdiseminfo_sosialisasi.created_by,
+    cegahdiseminfo_sosialisasi.created_by_username,
+    cegahdiseminfo_sosialisasi.updated_at,
+    cegahdiseminfo_sosialisasi.updated_by,
+    cegahdiseminfo_sosialisasi.updated_by_username,
+    cegahdiseminfo_sosialisasi.status_aktif,
+    cegahdiseminfo_sosialisasi.periode,
+    cegahdiseminfo_sosialisasi.periode_tahun,
+    cegahdiseminfo_sosialisasi.periode_bulan,
+    cegahdiseminfo_sosialisasi.periode_tanggal,
+    sasaran.lookup_name AS nama_sasaran,
+    anggaran.lookup_name AS nama_anggaran,
+    tr_instansi.nm_instansi,
+    t1.nm_wilayah AS lokasi_kegiatan_namaprovinsi,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    tr_jnswilayah.nm_jnswilayah,
+    t3.posisi,
+    t3.nm_wilayah,
+    t3.id_wilayah,
+    t3.wil_id_wilayah,
+    cegahdiseminfo_sosialisasi.asal_peserta,
+    cegahdiseminfo_sosialisasi.status,
+    cegahdiseminfo_sosialisasi.bentuk_kegiatan,
+    cegahdiseminfo_sosialisasi.deleted_at,
+    cegahdiseminfo_sosialisasi.meta_nasum_materi,
+    cegahdiseminfo_sosialisasi.uraian_singkat
+   FROM cegahdiseminfo_sosialisasi
+     LEFT JOIN sin_lookup_values sasaran ON cegahdiseminfo_sosialisasi.kodesasaran::text = sasaran.lookup_value::text
+     LEFT JOIN sin_lookup_values anggaran ON cegahdiseminfo_sosialisasi.kodesumberanggaran::text = anggaran.lookup_value::text
+     LEFT JOIN tr_instansi ON cegahdiseminfo_sosialisasi.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah t1 ON cegahdiseminfo_sosialisasi.lokasi_kegiatan_idprovinsi = t1.id_wilayah
+     LEFT JOIN tr_wilayah t2 ON cegahdiseminfo_sosialisasi.lokasi_kegiatan_idkabkota = t2.id_wilayah
+     LEFT JOIN tr_jnswilayah ON t2.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t3 ON tr_instansi.id_wilayah = t3.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahdiseminfo_mediaonline
+AS SELECT cegahdiseminfo_mediaonline.id,
+    cegahdiseminfo_mediaonline.tgl_pelaksanaan,
+    cegahdiseminfo_mediaonline.idpelaksana,
+    cegahdiseminfo_mediaonline.materi,
+    cegahdiseminfo_mediaonline.kodesumberanggaran,
+    cegahdiseminfo_mediaonline.file_upload,
+    cegahdiseminfo_mediaonline.created_at,
+    cegahdiseminfo_mediaonline.created_by,
+    cegahdiseminfo_mediaonline.created_by_username,
+    cegahdiseminfo_mediaonline.updated_at,
+    cegahdiseminfo_mediaonline.updated_by,
+    cegahdiseminfo_mediaonline.updated_by_username,
+    cegahdiseminfo_mediaonline.status_aktif,
+    cegahdiseminfo_mediaonline.periode,
+    cegahdiseminfo_mediaonline.periode_tahun,
+    cegahdiseminfo_mediaonline.periode_bulan,
+    cegahdiseminfo_mediaonline.periode_tanggal,
+    cegahdiseminfo_mediaonline.meta_media,
+    cegahdiseminfo_mediaonline.jumlah_yang_melihat,
+    cegahdiseminfo_mediaonline.orang_yang_tertarik,
+    cegahdiseminfo_mediaonline.laporan,
+    cegahdiseminfo_mediaonline.waktu_publish,
+    tr_instansi.nm_instansi,
+    t1.lookup_name AS nama_sumberanggaran,
+    cegahdiseminfo_mediaonline.jenis_media,
+    tr_jnswilayah.nm_jnswilayah,
+    tr_wilayah.posisi,
+    tr_wilayah.nm_wilayah,
+    tr_wilayah.id_wilayah,
+    tr_wilayah.wil_id_wilayah,
+    cegahdiseminfo_mediaonline.lokasi,
+    cegahdiseminfo_mediaonline.jenis_kegiatan,
+    cegahdiseminfo_mediaonline.status,
+    cegahdiseminfo_mediaonline.bentuk_kegiatan,
+    cegahdiseminfo_mediaonline.kodesasaran,
+    cegahdiseminfo_mediaonline.deleted_at,
+    cegahdiseminfo_mediaonline.uraian_singkat,
+    cegahdiseminfo_mediaonline.dasar_kegiatan,
+    cegahdiseminfo_mediaonline.selesai_publish
+   FROM cegahdiseminfo_mediaonline
+     LEFT JOIN tr_instansi ON cegahdiseminfo_mediaonline.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN sin_lookup_values t1 ON cegahdiseminfo_mediaonline.kodesumberanggaran::text = t1.lookup_value::text
+     LEFT JOIN tr_wilayah ON tr_instansi.id_wilayah = tr_wilayah.id_wilayah
+     LEFT JOIN tr_jnswilayah ON tr_wilayah.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahdiseminfo_mediapenyiaran
+AS SELECT cegahdiseminfo_mediapenyiaran.id,
+    cegahdiseminfo_mediapenyiaran.tgl_pelaksanaan,
+    cegahdiseminfo_mediapenyiaran.idpelaksana,
+    cegahdiseminfo_mediapenyiaran.materi,
+    cegahdiseminfo_mediapenyiaran.kodesumberanggaran,
+    cegahdiseminfo_mediapenyiaran.file_upload,
+    cegahdiseminfo_mediapenyiaran.created_at,
+    cegahdiseminfo_mediapenyiaran.created_by,
+    cegahdiseminfo_mediapenyiaran.created_by_username,
+    cegahdiseminfo_mediapenyiaran.updated_at,
+    cegahdiseminfo_mediapenyiaran.updated_by,
+    cegahdiseminfo_mediapenyiaran.updated_by_username,
+    cegahdiseminfo_mediapenyiaran.status_aktif,
+    cegahdiseminfo_mediapenyiaran.periode,
+    cegahdiseminfo_mediapenyiaran.periode_tahun,
+    cegahdiseminfo_mediapenyiaran.periode_bulan,
+    cegahdiseminfo_mediapenyiaran.periode_tanggal,
+    cegahdiseminfo_mediapenyiaran.meta_media,
+    cegahdiseminfo_mediapenyiaran.laporan,
+    cegahdiseminfo_mediapenyiaran.idmedia,
+    cegahdiseminfo_mediapenyiaran.jumlah_media,
+    cegahdiseminfo_mediapenyiaran.narasumber,
+    cegahdiseminfo_mediapenyiaran.durasi_penyiaran,
+    cegahdiseminfo_mediapenyiaran.jenis_media,
+    tr_instansi.nm_instansi,
+    tr_instansi.id_wilayah,
+    tr_wilayah.posisi,
+    tr_wilayah.nm_wilayah,
+    tr_wilayah.kd_jnswilayah,
+    tr_jnswilayah.nm_jnswilayah,
+    tr_wilayah.kode,
+    tr_wilayah.wil_id_wilayah,
+    cegahdiseminfo_mediapenyiaran.lokasi,
+    cegahdiseminfo_mediapenyiaran.jenis_kegiatan,
+    cegahdiseminfo_mediapenyiaran.waktu_publish,
+    cegahdiseminfo_mediapenyiaran.status,
+    cegahdiseminfo_mediapenyiaran.bentuk_kegiatan,
+    cegahdiseminfo_mediapenyiaran.kodesasaran,
+    cegahdiseminfo_mediapenyiaran.deleted_at,
+    cegahdiseminfo_mediapenyiaran.dasar_kegiatan,
+    cegahdiseminfo_mediapenyiaran.selesai_publish,
+    cegahdiseminfo_mediapenyiaran.penonton,
+    cegahdiseminfo_mediapenyiaran.jumlah
+   FROM cegahdiseminfo_mediapenyiaran
+     LEFT JOIN tr_instansi ON cegahdiseminfo_mediapenyiaran.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah ON tr_instansi.id_wilayah = tr_wilayah.id_wilayah
+     LEFT JOIN tr_jnswilayah ON tr_wilayah.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahdiseminfo_mediacetak
+AS SELECT tr_instansi.nm_instansi,
+    tr_instansi.id_wilayah,
+    tr_wilayah.nm_wilayah,
+    tr_wilayah.kd_jnswilayah,
+    tr_jnswilayah.nm_jnswilayah,
+    tr_wilayah.posisi,
+    cegahdiseminfo_mediacetak.id,
+    cegahdiseminfo_mediacetak.tgl_pelaksanaan,
+    cegahdiseminfo_mediacetak.idpelaksana,
+    cegahdiseminfo_mediacetak.kode_jenis_media,
+    cegahdiseminfo_mediacetak.jumlah_instansi,
+    cegahdiseminfo_mediacetak.meta_instansi,
+    cegahdiseminfo_mediacetak.jumlah_peserta,
+    cegahdiseminfo_mediacetak.lokasi_kegiatan,
+    cegahdiseminfo_mediacetak.lokasi_kegiatan_idprovinsi,
+    cegahdiseminfo_mediacetak.lokasi_kegiatan_idkabkota,
+    cegahdiseminfo_mediacetak.narasumber,
+    cegahdiseminfo_mediacetak.panitia_monev,
+    cegahdiseminfo_mediacetak.materi,
+    cegahdiseminfo_mediacetak.kodesumberanggaran,
+    cegahdiseminfo_mediacetak.file_upload,
+    cegahdiseminfo_mediacetak.created_at,
+    cegahdiseminfo_mediacetak.created_by,
+    cegahdiseminfo_mediacetak.created_by_username,
+    cegahdiseminfo_mediacetak.updated_at,
+    cegahdiseminfo_mediacetak.updated_by,
+    cegahdiseminfo_mediacetak.updated_by_username,
+    cegahdiseminfo_mediacetak.status_aktif,
+    cegahdiseminfo_mediacetak.periode,
+    cegahdiseminfo_mediacetak.periode_tahun,
+    cegahdiseminfo_mediacetak.periode_bulan,
+    cegahdiseminfo_mediacetak.periode_tanggal,
+    cegahdiseminfo_mediacetak.jenis_kegiatan,
+    cegahdiseminfo_mediacetak.kode_jenis_media_ruang,
+    cegahdiseminfo_mediacetak.nama_media,
+    cegahdiseminfo_mediacetak.laporan,
+    tr_wilayah.wil_id_wilayah,
+    cegahdiseminfo_mediacetak.waktu_publish,
+    cegahdiseminfo_mediacetak.status,
+    cegahdiseminfo_mediacetak.bentuk_kegiatan,
+    cegahdiseminfo_mediacetak.kodesasaran,
+    cegahdiseminfo_mediacetak.deleted_at,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota,
+    cegahdiseminfo_mediacetak.uraian_singkat,
+    cegahdiseminfo_mediacetak.meta_media,
+    cegahdiseminfo_mediacetak.dasar_kegiatan,
+    cegahdiseminfo_mediacetak.selesai_publish,
+    cegahdiseminfo_mediacetak.jumlah_cetak
+   FROM cegahdiseminfo_mediacetak
+     LEFT JOIN tr_instansi ON cegahdiseminfo_mediacetak.idpelaksana = tr_instansi.id_instansi
+     LEFT JOIN tr_wilayah ON tr_instansi.id_wilayah = tr_wilayah.id_wilayah
+     LEFT JOIN tr_jnswilayah ON tr_wilayah.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t2 ON cegahdiseminfo_mediacetak.lokasi_kegiatan_idkabkota = t2.id_wilayah;
+
+
+CREATE OR REPLACE VIEW public.v_cegahdiseminfo_mediakonvensional
+AS SELECT cegahdiseminfo_mediakonvensional.id,
+    cegahdiseminfo_mediakonvensional.tgl_pelaksanaan,
+    cegahdiseminfo_mediakonvensional.idpelaksana,
+    cegahdiseminfo_mediakonvensional.kodesasaran,
+    cegahdiseminfo_mediakonvensional.jumlah_instansi,
+    cegahdiseminfo_mediakonvensional.meta_instansi,
+    cegahdiseminfo_mediakonvensional.jumlah_peserta,
+    cegahdiseminfo_mediakonvensional.lokasi_kegiatan,
+    cegahdiseminfo_mediakonvensional.lokasi_kegiatan_idprovinsi,
+    cegahdiseminfo_mediakonvensional.lokasi_kegiatan_idkabkota,
+    cegahdiseminfo_mediakonvensional.narasumber,
+    cegahdiseminfo_mediakonvensional.panitia_monev,
+    cegahdiseminfo_mediakonvensional.materi,
+    cegahdiseminfo_mediakonvensional.kodesumberanggaran,
+    cegahdiseminfo_mediakonvensional.file_upload,
+    cegahdiseminfo_mediakonvensional.created_at,
+    cegahdiseminfo_mediakonvensional.created_by,
+    cegahdiseminfo_mediakonvensional.created_by_username,
+    cegahdiseminfo_mediakonvensional.updated_at,
+    cegahdiseminfo_mediakonvensional.updated_by,
+    cegahdiseminfo_mediakonvensional.updated_by_username,
+    cegahdiseminfo_mediakonvensional.status_aktif,
+    cegahdiseminfo_mediakonvensional.periode,
+    cegahdiseminfo_mediakonvensional.periode_tahun,
+    cegahdiseminfo_mediakonvensional.periode_bulan,
+    cegahdiseminfo_mediakonvensional.periode_tanggal,
+    cegahdiseminfo_mediakonvensional.jenis_kegiatan,
+    cegahdiseminfo_mediakonvensional.laporan,
+    tr_instansi.nm_instansi,
+    tr_instansi.id_wilayah,
+    tr_wilayah.nm_wilayah,
+    tr_wilayah.kd_jnswilayah,
+    tr_wilayah.posisi,
+    tr_jnswilayah.nm_jnswilayah,
+    tr_wilayah.wil_id_wilayah,
+    cegahdiseminfo_mediakonvensional.waktu_publish,
+    cegahdiseminfo_mediakonvensional.status,
+    cegahdiseminfo_mediakonvensional.bentuk_kegiatan,
+    cegahdiseminfo_mediakonvensional.deleted_at,
+    cegahdiseminfo_mediakonvensional.dasar_kegiatan,
+    cegahdiseminfo_mediakonvensional.selesai_publish,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota
+   FROM cegahdiseminfo_mediakonvensional
+     JOIN tr_instansi ON cegahdiseminfo_mediakonvensional.idpelaksana = tr_instansi.id_instansi
+     JOIN tr_wilayah ON tr_instansi.id_wilayah = tr_wilayah.id_wilayah
+     JOIN tr_jnswilayah ON tr_wilayah.kd_jnswilayah = tr_jnswilayah.kd_jnswilayah
+     LEFT JOIN tr_wilayah t2 ON cegahdiseminfo_mediakonvensional.lokasi_kegiatan_idkabkota = t2.id_wilayah;
