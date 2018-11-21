@@ -215,7 +215,7 @@ function web_token(){
 function execute_api($url,$method,$params=array()){
 
 //	if($url == "http://integrasi.bnn.go.id:7001/simpeg/listSatker" || $url == "http://integrasi.bnn.go.id:7001/simpeg/staffBySatker" || $url == "http://integrasi.bnn.go.id:7001/"){
-	if(strpos($url, 'http://integrasi.bnn.go.id/simpeg/listSatker') !== false || strpos($url, 'http://integrasi.bnn.go.id/simpeg/staffBySatker') !== false || strpos($url, 'http://integrasi.bnn.go.id/') !== false){
+	if(strpos($url, 'https://integrasi.bnn.go.id/simpeg/listSatker') !== false || strpos($url, 'https://integrasi.bnn.go.id/simpeg/staffBySatker') !== false || strpos($url, 'https://integrasi.bnn.go.id/') !== false){
 			$url=$url;
 	}else{
 		$baseUrl = config('app.url_api_local');
@@ -1973,7 +1973,7 @@ function execute_api_json($url,$method,$params=array()){
 	// if ($url == "http://integrasi.bnn.go.id/simpeg/listSatker/") {
 	// 	dd('test');
 	// }
-	if(strpos($url, 'http://integrasi.bnn.go.id/simpeg/listSatker') !== false || strpos($url, 'http://integrasi.bnn.go.id/simpeg/staffBySatker') !== false || strpos($url, 'http://integrasi.bnn.go.id/') !== false){
+	if(strpos($url, 'https://integrasi.bnn.go.id/simpeg/listSatker') !== false || strpos($url, 'https://integrasi.bnn.go.id/simpeg/staffBySatker') !== false || strpos($url, 'https://integrasi.bnn.go.id/') !== false){
 			$url=$url;
 	}else{
 		$baseUrl = config('app.url_api_local');
