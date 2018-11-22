@@ -21,7 +21,7 @@ class pengujianController extends Controller
 {
     public $data;
 	  public $selected;
-    private $url_balaiLab = 'http://103.3.70.84:7001/balailab/berkas';
+    private $url_balaiLab = 'http://10.210.84.23:7001/balailab/berkas';
     // public function pengujianBahan(Request $request){
     //     $kondisi = '';
     //     if($request->limit) {
