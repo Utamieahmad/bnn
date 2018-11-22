@@ -35,7 +35,7 @@
 
             reader.readAsDataURL(input.files[0]);
         }
-    }
+    }	
 </script>
     <div class="right_col" role="main">
         <div class="m-t-40">

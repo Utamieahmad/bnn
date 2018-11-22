@@ -1354,7 +1354,7 @@ class RehabilitasiController extends Controller
         }
     }
     public function updatePesertaPelatihanPlrkm(Request $request){
-        if($request->ajax()){
+        if($request->ajax()){            
             $id = $request->id_detail;
             $this->form_params = $request->except(['_token','id_detail','index']);
             $data_request = execute_api('api/pelatihanpeserta/'.$id,'PUT',$this->form_params);
@@ -2717,9 +2717,9 @@ class RehabilitasiController extends Controller
     }
 
     public function updatePesertaPelatihanPlrip(Request $request){
-        if($request->ajax()){
-
+        if($request->ajax()){            
             $id = $request->id_detail;
+//            dd($id);
             $this->form_params = $request->except(['_token','id_detail','index']);
             $data_request = execute_api_json('api/pelatihanpeserta/'.$id,'PUT',$this->form_params);
 

@@ -451,7 +451,11 @@
                                             <td>{{$t['kode_warga_negara']}}</td>
                                             <td>{{$t['nama_peran']}}</td>
                                             <td>{{$t['nama_pendidikan_akhir']}}</td>
+                                            <?php if($t['nama_pekerjaan'] != '' || $t['nama_pekerjaan'] != NULL):?>
                                             <td>{{$t['nama_pekerjaan']}}</td>
+                                            <?php else:?>
+                                            <td>{{$t['nm_kerja']}}</td>
+                                            <?php endif;?>                                            
                                             <td class="actionTable">
                                                 <a class="editTersangka" data-url="{{URL('/pemberantasan/update_tersangka')}}" data-id="{{$t['tersangka_id']}}" data-api="gettersangka" style="cursor:pointer"><i class="fa fa-pencil f-18"></i></a>
                                                 <a class="button-delete deleteTersangka" data-parent="kasus" data-parent_id="{{$t['kasus_id']}}" data-url="tersangka" data-target="{{$t['tersangka_id']}}" data-api="gettersangka" style="cursor:pointer"><i class="fa fa-trash f-18"></i></a>
