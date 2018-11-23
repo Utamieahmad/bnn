@@ -2594,10 +2594,18 @@ function open_modalEditPesertaPelatihan(ev,e,$uri ="",$id=""){
           if(data.status == 'success'){
             if(data.data ){
               $d = data.data;
-
+              // console.log(val);
               $.each($d, function(i,val){
-                console.log(val);
+                // console.log(val);
                 $('.'+i).val(val);
+                if (i=='kode_jeniskelamin'){
+                  if(val=='L'){
+                    $('.kelamin_lakilaki').attr('checked', 'true');
+                  } else if(val=='P'){
+                    $('.kelamin_perempuan').attr('checked', 'true');
+                  }
+                  
+                }
               });
               $('#modal_edit_peserta').modal('show');
               $('#modal_edit_form').show();

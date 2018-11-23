@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::get('/pdf','PdfController@index'); //sample generate to pdf
 Route::get('/downloadapp','AuthenticationController@downloadApp')->name('downloadApp');
 Route::get('/usermanual','AuthenticationController@userManual')->name('userManual');
 Route::get('/userpelatihan','AuthenticationController@userPelatihan')->name('User_pelatihan');

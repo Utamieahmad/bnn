@@ -1,0 +1,17 @@
+drop view v_arahan_pimpinan;
+ALTER TABLE public.arahan_pimpinan ALTER COLUMN satker TYPE varchar(256) USING satker::varchar;
+
+CREATE OR REPLACE VIEW public.v_arahan_pimpinan
+AS SELECT a.id,
+    a.tgl_arahan,
+    a.satker,
+    a.tgl_kadaluarsa,
+    a.judul_arahan,
+    a.isi_arahan,
+    a.status,
+    a.created_at,
+    a.created_by,
+    a.updated_at,
+    a.updated_by,
+    a.deleted_at
+   FROM arahan_pimpinan a;
