@@ -35,6 +35,7 @@ class deputiCegahController extends Controller {
         } else {
             $this->limit = config('app.limit');
         }        
+        $actstat = 'approve';
 
         $kondisi = '';
         if ($request->isMethod('get')) {
@@ -57,7 +58,7 @@ class deputiCegahController extends Controller {
                 $this->data['filter'] = $this->selected;
             }
             $result_data_array = array(
-                'actstat' => 'approve',
+                'actstat' => $actstat,
                 'limit'  => $this->limit,
                 'page'  => $page
             );
@@ -127,10 +128,13 @@ class deputiCegahController extends Controller {
             }
             $array11 = array('limit' => $this->limit);
             $array12 = array('page' => $page);
-            $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array11, $array12);
+            $array13 = array('anggaran' => $request->anggaran);
+            $array14 = array('actstat' => $actstat);
+            $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array11, $array12, $array13, $array14);
         }
 
         $data_request = json_encode($result_data_array);        
+//        dd($data_request);
         $this->data['title'] = "Data Aktivitas Sebaran Deputi Cegah";
         if ($request->page) {
             $current_page = $request->page;
@@ -159,7 +163,8 @@ class deputiCegahController extends Controller {
         if (($datas['status'] != 'error') && ($datas['code'] == 200)) {
             $this->data['data_aktivitas'] = $datas['data'];
             $total_item = $datas['pagination']['totalpage'] * $this->limit;
-//            dd($datas['pagination']['totalpage']);
+            //total data
+//            dd($datas['pagination']['count']);
         } else {
             $this->data['data'] = [];
             $total_item = 0;
@@ -179,7 +184,6 @@ class deputiCegahController extends Controller {
         $this->data['route_name'] = $request->route()->getName();
         $this->data['start_number'] = $start_number;
         $this->data['current_page'] = $current_page;
-//        $this->data['pagination'] = paginations($current_page, 0, $this->limit, config('app.page_ellipsis'), '/' . $request->route()->getPrefix() . "/kegiatan_pelatihan_plrkm", $filtering, $filter);
         $this->data['pagination'] = paginations($current_page,$total_item, $this->limit, config('app.page_ellipsis'), '/'.$request->route()->getPrefix()."/data_aktivitas_sebaran",$filtering,$filter);
         $this->data['breadcrumps'] = breadcrumps_dir_pasca($request->route()->getName());
 
