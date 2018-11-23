@@ -342,8 +342,9 @@ class irtamaController extends Controller
     }
 
     public function deleteIrtamaAudit(Request $request){
-      $id = $request->input('id');
+
         if ($request->ajax()) {
+          $id = $request->input('id');
             if($id){
                 $id = $request->id;
                 $id_lha = [];
@@ -3802,7 +3803,7 @@ class irtamaController extends Controller
 
         $this->data['path'] = $request->path();
         $url_simpeg = config('app.url_simpeg');
-        $query  =  execute_api_json($url_simpeg,"GET");        
+        $query  =  execute_api_json($url_simpeg,"GET");
         if($query->code == 200 && ($query->status != 'error')){
           $this->data['satker'] = $query->data;
         }else{
@@ -5533,9 +5534,9 @@ class irtamaController extends Controller
              foreach($data as $key=>$d){
                 $result[$key]['No'] = $i;
                 $result[$key]['No Laporan'] =$d->no_laporan;
-                $result[$key]['Tanggal Laporan'] = ($d->tgl_laporan? date('d/m/Y',strtotime($d->tgl_laporan)) : '');                
+                $result[$key]['Tanggal Laporan'] = ($d->tgl_laporan? date('d/m/Y',strtotime($d->tgl_laporan)) : '');
                 $a = json_decode($d->kode_satker,true);
-                $nama_satker = $a['nama'];                                
+                $nama_satker = $a['nama'];
                 $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$nama_satker ) : '') ;
 //                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$d->kode_satker ) : '') ;
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
@@ -6002,7 +6003,7 @@ class irtamaController extends Controller
                 $result[$key]['No Laporan'] =$d->no_laporan;
                 $result[$key]['Tanggal Laporan'] = ($d->tgl_laporan? date('d/m/Y',strtotime($d->tgl_laporan)) : '');
                 $a = json_decode($d->kode_satker,true);
-                $nama_satker = $a['nama'];                                
+                $nama_satker = $a['nama'];
                 $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$nama_satker ) : '') ;
 //                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$d->kode_satker ) : '') ;
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
