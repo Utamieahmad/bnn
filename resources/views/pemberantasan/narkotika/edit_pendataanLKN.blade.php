@@ -454,7 +454,7 @@
                                             <?php if($t['nama_pekerjaan'] != '' || $t['nama_pekerjaan'] != NULL):?>
                                             <td>{{$t['nama_pekerjaan']}}</td>
                                             <?php else:?>
-                                            <td>{{$t['nm_kerja']}}</td>
+                                            <td>-</td>
                                             <?php endif;?>                                            
                                             <td class="actionTable">
                                                 <a class="editTersangka" data-url="{{URL('/pemberantasan/update_tersangka')}}" data-id="{{$t['tersangka_id']}}" data-api="gettersangka" style="cursor:pointer"><i class="fa fa-pencil f-18"></i></a>
@@ -965,32 +965,32 @@
 				</div>
 			</div> --}}
 
-			<div class="modal fade bs-modal-sm" tabindex="-                                                                1" role="dialog" id="modalDelete" aria-h                                                                    idden="true">
-				<div class="moda                                                                        l-dialog modal-sm">
-					<div cla                                                                            ss="modal-content">
+			<div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" id="modalDelete" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
 
-						<div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title" id="myModalLabel2">Hapus Data</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                Apakah Anda ingin menghapus data ini ?
-                                            </div>
-                                            <input type="hidden" class="target_id" value=""/>
-                                            <input type="hidden" class="target_parent" value=""/>
-                                            <input type="hidden" class="target_parent_id" value=""/>
-                                            <input type="hidden" class="audit_menu" value="Pemberantasan - Direktorat Narkotika - Pendataan LKN"/>
-                                            <input type="hidden" class="audit_url" value="http://{{ $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] }}"/>
-                                            <input type="hidden" class="audit_ip_address" value="{{ $_SERVER['SERVER_ADDR'] }}"/>
-                                            <input type="hidden" class="audit_user_agent" value="{{ $_SERVER['HTTP_USER_AGENT'] }}"/>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                                                <button type="button" class="btn btn-primary confirm" onclick="deleteData()">Ya</button>
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">Hapus Data</h4>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda ingin menghapus data ini ?
+                        </div>
+                        <input type="hidden" class="target_id" value=""/>
+                <input type="hidden" class="target_parent" value=""/>
+                <input type="hidden" class="target_parent_id" value=""/>
+                        <input type="hidden" class="audit_menu" value="Pemberantasan - Direktorat Psikotropika dan Prekursor - Pendataan LKN"/>
+                        <input type="hidden" class="audit_url" value="http://{{ $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] }}"/>
+                        <input type="hidden" class="audit_ip_address" value="{{ $_SERVER['SERVER_ADDR'] }}"/>
+                        <input type="hidden" class="audit_user_agent" value="{{ $_SERVER['HTTP_USER_AGENT'] }}"/>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                            <button type="button" class="btn btn-primary confirm" onclick="deleteData()">Ya</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
                             @include('modal.modal_add_tersangka')
                             @include('modal.modal_add_narkotika')
                             @include('modal.modal_add_prekursor')
