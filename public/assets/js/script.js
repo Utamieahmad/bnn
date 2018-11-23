@@ -2104,8 +2104,8 @@ function delete_row_form(ev,e){
 
     },
     'success' : function(data){
-      console.log(data);
-      if(data.code == 200 || (data.code == 200 && data.status != 'error')){
+      // console.log(data);
+      // if(data.code == 200 || (data.code == 200 && data.status != 'error')){
             $('.modal-footer-loading').hide('slow',function(){
                $('.modal-body .alert-message').html('<div class="alert alert-success">Data berhasil dihapus</div>').show('');
                setTimeout(function() {
@@ -2116,7 +2116,24 @@ function delete_row_form(ev,e){
                   location.reload();
                }, 1000);
            });
-      }else{
+      // }else{
+      //     $('.modal-body').hide('slow',function(){
+      //     $('.modal-body .content').hide();
+      //     $('.modal-body .alert-message').html('<div class="alert alert-warning">Data gagal dihapus</div>').show('');
+      //       // $('.modal-body').html('<div class="alert alert-warning">Data gagal dihapus</div>');
+      //       $('.modal-body').show('slow');
+      //       setTimeout(function() {
+      //         $('.modal').modal('hide');
+      //         $('.modal-body .alert-message').hide('slow');
+      //         $('.modal-body .content').show();
+      //         $('.modal-footer').show('slow');
+      //         // location.reload();
+      //       }, 1000);
+      //     });
+      // }
+    },
+    'error':function(e){
+      console.log('error '+JSON.stringify(e));
           $('.modal-body').hide('slow',function(){
           $('.modal-body .content').hide();
           $('.modal-body .alert-message').html('<div class="alert alert-warning">Data gagal dihapus</div>').show('');
@@ -2130,10 +2147,6 @@ function delete_row_form(ev,e){
               location.reload();
             }, 1000);
           });
-      }
-    },
-    'error':function(e){
-      console.log('error '+JSON.stringify(e));
     }
   });
 }
@@ -2604,7 +2617,7 @@ function open_modalEditPesertaPelatihan(ev,e,$uri ="",$id=""){
                   } else if(val=='P'){
                     $('.kelamin_perempuan').attr('checked', 'true');
                   }
-                  
+
                 }
               });
               $('#modal_edit_peserta').modal('show');
