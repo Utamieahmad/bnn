@@ -731,6 +731,65 @@ class balaiBesarController extends Controller{
         }
     }
 
+    public function downloadBalaibesar(Request $request){
+        
+        $data = DB::table('balai_besar');
+        if ($request->date_from != '') {
+          $data->where('tanggal_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+          $data->where('tanggal_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+
+        $data = $data->orderBy('tanggal_mulai', 'desc')->get();
+
+        $query = execute_api('/api/lookup/balai_besar_instansi','GET');
+        if($query['code'] == 200 && $query['status'] != 'error'){
+            $instansi  = $query['data'];
+        }else{
+            $instansi  = [];
+        }
+
+        $result = [];
+        $i = 1;
+        foreach($data as $key=>$d){
+            $result[$key]['No'] = $i;
+            $result[$key]['Jenis Kegiatan'] = $d->jenis_kegiatan;
+            $result[$key]['Nama Kegiatan'] = $d->nama_kegiatan;
+            $result[$key]['Periode'] = ($d->tanggal_mulai ? date('d/m/Y',strtotime($d->tanggal_mulai)) : '') .'-'. ($d->tanggal_selesai ? date('d/m/Y',strtotime($d->tanggal_selesai)) : '');
+            $result[$key]['Nomoer Agenda'] = $d->nomor_agenda;
+            $result[$key]['Nomor Surat'] = $d->nomor_surat;
+            $result[$key]['Instansi'] = ( isset($instansi[$d->kode_instansi]) ? $instansi[$d->kode_instansi] :$d->kode_instansi);
+
+            $meta = json_decode($d->meta_instansi,true);
+            if(count($meta)){
+              for($j = 0 ; $j < count($meta); $j++){
+                  $InstansiArray[$key]['Instansi'][$j] = $meta[$j]['nama_instansi'].'('.$meta[$j]['jumlah_peserta'].')';
+              }
+              $result[$key]['Instansi/Jumlah Peserta'] = implode("\n", $InstansiArray[$key]['Instansi']);
+            } else {
+              $result[$key]['Instansi/Jumlah Peserta'] = '-';
+            }
+             
+            $meta = json_decode($d->meta_materi,true);
+            if(count($meta)){
+              for($j = 0 ; $j < count($meta); $j++){
+                  $InstansiArray[$key]['Materi'][$j] = $meta[$j]['narasumber'].'('.$meta[$j]['judul_materi'].')';
+              }
+              $result[$key]['Narsum/Materi'] = implode("\n", $InstansiArray[$key]['Materi']);
+            } else {
+              $result[$key]['Narsum/Materi'] = '-';
+            }
+
+            $result[$key]['Status'] = ( ($d->status == 'Y') ? 'Lengkap' : 'Belum Lengkap');
+
+            $i = $i+1;
+        }
+        $name = 'Export Data Balai Besar '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($result, $name);
+        
+    }
+
     private function kelengkapan_balai_besar($id){
         $status_kelengkapan = true;
         try{
