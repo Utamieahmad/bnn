@@ -24,12 +24,17 @@ class deputiCegahController extends Controller {
     public function pendataanAktivitasSebaran(Request $request) {        
 //        dd($request->limit);        
         $url_cegah = 'http://10.210.84.11:7004/cegah/react/activityquery/getFiltered';
-        $client = new Client();
-        if($request->page){
-            $page = $request->page;
+        $client = new Client();        
+        if(isset($_GET['page'])){
+            $page = $_GET['page'];
         }else{
-            $page = 1;
+            if($request->page){
+                $page = $request->page;
+            }else{
+                $page = 1;
+            }
         }
+//        dd($page);
         if ($request->limit) {
             $this->limit = $request->limit;
         } else {
@@ -39,11 +44,78 @@ class deputiCegahController extends Controller {
 
         $kondisi = '';
         if ($request->isMethod('get')) {
+            if(isset($_GET['userName'])){
+                $array1 = array('userName' => $_GET['userName']);
+            }else{
+                $array1 = array();
+            }        
+            if(isset($_GET['userSatker'])){
+                $array2 = array('userSatker' => $_GET['userSatker']);
+            }else{
+                $array2 = array();
+            }        
+            if(isset($_GET['userWilayah'])){
+                $array3 = array('userWilayah' => $_GET['userWilayah']);
+            }else{
+                $array3 = array();
+            }        
+            if(isset($_GET['nmmedia'])){
+                $array4 = array('nmmedia' => $_GET['nmmedia']);
+            }else{
+                $array4 = array();
+            }        
+            if(isset($_GET['sasaran'])){
+                $array5 = array('sasaran' => $_GET['sasaran']);
+            }else{
+                $array5 = array();
+            }        
+            if(isset($_GET['jmlsebarstart'])){
+                $array6 = array('jmlsebarstart' => $_GET['jmlsebarstart']);
+            }else{
+                $array6 = array();
+            }        
+            if(isset($_GET['jmlsebarend'])){
+                $array7 = array('jmlsebarend' => $_GET['jmlsebarend']);
+            }else{
+                $array7 = array();
+            }        
+            if(isset($_GET['tglactstart'])){
+                $array8 = array('tglactstart' => $_GET['tglactstart']);
+            }else{
+                $array8 = array();
+            }        
+            if(isset($_GET['tglactend'])){
+                $array9 = array('tglactend' => $_GET['tglactend']);
+            }else{
+                $array9 = array();
+            }        
+//            if(isset($_GET['limit'])){
+//                $array10 = array('limit' => $_GET['limit']);
+//            }else{
+//                $array10 = array('limit' => $this->limit);
+//            }        
+//            if(isset($_GET['page'])){
+//                $array11 = array('page' => $_GET['page']);
+//            }else{
+//                $array11 = array('page' => $page);
+//            }        
+            if(isset($_GET['anggaran'])){
+                $array12 = array('anggaran' => $_GET['anggaran']);
+            }else{
+                $array12 = array();
+            }        
+            if(isset($_GET['actstat'])){
+                $array13 = array('actstat' => $_GET['actstat']);
+            }else{
+                $array13 = array('actstat' => $actstat);
+            }                    
+            
+            
             $get = $request->except(['_token', 'kategori']);
             if (count($get) > 0) {
                 foreach ($get as $key => $value) {
                     $kondisi .= "&" . $key . '=' . $value;
-                    if (($key == 'start_from') || ($key == 'start_to') || ($key == 'end_from') || ($key == 'end_to') || ($key == 'jumlah_from') || ($key == 'jumlah_to')) {
+                    if (($key == 'tglactstart') || ($key == 'tglactend')){
                         if ($value) {
                             $value = date('d/m/Y', strtotime($value));
                         } else {
@@ -57,11 +129,7 @@ class deputiCegahController extends Controller {
                 $this->selected['order'] = $request->order;
                 $this->data['filter'] = $this->selected;
             }
-            $result_data_array = array(
-                'actstat' => $actstat,
-                'limit'  => $this->limit,
-                'page'  => $page
-            );
+            $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array12, $array13);
         } else {            
             $pembuat = trim($request->pembuat);
             if ($pembuat != '') {
@@ -131,20 +199,37 @@ class deputiCegahController extends Controller {
             $array13 = array('anggaran' => $request->anggaran);
             $array14 = array('actstat' => $actstat);
             $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array11, $array12, $array13, $array14);
+            
+            $result_data_array2 = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array13, $array14);
+            foreach ($result_data_array2 as $key => $value) {
+                $kondisi .= "&" . $key . '=' . $value;
+                    if (($key == 'tglactstart') || ($key == 'tglactend')){
+                        if ($value) {
+                            $value = date('d/m/Y', strtotime($value));
+                        } else {
+                            $value = "";
+                        }
+                    } else {
+                        $value = $value;
+                    }
+                    $this->selected[$key] = $value;
+                }
+                $this->selected['order'] = $request->order;
+                $this->data['filter'] = $this->selected;
         }
-
+//        dd($result_data_array);
         $data_request = json_encode($result_data_array);        
 //        dd($data_request);
         $this->data['title'] = "Data Aktivitas Sebaran Deputi Cegah";
         if ($request->page) {
-            $current_page = $request->page;
+//            $current_page = $request->page;
             $start_number = ($this->limit * ($request->page - 1 )) + 1;
         } else {
-            $current_page = 1;
-            $start_number = $current_page;
+//            $current_page = 1;
+            $start_number = $page;
         }
         $limit = 'limit=' . $this->limit;
-        $offset = 'page=' . $current_page;
+        $offset = 'page=' . $page;
         $this->data['filter'] = $this->selected;
         $this->data['forprint'] = $limit.'&'.$offset.$kondisi;
         $requestCegah = $client->request('POST', $url_cegah, [   
@@ -179,12 +264,12 @@ class deputiCegahController extends Controller {
         } else {
             $filter = '/';
             $filtering = false;
-            $this->data['kondisi'] = $current_page;
+            $this->data['kondisi'] = $page;
         }
         $this->data['route_name'] = $request->route()->getName();
         $this->data['start_number'] = $start_number;
-        $this->data['current_page'] = $current_page;
-        $this->data['pagination'] = paginations($current_page,$total_item, $this->limit, config('app.page_ellipsis'), '/'.$request->route()->getPrefix()."/data_aktivitas_sebaran",$filtering,$filter);
+        $this->data['current_page'] = $page;
+        $this->data['pagination'] = paginations($page,$total_item, $this->limit, config('app.page_ellipsis'), '/'.$request->route()->getPrefix()."/data_aktivitas_sebaran",$filtering,$filter);
         $this->data['breadcrumps'] = breadcrumps_dir_pasca($request->route()->getName());
 
         return view('pencegahan.deputiCegah.aktivitasSebaran.index_pendataanAtivitasSebaran', $this->data);

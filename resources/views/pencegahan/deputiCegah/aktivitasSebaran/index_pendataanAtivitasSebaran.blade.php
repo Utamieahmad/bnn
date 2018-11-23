@@ -31,7 +31,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Data Aktivitas Sebaran<small></small></h2>
+                        <h2>Data Aktivitas Sebaran<small></small></h2>                        
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="" @php if(!in_array(53, Session::get("cancreate")))  echo 'style="display:none;"'; @endphp>
                                 <a href="{{url('pencegahan/dir_advokasi/add_pendataan_asistensi')}}" class="btn btn-lg btn-round btn-primary">
@@ -47,15 +47,17 @@
                                 <a href="{{URL('/pencegahan/dir_advokasi/printasistensi?'.$forprint)}}" class="btn btn-lg btn-round btn-success">
                                     <i class="fa fa-file-excel-o"></i> Excel
                                 </a>
-                            </li>
-                            <li class="">
-                                <a class="btn btn-lg btn-round btn-warning" id="searchButton" onchange="formFilter(this)">
-                                    <i class="fa fa-search"></i> Search By
-                                </a>
-                            </li>
+                            </li>                            
                         </ul>
                         <div class="clearfix"></div>
                     </div>
+                    <ul class="nav navbar-left panel_toolbox">
+                        <li class="">
+                            <a class="btn btn-lg btn-round btn-warning" id="searchButton" onchange="formFilter(this)">
+                                <i class="fa fa-search"></i> Search By
+                            </a>
+                        </li>
+                    </ul>
                     <div class="x_content ">
                         @if(session('status'))
                         @php

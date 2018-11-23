@@ -77,7 +77,7 @@
                         <label for="tipe" class="control-label">Jumlah Per Halaman</label>
                         <select class="form-control select2" name="limit">
                             <option value="5" {{isset($filter) ? ( isset($filter['limit'])? ($filter['limit'] == '5' ? 'selected=selected':''): '' ): ''}}>5</option>
-                            <option value="10" {{isset($filter) ? ( isset($filter['limit'])? ($filter['limit'] == '10' ? 'selected=selected':''): 'selected=selected' ): 'selected=selected'}}>10</option>
+                            <option value="10" {{isset($filter) ? ( isset($filter['limit'])? ($filter['limit'] == '10' ? 'selected=selected':''): '' ): ''}}>10</option>
                             <option value="25" {{isset($filter) ?( isset($filter['limit'])? ($filter['limit'] == '25' ? 'selected=selected':''): ''): ''}}>25</option>
                             <option value="50" {{isset($filter) ? ( isset($filter['limit'])? ($filter['limit'] == '50' ? 'selected=selected':''): ''): ''}}>50</option>
                             <option value="100" {{isset($filter) ? ( isset($filter['limit'])? ($filter['limit'] == '100' ? 'selected=selected':''): ''): ''}}>100</option>
@@ -86,7 +86,7 @@
                     <div class="col-sm-3 col-md-3 col-xs-12">
                         <label for="tipe" class="control-label">&nbsp;</label>
                         <div class="m-t-3">
-                            <input type="submit" class="btn btn-success btn-search" value="Cari" name="cari" style="width: 239px;">
+                            <input type="submit" class="btn btn-action btn-search" value="Cari" name="cari" style="width: 239px;">
                             <!--input type="submit" class="btn btn-success btn-search" value="Cari" name="cari" style="width: 499px;"-->
                         </div>
                         <div class="clearfix"></div>
