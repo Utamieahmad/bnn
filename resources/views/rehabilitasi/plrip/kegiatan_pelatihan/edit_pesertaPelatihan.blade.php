@@ -80,9 +80,3 @@
         </div>
     </div>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>        
-    var a = $('#jns_kelamin').val();
-    console.log(a);
-    console.log('asd');
-</script>

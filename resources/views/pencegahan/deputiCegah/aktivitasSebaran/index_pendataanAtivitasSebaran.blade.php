@@ -2,7 +2,20 @@
 @section('title', 'Data Aktivitas Sebaran')
 
 @section('content')
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchButton').click(function() {
+        $('.formSearch').slideToggle("slow");
+        // Alternative animation for example
+        // slideToggle("fast");
+        });
+    });
+    
+    $(document).ready(function() {
+        $('#datatableCegah').DataTable();
+    } );
+</script>
 <div class="right_col" role="main">
     <div class="m-t-40">
         <div class="page-title">
@@ -35,6 +48,11 @@
                                     <i class="fa fa-file-excel-o"></i> Excel
                                 </a>
                             </li>
+                            <li class="">
+                                <a class="btn btn-lg btn-round btn-warning" id="searchButton" onchange="formFilter(this)">
+                                    <i class="fa fa-search"></i> Search By
+                                </a>
+                            </li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -47,9 +65,9 @@
                             {{ $session['message'] }}
                         </div>
                         @endif                        
-                        <div style="overflow-x:auto;">
+                        <!--div style="overflow-x:auto;"-->
                             @include('_templateFilter.cegah_aktivitas_sebaran')
-                            <table id="example" class="table table-striped dt-responsive nowrap text-left" cellspacing="0" width="100%">
+                            <table id="datatableCegah" class="table table-striped dt-responsive nowrap text-left" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -103,7 +121,7 @@
                                     @endif
                                 </tbody>
                             </table>                            
-                        </div>
+                        <!--/div-->
                         @if(count($data_aktivitas) > 0)
                             {!! $pagination !!}
                         @endif
