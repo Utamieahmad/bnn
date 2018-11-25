@@ -319,6 +319,8 @@ Route::group(['middleware' => ['auth']], function () {
 		});
 		Route::get('/print_page_pascarehabilitasi/{segment?}/{page?}','RehabilitasiController@printPage')->name("print_page_pascarehabilitasi");
 		Route::post('/print_page_rehabilitasi/downloadPlrip','RehabilitasiController@downloadPlrip')->name("print_page_rehabilitasi");
+		Route::post('/print_page_rehabilitasi/downloadPlripDocNSPK','RehabilitasiController@downloadPlripDocNSPK')->name("print_page_PlripDocNSPK");
+		Route::post('/print_page_rehabilitasi/downloadPlripKegiatan','RehabilitasiController@downloadPlripKegiatan')->name("print_page_PlripKegiatan");
 	});
 
 
