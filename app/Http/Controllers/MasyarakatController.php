@@ -3807,4 +3807,272 @@ class MasyarakatController extends Controller
       }
     }
 
+    public function downloadTesNarkoba(Request $request){
+    
+      $data = DB::table('v_dayamas_test_uji_instansi_wilayah');
+      if ($request->date_from != '') {
+        $data->where('tgl_test', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_test', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_test', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Nomor Surat'] = $value->no_surat_permohonan ;
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Tanggal Tes'] = ( $value->tgl_test ? date('d/m/Y',strtotime($value->tgl_test)) : '');
+            $result[$key]['Sasaran'] =$value->sasaran_values;
+            $result[$key]['Jumlah Peserta'] =$value->jmlh_peserta;
+            $result[$key]['Total Positif'] =$value->jmlh_positif;
+            $result[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+            $result[$key]['Lokasi Tes'] =$value->lokasi;
+            $result[$key]['Keterangan Lain'] =$value->keterangan_lainnya;
+            
+            $i = $i +1;
+          }
+        $name = 'Export Pendataan Tes Narkoba '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadAntiNarkoba(Request $request){
+    
+      $data = DB::table('v_dayamas_psm_penggiat');
+      if ($request->date_from != '') {
+        $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_pelaksanaan ? date('d/m/Y',strtotime($value->tgl_pelaksanaan)) : '').' - '.( $value->tgl_selesai ? date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Lokasi Kegiatan'] =$value->lokasi_kegiatan_namakabkota;
+            $result[$key]['Alamat Lokasi'] =$value->lokasi_kegiatan;
+            $result[$key]['Jenis Kegiatan'] =$value->jenis_kegiatan;
+            $result[$key]['Jumlah Anggota'] =$value->jumlah_peserta;
+            
+            $peserta = "";
+            $meta_peserta = $value->narasumber;
+            if($meta_peserta){
+              $meta = json_decode($meta_peserta,true);
+              $meta2 = json_decode($value->materi,true);
+              if(count($meta) > 0 ){
+                for($i = 0 ; $i < count($meta); $i ++ ){
+                  $peserta .= 'Narasumber : '.$meta[$i].' , Materi : '.$meta2[$i];
+                  $peserta .= "\n";
+                }
+                $peserta = rtrim($peserta);
+              }
+            }
+            $result[$key]['Materi']= $peserta;
+
+            $result[$key]['Asal Penggiat'] =$value->kodesasaran;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Pengembangan Kapasitas '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadPelatihan(Request $request){
+    
+      $data = DB::table('v_dayamas_psm_pelatihanpenggiat');
+      if ($request->date_from != '') {
+        $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_pelaksanaan ? date('d/m/Y',strtotime($value->tgl_pelaksanaan)) : '');
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Sasaran'] =$value->kodesasaran;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_instansi;
+            if($meta_peserta){
+              $meta = json_decode($meta_peserta,true);
+              if(count($meta) > 0 ){
+                for($i = 0 ; $i < count($meta); $i ++ ){
+                  $peserta .= 'Instansi : '.$meta[$i]['list_nama_instansi'].' , Jml Peserta : '.$meta[$i]['list_jumlah_peserta'];
+                  $peserta .= "\n";
+                }
+                $peserta = rtrim($peserta);
+              }
+            }
+            $result[$key]['Instansi/Peserta']= $peserta;
+
+            $result[$key]['Lokasi Kegiatan'] =$value->lokasi_kegiatan_namakabkota;
+            $result[$key]['Alamat Lokasi'] =$value->lokasi_kegiatan;
+            $result[$key]['Panitia'] =$value->panitia_monev;
+            
+            $peserta = "";
+            $meta_peserta = $value->narasumber;
+            if($meta_peserta){
+              $meta = json_decode($meta_peserta,true);
+              $meta2 = json_decode($value->materi,true);
+              if(count($meta) > 0 ){
+                for($i = 0 ; $i < count($meta); $i ++ ){
+                  $peserta .= 'Narasumber : '.$meta[$i].' , Materi : '.$meta2[$i];
+                  $peserta .= "\n";
+                }
+                $peserta = rtrim($peserta);
+              }
+            }
+            $result[$key]['Materi']= $peserta;
+
+            $result[$key]['Sumber Anggaran'] =$value->kodesumberanggaran;
+
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Bimbingan Teknis '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadSupervisi(Request $request){
+    
+      $data = DB::table('v_dayamas_psm_supervisi');
+      if ($request->date_from != '') {
+        $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Pelaksanaan'] = ( $value->tgl_pelaksanaan ? date('d/m/Y',strtotime($value->tgl_pelaksanaan)) : '');
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Sasaran'] =$value->kodesasaran;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_instansi;
+            if($meta_peserta){
+              $meta = json_decode($meta_peserta,true);
+              if(count($meta) > 0 ){
+                for($i = 0 ; $i < count($meta); $i ++ ){
+                  $peserta .= 'Instansi : '.$meta[$i]['list_nama_instansi'].' , Jml Peserta : '.$meta[$i]['list_jumlah_peserta'];
+                  $peserta .= "\n";
+                }
+                $peserta = rtrim($peserta);
+              }
+            }
+            $result[$key]['Instansi/Peserta']= $peserta;
+
+            $result[$key]['Tim Supervisi'] =$value->panitia_monev;
+            $result[$key]['Sumber Anggaran'] =$value->kodesumberanggaran;
+
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Kegiatan Monitoring & Evaluasi '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadPsmRapat(Request $request){
+    
+      $data = DB::table('v_dayamas_rapat_kerja_pemetaan')->where('type','peran_serta');
+      if ($request->date_from != '') {
+        $data->where('tanggal_pemetaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tanggal_pemetaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tanggal_pemetaan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+      $array_sasaran = [
+          '7'=>'Pemerintah',
+          '14'=>'Swasta',
+          '1'=>'Pendidikan',
+          '20'=>'Masyarakat',
+      ];
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Pemetaan'] = ( $value->tanggal_pemetaan ? date('d/m/Y',strtotime($value->tanggal_pemetaan)) : '');
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Lokasi Kegiatan'] =$value->nm_wilayah;
+            $result[$key]['Jumlah Peserta'] =$value->jumlah_peserta;
+            $result[$key]['Sumber Anggaran'] =$value->kode_sumber_anggaran;
+            $result[$key]['Sasaran'] =$array_sasaran[$value->kode_sasaran]; 
+
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Rapat Kerja Pemetaan '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadAltdevRapat(Request $request){
+    
+      $data = DB::table('v_dayamas_rapat_kerja_pemetaan')->where('type','alternative');
+      if ($request->date_from != '') {
+        $data->where('tanggal_pemetaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tanggal_pemetaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tanggal_pemetaan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+      $array_sasaran = [
+          '7'=>'Pemerintah',
+          '14'=>'Swasta',
+          '1'=>'Pendidikan',
+          '20'=>'Masyarakat',
+      ];
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Pemetaan'] = ( $value->tanggal_pemetaan ? date('d/m/Y',strtotime($value->tanggal_pemetaan)) : '');
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Lokasi Kegiatan'] =$value->nm_wilayah;
+            $result[$key]['Jumlah Peserta'] =$value->jumlah_peserta;
+            $result[$key]['Sumber Anggaran'] =$value->kode_sumber_anggaran;
+            $result[$key]['Sasaran'] =$array_sasaran[$value->kode_sasaran]; 
+
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Rapat Kerja Pemetaan '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
 }

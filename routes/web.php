@@ -477,6 +477,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','caseController@view');
 			Route::post('/input_peserta','MasyarakatController@inputPeserta');
 			Route::post('/update_peserta','MasyarakatController@updatePeserta');
+			Route::post('/downloadtesnarkoba', 'MasyarakatController@downloadTesNarkoba');
 
 			Route::match(['get','post'],'/pendataan_anti_narkoba/{page?}','MasyarakatController@pendataanAntiNarkoba')->name('pendataan_anti_narkoba');
 			Route::get('/edit_pendataan_anti_narkoba/{id}','MasyarakatController@editpendataanAntiNarkoba')->name('edit_pendataan_anti_narkoba');
@@ -485,6 +486,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_anti_narkoba','MasyarakatController@updatePendataanAntiNarkoba');
 			Route::post('/delete_pendataan_anti_narkoba','MasyarakatController@deletePendataanAntiNarkoba')->name('delete_pendataan_anti_narkoba');
 			Route::get('/view','caseController@view');
+			Route::post('/downloadantinarkoba', 'MasyarakatController@downloadAntiNarkoba');
 
 			Route::match(['get','post'],'/pendataan_pelatihan/{page?}','MasyarakatController@pendataanPelatihan')->name('pendataan_pelatihan');
 			Route::get('/edit_pendataan_pelatihan/{id}','MasyarakatController@editpendataanPelatihan')->name('edit_pendataan_pelatihan');
@@ -493,6 +495,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_pelatihan','MasyarakatController@updatePendataanPelatihan');
 			Route::post('/delete_pendataan_pelatihan','MasyarakatController@deletePendataanPelatihan')->name('delete_pendataan_pelatihan');
 			Route::get('/view','caseController@view');
+			Route::post('/downloadpelatihan', 'MasyarakatController@downloadPelatihan');
 
 			Route::get('/pendataan_kapasitas','MasyarakatController@pendataanKapasitas')->name('pendataan_kapasitas');
 			Route::get('/edit_pendataan_kapasitas/{id}','MasyarakatController@editpendataanKapasitas')->name('edit_pendataan_kapasitas');
@@ -508,6 +511,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_psm_supervisi','MasyarakatController@updatepsmSupervisi');
 			Route::post('/delete_psm_supervisi','MasyarakatController@deletepsmSupervisi')->name('delete_psm_supervisi');
 			Route::get('/view','caseController@view');
+			Route::post('/downloadsupervisi', 'MasyarakatController@downloadSupervisi');
 
 			Route::get('/psm_ormas','MasyarakatController@psmOrmas')->name('psm_ormas');
 			Route::get('/edit_psm_ormas/{id}','MasyarakatController@editpsmOrmas')->name('edit_psm_ormas');
@@ -522,6 +526,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_rapat_kerja_pemetaan','MasyarakatController@addRapatKerja')->name('save_rapat_kerja_pemetaan');
 			Route::post('/update_rapat_kerja_pemetaan','MasyarakatController@updateRapatKerja')->name('update_rapat_kerja_pemetaan');
 			Route::post('/delete_rapat_kerja_pemetaan','MasyarakatController@deleteRapatKerja')->name('delete_rapat_kerja_pemetaan');
+			Route::post('/downloadpsmrapat', 'MasyarakatController@downloadPsmRapat');
 
 
 		});
@@ -533,6 +538,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_altdev_lahan_ganja','caseController@addaltdevLahanGanja')->name('save_altdev_lahan_ganja');
 			Route::post('/update_altdev_lahan_ganja','caseController@updateAltdevLahanGanja')->name('update_altdev_lahan_ganja');
 			Route::post('/delete_altdev_lahan_ganja','caseController@deleteAltdevLahanGanja')->name('delete_altdev_lahan_ganja');
+			Route::post('/downloadlahanganja', 'caseController@downloadLahanGanja');
 
 			Route::get('/peserta_alih_fungsi','caseController@pesertaAlihFungsi')->name('peserta_alih_fungsi');
 			Route::get('/edit_peserta_alih_fungsi/{id}','caseController@editPesertaAlihFngsi')->name('edit_peserta_alih_fungsi');
@@ -547,6 +553,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_altdev_alih_profesi','caseController@addaltdevAlihProfesi')->name('save_altdev_alih_profesi');
 			Route::post('/update_altdev_alih_profesi','caseController@updatealtdevAlihProfesi')->name('update_altdev_alih_profesi');
 			Route::post('/delete_altdev_alih_profesi','caseController@deletealtdevAlihProfesi')->name('delete_altdev_alih_profesi');
+			Route::post('/downloadalihprofesi', 'caseController@downloadAlihProfesi');
 
 			Route::get('/peserta_alih_profesi','caseController@pesertaAlihProfesi')->name('peserta_alih_profesi');
 			Route::get('/edit_peserta_alih_profesi/{id}','caseController@editPesertaAlihProfesi')->name('edit_peserta_alih_profesi');
@@ -563,6 +570,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_altdev_kawasan_rawan','caseController@addaltdevKawasanRawan')->name('save_altdev_kawasan_rawan');
 			Route::post('/update_altdev_kawasan_rawan','caseController@updatealtdevKawasanRawan')->name('update_altdev_kawasan_rawan');
 			Route::post('/delete_altdev_kawasan_rawan','caseController@deletealtdevKawasanRawan')->name('delete_altdev_kawasan_rawan');
+			Route::post('/downloadkawasanrawan', 'caseController@downloadKawasanRawan');
 
 
 			Route::match(['get','post'],'/altdev_monitoring','caseController@altdevMonitoring')->name('altdev_monitoring');
@@ -571,6 +579,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_altdev_monitoring','caseController@addaltdevMonitoring')->name('save_altdev_monitoring');
 			Route::post('/delete_altdev_monitoring','caseController@deletealtdevMonitoring')->name('delete_altdev_monitoring');
 			Route::post('/update_altdev_monitoring','caseController@updatealtdevMonitoring')->name('update_altdev_monitoring');
+			Route::post('/downloadmonitoring', 'caseController@downloadMonitoring');
 
 
 			Route::get('/peserta_monev','caseController@pesertaMonev')->name('peserta_monev');
@@ -586,6 +595,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_altdev_sinergi','caseController@addaltdevSinergitas')->name("save_altdev_sinergitas");
 			Route::post('/update_altdev_sinergi','caseController@updatealtdevSinergitas')->name("update_altdev_sinergitas");
 			Route::post('/delete_altdev_sinergi','caseController@deletealtdevSinergitas')->name("delete_altdev_sinergitas");
+			Route::post('/downloadsinergi', 'caseController@downloadSinergi');
 			Route::get('/print_page/{segment?}/{page?}','caseController@printPage')->name("print_page");
 
 			Route::match(['get','post'],'/alv_rapat_kerja_pemetaan','MasyarakatController@rapatKerjaDevelopment')->name('alv_rapat_kerja_pemetaan');
@@ -594,6 +604,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_alv_rapat_kerja_pemetaan','MasyarakatController@addRapatKerjaDevelopment')->name('save_alv_rapat_kerja_pemetaan');
 			Route::post('/update_alv_rapat_kerja_pemetaan','MasyarakatController@updateRapatKerjaDevelopment')->name('update_alv_rapat_kerja_pemetaan');
 			Route::post('/delete_alv_rapat_kerja_pemetaan','MasyarakatController@deleteRapatKerjaDevelopment')->name('delete_alv_rapat_kerja_pemetaan');
+			Route::post('/downloadaltdevrapat', 'MasyarakatController@downloadAltdevRapat');
 
 
 		});
