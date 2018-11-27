@@ -19,8 +19,8 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="{{URL('/huker/input_perka_finalisasi')}}" id="form_modalFinalisasiPerka" class="form-horizontal" id="frm_add" method="post" enctype="multipart/form-data">
       {{ csrf_field() }}
       <input type="hidden" name="form_method" value="create">
-      <input type="hidden" name="id_perka" value="{{$id}}"> 
-      <input type="hidden" name="finalisasi_id" id="finalisasi_id" value="">       
+      <input type="hidden" name="id_perka" value="{{$id}}">
+      <input type="hidden" name="finalisasi_id" id="finalisasi_id" value="">
       <div class="form-body">
 
         <div class="form-group">
@@ -56,15 +56,15 @@ aria-labelledby="myModalLabel" aria-hidden="true">
 
       <div class="form-group">
           <label for="instansi" class="col-md-3 col-sm-3 col-xs-12 control-label">Narasumber</label>
-          <div class="col-md-9 col-sm-9 col-xs-12">                                                        
+          <div class="col-md-9 col-sm-9 col-xs-12">
               <div class="mt-repeater" id="narasumber_repeater_finalisasi">
                   <div data-repeater-list="meta_narsum_materi" class="mt-repeater-before-item">
                       <div data-repeater-item="" class="mt-repeater-item">
                           <div class="row mt-repeater-row">
-                              <div class="col-md-5 col-sm-5 col-xs-12">  
+                              <div class="col-md-5 col-sm-5 col-xs-12">
                                   <label class="control-label">Narasumber</label>
                                   <input name="meta_narsum_materi[][narasumber_finalisasi]" type="text"  class="form-control"> </div>
-                              <div class="col-md-6 col-sm-6 col-xs-12">  
+                              <div class="col-md-6 col-sm-6 col-xs-12">
                                   <label class="control-label">Materi</label>
                                   <input name="meta_narsum_materi[][materi_finalisasi]" type="text" class="form-control"> </div>
                               <div class="col-md-1 col-sm-1 col-xs-12">
@@ -83,17 +83,17 @@ aria-labelledby="myModalLabel" aria-hidden="true">
 
         <div class="form-group">
           <label for="instansi" class="col-md-3 col-sm-3 col-xs-12 control-label">Peserta</label>
-          <div class="col-md-9 col-sm-9 col-xs-12">                                                        
+          <div class="col-md-9 col-sm-9 col-xs-12">
               <div class="mt-repeater" id="peserta_repeater_finalisasi">
                   <div data-repeater-list="meta_peserta" class="mt-repeater-before-item">
                       <div data-repeater-item="" class="mt-repeater-item">
                           <div class="row mt-repeater-row">
-                              <div class="col-md-5 col-sm-5 col-xs-12">  
+                              <div class="col-md-5 col-sm-5 col-xs-12">
                                   <label class="control-label">Nama Instansi</label>
-                                  <input name="meta_peserta[][nama_finalisasi]" type="text"  class="form-control"> </div>
-                              <div class="col-md-6 col-sm-6 col-xs-12">  
+                                  <input name="meta_peserta[][nama_finalisasi]" type="text" class="form-control"> </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
                                   <label class="control-label">Jumlah Peserta</label>
-                                  <input name="meta_peserta[][jumlah_finalisasi]" type="text"  class="form-control"> </div>
+                                  <input name="meta_peserta[][jumlah_finalisasi]" type="text" class="form-control" onKeydown="numeric_only(event,this)"> </div>
                               <div class="col-md-1 col-sm-1 col-xs-12">
                                   <a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">
                                       <i class="fa fa-close"></i>
@@ -143,7 +143,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       </button>
     </div>
   </form>
-  
+
 </div>
 </div>
 </div>

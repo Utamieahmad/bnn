@@ -145,7 +145,7 @@ $(document).ready(function(){
                    '<input value="'+ metaPeserta[i].nama_finalisasi +'" name="meta_peserta[' + i + '][nama_finalisasi]" class="form-control" type="text"> </div>'+
                '<div class="col-md-6 col-sm-6 col-xs-12">'+
                    '<label class="control-label">Jumlah Peserta</label>'+
-                   '<input value="'+ metaPeserta[i].jumlah_finalisasi +'" name="meta_peserta[' + i + '][jumlah_finalisasi]" class="form-control" type="text"> </div>'+
+                   '<input value="'+ metaPeserta[i].jumlah_finalisasi +'" name="meta_peserta[' + i + '][jumlah_finalisasi]" class="form-control" type="text" onKeydown="numeric_only(event,this)"> </div>'+
                '<div class="col-md-1 col-sm-1 col-xs-12">'+
                    '<a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">'+
                        '<i class="fa fa-close"></i>'+
@@ -171,7 +171,7 @@ $(document).ready(function(){
                    '<input value="" name="meta_peserta[0][nama_harmonisasi]" class="form-control" type="text"> </div>'+
                '<div class="col-md-6 col-sm-6 col-xs-12">'+
                    '<label class="control-label">Jumlah Peserta</label>'+
-                   '<input value="" name="meta_peserta[0][jumlah_harmonisasi]" class="form-control" type="text"> </div>'+
+                   '<input value="" name="meta_peserta[0][jumlah_harmonisasi]" class="form-control" type="text" onKeydown="numeric_only(event,this)"> </div>'+
                '<div class="col-md-1 col-sm-1 col-xs-12">'+
                    '<a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">'+
                        '<i class="fa fa-close"></i>'+
@@ -294,7 +294,7 @@ $(document).ready(function(){
                    '<input value="'+ metaPeserta[i].nama_harmonisasi +'" name="meta_peserta[' + i + '][nama_harmonisasi]" class="form-control" type="text"> </div>'+
                '<div class="col-md-6 col-sm-6 col-xs-12">'+
                    '<label class="control-label">Jumlah Peserta</label>'+
-                   '<input value="'+ metaPeserta[i].jumlah_harmonisasi +'" name="meta_peserta[' + i + '][jumlah_harmonisasi]" class="form-control" type="text"> </div>'+
+                   '<input value="'+ metaPeserta[i].jumlah_harmonisasi +'" name="meta_peserta[' + i + '][jumlah_harmonisasi]" class="form-control" type="text" onKeydown="numeric_only(event,this)"> </div>'+
                '<div class="col-md-1 col-sm-1 col-xs-12">'+
                    '<a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">'+
                        '<i class="fa fa-close"></i>'+
@@ -320,7 +320,7 @@ $(document).ready(function(){
                    '<input value="" name="meta_peserta[0][nama_harmonisasi]" class="form-control" type="text"> </div>'+
                '<div class="col-md-6 col-sm-6 col-xs-12">'+
                    '<label class="control-label">Jumlah Peserta</label>'+
-                   '<input value="" name="meta_peserta[0][jumlah_harmonisasi]" class="form-control" type="text"> </div>'+
+                   '<input value="" name="meta_peserta[0][jumlah_harmonisasi]" class="form-control" type="text" onKeydown="numeric_only(event,this)"> </div>'+
                '<div class="col-md-1 col-sm-1 col-xs-12">'+
                    '<a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">'+
                        '<i class="fa fa-close"></i>'+

@@ -1596,10 +1596,10 @@ class SettamaController extends Controller
   
 		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '1');
 		if ($request->date_from != '') {
-		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		  $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
 		}
 		if ($request->date_to != '' ) {
-		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		  $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
 		}
 
 		$data = $data->orderBy('created_at', 'desc')->get();
@@ -1644,10 +1644,10 @@ class SettamaController extends Controller
   
 		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '2');
 		if ($request->date_from != '') {
-		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		  $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
 		}
 		if ($request->date_to != '' ) {
-		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		  $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
 		}
 
 		$data = $data->orderBy('created_at', 'desc')->get();
@@ -1692,10 +1692,10 @@ class SettamaController extends Controller
   
 		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '4');
 		if ($request->date_from != '') {
-		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		  $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
 		}
 		if ($request->date_to != '' ) {
-		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		  $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
 		}
 
 		$data = $data->orderBy('created_at', 'desc')->get();
@@ -1740,10 +1740,10 @@ class SettamaController extends Controller
   
 		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '3');
 		if ($request->date_from != '') {
-		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		  $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
 		}
 		if ($request->date_to != '' ) {
-		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		  $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
 		}
 
 		$data = $data->orderBy('created_at', 'desc')->get();
