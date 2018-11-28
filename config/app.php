@@ -275,7 +275,7 @@ return [
     // 'url_soadev' => 'http://103.3.70.160:7004/sinapp/',
     // 'url_soadev2' => 'http://103.3.70.160:7004/',
     'url_soakemenkeu' => 'http://10.210.84.13:8080/kemenkeu/api/data/',//'url_soakemenkeu' => 'http://103.3.70.167:8080/kemenkeu/api/data/',
-    'url_api_local' => env('URL_API_LOCAL', 'http://localhost/bnn_api/public'),
+    'url_api_local' => env('URL_API_LOCAL', 'http://localhost:8080'),
     'email_bnn' => '@bnn.go.id',
     /*api balai lab*/
 ];
