@@ -15,21 +15,12 @@
         <link href="{{asset('assets/css/green.css') }}" rel="stylesheet">
         <link href="{{asset('assets/css/custom.css') }}" rel="stylesheet">
         <link href="{{asset('assets/css/customs.css') }}" rel="stylesheet">
+        <link href="{{asset('assets/css/custom-omspan.css') }}" rel="stylesheet">
         <script>
     		var TOKEN = '{{Request::session()->get('token')}}';
     		var SOA_URL = '{{config('app.url_soa')}}';
     		var SOA_DEV_URL = '{{config('app.url_soa_dev')}}';
-    		</script>
-		<style>
-			.dt-omspan {
-				color: black;
-				font-size: 10px;
-			}
-			.dt-omspan tbody tr td {
-				padding: 2px;
-			}
-			
-		</style>
+    	</script>
     </head>
 
     <body class="nav-md">
@@ -71,68 +62,6 @@
                                     </li>
 
                                     <li role="presentation" class="dropdown">
-                                        <!-- <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-user-circle"></i>
-                                            <span class="badge bg-blue-light">6</span>
-                                        </a> -->
-                                        <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                            <li>
-                                                <a>
-                                                    <span class="image"><img src="{{url('assets/images/img.jpg')}}" alt="Profile Image" /></span>
-                                                    <span>
-                                                        <span>John Smith</span>
-                                                        <span class="time">3 mins ago</span>
-                                                    </span>
-                                                    <span class="message">
-                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a>
-                                                    <span class="image"><img src="{{url('assets/images/img.jpg')}}" alt="Profile Image" /></span>
-                                                    <span>
-                                                        <span>John Smith</span>
-                                                        <span class="time">3 mins ago</span>
-                                                    </span>
-                                                    <span class="message">
-                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a>
-                                                    <span class="image"><img src="{{url('assets/images/img.jpg')}}" alt="Profile Image" /></span>
-                                                    <span>
-                                                        <span>John Smith</span>
-                                                        <span class="time">3 mins ago</span>
-                                                    </span>
-                                                    <span class="message">
-                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a>
-                                                    <span class="image"><img src="{{url('assets/images/img.jpg')}}" alt="Profile Image" /></span>
-                                                    <span>
-                                                        <span>John Smith</span>
-                                                        <span class="time">3 mins ago</span>
-                                                    </span>
-                                                    <span class="message">
-                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <div class="text-center">
-                                                    <a>
-                                                        <strong>See All Alerts</strong>
-                                                        <i class="fa fa-angle-right"></i>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        </ul>
                                     </li>
                                 </ul>
                             </nav>
@@ -187,6 +116,6 @@
         <script type="text/javascript" src="{{asset('/assets/js/popper.js')}}"></script>
         <script src="{{asset('assets/js/custom.js') }}"> </script>
         <script src="{{asset('assets/js/script.js') }}"> </script>
-        <!--script src="{{asset('assets/js/script2.js') }}"> </script-->
+        <script src="{{asset('assets/js/script-omspan.js') }}"> </script>
     </footer>
 </html>
