@@ -5706,10 +5706,10 @@ class irtamaController extends Controller
         if ($segment == 'irtama_audit') {
             $data_request = DB::table('irtama_audit_lha');
             if ($request->date_from != '') {
-                $data_request->where('tanggal_lha', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tanggal_lha', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tanggal_lha', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tanggal_lha', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lha', 'asc')->get();
             if(count($data)>=1){
@@ -5808,10 +5808,10 @@ class irtamaController extends Controller
         }else if ($segment == 'irtama_ptl') {
             $data_request = DB::table('v_irtama_ptl');
             if ($request->date_from != '') {
-                $data_request->where('tanggal_lha', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tanggal_lha', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tanggal_lha', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tanggal_lha', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lha', 'desc')->get();
             if(count($data)>=1){
@@ -5835,10 +5835,10 @@ class irtamaController extends Controller
         }else if($segment == 'irtama_riktu'){
             $data_request = DB::table('irtama_rikturiksus');
             if ($request->date_from != '') {
-                $data_request->where('tgl_hasil_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tgl_hasil_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tgl_hasil_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tgl_hasil_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_hasil_laporan', 'desc')->get();
 
@@ -5892,10 +5892,10 @@ class irtamaController extends Controller
         }else if($segment == 'irtama_sosialisasi'){
             $data_request = DB::table('irtama_sosialisasi');
             if ($request->date_from != '') {
-                $data_request->where('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
 
@@ -5925,20 +5925,20 @@ class irtamaController extends Controller
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }
 
         }else if($segment == 'irtama_verifikasi'){
             $data_request = DB::table('irtama_verifikasi');
             if ($request->date_from != '') {
-                $data_request->where('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
 
@@ -5958,27 +5958,35 @@ class irtamaController extends Controller
                 }else{
                   $nama_satker = "";
                 }
-
                 $result[$key]['Satker'] =  $nama_satker;
-                $result[$key]['Pejabat yang Diganti']  =$d->pejabat_diganti ;
-                $result[$key]['Pejabat yang Baru'] = $d->pejabat_baru;
+                
+                $result[$key]['Pejabat yang Diganti'] = $d->pejabat_diganti."\n".
+                                                          'SKEP : '.$d->pejabat_skep_diganti."\n".
+                                                          'Tanggal SKEP : '.($d->pejabat_tgl_skep_diganti ? date('d/m/Y',strtotime($d->pejabat_tgl_skep_diganti)) : '');   
+                $result[$key]['Pejabat yang Baru'] = $d->pejabat_baru."\n".
+                                                      'SKEP : '.$d->pejabat_skep_baru."\n".
+                                                      'Tanggal SKEP : '.($d->pejabat_tgl_skep_baru ? date('d/m/Y',strtotime($d->pejabat_tgl_skep_baru)) : '');   
+                
+                $result[$key]['No Laporan'] =$d->no_laporan;                
                 $result[$key]['Tanggal laporan'] = ($d->tgl_laporan ? date('d/m/Y',strtotime($d->tgl_laporan)) : '');
+                $result[$key]['Hal Yang Menjadi Perhatian'] =$d->hal_menjadi_perhatian;
+                $result[$key]['Saran'] =$d->saran;
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }
         }else if($segment == 'irtama_sop'){
             $data_request = DB::table('irtama_sop_kebijakan');
             if ($request->date_from != '') {
-                $data_request->where('tgl_sop', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tgl_sop', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tgl_sop', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tgl_sop', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_sop', 'desc')->get();
 
@@ -5996,20 +6004,20 @@ class irtamaController extends Controller
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }
 
         }else if($segment == 'irtama_penegakan'){
             $data_request = DB::table('irtama_penegakan_disiplin');
             if ($request->date_from != '') {
-                $data_request->where('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tgl_laporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tgl_laporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tgl_laporan', 'desc')->get();
 
@@ -6031,23 +6039,27 @@ class irtamaController extends Controller
                 $nama_satker = $a['nama'];
                 $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$nama_satker ) : '') ;
 //                $result[$key]['Satker'] = ( isset($satker) ? (isset($satker[$d->kode_satker]) ? $satker[$d->kode_satker] :$d->kode_satker ) : '') ;
+                $result[$key]['DATA ABSENSI (KALI)'] = 'Tanpa Keterangan : '.$d->absensi_tanpa_keterangan."\n".
+                                                      'Terlambat : '.$d->absensi_terlambat."\n".
+                                                      'Pulang Cepat : '.$d->absensi_pulang_cepat."\n".
+                                                      'Terlambat / Pulang cepat : '.$d->absensi_telambat_pulang_cepat."\n";   
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }
 
         }else if($segment == 'irtama_apel'){
             $data_request = DB::table('irtama_apel_upacara');
             if ($request->date_from != '') {
-                $data_request->where('tanggal', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tanggal', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tanggal', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tanggal', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal', 'desc')->get();
 
@@ -6077,22 +6089,31 @@ class irtamaController extends Controller
                 $result[$key]['Satker'] =  $nama_satker;
                 $result[$key]['Jumlah Hadir'] = $d->jumlah_hadir;
                 $result[$key]['Jumlah Tidak Hadir'] = $d->jumlah_tidak_hadir;
+                $result[$key]['KETERANGAN'] = 'Dinas : '.$d->keterangan_dinas."\n".
+                                                      'Izin : '.$d->keterangan_izin."\n".
+                                                      'Sakit : '.$d->keterangan_sakit."\n".
+                                                      'Cuti : '.$d->keterangan_cuti."\n".
+                                                      'Pendidikan : '.$d->keterangan_pendidikan."\n".
+                                                      'Hamil : '.$d->keterangan_hamil."\n".
+                                                      'Terlambat : '.$d->keterangan_terlambat."\n".
+                                                      'Tugas Kantor : '.$d->keterangan_tugas_kantor."\n".
+                                                      'Tanpa Keterangan : '.$d->keterangan_tanpa_keterangan."\n";   
                 $result[$key]['Status'] = ( $d->status ? ( (trim($d->status) == 'Y' )? 'Lengkap' : 'Belum Lengkap'):'Belum Lengkap');
                 $i = $i+1;
               }
-              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+              $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
               $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }
         }else if($segment == 'irtama_lk'){
             $data_request = DB::table('irtama_reviu_lk');
             if ($request->date_from != '') {
-                $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
             if(count($data)>=1){
@@ -6128,10 +6149,10 @@ class irtamaController extends Controller
         }else if($segment == 'irtama_rkakl'){
             $data_request = DB::table('irtama_reviu_rkakl');
             if ($request->date_from != '') {
-                $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
             if(count($data)>=1){
@@ -6173,13 +6194,13 @@ class irtamaController extends Controller
             $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }
-        }else if($segment == 'irtama_rkbmn'){
+        }else if($segment == 'irtama_rkbmn'){            
             $data_request = DB::table('irtama_reviu_rkbmn');
             if ($request->date_from != '') {
-                $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
             if(count($data)>=1){
@@ -6187,25 +6208,61 @@ class irtamaController extends Controller
             foreach($data as $key=>$d){
                $result[$key]['No'] = $i;
                $result[$key]['No Surat Perintah'] = $d->no_sprint;
-               $result[$key]['Ketua Tim'] = $d->ketua_tim;
-               $result[$key]['Tanggal Laporan'] = ($d->tanggal_lap ? date('d/m/Y', strtotime(str_replace('/', ',', $d->tanggal_lap))) : '');
                $result[$key]['Tahun Anggaran'] = $d->tahun_anggaran;
+               $result[$key]['Data Satker'] = 'Jumlah yang Direviu : '.$d->jmlh_direviu."\n".
+                                              'Keterangan yang Direviu : '.$d->keterangan_direviu."\n".                                              
+                                              'Jumlah Tidak Direviu : '.$d->jmlh_tdk_direviu."\n".                                              
+                                              'Keterangan Tidak Direviu : '.$d->keterangan_tdk_direviu."\n";
+               $result[$key]['Tim'] = 'Pengendali Teknis : '.$d->pengendali_teknis."\n".
+                                      'Ketua Tim : '.$d->ketua_tim."\n".                                              
+                                      'Pereviu : '.$d->pereviu."\n".                                              
+                                      'Kelengkapan Dokumen Pendukung : '.ucwords($d->kelengkapan)."\n".                                              
+                                      'Keterangan Kelengkapan : '.$d->ket_kelengkapan."\n".                                              
+                                      'Kesesuaian dengan Renstra KL : '.ucwords($d->kesesuaian)."\n".                             
+                                      'Keterangan Kesesuaian: '.$d->ket_kesesuaian."\n";
+               $result[$key]['Hasil Reviu Bangunan Gedung Kantor'] =  'Jumlah Usulan : '.$d->kantor_jmlh_usulan."\n".
+                                                                      'Jumlah yang Disetujui : '.$d->kantor_jmlh_disetujui."\n".                                              
+                                                                      'Jumlah yang Tidak Disetujui : '.$d->kantor_jmlh_tdk_disetujui."\n".                                                                                                                    
+                                                                      'Alasan : '.$d->kantor_alasan."\n";
+               $result[$key]['Hasil Reviu Bangunan Rumah Negara'] =  'Jumlah Usulan : '.$d->rumah_jmlh_usulan."\n".
+                                                                     'Jumlah yang Disetujui : '.$d->rumah_jmlh_disetujui."\n".                                              
+                                                                     'Jumlah yang Tidak Disetujui : '.$d->rumah_jmlh_tdk_disetujui."\n".                                                                                                                    
+                                                                     'Alasan : '.$d->rumah_alasan."\n";
+               $result[$key]['Hasil Reviu Tanah untuk Bangunan Gedung Kantor'] =  'Jumlah Usulan : '.$d->tanahkantor_jmlh_usulan."\n".
+                                                                                  'Jumlah yang Disetujui : '.$d->tanahkantor_jmlh_disetujui."\n".                                              
+                                                                                  'Jumlah yang Tidak Disetujui : '.$d->tanahkantor_jmlh_tdk_disetujui."\n".                                                                                                                    
+                                                                                  'Alasan : '.$d->tanahkantor_alasan."\n";
+               $result[$key]['Hasil Reviu Tanah untuk Bangunan Rumah Negara'] =  'Jumlah Usulan : '.$d->tanahrumah_jmlh_usulan."\n".
+                                                                                  'Jumlah yang Disetujui : '.$d->tanahrumah_jmlh_disetujui."\n".                                              
+                                                                                  'Jumlah yang Tidak Disetujui : '.$d->tanahrumah_jmlh_tdk_disetujui."\n".                                                                                                                    
+                                                                                  'Alasan : '.$d->tanahrumah_alasan."\n";
+               $result[$key]['Hasil Reviu Alat Angkutan darat bermotor'] =  'Jumlah Usulan : '.$d->angkutan_jmlh_usulan."\n".
+                                                                            'Jumlah yang Disetujui : '.$d->angkutan_jmlh_disetujui."\n".                                              
+                                                                            'Jumlah yang Tidak Disetujui : '.$d->angkutan_jmlh_tdk_disetujui."\n".                                                                                                                    
+                                                                            'Alasan : '.$d->angkutan_alasan."\n";
+               $result[$key]['Hasil Reviu Pemeliharaan'] =  'Jumlah Usulan : '.$d->pemeliharaan_jmlh_usulan."\n".
+                                                            'Jumlah yang Disetujui : '.$d->pemeliharaan_jmlh_disetujui."\n".                                              
+                                                            'Jumlah yang Tidak Disetujui : '.$d->pemeliharaan_jmlh_tdk_disetujui."\n".                                                                                                                    
+                                                            'Alasan : '.$d->pemeliharaan_alasan."\n";
+               
+               $result[$key]['No Laporan'] = $d->nomor_lap;
+               $result[$key]['Tanggal Laporan'] = ($d->tanggal_lap ? date('d/m/Y', strtotime(str_replace('/', ',', $d->tanggal_lap))) : '');               
                $result[$key]['Status'] = $d->status == 'Y' ? 'Lengkap' : 'Belum Lengkap';
                $i = $i +1;
             }
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }
         }else if($segment == 'irtama_lkip'){
             $data_request = DB::table('irtama_reviu_lkip');
             if ($request->date_from != '') {
-                $data_request->where('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+                $data_request->whereDate('tanggal_lap', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
             }
             if ($request->date_to != '' ) {
-                $data_request->where('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+                $data_request->whereDate('tanggal_lap', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
             }
             $data = $data_request->orderBy('tanggal_lap', 'desc')->get();
             if(count($data)>=1){
@@ -6214,16 +6271,31 @@ class irtamaController extends Controller
             foreach($data as $key=>$d){
                $result[$key]['No'] = $i;
                $result[$key]['No Surat Perintah'] = $d->no_sprint;
-               $result[$key]['Tanggal Laporan'] = ($d->tanggal_lap ? date('d/m/Y', strtotime(str_replace('/', ',', $d->tanggal_lap))) : '');
                $result[$key]['Tahun Anggaran'] = $d->tahun_anggaran;
-               $result[$key]['Sasaran'] = $d->sasaran;
+               $result[$key]['Tim'] = 'Pengendali Teknis : '.$d->pengendali_teknis."\n".
+                                      'Ketua Tim : '.$d->ketua_tim."\n".                                              
+                                      'Pereviu : '.$d->pereviu."\n";
+               $meta_indikator = json_decode($d->meta_indikator,true);               
+               $merge = "";
+               if(count($meta_indikator)){
+                   for($j = 0 ; $j < count($meta_indikator); $j++){
+                        $merge.= 'Indikator : '.$meta_indikator[$j]['indikator']."\n".
+                                'Target : '.$meta_indikator[$j]['target']."\n".
+                                'Realisasi : '.$meta_indikator[$j]['realisasi']."\n".
+                                'Capaian : '.$meta_indikator[$j]['capaian']."\n"."\n"."\n";
+                   }
+               }
+               $result[$key]['Data Umum LKIP'] = 'Sasaran Strategis : '.$d->sasaran."\n".
+                                                  $merge."\n";
+               $result[$key]['Tanggal Laporan'] = ($d->tanggal_lap ? date('d/m/Y', strtotime(str_replace('/', ',', $d->tanggal_lap))) : '');               
+               $result[$key]['No Laporan'] = $d->nomor_lap;
                $result[$key]['Status'] = $d->status == 'Y' ? 'Lengkap' : 'Belum Lengkap';
                $i = $i +1;
             }
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }else{
-            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+            $name = $array_titles[$segment].' '.date('d-m-Y', strtotime(str_replace('/', '-', $request->date_from))). ' - ' . date('d-m-Y', strtotime(str_replace('/', '-', $request->date_to)));
             $this->printData($result, $name);
           }
         }else{
