@@ -3870,8 +3870,8 @@ class MasyarakatController extends Controller
               $meta = json_decode($meta_peserta,true);
               $meta2 = json_decode($value->materi,true);
               if(count($meta) > 0 ){
-                for($i = 0 ; $i < count($meta); $i ++ ){
-                  $peserta .= 'Narasumber : '.$meta[$i].' , Materi : '.$meta2[$i];
+                for($j = 0 ; $j < count($meta); $j ++ ){
+                  $peserta .= 'Narasumber : '.$meta[$j].' , Materi : '.$meta2[$j];
                   $peserta .= "\n";
                 }
                 $peserta = rtrim($peserta);
@@ -3914,8 +3914,8 @@ class MasyarakatController extends Controller
             if($meta_peserta){
               $meta = json_decode($meta_peserta,true);
               if(count($meta) > 0 ){
-                for($i = 0 ; $i < count($meta); $i ++ ){
-                  $peserta .= 'Instansi : '.$meta[$i]['list_nama_instansi'].' , Jml Peserta : '.$meta[$i]['list_jumlah_peserta'];
+                for($j = 0 ; $j < count($meta); $j ++ ){
+                  $peserta .= 'Instansi : '.$meta[$j]['list_nama_instansi'].' , Jml Peserta : '.$meta[$j]['list_jumlah_peserta'];
                   $peserta .= "\n";
                 }
                 $peserta = rtrim($peserta);
@@ -3933,8 +3933,8 @@ class MasyarakatController extends Controller
               $meta = json_decode($meta_peserta,true);
               $meta2 = json_decode($value->materi,true);
               if(count($meta) > 0 ){
-                for($i = 0 ; $i < count($meta); $i ++ ){
-                  $peserta .= 'Narasumber : '.$meta[$i].' , Materi : '.$meta2[$i];
+                for($j = 0 ; $j < count($meta); $j ++ ){
+                  $peserta .= 'Narasumber : '.$meta[$j].' , Materi : '.$meta2[$j];
                   $peserta .= "\n";
                 }
                 $peserta = rtrim($peserta);
@@ -3978,8 +3978,8 @@ class MasyarakatController extends Controller
             if($meta_peserta){
               $meta = json_decode($meta_peserta,true);
               if(count($meta) > 0 ){
-                for($i = 0 ; $i < count($meta); $i ++ ){
-                  $peserta .= 'Instansi : '.$meta[$i]['list_nama_instansi'].' , Jml Peserta : '.$meta[$i]['list_jumlah_peserta'];
+                for($j = 0 ; $j < count($meta); $j ++ ){
+                  $peserta .= 'Instansi : '.$meta[$j]['list_nama_instansi'].' , Jml Peserta : '.$meta[$j]['list_jumlah_peserta'];
                   $peserta .= "\n";
                 }
                 $peserta = rtrim($peserta);

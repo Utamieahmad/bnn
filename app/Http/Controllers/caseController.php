@@ -4441,8 +4441,8 @@ class caseController extends Controller
             if($meta_peserta){
                 $meta = json_decode($meta_peserta,true);
                 if(count($meta) > 0 ){
-                    for($i = 0 ; $i < count($meta); $i ++ ){
-                        $peserta .= str_replace('PENYELENGGARA_', '', $meta[$i]);
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= str_replace('PENYELENGGARA_', '', $meta[$j]);
                         $peserta .= ". ";
                     }
                     $peserta = rtrim($peserta);
@@ -4455,8 +4455,8 @@ class caseController extends Controller
             if($meta_peserta){
                 $meta = json_decode($meta_peserta,true);
                 if(count($meta) > 0 ){
-                    for($i = 0 ; $i < count($meta); $i ++ ){
-                        $peserta .= $meta[$i];
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= $meta[$j];
                         $peserta .= ". ";
                     }
                     $peserta = rtrim($peserta);
@@ -4503,8 +4503,8 @@ class caseController extends Controller
             if($meta_peserta){
                 $meta = json_decode($meta_peserta,true);
                 if(count($meta) > 0 ){
-                    for($i = 0 ; $i < count($meta); $i ++ ){
-                        $peserta .= $meta[$i];
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= $meta[$j];
                         $peserta .= ". ";
                     }
                     $peserta = rtrim($peserta);
@@ -4557,8 +4557,8 @@ class caseController extends Controller
             if($meta_peserta){
                 $meta = json_decode($meta_peserta,true);
                 if(count($meta) > 0 ){
-                    for($i = 0 ; $i < count($meta); $i ++ ){
-                        $peserta .= $meta[$i];
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= $meta[$j];
                         $peserta .= ". ";
                     }
                     $peserta = rtrim($peserta);
