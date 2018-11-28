@@ -199,11 +199,11 @@ class deputiCegahController extends Controller {
             $array11 = array('limit' => $this->limit);
             $array12 = array('page' => $page);
             $anggaran = trim($request->anggaran);
-            if($anggaran != ''){
+            if ($anggaran != '') {
                 $array13 = array('anggaran' => $request->anggaran);
-            }else{
+            } else {
                 $array13 = array();
-            }            
+            }
             $array14 = array('actstat' => $actstat);
             $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array11, $array12, $array13, $array14);
 
@@ -238,7 +238,7 @@ class deputiCegahController extends Controller {
         $limit = 'limit=' . $this->limit;
         $offset = 'page=' . $page;
         $this->selected['limit'] = $this->limit;
-        $this->data['filter'] = $this->selected;        
+        $this->data['filter'] = $this->selected;
 //        dd($data_request);
         $requestCegah = $client->request('POST', $url_cegah, [
             'headers' =>
@@ -290,13 +290,13 @@ class deputiCegahController extends Controller {
         $url_cegah = 'http://10.210.84.11:7004/cegah/react/activityquery/getFiltered';
         $client = new Client();
         $actstat = 'approve';
-        $array1 = array('limit' => 10);        
-        $array2 = array('page' => 1);        
-        $array3 = array('actstat' => $actstat);        
+        $array1 = array('limit' => 10);
+        $array2 = array('page' => 1);
+        $array3 = array('actstat' => $actstat);
         $tglactstart = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from)));
         $tglactend = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to)));
-        $array4 = array('tglactstart' => $tglactstart);        
-        $array5 = array('tglactend' => $tglactend);        
+        $array4 = array('tglactstart' => $tglactstart);
+        $array5 = array('tglactend' => $tglactend);
         $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5);
         $data_request = json_encode($result_data_array);
 //        dd($data_request);
@@ -315,14 +315,14 @@ class deputiCegahController extends Controller {
         } else {
             $totalData = 10;
         }
-        if($totalData >= 500){
-            $limit = 500; 
-        }else{
+        if ($totalData >= 500) {
+            $limit = 500;
+        } else {
             $limit = $totalData;
         }
-        
+
         $array6 = array('limit' => $limit);
-        
+
         $result_data_array2 = array_merge($array2, $array3, $array4, $array5, $array6);
         $data_request2 = json_encode($result_data_array2);
 //        dd($data_request2);
@@ -337,17 +337,17 @@ class deputiCegahController extends Controller {
         );
         $datas2 = json_decode($requestCegah2->getBody()->getContents(), true);
         if (($datas2['status'] != 'error') && ($datas2['code'] == 200)) {
-            $result = $datas2['data'];                        
+            $result = $datas2['data'];
         } else {
             $result = [];
-        }        
-        
+        }
+
         $DataArray = [];
 
         $i = 1;
         foreach ($result as $key => $value) {
             $DataArray[$key]['No'] = $i;
-            $DataArray[$key]['Pembuat'] = $value['userName'];            
+            $DataArray[$key]['Pembuat'] = $value['userName'];
             $DataArray[$key]['Satker'] = $value['userSatker'];
             $DataArray[$key]['Wilayah'] = $value['userWilayah'];
             $DataArray[$key]['Tanggal'] = date_format(date_create($value['tglact']), "d-m-Y");
@@ -355,7 +355,7 @@ class deputiCegahController extends Controller {
             $DataArray[$key]['Paket'] = $value['paket'];
             $DataArray[$key]['Anggaran'] = $value['anggaran'];
             $DataArray[$key]['Sasaran'] = $value['sasaran'];
-            $DataArray[$key]['Jumlah Sebaran'] = $value['jmlsebar'];            
+            $DataArray[$key]['Jumlah Sebaran'] = $value['jmlsebar'];
             $i = $i + 1;
         }
         //dd($DataArray);
@@ -363,18 +363,18 @@ class deputiCegahController extends Controller {
         $name = 'Download Data Aktivitas Sebaran Deputi Cegah ' . date('d-m-Y H:i:s');
         $this->printData($data, $name);
     }
-    
-    public function printPdfAktivitas(Request $request){
+
+    public function printPdfAktivitas(Request $request) {
         $url_cegah = 'http://10.210.84.11:7004/cegah/react/activityquery/getFiltered';
         $client = new Client();
         $actstat = 'approve';
-        $array1 = array('limit' => 10);        
-        $array2 = array('page' => 1);        
-        $array3 = array('actstat' => $actstat);        
+        $array1 = array('limit' => 10);
+        $array2 = array('page' => 1);
+        $array3 = array('actstat' => $actstat);
         $tglactstart = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from)));
         $tglactend = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to)));
-        $array4 = array('tglactstart' => $tglactstart);        
-        $array5 = array('tglactend' => $tglactend);        
+        $array4 = array('tglactstart' => $tglactstart);
+        $array5 = array('tglactend' => $tglactend);
         $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5);
         $data_request = json_encode($result_data_array);
 //        dd($data_request);
@@ -393,14 +393,14 @@ class deputiCegahController extends Controller {
         } else {
             $totalData = 10;
         }
-        if($totalData >= 500){
-            $limit = 50; 
-        }else{
+        if ($totalData >= 500) {
+            $limit = 50;
+        } else {
             $limit = $totalData;
         }
-        
+
         $array6 = array('limit' => $limit);
-        
+
         $result_data_array2 = array_merge($array2, $array3, $array4, $array5, $array6);
         $data_request2 = json_encode($result_data_array2);
 //        dd($data_request2);
@@ -415,17 +415,17 @@ class deputiCegahController extends Controller {
         );
         $datas2 = json_decode($requestCegah2->getBody()->getContents(), true);
         if (($datas2['status'] != 'error') && ($datas2['code'] == 200)) {
-            $result = $datas2['data'];                        
+            $result = $datas2['data'];
         } else {
             $result = [];
-        }        
-        
+        }
+
         $DataArray = [];
 
         $i = 1;
         foreach ($result as $key => $value) {
             $DataArray[$key]['No'] = $i;
-            $DataArray[$key]['Pembuat'] = $value['userName'];            
+            $DataArray[$key]['Pembuat'] = $value['userName'];
             $DataArray[$key]['Satker'] = $value['userSatker'];
             $DataArray[$key]['Wilayah'] = $value['userWilayah'];
             $DataArray[$key]['Tanggal'] = date_format(date_create($value['tglact']), "d-m-Y");
@@ -433,17 +433,260 @@ class deputiCegahController extends Controller {
             $DataArray[$key]['Paket'] = $value['paket'];
             $DataArray[$key]['Anggaran'] = $value['anggaran'];
             $DataArray[$key]['Sasaran'] = $value['sasaran'];
-            $DataArray[$key]['Jumlah_Sebaran'] = $value['jmlsebar'];            
+            $DataArray[$key]['Jumlah_Sebaran'] = $value['jmlsebar'];
             $i = $i + 1;
-        }       
+        }
 //        dd($DataArray);
-        $data = $DataArray;        
+        $data = $DataArray;
         $pdf = PDF::loadView('pencegahan/deputiCegah/aktivitasSebaran/pdfAktivitasSebaran', compact('data'));
-        return $pdf->download('Aktivitas Sebaran Deputi Cegah '. date('d-m-Y H:i:s').'.pdf');        
+        return $pdf->download('Aktivitas Sebaran Deputi Cegah ' . date('d-m-Y H:i:s') . '.pdf');
+    }
+
+    public function newPdfAktivitasSebaran(Request $request) {
+        $url_cegah = 'http://10.210.84.11:7004/cegah/react/activityquery/getFiltered';
+        $client = new Client();
+        $actstat = 'approve';
+        if (isset($_GET['userName'])) {
+            $array1 = array('userName' => $_GET['userName']);
+        } else {
+            $array1 = array();
+        }
+        if (isset($_GET['userSatker'])) {
+            $array2 = array('userSatker' => $_GET['userSatker']);
+        } else {
+            $array2 = array();
+        }
+        if (isset($_GET['userWilayah'])) {
+            $array3 = array('userWilayah' => $_GET['userWilayah']);
+        } else {
+            $array3 = array();
+        }
+        if (isset($_GET['nmmedia'])) {
+            $array4 = array('nmmedia' => $_GET['nmmedia']);
+        } else {
+            $array4 = array();
+        }
+        if (isset($_GET['sasaran'])) {
+            $array5 = array('sasaran' => $_GET['sasaran']);
+        } else {
+            $array5 = array();
+        }
+        if (isset($_GET['jmlsebarstart'])) {
+            $array6 = array('jmlsebarstart' => $_GET['jmlsebarstart']);
+        } else {
+            $array6 = array();
+        }
+        if (isset($_GET['jmlsebarend'])) {
+            $array7 = array('jmlsebarend' => $_GET['jmlsebarend']);
+        } else {
+            $array7 = array();
+        }
+        if (isset($_GET['tglactstart'])) {
+            $array8 = array('tglactstart' => $_GET['tglactstart']);
+        } else {
+            $array8 = array();
+        }
+        if (isset($_GET['tglactend'])) {
+            $array9 = array('tglactend' => $_GET['tglactend']);
+        } else {
+            $array9 = array();
+        }                
+        if (isset($_GET['anggaran'])) {
+            $array10 = array('anggaran' => $_GET['anggaran']);
+        } else {
+            $array10 = array();
+        }        
+        $array11 = array('limit' => 10);
+        $array12 = array('page' => 1);
+        $array13 = array('actstat' => $actstat);
+        $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array11, $array12, $array13);
+        $data_request = json_encode($result_data_array);        
+//        dd($data_request);
+        $requestCegah = $client->request('POST', $url_cegah, [
+            'headers' =>
+                [
+                'Content-Type' => 'application/json'
+            ],
+            'body' => $data_request
+                ]
+        );
+        $datas = json_decode($requestCegah->getBody()->getContents(), true);
+        if (($datas['status'] != 'error') && ($datas['code'] == 200)) {
+            $totalData = $datas['pagination']['count'];
+//            dd($totalData);
+        } else {
+            $totalData = 10;
+        }
+        if ($totalData >= 150) {
+            $limit = 150;
+        } else {
+            $limit = $totalData;
+        }        
+
+        $array14 = array('limit' => $limit);
+
+        $result_data_array2 = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array14, $array12, $array13);
+        $data_request2 = json_encode($result_data_array2);
+//        dd($data_request2);
+
+        $requestCegah2 = $client->request('POST', $url_cegah, [
+            'headers' =>
+                [
+                'Content-Type' => 'application/json'
+            ],
+            'body' => $data_request2
+                ]
+        );
+        $datas2 = json_decode($requestCegah2->getBody()->getContents(), true);
+        if (($datas2['status'] != 'error') && ($datas2['code'] == 200)) {
+            $result = $datas2['data'];
+        } else {
+            $result = [];
+        }
+
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+            $DataArray[$key]['No'] = $i;
+            $DataArray[$key]['Pembuat'] = $value['userName'];
+            $DataArray[$key]['Satker'] = $value['userSatker'];
+            $DataArray[$key]['Wilayah'] = $value['userWilayah'];
+            $DataArray[$key]['Tanggal'] = date_format(date_create($value['tglact']), "d-m-Y");
+            $DataArray[$key]['Media'] = $value['nmmedia'];
+            $DataArray[$key]['Paket'] = $value['paket'];
+            $DataArray[$key]['Anggaran'] = $value['anggaran'];
+            $DataArray[$key]['Sasaran'] = $value['sasaran'];
+            $DataArray[$key]['Jumlah_Sebaran'] = $value['jmlsebar'];
+            $i = $i + 1;
+        }
+//        dd($DataArray);
+        $data = $DataArray;
+        $pdf = PDF::loadView('pencegahan/deputiCegah/aktivitasSebaran/pdfAktivitasSebaran', compact('data'));
+        return $pdf->download('Aktivitas Sebaran Deputi Cegah ' . date('d-m-Y H:i:s') . '.pdf');
     }
     
-    public function printoutAktivitasSebaran(){
-        dd('gemes');
+    public function newExcelAktivitasSebaran(){
+        $url_cegah = 'http://10.210.84.11:7004/cegah/react/activityquery/getFiltered';
+        $client = new Client();
+        $actstat = 'approve';
+        if (isset($_GET['userName'])) {
+            $array1 = array('userName' => $_GET['userName']);
+        } else {
+            $array1 = array();
+        }
+        if (isset($_GET['userSatker'])) {
+            $array2 = array('userSatker' => $_GET['userSatker']);
+        } else {
+            $array2 = array();
+        }
+        if (isset($_GET['userWilayah'])) {
+            $array3 = array('userWilayah' => $_GET['userWilayah']);
+        } else {
+            $array3 = array();
+        }
+        if (isset($_GET['nmmedia'])) {
+            $array4 = array('nmmedia' => $_GET['nmmedia']);
+        } else {
+            $array4 = array();
+        }
+        if (isset($_GET['sasaran'])) {
+            $array5 = array('sasaran' => $_GET['sasaran']);
+        } else {
+            $array5 = array();
+        }
+        if (isset($_GET['jmlsebarstart'])) {
+            $array6 = array('jmlsebarstart' => $_GET['jmlsebarstart']);
+        } else {
+            $array6 = array();
+        }
+        if (isset($_GET['jmlsebarend'])) {
+            $array7 = array('jmlsebarend' => $_GET['jmlsebarend']);
+        } else {
+            $array7 = array();
+        }
+        if (isset($_GET['tglactstart'])) {
+            $array8 = array('tglactstart' => $_GET['tglactstart']);
+        } else {
+            $array8 = array();
+        }
+        if (isset($_GET['tglactend'])) {
+            $array9 = array('tglactend' => $_GET['tglactend']);
+        } else {
+            $array9 = array();
+        }                
+        if (isset($_GET['anggaran'])) {
+            $array10 = array('anggaran' => $_GET['anggaran']);
+        } else {
+            $array10 = array();
+        }        
+        $array11 = array('limit' => 10);
+        $array12 = array('page' => 1);
+        $array13 = array('actstat' => $actstat);
+        $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array11, $array12, $array13);
+        $data_request = json_encode($result_data_array);        
+//        dd($data_request);
+        $requestCegah = $client->request('POST', $url_cegah, [
+            'headers' =>
+                [
+                'Content-Type' => 'application/json'
+            ],
+            'body' => $data_request
+                ]
+        );
+        $datas = json_decode($requestCegah->getBody()->getContents(), true);
+        if (($datas['status'] != 'error') && ($datas['code'] == 200)) {
+            $totalData = $datas['pagination']['count'];
+//            dd($totalData);
+        } else {
+            $totalData = 10;
+        }
+        if ($totalData >= 150) {
+            $limit = 150;
+        } else {
+            $limit = $totalData;
+        }        
+
+        $array14 = array('limit' => $limit);
+
+        $result_data_array2 = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array14, $array12, $array13);
+        $data_request2 = json_encode($result_data_array2);
+//        dd($data_request2);
+
+        $requestCegah2 = $client->request('POST', $url_cegah, [
+            'headers' =>
+                [
+                'Content-Type' => 'application/json'
+            ],
+            'body' => $data_request2
+                ]
+        );
+        $datas2 = json_decode($requestCegah2->getBody()->getContents(), true);
+        if (($datas2['status'] != 'error') && ($datas2['code'] == 200)) {
+            $result = $datas2['data'];
+        } else {
+            $result = [];
+        }
+
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+            $DataArray[$key]['No'] = $i;
+            $DataArray[$key]['Pembuat'] = $value['userName'];
+            $DataArray[$key]['Satker'] = $value['userSatker'];
+            $DataArray[$key]['Wilayah'] = $value['userWilayah'];
+            $DataArray[$key]['Tanggal'] = date_format(date_create($value['tglact']), "d-m-Y");
+            $DataArray[$key]['Media'] = $value['nmmedia'];
+            $DataArray[$key]['Paket'] = $value['paket'];
+            $DataArray[$key]['Anggaran'] = $value['anggaran'];
+            $DataArray[$key]['Sasaran'] = $value['sasaran'];
+            $DataArray[$key]['Jumlah_Sebaran'] = $value['jmlsebar'];
+            $i = $i + 1;
+        }
+        $data = $DataArray;
+        $name = 'Download Data Aktivitas Sebaran Deputi Cegah ' . date('d-m-Y H:i:s');
+        $this->printData($data, $name);
     }
 
 }

@@ -93,11 +93,11 @@
                     </div>
                 </div>
             </div>
-
         </div>    
     </form>
     <div class="m-b-20">
         <div class="m-b-20">
+            Catatan : <i>*Cetak PDF dan Excel tidak dapat melebihi 150 data</i><br>
             @if(isset($filter))
             @php
             $s = $filter;
