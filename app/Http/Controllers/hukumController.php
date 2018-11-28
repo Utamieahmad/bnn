@@ -1890,10 +1890,10 @@ class HukumController extends Controller
 //        );
         $data_request = DB::table('huker_hukumnonlitigasi');             
         if ($request->date_from != '') {
-            $data_request->where('tgl_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+            $data_request->whereDate('tgl_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
         }
         if ($request->date_to != '' ) {
-            $data_request->where('tgl_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+            $data_request->whereDate('tgl_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
         }
         $result = $data_request->orderBy('tgl_mulai', 'desc')->get();
                         

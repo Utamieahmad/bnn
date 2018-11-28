@@ -465,6 +465,9 @@ Route::group(['middleware' => ['auth']], function () {
 
                 Route::group(['prefix'=>'dep_cegah'],function(){
                     Route::match(['get', 'post'],'/data_aktivitas_sebaran/{page?}','deputiCegahController@pendataanAktivitasSebaran')->name('pendataan_aktivitasSebaran');
+                    Route::match(['get', 'post'],'/printoutaktivitassebaran/{page?}','deputiCegahController@printoutAktivitasSebaran')->name('printout_aktivitasSebaran');
+                    Route::post('/printaktivitassebaran', 'deputiCegahController@printExcelAktivitas');
+                    Route::post('/pdfaktivitassebaran', 'deputiCegahController@printPdfAktivitas');                    
                 });
 	});
 
@@ -933,6 +936,7 @@ Route::group(['middleware' => ['auth']], function () {
 				Route::get('/index_peserta_pelatihan/{parent_id}/{page?}', 'pendidikanController@indexPesertaPelatihan')->name('index_peserta_pelatihan');
 
 				Route::get('page_balai_diklat/{segment?}/{page?}','pendidikanController@printPage')->name('page_balai_diklat');
+				Route::post('/downloadpendidikan', 'pendidikanController@downloadPendidikan');
 
 			});
 	});
