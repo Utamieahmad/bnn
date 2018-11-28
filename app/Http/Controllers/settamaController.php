@@ -343,8 +343,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
@@ -946,8 +946,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
@@ -1571,8 +1571,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
@@ -1623,8 +1623,8 @@ class SettamaController extends Controller
         	if($meta_peserta){
         		$meta = json_decode($meta_peserta,true);
         		if(count($meta) > 0 ){
-        			for($i = 0 ; $i < count($meta); $i ++ ){
-        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        			for($j = 0 ; $j < count($meta); $j ++ ){
+        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
         				$peserta .= "\n";
         			}
         			$peserta = rtrim($peserta);
@@ -1671,8 +1671,8 @@ class SettamaController extends Controller
         	if($meta_peserta){
         		$meta = json_decode($meta_peserta,true);
         		if(count($meta) > 0 ){
-        			for($i = 0 ; $i < count($meta); $i ++ ){
-        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        			for($j = 0 ; $j < count($meta); $j ++ ){
+        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
         				$peserta .= "\n";
         			}
         			$peserta = rtrim($peserta);
@@ -1719,8 +1719,8 @@ class SettamaController extends Controller
         	if($meta_peserta){
         		$meta = json_decode($meta_peserta,true);
         		if(count($meta) > 0 ){
-        			for($i = 0 ; $i < count($meta); $i ++ ){
-        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        			for($j = 0 ; $j < count($meta); $j ++ ){
+        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
         				$peserta .= "\n";
         			}
         			$peserta = rtrim($peserta);
@@ -1767,8 +1767,8 @@ class SettamaController extends Controller
         	if($meta_peserta){
         		$meta = json_decode($meta_peserta,true);
         		if(count($meta) > 0 ){
-        			for($i = 0 ; $i < count($meta); $i ++ ){
-        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        			for($j = 0 ; $j < count($meta); $j ++ ){
+        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
         				$peserta .= "\n";
         			}
         			$peserta = rtrim($peserta);
@@ -2369,8 +2369,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
@@ -3005,8 +3005,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
