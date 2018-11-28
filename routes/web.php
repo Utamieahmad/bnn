@@ -465,6 +465,9 @@ Route::group(['middleware' => ['auth']], function () {
 
                 Route::group(['prefix'=>'dep_cegah'],function(){
                     Route::match(['get', 'post'],'/data_aktivitas_sebaran/{page?}','deputiCegahController@pendataanAktivitasSebaran')->name('pendataan_aktivitasSebaran');
+                    Route::match(['get', 'post'],'/printoutaktivitassebaran/{page?}','deputiCegahController@printoutAktivitasSebaran')->name('printout_aktivitasSebaran');
+                    Route::post('/printaktivitassebaran', 'deputiCegahController@printExcelAktivitas');
+                    Route::post('/pdfaktivitassebaran', 'deputiCegahController@printPdfAktivitas');                    
                 });
 	});
 
