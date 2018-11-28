@@ -37,16 +37,18 @@
                             <input name="nomor_identitas" value="" type="text" class="form-control nomor_identitas"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3" >Jenis Kelamin</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label class="mt-radio col-md-9"> <input type="radio" value="L" name="kode_jeniskelamin" class="kode_jeniskelamin" >
-                                <span>Laki-Laki </span>
-                                </label>
-                                <label class="mt-radio col-md-9"> <input type="radio" value="P" name="kode_jeniskelamin" class="kode_jeniskelamin" >
-                                <span>Perempuan </span>
-                                </label>
+                    <div id="editJenisKelamin">
+                        <div class="form-group">
+                            <label class="control-label col-md-3" >Jenis Kelamin</label>
+                            <div class="col-sm-9">
+                                <div class="radio jenis_kelamin_ganda">
+                                    <label class="mt-radio col-md-9"> <input type="radio" value="L" name="kode_jeniskelamin" class="kelamin_lakilaki">
+                                    <span>Laki-Laki </span>
+                                    </label>
+                                    <label class="mt-radio col-md-9"> <input type="radio" value="P" name="kode_jeniskelamin" class="kelamin_perempuan">
+                                    <span>Perempuan </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>

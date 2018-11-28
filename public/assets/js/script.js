@@ -145,7 +145,7 @@ $(document).ready(function(){
                    '<input value="'+ metaPeserta[i].nama_finalisasi +'" name="meta_peserta[' + i + '][nama_finalisasi]" class="form-control" type="text"> </div>'+
                '<div class="col-md-6 col-sm-6 col-xs-12">'+
                    '<label class="control-label">Jumlah Peserta</label>'+
-                   '<input value="'+ metaPeserta[i].jumlah_finalisasi +'" name="meta_peserta[' + i + '][jumlah_finalisasi]" class="form-control" type="text"> </div>'+
+                   '<input value="'+ metaPeserta[i].jumlah_finalisasi +'" name="meta_peserta[' + i + '][jumlah_finalisasi]" class="form-control" type="text" onKeydown="numeric_only(event,this)"> </div>'+
                '<div class="col-md-1 col-sm-1 col-xs-12">'+
                    '<a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">'+
                        '<i class="fa fa-close"></i>'+
@@ -171,7 +171,7 @@ $(document).ready(function(){
                    '<input value="" name="meta_peserta[0][nama_harmonisasi]" class="form-control" type="text"> </div>'+
                '<div class="col-md-6 col-sm-6 col-xs-12">'+
                    '<label class="control-label">Jumlah Peserta</label>'+
-                   '<input value="" name="meta_peserta[0][jumlah_harmonisasi]" class="form-control" type="text"> </div>'+
+                   '<input value="" name="meta_peserta[0][jumlah_harmonisasi]" class="form-control" type="text" onKeydown="numeric_only(event,this)"> </div>'+
                '<div class="col-md-1 col-sm-1 col-xs-12">'+
                    '<a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">'+
                        '<i class="fa fa-close"></i>'+
@@ -294,7 +294,7 @@ $(document).ready(function(){
                    '<input value="'+ metaPeserta[i].nama_harmonisasi +'" name="meta_peserta[' + i + '][nama_harmonisasi]" class="form-control" type="text"> </div>'+
                '<div class="col-md-6 col-sm-6 col-xs-12">'+
                    '<label class="control-label">Jumlah Peserta</label>'+
-                   '<input value="'+ metaPeserta[i].jumlah_harmonisasi +'" name="meta_peserta[' + i + '][jumlah_harmonisasi]" class="form-control" type="text"> </div>'+
+                   '<input value="'+ metaPeserta[i].jumlah_harmonisasi +'" name="meta_peserta[' + i + '][jumlah_harmonisasi]" class="form-control" type="text" onKeydown="numeric_only(event,this)"> </div>'+
                '<div class="col-md-1 col-sm-1 col-xs-12">'+
                    '<a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">'+
                        '<i class="fa fa-close"></i>'+
@@ -320,7 +320,7 @@ $(document).ready(function(){
                    '<input value="" name="meta_peserta[0][nama_harmonisasi]" class="form-control" type="text"> </div>'+
                '<div class="col-md-6 col-sm-6 col-xs-12">'+
                    '<label class="control-label">Jumlah Peserta</label>'+
-                   '<input value="" name="meta_peserta[0][jumlah_harmonisasi]" class="form-control" type="text"> </div>'+
+                   '<input value="" name="meta_peserta[0][jumlah_harmonisasi]" class="form-control" type="text" onKeydown="numeric_only(event,this)"> </div>'+
                '<div class="col-md-1 col-sm-1 col-xs-12">'+
                    '<a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">'+
                        '<i class="fa fa-close"></i>'+
@@ -615,7 +615,7 @@ $(document).ready(function(){
         $('#add_modaltersangka').find('#tersangka_tanggal_lahir').val(tersangka_tanggal_lahir);
         $('#add_modaltersangka').find('#kode_pendidikan_akhir_'+data.data.kode_pendidikan_akhir).attr('checked', 'true');
         $('#add_modaltersangka').find('#kode_pekerjaan_'+data.data.kode_pekerjaan).attr('checked', 'true');
-        $('#add_modaltersangka').find('#kode_warga_negara_'+data.data.kode_warga_negara).val(data.data.kode_warga_negara).trigger('change');
+        $('#add_modaltersangka').find('#kode_warga_negara_'+data.data.kode_warga_negara).attr('checked', 'true');
         $('#add_modaltersangka').find('#kode_negara').val(data.data.kode_negara).trigger('change');
         $('#add_modaltersangka').find('#kode_peran_tersangka_'+data.data.kode_peran_tersangka).attr('checked', 'true');
         $('#add_modaltersangka').modal('show');
@@ -2104,8 +2104,8 @@ function delete_row_form(ev,e){
 
     },
     'success' : function(data){
-      console.log(data);
-      if(data.code == 200 || (data.code == 200 && data.status != 'error')){
+      // console.log(data);
+      // if(data.code == 200 || (data.code == 200 && data.status != 'error')){
             $('.modal-footer-loading').hide('slow',function(){
                $('.modal-body .alert-message').html('<div class="alert alert-success">Data berhasil dihapus</div>').show('');
                setTimeout(function() {
@@ -2116,7 +2116,24 @@ function delete_row_form(ev,e){
                   location.reload();
                }, 1000);
            });
-      }else{
+      // }else{
+      //     $('.modal-body').hide('slow',function(){
+      //     $('.modal-body .content').hide();
+      //     $('.modal-body .alert-message').html('<div class="alert alert-warning">Data gagal dihapus</div>').show('');
+      //       // $('.modal-body').html('<div class="alert alert-warning">Data gagal dihapus</div>');
+      //       $('.modal-body').show('slow');
+      //       setTimeout(function() {
+      //         $('.modal').modal('hide');
+      //         $('.modal-body .alert-message').hide('slow');
+      //         $('.modal-body .content').show();
+      //         $('.modal-footer').show('slow');
+      //         // location.reload();
+      //       }, 1000);
+      //     });
+      // }
+    },
+    'error':function(e){
+      console.log('error '+JSON.stringify(e));
           $('.modal-body').hide('slow',function(){
           $('.modal-body .content').hide();
           $('.modal-body .alert-message').html('<div class="alert alert-warning">Data gagal dihapus</div>').show('');
@@ -2130,10 +2147,6 @@ function delete_row_form(ev,e){
               location.reload();
             }, 1000);
           });
-      }
-    },
-    'error':function(e){
-      console.log('error '+JSON.stringify(e));
     }
   });
 }
@@ -2246,6 +2259,7 @@ function submit_modal_update(ev,e,idmodal="",type=""){
             $(e).attr('disabled',false);
 
          }
+         location.reload();
       },
       'error':function(e){
          console.log('error '+JSON.stringify(e));
@@ -2553,6 +2567,61 @@ function open_modalEditPeserta(ev,e,$uri ="",$id=""){
                 $('.'+i).val(val);
               });
               $('#detailTersangka').modal('show');
+            }else{
+              $('.loading-content').html('<div class="alert alert-warning">Data Gagal Ditampilkan.</div>');
+            }
+
+          }else{
+            $('.loading-content').html('<div class="alert alert-warning">Data Gagal Ditampilkan.</div>');
+          }
+      },
+    'error':function(e){
+      console.log('error '+JSON.stringify(e));
+    }
+  });
+
+}
+function open_modalEditPesertaPelatihan(ev,e,$uri ="",$id=""){
+   ev.preventDefault();
+   $id = $(e).data('target');
+
+   if($uri){
+    $uri = $uri;
+   }else{
+    $uri = '/get_detail_tersangka';
+   }
+   $_token = $('input[name="_token"]').val();
+   $.ajax({
+      'url': $uri, // diganti pakai url api yang ditentukan
+      'type':'GET',
+      'data' : {'id':$id},
+      'headers': {'X-CSRF-TOKEN': $_token},
+      'complete': function(){
+         $('.loading-content').hide('fast');
+      },
+      'beforeSend': function(){
+         $('.loading-content').show('fast');
+      },
+      'success' : function(data){
+          console.log(data.data);
+          if(data.status == 'success'){
+            if(data.data ){
+              $d = data.data;
+              // console.log(val);
+              $.each($d, function(i,val){
+                // console.log(val);
+                $('.'+i).val(val);
+                if (i=='kode_jeniskelamin'){
+                  if(val=='L'){
+                    $('.kelamin_lakilaki').attr('checked', 'true');
+                  } else if(val=='P'){
+                    $('.kelamin_perempuan').attr('checked', 'true');
+                  }
+
+                }
+              });
+              $('#modal_edit_peserta').modal('show');
+              $('#modal_edit_form').show();
             }else{
               $('.loading-content').html('<div class="alert alert-warning">Data Gagal Ditampilkan.</div>');
             }

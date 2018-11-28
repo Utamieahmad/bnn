@@ -117,7 +117,8 @@
                                 <div class="radio">
                                     @if($profesi_pelatihan)
                                         @foreach($profesi_pelatihan as $mkey=>$mvalue)
-                                            <label class="mt-radio col-md-9"> <input type="radio" value="{{$mkey}}" name="kodepenghasilankotor" id="">
+                                            <!--label class="mt-radio col-md-9"> <input type="radio" value="{{$mkey}}" name="kodepenghasilankotor" id=""-->
+                                            <label class="mt-radio col-md-9"> <input type="radio" value="{{$mkey}}" name="kodepelatihanyangdiikuti" id="">
                                             <span>{{$mvalue}} </span>
                                             </label>
                                         @endforeach

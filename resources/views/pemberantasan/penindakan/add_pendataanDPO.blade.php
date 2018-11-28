@@ -119,7 +119,7 @@
 							<div class="form-group">
 								<label for="alamatktp_kodepos" class="col-md-3 control-label">Kodepos Alamat KTP</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="alamatktp_kodepos" name="alamatktp_kodepos" type="text" class="form-control" value="">
+									<input id="alamatktp_kodepos" name="alamatktp_kodepos" type="number" class="form-control numeric" onkeydown="numeric(event)" value="">
 								</div>
 							</div>
 							<div class="form-group">
@@ -143,7 +143,7 @@
 							<div class="form-group">
 								<label for="alamatdomisili_kodepos" class="col-md-3 control-label">Kodepos Alamat Domisili</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="alamatdomisili_kodepos" name="alamatdomisili_kodepos" type="text" class="form-control" value="">
+									<input id="alamatdomisili_kodepos" name="alamatdomisili_kodepos" type="number" class="form-control numeric" onkeydown="numeric(event)" value="">
 								</div>
 							</div>
 							<div class="form-group">
@@ -342,7 +342,7 @@
 							<div class="form-group">
 								<label for="fisik_tinggi_badan" class="col-md-3 control-label">Tinggi Badan</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="fisik_tinggi_badan" name="fisik_tinggi_badan" type="text" class="form-control mask-number" value="">
+									<input id="fisik_tinggi_badan" name="fisik_tinggi_badan" type="text" class="form-control" onKeydown="numeric_only(event,this)" value="">
 									<span class="help-block c-white">Cm</span>
 								</div>
 							</div>

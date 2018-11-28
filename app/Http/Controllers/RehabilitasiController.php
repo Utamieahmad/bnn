@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
+use App\Models\Rehab\Nspk_Models as Nspk;
 
 use Auth;
 use App\MainModel;
@@ -2719,6 +2720,7 @@ class RehabilitasiController extends Controller
     public function updatePesertaPelatihanPlrip(Request $request){
         if($request->ajax()){
             $id = $request->id_detail;
+//            dd($id);
             $this->form_params = $request->except(['_token','id_detail','index']);
             $data_request = execute_api_json('api/pelatihanpeserta/'.$id,'PUT',$this->form_params);
 
@@ -2734,9 +2736,8 @@ class RehabilitasiController extends Controller
 
 						$qtrail = $this->inputtrail($request->session()->get('token'),$trail);
 
-
             if(($data_request->code == 200)&& ($data_request->status != "error") ){
-                $html  = "<tr>";
+                $html = "<tr>";
                 $html .= '<td></td>';
                 $html .= '<td>'.$request->nama_peserta.'</td>';
                 $html .= '<td>'.$request->nomor_identitas.'</td>';
@@ -4735,10 +4736,10 @@ class RehabilitasiController extends Controller
       // dd($request->all());
       $infoumumlembaga = DB::table('rehab_infoumumlembaga');
       if ($request->date_from != '') {
-          $infoumumlembaga->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+          $infoumumlembaga->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
       }
       if ($request->date_to != '' ) {
-          $infoumumlembaga->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+          $infoumumlembaga->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
       }
 
       $infoumumlembaga  = $infoumumlembaga->where(function ($query) {
@@ -4773,4 +4774,94 @@ class RehabilitasiController extends Controller
       $name = 'Export Data Informasi Lembaga Umum PLRIP '.Carbon::now()->format('Y-m-d H:i:s');
       $this->printData($infoumumPlripArray, $name);
     }
+
+		public function downloadPlripDocNSPK(Request $request){
+			$i = 1;
+			$response = array();
+
+			$qresults = DB::table('rehab_nspk');
+      if ($request->date_from != '') {
+          $qresults->whereDate('tgl_pembuatan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+          $qresults->whereDate('tgl_pembuatan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+			$qresults  = $qresults->where(function ($query) use ($request) {
+          $query->where('kategori', '=', 'plrip')->orWhere('kategori', '=', null);
+			});
+
+			$datas = $qresults->orderBy('tgl_pembuatan', 'desc')->get();
+			foreach ($datas as $row) {
+        $data['eventID']    = $row->id;
+        $data['tgl_pembuatan']     = $row->tgl_pembuatan;
+        $data['nama_nspk']   = $row->nama_nspk;
+        $data['nomor_nsdpk']   = $row->nomor_nsdpk;
+				$data['peruntukan'] = $row->peruntukan;
+        array_push($response, $data);
+      }
+
+			$dataDocNSPK = [];
+			foreach ($response as $key => $value) {
+				// dd($value['nama']);
+        // $kasusArray[$key]['No'] = $i;
+				$dataDocNSPK[$key]['No'] = $i;
+				$dataDocNSPK[$key]['Tanggal Pengesahan'] = $value['tgl_pembuatan'];
+				$dataDocNSPK[$key]['Nama NSPK'] = $value['nama_nspk'];
+				$dataDocNSPK[$key]['No. NSPK'] = $value['nomor_nsdpk'];
+				$dataDocNSPK[$key]['Peruntukan'] = $value['peruntukan'];
+				$i = $i+1;
+			}
+
+			$name = 'Export Data Dokumen NSPK'.Carbon::now()->format('Y-m-d H:i:s');
+      $this->printData($dataDocNSPK, $name);
+		}
+
+		public function downloadPlripKegiatan(Request $request){
+
+				$i = 1;
+				$response = array();
+
+				$qresults = DB::table('v_rehab_pelatihan');
+				// dd('from : '.$request->date_from.' to : '.$request->date_to);
+	      if ($request->date_from != '') {
+	          $qresults->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+	      }
+	      if ($request->date_to != '' ) {
+	          $qresults->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+	      }
+
+				$qresults  = $qresults->where(function ($query) use ($request) {
+	          $query->where('kategori', '=', 'plrip')->orWhere('kategori', '=', null);
+				});
+
+				$datas = $qresults->orderBy('created_at', 'desc')->get();
+				foreach ($datas as $row) {
+	        $data['eventID']    = $row->id;
+	        $data['nm_instansi']     = $row->nm_instansi;
+	        $data['tema']   = $row->tema;
+	        $data['nomor_sprint']   = $row->nomor_sprint;
+					$data['tgl_dilaksanakan_mulai'] = $row->tgl_dilaksanakan_mulai;
+					$data['tgl_dilaksanakan_selesai'] = $row->tgl_dilaksanakan_selesai;
+					$data['jumlah_peserta'] = $row->jumlah_peserta;
+	        array_push($response, $data);
+	      }
+
+				$dataDocNSPK = [];
+				foreach ($response as $key => $value) {
+					// dd($value['nama']);
+	        // $kasusArray[$key]['No'] = $i;
+					$dataDocNSPK[$key]['No'] = $i;
+					$dataDocNSPK[$key]['Pelaksana'] = $value['nm_instansi'];
+					$dataDocNSPK[$key]['Judul'] = $value['tema'];
+					$dataDocNSPK[$key]['Nomor Surat Perintah'] = $value['nomor_sprint'];
+					$dataDocNSPK[$key]['Tanggal Mulai'] = $value['tgl_dilaksanakan_mulai'];
+					$dataDocNSPK[$key]['Tanggal Selesai'] = $value['tgl_dilaksanakan_selesai'];
+					$dataDocNSPK[$key]['Jumlah Peserta'] = $value['jumlah_peserta'];
+					$i = $i+1;
+				}
+
+				$name = 'Export Data PLRIP Kegiatan'.Carbon::now()->format('Y-m-d H:i:s');
+	      $this->printData($dataDocNSPK, $name);
+		}
 }

@@ -103,7 +103,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="form-group">
         <label  class="col-md-3 control-label" for="alamatktp_kodepos">Alamat Kodepos</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="alamatktp_kodepos" name="alamatktp_kodepos"/>
+          <input type="text" class="form-control numeric" onKeydown="numeric(event)" id="alamatktp_kodepos" name="alamatktp_kodepos"/>
         </div>
       </div>
 
@@ -167,7 +167,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="form-group">
         <label  class="col-md-3 control-label" for="alamatlainnya_kodepos">Alamat Lainnya Kodepos</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="alamatlainnya_kodepos" name="alamatlainnya_kodepos"/>
+          <input type="text" class="form-control numeric" onKeydown="numeric(event)" id="alamatlainnya_kodepos" name="alamatlainnya_kodepos"/>
         </div>
       </div>
 

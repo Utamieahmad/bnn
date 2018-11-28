@@ -561,7 +561,7 @@ public function globalPemusnahanDetail($token, $id)
 }
 
 public function globalinstansi($wilayah, $token)
-{
+{        
   $client = new Client();
   $baseUrl = URL::to('/');
   $requestInstansi = $client->request('POST', $baseUrl.'/api/instansi',
@@ -578,7 +578,7 @@ public function globalinstansi($wilayah, $token)
   );
 
   $instansi = json_decode($requestInstansi->getBody()->getContents(), true);
-  // dd($instansi);
+//   dd($instansi);
 
   return $instansi['data'];
 }

@@ -2695,7 +2695,7 @@ class caseController extends Controller
           $this->form_params['tgl_kegiatan'] = $date[2].'-'.$date[1].'-'.$date[0];
         }
         $this->form_params['meta_kode_pelatihan'] = json_encode($request->kode_pelatihan);
-        $data_request = execute_api_json('api/altdevprofesi/','POST',$this->form_params);
+        $data_request = execute_api_json('api/altdevprofesi','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Jenis Profesi/Usaha';
         $trail['audit_event'] = 'post';
@@ -2968,7 +2968,7 @@ class caseController extends Controller
         if(count($request->meta_kriminalitas)>= 1){
           $this->form_params['meta_kriminalitas'] = implode(',',$request->meta_kriminalitas);
         }
-        $data_request = execute_api_json('api/altdevkawasan/','POST',$this->form_params);
+        $data_request = execute_api_json('api/altdevkawasan','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Kawasan Rawan Narkoba';
         $trail['audit_event'] = 'post';
@@ -3534,7 +3534,7 @@ class caseController extends Controller
             $date = explode('/', $request->tgl_pelaksanaan);
             $this->form_params['tgl_pelaksanaan'] = $date[2].'-'.$date[1].'-'.$date[0];
           }
-          $data_request = execute_api_json('api/psmsinergitas/','POST',$this->form_params);
+          $data_request = execute_api_json('api/psmsinergitas','POST',$this->form_params);
 
           $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Sinergi';
           $trail['audit_event'] = 'post';
@@ -3633,6 +3633,7 @@ class caseController extends Controller
       }
     }
     public function addPesertaAlihFngsi(Request $request){
+//        dd('peserta alih fungsi');
       if($request->ajax()){
         $token = $request->session()->get('token');
         $this->form_params = $request->except(['_token']);
@@ -3718,13 +3719,14 @@ class caseController extends Controller
       }
     }
     public function addPesertaAlihProfesi(Request $request){
+//        dd('peserta alih profesi');
         $token = $request->session()->get('token');
         $this->form_params = $request->except(['_token','index']);
         if($request->tgl_lahir){
           $date = explode('/', $request->tgl_lahir);
           $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
         }
-        $data_request = execute_api_json('api/altdevprofesipeserta/','POST',$this->form_params);
+        $data_request = execute_api_json('api/altdevprofesipeserta','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Alih Jenis Profesi/Usaha Peserta';
         $trail['audit_event'] = 'post';
@@ -3854,13 +3856,14 @@ class caseController extends Controller
       }
     }
     public function addPesertaMonev(Request $request){
+//        dd('peserta monev');
         $token = $request->session()->get('token');
         $this->form_params = $request->except(['_token']);
         if($request->tgl_lahir){
           $date = explode('/', $request->tgl_lahir);
           $this->form_params['tgl_lahir'] = $date[2].'-'.$date[1].'-'.$date[0];
         }
-        $data_request = execute_api_json('api/monevkawasanpeserta/','POST',$this->form_params);
+        $data_request = execute_api_json('api/monevkawasanpeserta','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Monitoring dan Evaluasi Kawasan Rawan Narkotika Peserta';
         $trail['audit_event'] = 'post';
@@ -4413,4 +4416,227 @@ class caseController extends Controller
       $qtrail = $this->inputtrail($request->session()->get('token'),$trail);
 
     }
+
+    public function downloadLahanGanja(Request $request){
+    
+      $data = DB::table('v_dayamas_altdev_alihfungsilahanganja');
+      if ($request->date_from != '') {
+        $data->where('tgl_kegiatan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_kegiatan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_kegiatan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Kegiatan'] = ( $value->tgl_kegiatan ? date('d/m/Y',strtotime($value->tgl_kegiatan)) : '');
+            $result[$key]['Pelaksana'] = $value->idpelaksana;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_kode_penyelenggara;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= str_replace('PENYELENGGARA_', '', $meta[$j]);
+                        $peserta .= ". ";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Penyelenggara']= $peserta;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_kode_komoditi;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= $meta[$j];
+                        $peserta .= ". ";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Jenis Komoditi']= $peserta;
+
+            $result[$key]['Masa Tanam'] =$value->bulan_tanam;
+            $result[$key]['Keterangan Lainnya'] =$value->keterangan_lainnya;
+            $result[$key]['Lokasi Peninjauan'] =$value->lokasi;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Alih Fungsi Lahan Ganja '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadAlihProfesi(Request $request){
+    
+      $data = DB::table('v_dayamas_altdev_alihfungsiprofesi');
+      if ($request->date_from != '') {
+        $data->where('tgl_kegiatan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_kegiatan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_kegiatan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Penyelenggara'] = $value->kodepenyelenggara;
+            $result[$key]['Lokasi'] = $value->nama_kegiatan;
+            $result[$key]['Tanggal Kegiatan'] = ( $value->tgl_kegiatan ? date('d/m/Y',strtotime($value->tgl_kegiatan)) : '');
+            $result[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_kode_pelatihan;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= $meta[$j];
+                        $peserta .= ". ";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            if($value->pelatihan_lain){
+                $peserta .= $value->pelatihan_lain;
+            }
+            $result[$key]['Pelatihan']= $peserta;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Alih Fungsi Profesi '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadKawasanRawan(Request $request){
+    
+      $data = DB::table('v_dayamas_altdev_kawasanrawan');
+      if ($request->date_from != '') {
+        $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Kegiatan'] = ( $value->tgl_pelaksanaan ? date('d/m/Y',strtotime($value->tgl_pelaksanaan)) : '');
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Nama Lokasi'] = $value->lokasi_kawasan_rawan;
+            $result[$key]['Lokasi Desa'] = $value->kode_desakampung;
+            $result[$key]['Lokasi Kelurahan'] = $value->kode_kelurahan;
+            $result[$key]['Lokasi Kecamatan'] = $value->kode_kecamatan;
+            $result[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+            $result[$key]['Jenis Geografis'] = $value->kode_geografis;
+            $result[$key]['Batas Utara'] = $value->batas_utara;
+            $result[$key]['Batas Timur'] = $value->batas_timur;
+            $result[$key]['Batas Selatan'] = $value->batas_selatan;
+            $result[$key]['Batas Barat'] = $value->batas_barat;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_kriminalitas;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= $meta[$j];
+                        $peserta .= ". ";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Kriminalitas']= $peserta;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Kawasan Rawan '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadMonitoring(Request $request){
+    
+      $data = DB::table('v_dayamas_altdev_monev_kawasanrawan');
+      if ($request->date_from != '') {
+        $data->where('tgl_kegiatan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_kegiatan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_kegiatan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Penyelenggara'] = $value->kodepenyelenggara;
+            $result[$key]['Lokasi'] = $value->nama_kegiatan;
+            $result[$key]['Tanggal Kegiatan'] = ( $value->tgl_kegiatan ? date('d/m/Y',strtotime($value->tgl_kegiatan)) : '');
+            $result[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Monev Kawasan Rawan '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadSinergi(Request $request){
+    
+      $data = DB::table('v_dayamas_psm_sinergitas');
+      if ($request->date_from != '') {
+        $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Kegiatan'] = ( $value->tgl_pelaksanaan ? date('d/m/Y',strtotime($value->tgl_pelaksanaan)) : '');
+            $result[$key]['Pelaksana'] = $value->nm_instansi;
+            $result[$key]['Lokasi'] = $value->lokasi_kegiatan;
+            $result[$key]['Lokasi Kabupaten'] = $value->lokasi_kegiatan_namakabkota;
+            $result[$key]['Type Instansi'] = $value->kodesasaran;
+            $result[$key]['Nama Instansi'] = $value->materi;
+            $result[$key]['Alamat Instansi'] = $value->narasumber;
+            $result[$key]['Bentuk Kegiatan'] = $value->jenis_kegiatan;
+            $result[$key]['Lama Kegiatan'] = $value->panitia_monev;
+            $result[$key]['Jumlah Peserta'] = $value->jumlah_peserta;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Sinergitas '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
 }

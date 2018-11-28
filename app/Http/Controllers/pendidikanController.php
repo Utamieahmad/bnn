@@ -311,7 +311,7 @@ class pendidikanController extends Controller
             }
 
 
-            $data_request = execute_api_json('api/kegiatan/','POST',$this->form_params);
+            $data_request = execute_api_json('api/kegiatan','POST',$this->form_params);
 
             $trail['audit_menu'] = 'Balai Diklat - Pendidikan dan Pelatihan';
             $trail['audit_event'] = 'post';
@@ -500,7 +500,7 @@ class pendidikanController extends Controller
         $parent_id = $request->parent_id;
 
         $this->form_params['header_id'] = $request['parent_id'];
-        $data_request = execute_api_json('api/kegiatanpeserta/','POST',$this->form_params);
+        $data_request = execute_api_json('api/kegiatanpeserta','POST',$this->form_params);
 
         $trail['audit_menu'] = 'Balai Diklat - Pendidikan dan Pelatihan Peserta';
         $trail['audit_event'] = 'post';
@@ -703,6 +703,43 @@ class pendidikanController extends Controller
         }else{
             return false;
         }
+    }
+
+    public function downloadPendidikan(Request $request){
+    
+      $data = DB::table('v_badiklat_kegiatan');
+      if ($request->date_from != '') {
+        $data->where('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_pelaksanaan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Nama Kegiatan'] = $value->nama_kegiatan;
+            $result[$key]['Periode Pelaksanaan'] = ( $value->tgl_pelaksanaan ? date('d/m/Y',strtotime($value->tgl_pelaksanaan)) : '').' - '. ($value->tgl_selesai ? date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+            $result[$key]['Jenis Kegiatan'] = $value->jenis_diklat;
+            $result[$key]['Tujuan Kegiatan'] = $value->tujuan_kegiatan;
+            $result[$key]['Lokasi Kegiatan'] = $value->lokasi_kegiatan_namakabkota;
+            $result[$key]['Alamat Pelaksanaan'] = $value->tempat;
+            $result[$key]['Jumlah Hari Diklat'] = $value->total_hari_diklat;
+            $result[$key]['Jumlah Jam Pelajaran'] = $value->total_jam_pelajaran;
+            $result[$key]['Jumlah Narasumber'] = $value->total_narasumber_pengajar;
+            $result[$key]['Jumlah Peserta'] = $value->total_peserta;
+            $result[$key]['Syarat Mengikuti'] = $value->syarat_mengikuti_diklat;
+            $result[$key]['Sumber Anggaran'] = $value->kodeanggaran;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Sinergitas '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
     }
 
     public function indexPesertaPelatihan(Request $request){

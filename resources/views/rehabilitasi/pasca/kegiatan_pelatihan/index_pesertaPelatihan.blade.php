@@ -26,7 +26,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@php 
+								@php
 									$j =  1;
 								@endphp
 								@if(count($peserta))
@@ -38,11 +38,11 @@
 											<td> {{ ( ($p->kode_jeniskelamin == "P") ? 'Perempuan' : ( ($p->kode_jeniskelamin == "L") ? 'Laki-Laki' : ''))}}</td>
 											<td>{{$p->asal_instansilembaga}}</td>
 											<td class="actionTable">
-												<button type="button" class="btn btn-primary button-edit" data-target="{{$p->id_detail}}" onClick="open_modalEditPeserta(event,this,'/rehabilitasi/dir_pasca/edit_peserta_pelatihan_pascarehabilitasi/','modal_edit_form')"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn btn-primary button-edit" data-target="{{$p->id_detail}}" onClick="open_modalEditPesertaPelatihan(event,this,'/rehabilitasi/dir_pasca/edit_peserta_pelatihan_pascarehabilitasi/','modal_edit_form')"><i class="fa fa-pencil"></i></button>
                   								<button type="button" class="btn btn-primary button-action" data-target="{{$p->id_detail}}"  onClick="ajax_delete(event,this)" ><i class="fa fa-trash"></i></button>
 											</td>
 										</tr>
-									@php 
+									@php
 										$j = $j+1;
 									@endphp
 									@endforeach
@@ -71,4 +71,3 @@
 
 @include('rehabilitasi.pasca.kegiatan_pelatihan.edit_pesertaPelatihan')
 @include('rehabilitasi.pasca.kegiatan_pelatihan.add_pesertaPelatihan')
-

@@ -445,8 +445,7 @@ public function editPsiPendataanLKN(Request $request){
     ]
   );
 
-  $instansi = json_decode($requestInstansi->getBody()->getContents(), true);
-
+  $instansi = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
   $requestJalur_masuk = $client->request('GET', $baseUrl.'/api/lookup/jalur_masuk_narkotika',
     [
       'headers' =>
@@ -510,7 +509,7 @@ public function editPsiPendataanLKN(Request $request){
           ],
           'form_params' =>
           [
-            'jenis' => 'ASET_BARANG'
+            'jenis' => ''
           ]
       ]
   );

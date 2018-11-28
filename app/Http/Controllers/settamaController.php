@@ -343,8 +343,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
@@ -946,8 +946,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
@@ -1571,8 +1571,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
@@ -1596,10 +1596,10 @@ class SettamaController extends Controller
   
 		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '1');
 		if ($request->date_from != '') {
-		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		  $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
 		}
 		if ($request->date_to != '' ) {
-		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		  $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
 		}
 
 		$data = $data->orderBy('created_at', 'desc')->get();
@@ -1623,8 +1623,8 @@ class SettamaController extends Controller
         	if($meta_peserta){
         		$meta = json_decode($meta_peserta,true);
         		if(count($meta) > 0 ){
-        			for($i = 0 ; $i < count($meta); $i ++ ){
-        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        			for($j = 0 ; $j < count($meta); $j ++ ){
+        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
         				$peserta .= "\n";
         			}
         			$peserta = rtrim($peserta);
@@ -1644,10 +1644,10 @@ class SettamaController extends Controller
   
 		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '2');
 		if ($request->date_from != '') {
-		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		  $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
 		}
 		if ($request->date_to != '' ) {
-		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		  $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
 		}
 
 		$data = $data->orderBy('created_at', 'desc')->get();
@@ -1671,8 +1671,8 @@ class SettamaController extends Controller
         	if($meta_peserta){
         		$meta = json_decode($meta_peserta,true);
         		if(count($meta) > 0 ){
-        			for($i = 0 ; $i < count($meta); $i ++ ){
-        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        			for($j = 0 ; $j < count($meta); $j ++ ){
+        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
         				$peserta .= "\n";
         			}
         			$peserta = rtrim($peserta);
@@ -1692,10 +1692,10 @@ class SettamaController extends Controller
   
 		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '4');
 		if ($request->date_from != '') {
-		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		  $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
 		}
 		if ($request->date_to != '' ) {
-		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		  $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
 		}
 
 		$data = $data->orderBy('created_at', 'desc')->get();
@@ -1719,8 +1719,8 @@ class SettamaController extends Controller
         	if($meta_peserta){
         		$meta = json_decode($meta_peserta,true);
         		if(count($meta) > 0 ){
-        			for($i = 0 ; $i < count($meta); $i ++ ){
-        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        			for($j = 0 ; $j < count($meta); $j ++ ){
+        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
         				$peserta .= "\n";
         			}
         			$peserta = rtrim($peserta);
@@ -1740,10 +1740,10 @@ class SettamaController extends Controller
   
 		$data = DB::table('v_sekretariat_utama')->where('pelaksana', '3');
 		if ($request->date_from != '') {
-		  $data->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+		  $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
 		}
 		if ($request->date_to != '' ) {
-		  $data->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+		  $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
 		}
 
 		$data = $data->orderBy('created_at', 'desc')->get();
@@ -1767,8 +1767,8 @@ class SettamaController extends Controller
         	if($meta_peserta){
         		$meta = json_decode($meta_peserta,true);
         		if(count($meta) > 0 ){
-        			for($i = 0 ; $i < count($meta); $i ++ ){
-        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+        			for($j = 0 ; $j < count($meta); $j ++ ){
+        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
         				$peserta .= "\n";
         			}
         			$peserta = rtrim($peserta);
@@ -2369,8 +2369,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);
@@ -3005,8 +3005,8 @@ class SettamaController extends Controller
 	        	if($meta_peserta){
 	        		$meta = json_decode($meta_peserta,true);
 	        		if(count($meta) > 0 ){
-	        			for($i = 0 ; $i < count($meta); $i ++ ){
-	        				$peserta .= 'Instansi : '.$meta[$i]['nama_instansi'].' , Jumlah : '.$meta[$i]['jumlah_peserta'];
+	        			for($j = 0 ; $j < count($meta); $j ++ ){
+	        				$peserta .= 'Instansi : '.$meta[$j]['nama_instansi'].' , Jumlah : '.$meta[$j]['jumlah_peserta'];
 	        				$peserta .= "\n";
 	        			}
 	        			$peserta = rtrim($peserta);

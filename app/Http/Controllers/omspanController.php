@@ -37,7 +37,7 @@ class omspanController extends Controller
 				
 				$req_data_satker = $client->request('GET','http://10.210.84.13:8080/masterdata/api/view/list/satker'.$filter3);
 				$data_satker = json_decode($req_data_satker->getBody()->getContents(), true);
-				
+
 				$req_pengelolaan_up = $client->request('GET', config('app.url_soakemenkeu').'status_up/'.$filter);
 				$pengelolaan_up = json_decode($req_pengelolaan_up->getBody()->getContents(), true);
 				
@@ -80,7 +80,7 @@ class omspanController extends Controller
 				$revisi_count = 0;
 				$retur_count = 0;
 				foreach($data_satker['data'] as $key => $row) {
-					
+
 					//***Rekap Data Pengelolaan UP***\\
 					foreach($pengelolaan_up['data'] as $up) {
 						if(trim($row['kdInstansi']) == $up['kdsatker']) {
@@ -109,7 +109,7 @@ class omspanController extends Controller
 					}
 					$up_count = 0;
 					$up_count_tepat_waktu = 0;
-					
+
 					//***Rekap Data Data Kontrak***\\
 					foreach($data_kontrak['data'] as $dkon) {
 						if(trim($row['kdInstansi']) == $dkon['kdsatker']) {
@@ -121,7 +121,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($dkon_count != 0) {					
+					if($dkon_count != 0) {
 						$data_satker['data'][$key]['dkon'] = ($dkon_count_tepat_waktu / $dkon_count) * 100;
 					} else {
 						$data_satker['data'][$key]['dkon'] = 0;
@@ -175,7 +175,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($ptagih_count != 0) {					
+					if($ptagih_count != 0) {
 						$data_satker['data'][$key]['ptagih'] = ($ptagih_count_tepat / $ptagih_count) * 100;
 					} else {
 						$data_satker['data'][$key]['ptagih'] = 0;
@@ -192,7 +192,7 @@ class omspanController extends Controller
 					}
 					$ptagih_count = 0;
 					$ptagih_count_tepat = 0;
-					
+
 					//***Rekap Rekon LPJ***\\
 					foreach($rekon['data'] as $rk) {
 						if(trim($row['kdInstansi']) == $rk['kdsatker']) {
@@ -204,7 +204,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($rekon_count != 0) {					
+					if($rekon_count != 0) {
 						$data_satker['data'][$key]['rekon'] = ($rekon_count_tepat / $rekon_count) * 100;
 					} else {
 						$data_satker['data'][$key]['rekon'] = 0;
@@ -221,7 +221,7 @@ class omspanController extends Controller
 					}
 					$rekon_count = 0;
 					$rekon_count_tepat = 0;
-					
+
 					//***Rekap Renkas***\\
 					foreach($renkas['data'] as $rks) {
 						if(trim($row['kdInstansi']) == $rks['kdsatker']) {
@@ -233,7 +233,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($renkas_count != 0) {					
+					if($renkas_count != 0) {
 						$data_satker['data'][$key]['renkas'] = ($renkas_count_tepat / $renkas_count) * 100;
 					} else {
 						$data_satker['data'][$key]['renkas'] = 0;
@@ -250,7 +250,7 @@ class omspanController extends Controller
 					}
 					$renkas_count = 0;
 					$renkas_count_tepat = 0;
-					
+
 					//***Rekap Revisi DIPA***\\
 					foreach($revisi['data'] as $rvs) {
 						if(trim($row['kdInstansi']) == $rvs['kdsatker']) {
@@ -259,7 +259,7 @@ class omspanController extends Controller
 							}
 						}
 					}
-					if($revisi_count != 0) {					
+					if($revisi_count != 0) {
 						$data_satker['data'][$key]['revisi'] = 100;
 					} else {
 						$data_satker['data'][$key]['revisi'] = 100;
@@ -275,7 +275,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['na_revisi'] = 0;
 					}
 					$revisi_count = 0;
-					
+
 					//***Rekap Retur SP2D***\\
 					$jml_retur = 0;
 					$jml_sp2d = 0;
