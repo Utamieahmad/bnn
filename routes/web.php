@@ -933,6 +933,7 @@ Route::group(['middleware' => ['auth']], function () {
 				Route::get('/index_peserta_pelatihan/{parent_id}/{page?}', 'pendidikanController@indexPesertaPelatihan')->name('index_peserta_pelatihan');
 
 				Route::get('page_balai_diklat/{segment?}/{page?}','pendidikanController@printPage')->name('page_balai_diklat');
+				Route::post('/downloadpendidikan', 'pendidikanController@downloadPendidikan');
 
 			});
 	});
