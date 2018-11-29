@@ -12,60 +12,20 @@
                         // 'BrgBukti' => 'Barang Bukti',
                         'status_kelengkapan' => 'Status',
                     ];
-                    ?>
-
-                    <div class="col-md-3 col-sm-3 col-md-12">
-                        <label for="tipe" class="control-label">Pembuat</label>
-                        <input type="text" name="pembuat" value="{{isset($filter) ? (isset($filter['userName']) ? $filter['userName'] : '') :''}}" class="form-control"/>
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <label for="tipe" class="control-label">Satker</label>
-                        <input class="form-control" name="satker" value="{{isset($filter) ? (isset($filter['userSatker']) ? $filter['userSatker'] : '') :''}}" class="form-control" type="text"/>
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <label for="tipe" class="control-label">Wilayah</label>
-                        <input class="form-control" name="wilayah" value="{{isset($filter) ? (isset($filter['userWilayah']) ? $filter['userWilayah'] : '') :''}}" type="text"/>
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <label for="tipe" class="control-label">Media</label>
-                        <input class="form-control" name="media" value="{{isset($filter) ? (isset($filter['nmmedia']) ? $filter['nmmedia'] : '') :''}}" type="text"/>
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <label for="tipe" class="control-label">Tanggal Mulai</label>
-                        <div class="input-group date date_start row">
-                            <input type='text' name="tglactstart" class="form-control" value="{{isset($filter) ? (isset($filter['tglactstart']) ? $filter['tglactstart'] : '') :''}}"/>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>          
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <label for="tipe" class="control-label">Tanggal akhir</label>
-                        <div class="input-group date date_start row">
-                            <input type='text' name="tglactend" class="form-control" value="{{isset($filter) ? (isset($filter['tglactend']) ? $filter['tglactend'] : '') :''}}"/>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>                    
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <label for="tipe" class="control-label">Jumlah sebaran Mulai</label>
-                        <input class="form-control" name="jmlsebarstart" value="{{isset($filter) ? (isset($filter['jmlsebarstart']) ? $filter['jmlsebarstart'] : '') :''}}" type="text"/>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <label for="tipe" class="control-label">Jumlah sebaran Akhir</label>
-                        <input class="form-control" name="jmlsebarend" value="{{isset($filter) ? (isset($filter['jmlsebarend']) ? $filter['jmlsebarend'] : '') :''}}" type="text"/>
-                    </div>                    
-
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <label for="tipe" class="control-label">sasaran</label>
+                    ?>                                       
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <label for="tipe" class="control-label">Sasaran</label>
                         <input class="form-control" name="sasaran" value="{{isset($filter) ? (isset($filter['sasaran']) ? $filter['sasaran'] : '') :''}}" type="text"/>
+                        <input type="hidden" name="pembuat" value="" class="form-control"/>
+                        <input class="form-control" name="satker" value="" class="form-control" type="hidden"/>
+                        <input class="form-control" name="wilayah" value="" type="hidden"/>
+                        <input class="form-control" name="media" value="" type="hidden"/>
+                        <input type="hidden" name="tglactstart" class="form-control" value=""/>
+                        <input type="hidden" name="tglactend" class="form-control" value=""/>
+                        <input class="form-control" name="jmlsebarstart" value="" type="hidden"/>
+                        <input class="form-control" name="jmlsebarend" value="" type="hidden"/>                        
                     </div>
-                    <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="tipe" class="control-label">Anggaran</label>
                         <select class="form-control select2" name="anggaran">
                             <option value="" {{isset($filter) ? ( isset($filter['anggaran'])? ($filter['anggaran'] == '' ? 'selected=selected':''): '' ): ''}}>Semua</option>                            
@@ -73,7 +33,7 @@
                             <option value="Nondipa" {{isset($filter) ?( isset($filter['anggaran'])? ($filter['anggaran'] == 'Nondipa' ? 'selected=selected':''): ''): ''}}>Nondipa</option>                            
                         </select>
                     </div>
-                    <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="col-sm-4 col-md-4 col-xs-12">
                         <label for="tipe" class="control-label">Jumlah Per Halaman</label>
                         <select class="form-control select2" name="limit">
                             <option value="5" {{isset($filter) ? ( isset($filter['limit'])? ($filter['limit'] == '5' ? 'selected=selected':''): '' ): ''}}>5</option>
@@ -86,7 +46,7 @@
                     <div class="col-sm-3 col-md-3 col-xs-12">
                         <label for="tipe" class="control-label">&nbsp;</label>
                         <div class="m-t-3">
-                            <input type="submit" class="btn btn-action btn-primary" value="Cari" name="cari" style="width: 239px;">
+                            <input type="submit" class="btn btn-action btn-primary" value="Cari" name="cari" style="width: 100px;">
                             <!--input type="submit" class="btn btn-success btn-search" value="Cari" name="cari" style="width: 499px;"-->
                         </div>
                         <div class="clearfix"></div>
