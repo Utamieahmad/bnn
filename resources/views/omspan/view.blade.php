@@ -55,24 +55,24 @@
 										<tr>
 											<td rowspan="3">{{$i++}}</td>
 											<td rowspan="3"></td>
-											<td rowspan="3">{{trim($row['kdInstansi'])}}</td>
-											<td rowspan="3">{{$row['instansiName']}}</td>
+											<td rowspan="3">{{trim($row['kd_satker'])}}</td>
+											<td rowspan="3">{{$row['instansi_name']}}</td>
 											<td class="no_border">Nilai</td>
-											<td class="no_border on_hover detail_up" kd_instansi = "{{trim($row['kdInstansi'])}}">{{round($row['up'],2)}}</td>
-											<td class="no_border on_hover detail_dkon" kd_instansi = "{{trim($row['kdInstansi'])}}">{{round($row['dkon'],2)}}</td>
-											<td class="no_border on_hover detail_spm"  kd_instansi = "{{trim($row['kdInstansi'])}}">{{round($row['spm'],2)}}</td>
-											<td class="no_border on_hover detail_retur" kd_instansi = "{{trim($row['kdInstansi'])}}">{{round($row['retur'],2)}}</td>
-											<td class="no_border on_hover detail_hal3dipa" kd_instansi = "{{trim($row['kdInstansi'])}}">{{round($row['hal3dipa'],2)}}</td>
-											<td class="no_border on_hover detail_revisi" kd_instansi = "{{trim($row['kdInstansi'])}}">{{round($row['revisi'],2)}}</td>
-											<td class="no_border on_hover detail_tagih" kd_instansi = "{{trim($row['kdInstansi'])}}">{{round($row['ptagih'],2)}}</td>
+											<td class="no_border on_hover detail_up" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['up'],2)}}</td>
+											<td class="no_border on_hover detail_dkon" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['dkon'],2)}}</td>
+											<td class="no_border on_hover detail_spm"  kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['spm'],2)}}</td>
+											<td class="no_border on_hover detail_retur" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['retur'],2)}}</td>
+											<td class="no_border on_hover detail_hal3dipa" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['hal3dipa'],2)}}</td>
+											<td class="no_border on_hover detail_revisi" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['revisi'],2)}}</td>
+											<td class="no_border on_hover detail_tagih" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['ptagih'],2)}}</td>
 											<td class="no_border">{{round($row['rekon'],2)}}</td>
-											<td class="no_border on_hover detail_renkas" kd_instansi = "{{trim($row['kdInstansi'])}}">{{round($row['renkas'],2)}}</td>
-											<td class="no_border"></td>
+											<td class="no_border on_hover detail_renkas" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['renkas'],2)}}</td>
+											<td class="no_border on_hover detail_realisasi" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['nilai_realisasi'],2)}}</td>
 											<td class="no_border">0</td>
 											<td class="no_border">0</td>
-											<td rowspan="3">{{$row['na_up'] + $row['na_dkon'] + $row['na_retur'] + $row['na_revisi'] + $row['na_ptagih'] + $row['na_rekon'] + $row['na_renkas']}}</td>
-											<td rowspan="3">{{$row['bobot_up'] + $row['bobot_dkon'] + $row['bobot_retur'] + $row['bobot_revisi'] + $row['bobot_ptagih'] + $row['bobot_rekon'] + $row['bobot_renkas']}}</td>
-											<td rowspan="3"></td>
+											<td rowspan="3">{{$row['na_up'] + $row['na_dkon']+ $row['na_spm'] + $row['na_retur'] + $row['na_revisi'] + $row['na_ptagih'] + $row['na_rekon'] + $row['na_renkas']+ $row['na_realisasi']}}</td>
+											<td rowspan="3">{{$row['bobot_up'] + $row['bobot_dkon'] + $row['bobot_spm'] + $row['bobot_retur'] + $row['bobot_revisi'] + $row['bobot_ptagih'] + $row['bobot_rekon'] + $row['bobot_renkas'] + $row['bobot_realisasi']}}</td>
+											<td rowspan="3">{{round(($row['na_up'] + $row['na_dkon']+ $row['na_spm'] + $row['na_retur'] + $row['na_revisi'] + $row['na_ptagih'] + $row['na_rekon'] + $row['na_renkas']+ $row['na_realisasi']) / (($row['bobot_up'] + $row['bobot_dkon'] + $row['bobot_spm'] + $row['bobot_retur'] + $row['bobot_revisi'] + $row['bobot_ptagih'] + $row['bobot_rekon'] + $row['bobot_renkas'] + $row['bobot_realisasi']) / 90),2)}}</td>
 										</tr>
 										<tr>
 											<td>Bobot(%)</td>
@@ -85,7 +85,7 @@
 											<td>{{$row['bobot_ptagih']}}</td>
 											<td>{{$row['bobot_rekon']}}</td>
 											<td>{{$row['bobot_renkas']}}</td>
-											<td></td>
+											<td>{{$row['bobot_realisasi']}}</td>
 											<td>0</td>
 											<td>0</td>
 										</tr>
@@ -100,7 +100,7 @@
 											<td>{{$row['na_ptagih']}}</td>
 											<td>{{$row['na_rekon']}}</td>
 											<td>{{$row['na_renkas']}}</td>
-											<td></td>
+											<td>{{$row['na_realisasi']}}</td>
 											<td>0</td>
 											<td>0</td>
 										</tr>

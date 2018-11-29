@@ -107,7 +107,7 @@ $('document').ready(function(){
 					for (i = 0;i < parseInt($('#periode').val());i++) {
 						//console.log(i);
 						for (j = 0;j < data.data.length;j++) {
-							if('0'+k == data.data[j].periode) {
+							if(('0'+k).slice(-2) == data.data[j].periode) {
 								if(data.data[j].status != '-') {
 									if(data.data[j].status == 'TEPAT WAKTU') {									
 										tepat++;
@@ -122,22 +122,22 @@ $('document').ready(function(){
 						total = tepat + terlambat;
 						if(total != 0) {
 							persen = (tepat/total) *100;
+							row += "<tr>"+
+								"<td>"+k+"</td>"+
+								"<td>"+data.data[0].kdsatker+"</td>"+
+								"<td>"+data.data[0].instansiName+"</td>"+
+								"<td></td>"+
+								"<td>"+('0'+k).slice(-2)+"</td>"+
+								"<td>"+tepat+"</td>"+
+								"<td>"+terlambat+"</td>"+
+								"<td>"+convertToRupiah(total)+"</td>"+
+								"<td>"+parseFloat(persen).toFixed(2)+"</td>"+
+								"<td></td>";
 						}
-						row += "<tr>"+
-                            "<td>"+k+"</td>"+
-                            "<td>"+data.data[0].kdsatker+"</td>"+
-                            "<td>"+data.data[0].instansiName+"</td>"+
-                            "<td></td>"+
-                            "<td>0"+k+"</td>"+
-                            "<td>"+tepat+"</td>"+
-                            "<td>"+terlambat+"</td>"+
-                            "<td>"+convertToRupiah(total)+"</td>"+
-                            "<td>"+convertToRupiah(persen)+"</td>"+
-                            "<td></td>";
 						k++;
-						tepat = 0;
-						terlambat = 0;
-						total = 0;
+						//tepat = 0;
+						//terlambat = 0;
+						//total = 0;
 						persen = 0;
 					}
 					$('.dt-kontrak tbody').html(row);
@@ -288,21 +288,52 @@ $('document').ready(function(){
 					var row = "";
 					var persen = 0;
 					var no = 1;
+					var k = 1;
 					var tepat = 0;
 					var terlambat = 0;
 					$('.dt-renkas tbody').html("");
 					for (i = 0;i < parseInt($('#periode').val());i++) {
-						no++;
-						if($('#periode').val() == data.data[i].kdsatker)
+						
+						for (j = 0;j < data.data.length;j++) {
+							if(('0'+k).slice(-2) == data.data[j].periode) {
+								if(data.data[j].status != 'NULL') {
+									if(data.data[j].status == 'TEPAT') {									
+										tepat++;
+									} else {
+										terlambat++;
+									}
+								}
+							}
+						}
+						total = tepat + terlambat;
+						if(total != 0) {
+							persen = (tepat/total) *100;
+						}
 						row += "<tr>"+
-                            "<td>"+no+"</td>"+
-                            "<td>"+data.data[i].kdsatker+"</td>"+
-                            "<td>0"+no+"</td>"+
-                            "<td></td>"+
-                            "<td></td>"+
-                            "<td></td>"+
-                            "<td></td>";
+                            "<td>"+k+"</td>"+
+                            "<td>"+data.data[0].kdsatker+"</td>"+
+                            "<td>"+('0'+k).slice(-2)+"</td>"+
+                            "<td>"+tepat+"</td>"+
+                            "<td>"+terlambat+"</td>"+
+                            "<td>"+convertToRupiah(total)+"</td>"+
+                            "<td>"+parseFloat(persen).toFixed(2)+"</td>";
+						k++;
+						total = 0;
+						persen = 0;
 					}
+					
+					//for (i = 0;i < parseInt($('#periode').val());i++) {
+					//	no++;
+					//	if($('#periode').val() == data.data[i].kdsatker)
+					//	row += "<tr>"+
+                    //        "<td>"+no+"</td>"+
+                    //        "<td>"+data.data[i].kdsatker+"</td>"+
+                    //        "<td>0"+no+"</td>"+
+                    //        "<td></td>"+
+                    //        "<td></td>"+
+                    //        "<td></td>"+
+                    //        "<td></td>";
+					//}
 					$('.dt-renkas tbody').html(row);
 				} else {
 					$('.div_renkas').show();
@@ -348,19 +379,6 @@ $('document').ready(function(){
 					$('.dt-spm tbody').html("");
 					for (i = 0;i <data.data.length;i++) {
 						
-						//for (j = 0;j < data.data.length;j++) {
-						//	if('0'+no == data.data[j].periode) {
-						//		console.log(no);
-						//		total_salah += total_salah + data.data[j].akumulasi_salah;
-						//		total_spm += total_spm + data.data[j].total_spm;
-						//		break;
-						//	} else {
-						//		console.log('else');
-						//		total_salah = data.data[j].akumulasi_salah;
-						//		total_spm = data.data[j].total_spm;
-						//		break;
-						//	}
-						//}
 						total_salah += data.data[i].akumulasi_salah;
 						total_spm += data.data[i].total_spm;
 						
@@ -377,9 +395,6 @@ $('document').ready(function(){
                             "<td>"+total_spm+"</td>"+
                             "<td>"+convertToRupiah(persen)+"</td>"+
                             "<td>"+convertToRupiah(nilai)+"</td>";
-						//total_salah = 0;
-						//total_spm = 0;
-						//persen = 0;
 					}
 					$('.dt-spm tbody').html(row);
 				} else {
@@ -423,7 +438,7 @@ $('document').ready(function(){
 					var key_ren = "";
 					for (i = 0;i < parseInt($('#periode').val());i++) {
 						no++;
-						key_ren = "ren_0"+no;
+						key_ren = "ren_"+('0'+no).slice(-2);
 						row += "<tr>"+
                             "<td>"+no+"</td>"+
                             "<td>"+data.data[0].kdsatker+"</td>"+
@@ -450,6 +465,156 @@ $('document').ready(function(){
 		});
 	});
 	
+	$('.dt-omspan').on('click', '.detail_tagih', function () {
+		if($('#periode').val() == '') {
+			alert('Periode tidak ditemukan');
+			return false;
+		}
+		if($(this).attr('kd_instansi') == '') {
+			alert('Kode satker tidak ditemukan');
+			return false;
+		}
+		$.ajax({
+			type: "post",
+			url: BASE_URL + '/omspan/gettagihan',
+			data: {
+				_token: $('#_token').val(),
+				kdSatker : $(this).attr('kd_instansi'),
+				periode : $('#periode').val()
+			},
+			success: function(data) {
+                console.log(data);
+				if(data.code=='200') {
+					$('.div_tagihan').show();
+					$('.div_rekap').hide();
+					var row = "";
+					var tepat = 0;
+					var terlambat = 0;
+					var k = 1;
+					var total = 0;
+					var persen = 0;
+					$('.dt-tagihan tbody').html("");
+					for (i = 0;i < parseInt($('#periode').val());i++) {
+						
+						for (j = 0;j < data.data.length;j++) {
+							if(('0'+k).slice(-2) == data.data[j].periode) {
+								if(data.data[j].status != 'NULL') {
+									if(data.data[j].status == 'TEPAT') {									
+										tepat++;
+									} else {
+										terlambat++;
+									}
+								}
+							}
+						}
+						total = tepat + terlambat;
+						if(total != 0) {
+							persen = (tepat/total) *100;
+						}
+						row += "<tr>"+
+                            "<td>"+k+"</td>"+
+                            "<td>"+data.data[0].kdsatker+"</td>"+
+                            "<td>"+('0'+k).slice(-2)+"</td>"+
+                            "<td>"+tepat+"</td>"+
+                            "<td>"+terlambat+"</td>"+
+                            "<td>"+convertToRupiah(total)+"</td>"+
+                            "<td>"+parseFloat(persen).toFixed(2)+"</td>";
+						k++;
+						//tepat = 0;
+						//terlambat = 0;
+						total = 0;
+						persen = 0;
+					}
+					$('.dt-tagihan tbody').html(row);
+				} else {
+					$('.div_tagihan').show();
+					$('.div_rekap').hide();
+					$('.dt-tagihan tbody').html('<tr><td colspan="7" align="center">No Data Found</td></tr>');
+					alert(data.status);
+				}
+			},
+            error: function(e) {
+				console.log('error '+JSON.stringify(e));
+			}
+		});
+	});
+	
+	$('.dt-omspan').on('click', '.detail_realisasi', function () {
+		if($('#periode').val() == '') {
+			alert('Periode tidak ditemukan');
+			return false;
+		}
+		if($(this).attr('kd_instansi') == '') {
+			alert('Kode satker tidak ditemukan');
+			return false;
+		}
+		$.ajax({
+			type: "post",
+			url: BASE_URL + '/omspan/getrealisasi',
+			data: {
+				_token: $('#_token').val(),
+				kdSatker : $(this).attr('kd_instansi'),
+				periode : $('#periode').val()
+			},
+			success: function(data) {
+                console.log(data);
+				if(data.code=='200') {
+					$('.div_realisasi').show();
+					$('.div_rekap').hide();
+					var row = "";
+					var k = 1;
+					var realisasi = 0;
+					var persen = 0;
+					var triwulan = "";
+					$('.dt-realisasi tbody').html("");
+					for (i = 0;i < parseInt($('#periode').val());i++) {
+						
+						for (j = 0;j < data.data.length;j++) {
+							if(('0'+k).slice(-2) == data.data[j].periode) {
+								realisasi += data.data[j].jumlahRealisasi;
+							}
+							//else {
+							//	realisasi = 0;
+							//}
+						}
+						if(data.pagu != 0) {
+							persen = (realisasi/data.pagu) * 100;
+						}
+						if(parseInt(k) <= 3) {
+							triwulan = 15;
+						} else if(parseInt(k) > 3 && parseInt(k) <=6) {
+							triwulan = 45;
+						} else if(parseInt(k) > 6 && parseInt(k) <=9) {
+							triwulan = 60;
+						} else {
+							triwulan = 90;
+						}
+						row += "<tr>"+
+                            "<td>"+k+"</td>"+
+                            "<td>"+data.data[0].kdSatker+"</td>"+
+							"<td></td>"+
+                            "<td>"+('0'+k).slice(-2)+"</td>"+
+                            "<td>"+data.pagu+"</td>"+
+                            "<td>"+realisasi+"</td>"+
+                            "<td>"+parseFloat(persen).toFixed(2)+"</td>"+
+                            "<td>"+Math.round(persen/triwulan *100)+"</td>";
+						k++;
+						//realisasi = 0;
+						persen = 0;
+					}
+					$('.dt-realisasi tbody').html(row);
+				} else {
+					$('.div_realisasi').show();
+					$('.div_rekap').hide();
+					$('.dt-realisasi tbody').html('<tr><td colspan="8" align="center">No Data Found</td></tr>');
+					alert(data.status);
+				}
+			},
+            error: function(e) {
+				console.log('error '+JSON.stringify(e));
+			}
+		});
+	});
 	
 	$('.dt-omspan tbody tr td.on_hover')
 	.on('mouseenter', function(){ $(this).addClass('hover'); })

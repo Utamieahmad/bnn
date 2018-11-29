@@ -1292,6 +1292,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::match(['get','post'],'/gethal3dipa','omspanController@gethal3dipa')->name('gethal3dipa');
 		Route::match(['get','post'],'/getrevisi','omspanController@getrevisi')->name('getrevisi');
 		Route::match(['get','post'],'/gettagihan','omspanController@gettagihan')->name('gettagihan');
+		Route::match(['get','post'],'/getrealisasi','omspanController@getrealisasi')->name('getrealisasi');
 	});
 
 });
