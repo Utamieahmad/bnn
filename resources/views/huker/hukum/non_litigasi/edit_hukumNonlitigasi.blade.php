@@ -273,7 +273,7 @@
           @endif
 
                     <div class="form-group">
-                      <label for="hasil_dicapai " class="col-md-3 control-label">Hasil yang dicapai</label>
+                      <label for="file_laporan " class="col-md-3 control-label">Hasil yang dicapai</label>
                       <div class="col-md-5">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="input-group input-large">
@@ -284,7 +284,7 @@
                             <span class="input-group-addon btn default btn-file">
                               <span class="fileinput-new"> Pilih Berkas </span>
                               <span class="fileinput-exists"> Ganti </span>
-                              <input type="file" name="hasil_dicapai "> </span>
+                              <input type="file" name="file_laporan"> </span>
                               <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Hapus </a>
                             </div>
                           </div>
