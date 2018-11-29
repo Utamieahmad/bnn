@@ -28,16 +28,19 @@ class omspanController extends Controller
 				$filter2 = $get['periode'];
 				$filter3 = '';
 				$filter4 = intval($get['periode']);
+				$filterRealisasi = '';
 				if($get['kode_satker']) {
 					$filter = $get['kode_satker'] . '/' . $get['periode'];
 					$filter2 = $get['periode'] . '/' . $get['kode_satker'];
 					$filter3 = '/' . $get['kode_satker'];
 					$filter4 = $get['kode_satker'] . '/' . intval($get['periode']);
+					$filterRealisasi = $get['kode_satker'];
 				}
 				
-				$req_data_satker = $client->request('GET','http://10.210.84.13:8080/masterdata/api/view/list/satker'.$filter3);
+				//$req_data_satker = $client->request('GET','http://10.210.84.13:8080/masterdata/api/view/list/satker'.$filter3);
+				$req_data_satker = $client->request('GET','http://10.210.84.13:8080/satker/view/data/satker'.$filter3);
 				$data_satker = json_decode($req_data_satker->getBody()->getContents(), true);
-
+                
 				$req_pengelolaan_up = $client->request('GET', config('app.url_soakemenkeu').'status_up/'.$filter);
 				$pengelolaan_up = json_decode($req_pengelolaan_up->getBody()->getContents(), true);
 				
@@ -62,8 +65,16 @@ class omspanController extends Controller
 				$req_retur = $client->request('GET', config('app.url_soakemenkeu').'rekapretur/'.$filter);
 				$retur = json_decode($req_retur->getBody()->getContents(), true);
 				
-				//$req_3dipa = $client->request('GET', config('app.url_soakemenkeu').'hal_tiga_dipa'.$filter3);
-				//$hal_3dipa = json_decode($req_3dipa->getBody()->getContents(), true);
+				$req_pagudipa = $client->request('GET', config('app.url_soakemenkeu').'pagudipa'.$filter3);
+				$pagudipa = json_decode($req_pagudipa->getBody()->getContents(), true);
+				
+				$params['headers'] = ['Content-Type' => 'application/json', 'Accept' => 'application/json'];
+				$params['body'] = '{ "KD_SATKER" : "'.$filterRealisasi.'", "TAHUN" : "'.date("Y").'", "PERIODE" : "'.$get['periode'].'" }';
+				$req_realisasi = $client->request('POST', 'http://10.210.84.13:8080/monevgar/api/realisasi/getBySatkerPeriode', $params);
+				$realisasi = json_decode($req_realisasi->getBody()->getContents(), true);
+				
+				$req_3dipa = $client->request('GET', config('app.url_soakemenkeu').'hal_tiga_dipa'.$filter3);
+				$hal_3dipa = json_decode($req_3dipa->getBody()->getContents(), true);
 				
 				$up_count = 0;
 				$up_count_tepat_waktu = 0;
@@ -79,11 +90,20 @@ class omspanController extends Controller
 				$renkas_count_tepat = 0;
 				$revisi_count = 0;
 				$retur_count = 0;
+				$pagu = 0;
+				$pagudipa_count = 0;
+				$real = 0;
+				$realisasi_count = 0;
+				$triwulan = "";
+				$rencana = 0;
+				$deviasi = 0;
+				$deviasi_persen = 0;
+				$akumulasi_deviasi = 0;
 				foreach($data_satker['data'] as $key => $row) {
 
 					//***Rekap Data Pengelolaan UP***\\
 					foreach($pengelolaan_up['data'] as $up) {
-						if(trim($row['kdInstansi']) == $up['kdsatker']) {
+						if(trim($row['kd_satker']) == $up['kdsatker']) {
 							if($up['status'] != '-') {
 								if($up['status'] == 'TEPAT WAKTU') {
 									$up_count_tepat_waktu++;
@@ -103,7 +123,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['bobot_up'] = 10;
 					}
 					if($data_satker['data'][$key]['bobot_up'] != 0) {
-						$data_satker['data'][$key]['na_up'] = round((round($data_satker['data'][$key]['up'],2) / $data_satker['data'][$key]['bobot_up']),2);
+						$data_satker['data'][$key]['na_up'] = round((round($data_satker['data'][$key]['up'],2) * ($data_satker['data'][$key]['bobot_up']/100)),2);
 					} else {
 						$data_satker['data'][$key]['na_up'] = 0;
 					}
@@ -112,7 +132,7 @@ class omspanController extends Controller
 
 					//***Rekap Data Data Kontrak***\\
 					foreach($data_kontrak['data'] as $dkon) {
-						if(trim($row['kdInstansi']) == $dkon['kdsatker']) {
+						if(trim($row['kd_satker']) == $dkon['kdsatker']) {
 							if($dkon['status'] != '-') {
 								if($dkon['status'] == 'TEPAT WAKTU') {
 									$dkon_count_tepat_waktu++;
@@ -132,7 +152,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['bobot_dkon'] = 10;
 					}
 					if($data_satker['data'][$key]['bobot_dkon'] != 0) {
-						$data_satker['data'][$key]['na_dkon'] = round((round($data_satker['data'][$key]['dkon'],2) / $data_satker['data'][$key]['bobot_dkon']),2);
+						$data_satker['data'][$key]['na_dkon'] = round((round($data_satker['data'][$key]['dkon'],2) * ($data_satker['data'][$key]['bobot_dkon']/100)),2);
 					} else {
 						$data_satker['data'][$key]['na_dkon'] = 0;
 					}
@@ -141,7 +161,7 @@ class omspanController extends Controller
 					
 					//***Rekap Data Kesalahan SPM***\\
 					foreach($data_spm['data'] as $spm) {
-						if(trim($row['kdInstansi']) == $spm['kdsatker']) {
+						if(trim($row['kd_satker']) == $spm['kdsatker']) {
 							$spm_salah_count += $spm['akumulasi_salah'];
 							$spm_total_count += $spm['total_spm'];
 						}
@@ -157,7 +177,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['bobot_spm'] = 0;
 					}
 					if($data_satker['data'][$key]['bobot_spm'] != 0) {
-						$data_satker['data'][$key]['na_spm'] = round((round($data_satker['data'][$key]['spm'],2) / $data_satker['data'][$key]['bobot_spm']),2);
+						$data_satker['data'][$key]['na_spm'] = round((round($data_satker['data'][$key]['spm'],2) * ($data_satker['data'][$key]['bobot_spm']/100)),2);
 					} else {
 						$data_satker['data'][$key]['na_spm'] = 0;
 					}
@@ -166,7 +186,7 @@ class omspanController extends Controller
 					
 					//***Rekap Data Penyelesaian Tagihan***\\
 					foreach($pen_tagihan['data'] as $ptagih) {
-						if(trim($row['kdInstansi']) == $ptagih['kdsatker']) {
+						if(trim($row['kd_satker']) == $ptagih['kdsatker']) {
 							if($ptagih['status'] != 'null') {
 								if($ptagih['status'] == 'TEPAT') {
 									$ptagih_count_tepat++;
@@ -186,7 +206,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['bobot_ptagih'] = 20;
 					}
 					if($data_satker['data'][$key]['bobot_ptagih'] != 0) {
-						$data_satker['data'][$key]['na_ptagih'] = round((round($data_satker['data'][$key]['ptagih'],2) / $data_satker['data'][$key]['bobot_ptagih']),2);
+						$data_satker['data'][$key]['na_ptagih'] = round((round($data_satker['data'][$key]['ptagih'],2) * ($data_satker['data'][$key]['bobot_ptagih']/100)),2);
 					} else {
 						$data_satker['data'][$key]['na_ptagih'] = 0;
 					}
@@ -195,7 +215,7 @@ class omspanController extends Controller
 
 					//***Rekap Rekon LPJ***\\
 					foreach($rekon['data'] as $rk) {
-						if(trim($row['kdInstansi']) == $rk['kdsatker']) {
+						if(trim($row['kd_satker']) == $rk['kdsatker']) {
 							if($rk['status'] != 'null') {
 								if($rk['status'] == 'TEPAT') {
 									$rekon_count_tepat++;
@@ -215,7 +235,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['bobot_rekon'] = 5;
 					}
 					if($data_satker['data'][$key]['bobot_rekon'] != 0) {
-						$data_satker['data'][$key]['na_rekon'] = round((round($data_satker['data'][$key]['rekon'],2) / $data_satker['data'][$key]['bobot_rekon']),2);
+						$data_satker['data'][$key]['na_rekon'] = round((round($data_satker['data'][$key]['rekon'],2) * ($data_satker['data'][$key]['bobot_rekon']/100)),2);
 					} else {
 						$data_satker['data'][$key]['na_rekon'] = 0;
 					}
@@ -224,7 +244,7 @@ class omspanController extends Controller
 
 					//***Rekap Renkas***\\
 					foreach($renkas['data'] as $rks) {
-						if(trim($row['kdInstansi']) == $rks['kdsatker']) {
+						if(trim($row['kd_satker']) == $rks['kdsatker']) {
 							if($rks['status'] != 'null') {
 								if($rks['status'] == 'TEPAT') {
 									$renkas_count_tepat++;
@@ -244,7 +264,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['bobot_renkas'] = 5;
 					}
 					if($data_satker['data'][$key]['bobot_renkas'] != 0) {
-						$data_satker['data'][$key]['na_renkas'] = round((round($data_satker['data'][$key]['renkas'],2) / $data_satker['data'][$key]['bobot_renkas']),2);
+						$data_satker['data'][$key]['na_renkas'] = round((round($data_satker['data'][$key]['renkas'],2) * ($data_satker['data'][$key]['bobot_renkas']/100)),2);
 					} else {
 						$data_satker['data'][$key]['na_renkas'] = 0;
 					}
@@ -253,7 +273,7 @@ class omspanController extends Controller
 
 					//***Rekap Revisi DIPA***\\
 					foreach($revisi['data'] as $rvs) {
-						if(trim($row['kdInstansi']) == $rvs['kdsatker']) {
+						if(trim($row['kd_satker']) == $rvs['kdsatker']) {
 							if($rvs['nilai'] != 'null') {
 								$revisi_count++;
 							}
@@ -270,7 +290,7 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['bobot_revisi'] = 5;
 					}
 					if($data_satker['data'][$key]['bobot_revisi'] != 0) {
-						$data_satker['data'][$key]['na_revisi'] = round((round($data_satker['data'][$key]['revisi'],2) / $data_satker['data'][$key]['bobot_revisi']),2);
+						$data_satker['data'][$key]['na_revisi'] = round((round($data_satker['data'][$key]['revisi'],2) * ($data_satker['data'][$key]['bobot_revisi']/100)),2);
 					} else {
 						$data_satker['data'][$key]['na_revisi'] = 0;
 					}
@@ -280,7 +300,7 @@ class omspanController extends Controller
 					$jml_retur = 0;
 					$jml_sp2d = 0;
 					foreach($retur['data'] as $rtr) {
-						if(trim($row['kdInstansi']) == $rtr['kdsatker']) {
+						if(trim($row['kd_satker']) == $rtr['kdsatker']) {
 							if($rtr['jml_sp2d'] != 'null') {
 								$jml_retur = $rtr['jml_retur'];
 								$jml_sp2d = $rtr['jml_sp2d'];
@@ -299,16 +319,90 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['bobot_retur'] = 5;
 					}
 					if($data_satker['data'][$key]['bobot_retur'] != 0) {
-						$data_satker['data'][$key]['na_retur'] = round((round($data_satker['data'][$key]['retur'],2) / $data_satker['data'][$key]['bobot_retur']),2);
+						$data_satker['data'][$key]['na_retur'] = round((round($data_satker['data'][$key]['retur'],2) * ($data_satker['data'][$key]['bobot_retur']/100)),2);
 					} else {
 						$data_satker['data'][$key]['na_retur'] = 0;
 					}
 					$retur_count = 0;
 					
-					//***Rekap Hal III Dipa***\\
+					//**Data Pagu Dipa**\\
+					foreach($pagudipa['data'] as $pg) {
+						if(trim($row['kd_satker']) == $pg['kdsatker']) {
+							$pagudipa_count++;
+							$pagu = $pg['pagudipa'];
+						}
+					}
+					if($pagudipa_count != 0) {
+						$data_satker['data'][$key]['pagudipa'] = $pagu;
+					} else {
+						$data_satker['data'][$key]['pagudipa'] = 0;
+					}
+					$pagudipa_count = 0;
+					$pagu = 0;
+					
+					//**Data Realisasi**\\
+					foreach($realisasi['data'] as $rl) {
+						if(trim($row['kd_satker']) == $rl['kdSatker']) {
+							$realisasi_count++;
+							$real += $rl['jumlahRealisasi'];
+						}
+					}
+					if($realisasi_count != 0) {
+						$data_satker['data'][$key]['realisasi'] = $real;
+					} else {
+						$data_satker['data'][$key]['realisasi'] = 0;
+					}
+					$realisasi_count = 0;
+					$real = 0;
+					if($data_satker['data'][$key]['pagudipa'] != 0) {						
+						$data_satker['data'][$key]['persen_realisasi'] = round(($data_satker['data'][$key]['realisasi'] / $data_satker['data'][$key]['pagudipa']) * 100,2);
+					} else {
+						$data_satker['data'][$key]['persen_realisasi'] = 0;
+					}
+					if(intval($get['periode']) <= 3) {
+						$triwulan = 15;
+					} else if(intval($get['periode']) > 3 && intval($get['periode']) <=6) {
+						$triwulan = 45;
+					} else if(intval($get['periode']) > 6 && intval($get['periode']) <=9) {
+						$triwulan = 60;
+					} else {
+						$triwulan = 90;
+					}
+					$data_satker['data'][$key]['nilai_realisasi'] = ($data_satker['data'][$key]['persen_realisasi'] / $triwulan) *100;
+					if($data_satker['data'][$key]['nilai_realisasi'] == 0) {
+						$data_satker['data'][$key]['bobot_realisasi'] = 0;
+					} else {
+						$data_satker['data'][$key]['bobot_realisasi'] = 20;
+					}
+					if($data_satker['data'][$key]['bobot_realisasi'] != 0) {
+						$data_satker['data'][$key]['na_realisasi'] = round((round($data_satker['data'][$key]['nilai_realisasi'],2) * ($data_satker['data'][$key]['bobot_realisasi']/100)),2);
+					} else {
+						$data_satker['data'][$key]['na_realisasi'] = 0;
+					}
+					
+					////***Rekap Hal III Dipa***\\
+					//foreach($hal_3dipa['data'] as $dipa) {
+					//	if(trim($row['kd_satker']) == $dipa['kdsatker']) {
+					//		$rencana = $dipa['ren_'.$get['periode']];
+					//	}
+					//}
+					//$data_satker['data'][$key]['hal3dipa_ren'] = $rencana;
+					//
+					//foreach($realisasi['data'] as $realis) {
+					//	if(trim($row['kd_satker']) == $realis['kdsatker']) {
+					//		$deviasi = $realis['jumlahRealisasi'] - $rencana
+					//		$akumulasi_deviasi +=
+					//	}
+					//}
+					
+					
 					$data_satker['data'][$key]['hal3dipa'] = 0;
+					$rencana = 0;
 				}
-				
+				//echo "<pre>";
+				//print_r($data_satker);
+				//echo "</pre>";
+				//die;
 				$this->data['rekap'] = $data_satker['data'];
 				$this->data['periode'] = $get['periode'];
 				return view('omspan.view', $this->data);
@@ -448,6 +542,48 @@ class omspanController extends Controller
 			
 			$req_pen_tagihan = $client->request('GET', config('app.url_soakemenkeu').'kemajuan/'.$kdSatker.'/'.$periode);
 			$data = json_decode($req_pen_tagihan->getBody()->getContents(), true);
+			
+			return $data;
+        } catch(\Exception $e) {
+			return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
+        }
+	}
+	
+	public function getrekon(Request $request) {
+		$client = new Client();
+		try {
+				
+			$kdSatker = $request['kdSatker'];
+			$periode = intval($request['periode']);
+			
+			$req_rekon = $client->request('GET', config('app.url_soakemenkeu').'rekonLPJ/'.$kdSatker.'/'.$periode);
+			$data = json_decode($req_rekon->getBody()->getContents(), true);
+			
+			return $data;
+        } catch(\Exception $e) {
+			return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
+        }
+	}
+	
+	public function getrealisasi(Request $request) {
+		$client = new Client();
+		try {
+				
+			$kdSatker = $request['kdSatker'];
+			$periode = $request['periode'];
+			
+			$req_pagudipa = $client->request('GET', config('app.url_soakemenkeu').'pagudipa/'.$kdSatker);
+			$pagudipa = json_decode($req_pagudipa->getBody()->getContents(), true);
+				
+			$params['headers'] = ['Content-Type' => 'application/json', 'Accept' => 'application/json'];
+			$params['body'] = '{ "KD_SATKER" : "'.$kdSatker.'", "TAHUN" : "'.date("Y").'", "PERIODE" : "'.$periode.'" }';
+			$req_realisasi = $client->request('POST', 'http://10.210.84.13:8080/monevgar/api/realisasi/getBySatkerPeriode', $params);
+			$data = json_decode($req_realisasi->getBody()->getContents(), true);
+			if($data['code'] == '200') {
+				if($pagudipa['code'] == '200') {
+					$data['pagu'] = $pagudipa['data'][0]['pagudipa'];
+				}
+			}
 			
 			return $data;
         } catch(\Exception $e) {
