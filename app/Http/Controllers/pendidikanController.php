@@ -736,7 +736,7 @@ class pendidikanController extends Controller
 
             $i = $i +1;
           }
-        $name = 'Export Data Sinergitas '.date('Y-m-d H:i:s');
+        $name = 'Export Data Pendidikan dan Pelatihan '.date('Y-m-d H:i:s');
 
           $this->printData($result, $name);
       

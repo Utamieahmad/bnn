@@ -25,3 +25,7 @@ Perubahan GuzzleException:
 Penambahan librari pdf:
 1. url tutorial : https://codebriefly.com/laravel-5-export-to-pdf-laravel-dompdf/
 2. update composer --> "composer update"
+
+fixing data pada tabel sin_lookup_values
+1. Lingkungan PendidikanInstitusi Swasta --> Lingkungan Pendidikan
+query SELECT => SELECT * from sin_lookup_values WHERE lookup_name like '%Lingkungan PendidikanInstitusi Swasta%'

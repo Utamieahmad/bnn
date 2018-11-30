@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tgl_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Asal Profesi</label>
-                            <div class='col-md-7 col-sm-7 col-xs-12 input-group'> 
+                            <div class='col-md-7 col-sm-7 col-xs-12 input-group'>
                                 <div class="radio">
                                     @if($lahan_profesi)
                                         @foreach($lahan_profesi as $lkey=>$lvalue)
@@ -145,7 +145,7 @@
                 </div>
                 <input type="hidden" name="index" class="index" value=""/>
                 <button type="button" class="btn btn-default" data-dismiss="modal" > Batal </button>
-                <button type="submit" class="btn btn-success" onClick="submit_modal_update(event,this,'modal_edit_form')"> Kirim </button>
+                <button type="submit" class="btn btn-success" onClick="submit_modal_update(event,this,'modal_edit_form')"> SIMPAN </button>
             </div>
         </div>
     </div>
