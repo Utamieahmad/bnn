@@ -462,7 +462,7 @@
                         <div class="form-actions fluid">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <button class="btn btn-success addRapat" data-url="{{URL('/huker/update_perka_penetapan')}}">KIRIM</button>
+                                    <button class="btn btn-success addRapat" data-url="{{URL('/huker/update_perka_penetapan')}}">SIMPAN</button>
                                     <a href="{{route('hukum_perka')}}" class="btn btn-primary" type="button">BATAL</a>
                                 </div>
                             </div>
@@ -508,7 +508,7 @@
                         <div class="form-actions fluid">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <button type="submit" class="btn btn-success">KIRIM</button>
+                                    <button type="submit" class="btn btn-success">SIMPAN</button>
                                     <a href="{{route('hukum_perka')}}" class="btn btn-primary" type="button">BATAL</a>
                                 </div>
                             </div>
@@ -555,7 +555,7 @@
      <div class="form-actions fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="submit" class="btn btn-success">KIRIM</button>
+                <button type="submit" class="btn btn-success">SIMPAN</button>
 								<a href="{{route('hukum_perka')}}" class="btn btn-primary" type="button">BATAL</a>
             </div>
         </div>

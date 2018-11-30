@@ -69,7 +69,7 @@
                     Peserta Pelatihan Pasca Rehabilitasi Berhasil Diperbarui
                 </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal" > Batal </button>
-                <button type="submit" class="btn btn-success" onClick="submit_modal(event,this,'modal_add_form')"> Kirim </button>
+                <button type="submit" class="btn btn-success" onClick="submit_modal(event,this,'modal_add_form')"> SIMPAN </button>
             </div>
         </div>
     </div>

@@ -168,7 +168,7 @@
         <div class="form-group">
             <label for="password" class="col-md-3 col-sm-3 col-xs-12 control-label">Reset Password</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <a href="{{URL('/user_management/reset_password?id=' . $id)}}" class="btn btn-warning" type="button">Kirim Link</a>
+                <a href="{{URL('/user_management/reset_password?id=' . $id)}}" class="btn btn-warning" type="button">SIMPAN Link</a>
             </div>
         </div>
 
@@ -192,7 +192,7 @@
      <div class="form-actions fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="submit" class="btn btn-success">KIRIM</button>
+                <button type="submit" class="btn btn-success">SIMPAN</button>
 				<a href="{{route('user')}}" class="btn btn-primary" type="button">BATAL</a>
             </div>
         </div>

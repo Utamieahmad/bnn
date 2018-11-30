@@ -56,7 +56,7 @@
                             <label for="pelaksana" class="col-md-3 col-sm-3 col-xs-12 control-label">Pelaksana</label>
                             <div class="col-md-6">
                                 <input type="hidden" name="id_pelaksana" class="id_pelaksana" value="{{$data_detail['data']['idpelaksana']}}"/>
-                                <select name="idpelaksana" id="idpelaksana" class="form-control select2 selectPelaksana" tabindex="-1" aria-hidden="true" required> 
+                                <select name="idpelaksana" id="idpelaksana" class="form-control select2 selectPelaksana" tabindex="-1" aria-hidden="true" required>
                                   {{-- <option value="">-- Pilih Pelaksana --</option> --}}
                                   @foreach($instansi as $in)
                                   <option value="{{$in['id_instansi']}}" {{($in['id_instansi'] == $data_detail['data']['idpelaksana']) ? 'selected="selected"':""}} >{{$in['nm_instansi']}}</option>
@@ -234,7 +234,7 @@
                                         @php $i = 0;@endphp
                                         @foreach($kode_anggaran as $kkey => $kval)
                                         @php $i = $i+1; @endphp
-                                            <label class="mt-radio col-md-9"> 
+                                            <label class="mt-radio col-md-9">
                                                 <input type="radio"  value="{{$kkey }}" name="kodesumberanggaran" id="anggaran{{$i}}" {{($data_detail['data']['kodesumberanggaran'] == $kkey ) ? 'checked="checked"':""}}>
                                                 <span>{{$kval}}</span>
                                             </label>
@@ -245,15 +245,15 @@
                         </div>
 
                         <div class="form-group" id="PilihAnggaran" {{(($data_detail['data']['kodesumberanggaran'] == 'DIPA') ? '' : 'style=display:none;') }}>
-                            <label for="sasaran" class="col-md-3 col-sm-3 col-xs-12 control-label">Nama Anggaran </label> 
+                            <label for="sasaran" class="col-md-3 col-sm-3 col-xs-12 control-label">Nama Anggaran </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <select class="form-control select2 selectAnggaran" name="kd_anggaran" id="kd_anggaran" style="width:100%">
                                     <option value="">-- Pilih Anggaran --</option>
                                 </select>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="form-group" id="DetailAnggaran">
                             <label for="kodeSatker" class="col-md-3 col-sm-3 col-xs-12 control-label"></label>
                             <input type="hidden" name="asatker_code" id="kodeSatker" value="">
@@ -272,7 +272,7 @@
                                 @endif
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="hasil_yang_dicapai" class="col-md-3 control-label">Hasil yang dicapai</label>
                             <div class="col-md-5">
@@ -304,7 +304,7 @@
                      <div class="form-actions fluid">
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button type="submit" class="btn btn-success">KIRIM</button>
+                                <button type="submit" class="btn btn-success">SIMPAN</button>
                 								<a href="{{route('psm_supervisi')}}" class="btn btn-primary" type="button">BATAL</a>
                             </div>
                         </div>

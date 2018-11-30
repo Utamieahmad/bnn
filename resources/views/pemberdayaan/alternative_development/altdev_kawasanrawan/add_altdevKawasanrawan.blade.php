@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group"> 
+                                <div class="form-group">
                                     <label for="pelaksana" class="col-md-3 col-sm-3 col-xs-12 control-label">Pelaksana</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <!-- <input type="text" class="form-control" value="" name="idpelaksana"/> -->
@@ -71,7 +71,7 @@
                                         <input value="" id="lokasi_kawasan_rawan" name="lokasi_kawasan_rawan" type="text" class="form-control">
                                     </div>
                                 </div>
-                                    
+
                                 <div class="form-group">
                                     <label for="kode_desakampung" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Desa/Kampung</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -85,13 +85,13 @@
                                         <input value="" id="kode_kelurahan" name="kode_kelurahan" type="text" class="form-control">
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="kode_kecamatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Kecamatan</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input value="" id="kode_kecamatan" name="kode_kecamatan" type="text" class="form-control">
                                     </div>
-                                </div>    
+                                </div>
 
                                 <div class="form-group">
                                     <label for="lokasi_idkabkota" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Kab/Kota</label>
@@ -109,14 +109,14 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input value="" id="lokasi_longitude" name="lokasi_longitude" type="text" class="form-control">
                                     </div>
-                                </div>    
+                                </div>
 
                                 <div class="form-group">
                                     <label for="lokasi_latitude" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Latitude</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input value="" id="lokasi_latitude" name="lokasi_latitude" type="text" class="form-control">
                                     </div>
-                                </div>      
+                                </div>
 
                                 <div class="form-group">
                                     <label for="kode_geografis" class="col-md-3 col-sm-3 col-xs-12 control-label">Jenis Geografis</label>
@@ -190,14 +190,14 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input value="" id="kerja_tni" name="kerja_tni" type="text" class="form-control" onkeydown="numeric_only(event,this)">
                                     </div>
-                                </div> 
+                                </div>
 
                                 <div class="form-group">
                                     <label for="kerja_polisi" class="col-md-3 col-sm-3 col-xs-12 control-label">Polisi</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input value="" id="kerja_polisi" name="kerja_polisi" type="text" class="form-control" onkeydown="numeric_only(event,this)">
                                     </div>
-                                </div> 
+                                </div>
 
                                 <div class="form-group">
                                     <label for="kerja_swasta" class="col-md-3 col-sm-3 col-xs-12 control-label">Swasta</label>
@@ -400,7 +400,7 @@
                                         <input value="" id="barbuk_ganja" name="barbuk_ganja" type="text" class="form-control col-md-7 col-xs-12 numeric" onkeydown="numeric_only(event,this)">
                                     </div>
                                     <span class="help-block white">gram</span>
-                                </div> 
+                                </div>
 
                                 <div class="form-group">
                                     <label for="barbuk_putau" class="col-md-3 col-sm-3 col-xs-12 control-label">Putau</label>
@@ -464,7 +464,7 @@
                                  <div class="form-actions fluid">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button type="submit" class="btn btn-success">KIRIM</button>
+                                            <button type="submit" class="btn btn-success">SIMPAN</button>
                                              <a href="{{route('altdev_kawasan_rawan')}}" class="btn btn-primary" type="button">BATAL</a>
 
                                         </div>

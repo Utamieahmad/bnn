@@ -335,7 +335,7 @@
 								</div>
 
 								<div class="form-group">
-									<label class="control-label col-md-3">Kode Negara</label>
+									<label class="control-label col-md-3">Asal Negara</label>
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<select name="kode_negara" class="form-control select2">
 											<option value="" >-- Pilih Negara --</option>

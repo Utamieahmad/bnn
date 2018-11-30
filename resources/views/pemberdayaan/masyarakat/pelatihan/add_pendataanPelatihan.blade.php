@@ -64,7 +64,7 @@
                                     <div class="mt-radio-list">
                                         @if(count($sasaran) > 0 )
                                             @foreach($sasaran as $s => $val)
-                                                <label class="mt-radio col-md-9"> 
+                                                <label class="mt-radio col-md-9">
                                                     <input type="radio" value="{{$s}}" name="sasaran">
                                                     <span>{{$val}}</span>
                                                 </label>
@@ -166,13 +166,13 @@
                             <div class="form-group">
                                 <label for="sasakodesumberanggaranran" class="col-md-3 col-sm-3 col-xs-12 control-label">Sumber Anggaran</label>
                                 <div class="col-md-4">
-                                    <div class="radio"> 
+                                    <div class="radio">
                                         @if(count($kode_anggaran))
                                             @php $i = 0;@endphp
                                             @foreach($kode_anggaran as $k => $kval)
                                                 @php $i = $i+1; @endphp
-                                                <label class="mt-radio col-md-9"> 
-                                                    <input type="radio" value="{{$k}}" name="kodesumberanggaran" id="anggaran{{$i}}">  
+                                                <label class="mt-radio col-md-9">
+                                                    <input type="radio" value="{{$k}}" name="kodesumberanggaran" id="anggaran{{$i}}">
                                                     <span>{{$kval}}</span>
                                                 </label>
                                             @endforeach
@@ -225,7 +225,7 @@
                          <div class="form-actions fluid">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <button type="submit" class="btn btn-success">KIRIM</button>
+                                    <button type="submit" class="btn btn-success">SIMPAN</button>
                     								<a href="{{route('pendataan_pelatihan')}}" class="btn btn-primary" type="button">BATAL</a>
                                 </div>
                             </div>
