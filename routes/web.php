@@ -321,6 +321,8 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('/print_page_rehabilitasi/downloadPlrip','RehabilitasiController@downloadPlrip')->name("print_page_rehabilitasi");
 		Route::post('/print_page_rehabilitasi/downloadPlripDocNSPK','RehabilitasiController@downloadPlripDocNSPK')->name("print_page_PlripDocNSPK");
 		Route::post('/print_page_rehabilitasi/downloadPlripKegiatan','RehabilitasiController@downloadPlripKegiatan')->name("print_page_PlripKegiatan");
+		Route::post('/print_page_rehabilitasi/downloadPlrkmInfoUmum','RehabilitasiController@downloadPlrkmInfoUmum')->name("print_page_PlrkmInfoUmum");
+		Route::post('/print_page_rehabilitasi/downloadPlrkmDocNSPK','RehabilitasiController@downloadPlrkmDocNSPK')->name("print_page_PlrkmDocNSPK");
 	});
 
 
@@ -468,7 +470,7 @@ Route::group(['middleware' => ['auth']], function () {
                     Route::match(['get', 'post'],'/newpdfaktivitassebaran/{page?}','deputiCegahController@newPdfAktivitasSebaran')->name('newpdf_aktivitasSebaran');
                     Route::match(['get', 'post'],'/newexcelaktivitassebaran/{page?}','deputiCegahController@newExcelAktivitasSebaran')->name('newexcel_aktivitasSebaran');
                     Route::post('/printaktivitassebaran', 'deputiCegahController@printExcelAktivitas');
-                    Route::post('/pdfaktivitassebaran', 'deputiCegahController@printPdfAktivitas');                    
+                    Route::post('/pdfaktivitassebaran', 'deputiCegahController@printPdfAktivitas');
                 });
 	});
 

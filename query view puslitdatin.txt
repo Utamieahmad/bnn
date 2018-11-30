@@ -1,0 +1,57 @@
+CREATE OR REPLACE VIEW public.v_datin_pekerjaan_jaringan
+AS SELECT d.id,
+    d.status,
+    d.jenis_kegiatan,
+    d.meta_kodejaringan,
+    d.nomor_nota_dinas,
+    d.tgl_pelaporan,
+    d.tempatkejadian_idprovinsi,
+    d.penerima_laporan,
+    d.tgl_mulai,
+    d.tgl_selesai,
+    d.meta_teknisi,
+    d.meta_permasalahan,
+    d.nama_pelapor,
+    t.nm_instansi,
+    d.deleted_at,
+    d.penanggung_jawab
+   FROM datin_pekerjaan_jaringan d
+     LEFT JOIN tr_instansi t ON t.id_instansi = d.tempatkejadian_idprovinsi;
+
+
+CREATE OR REPLACE VIEW public.v_datin_pengecekan_jaringan
+AS SELECT j.id,
+    j.tgl_mulai,
+    j.tgl_selesai,
+    j.tempatkejadian_idprovinsi,
+    j.cek_jaringan,
+    j.ket_baik_jaringan,
+    j.ket_tdk_baik_jaringan,
+    j.cek_ip,
+    j.ket_baik_ip,
+    j.ket_tdk_baik_ip,
+    j.cek_ping,
+    j.ket_baik_ping,
+    j.ket_tdk_baik_ping,
+    j.cek_switch,
+    j.ket_baik_switch,
+    j.ket_tdk_baik_switch,
+    j.cek_manageable,
+    j.ket_baik_manageable,
+    j.ket_tdk_baik_manageable,
+    j.cek_kabel,
+    j.ket_baik_kabel,
+    j.ket_tdk_baik_kabel,
+    j.cek_wireless,
+    j.ket_baik_wireless,
+    j.ket_tdk_baik_wireless,
+    j.meta_pengguna,
+    j.meta_tim,
+    j.status,
+    i.nm_instansi,
+    j.deleted_at,
+    j.meta_aktivitas
+   FROM datin_pengecekan_jaringan j
+     LEFT JOIN tr_instansi i ON i.id_instansi = j.tempatkejadian_idprovinsi;
+
+
