@@ -465,6 +465,10 @@ Route::group(['middleware' => ['auth']], function () {
 
                 Route::group(['prefix'=>'dep_cegah'],function(){
                     Route::match(['get', 'post'],'/data_aktivitas_sebaran/{page?}','deputiCegahController@pendataanAktivitasSebaran')->name('pendataan_aktivitasSebaran');
+                    Route::match(['get', 'post'],'/newpdfaktivitassebaran/{page?}','deputiCegahController@newPdfAktivitasSebaran')->name('newpdf_aktivitasSebaran');
+                    Route::match(['get', 'post'],'/newexcelaktivitassebaran/{page?}','deputiCegahController@newExcelAktivitasSebaran')->name('newexcel_aktivitasSebaran');
+                    Route::post('/printaktivitassebaran', 'deputiCegahController@printExcelAktivitas');
+                    Route::post('/pdfaktivitassebaran', 'deputiCegahController@printPdfAktivitas');                    
                 });
 	});
 
@@ -1292,7 +1296,13 @@ Route::group(['middleware' => ['auth']], function () {
 		//Route::get('getpengelolaanup/{kdsatker}/{periode}', 'omspanController@getpengelolaanup')->name('getpengelolaanup');
 		Route::match(['get','post'],'/getpengelolaanup','omspanController@getpengelolaanup')->name('getpengelolaanup');
 		Route::match(['get','post'],'/getdatakontrak','omspanController@getdatakontrak')->name('getdatakontrak');
-		//Route::post('/getpengelolaanup', 'omspanController@getpengelolaanup')->name('getpengelolaanup');
+		Route::match(['get','post'],'/getretur','omspanController@getretur')->name('getretur');
+		Route::match(['get','post'],'/getrenkas','omspanController@getrenkas')->name('getrenkas');
+		Route::match(['get','post'],'/getspm','omspanController@getspm')->name('getspm');
+		Route::match(['get','post'],'/gethal3dipa','omspanController@gethal3dipa')->name('gethal3dipa');
+		Route::match(['get','post'],'/getrevisi','omspanController@getrevisi')->name('getrevisi');
+		Route::match(['get','post'],'/gettagihan','omspanController@gettagihan')->name('gettagihan');
+		Route::match(['get','post'],'/getrealisasi','omspanController@getrealisasi')->name('getrealisasi');
 	});
 
 });

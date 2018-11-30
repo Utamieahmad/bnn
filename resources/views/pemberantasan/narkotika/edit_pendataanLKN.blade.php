@@ -358,16 +358,16 @@
                                     <img src="data:image/png;base64,{{$data_kasus['data']['foto1']}}" id="blah" style="width:100%;height:150px;" />
                                 @else
                                     <img src="{{asset('assets/images/NoImage.gif')}}" id="blah" style="width:100%;height:150px;" />
-                                @endif                                
+                                @endif
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12">                                
+                            <div class="col-md-3 col-sm-3 col-xs-12">
                                 @if ($data_kasus['data']['foto2'])
                                     <img src="data:image/png;base64,{{$data_kasus['data']['foto2']}}" id="blah2" style="width:100%;height:150px;" />
                                 @else
                                     <img src="{{asset('assets/images/NoImage.gif')}}" id="blah2" style="width:100%;height:150px;" />
                                 @endif
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12">                                
+                            <div class="col-md-3 col-sm-3 col-xs-12">
                                 @if ($data_kasus['data']['foto3'])
                                     <img src="data:image/png;base64,{{$data_kasus['data']['foto3']}}" id="blah3" style="width:100%;height:150px;" />
                                 @else
@@ -375,7 +375,7 @@
                                 @endif
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  >&nbsp;</label>
                             <div class="col-md-3 col-sm-3 col-xs-12">
@@ -394,7 +394,7 @@
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button type="submit" class="btn btn-success">KIRIM</button>
+                                <button type="submit" class="btn btn-success">SIMPAN</button>
                                 <a href="{{route('pendataan_lkn')}}" class="btn btn-primary" type="button">BATAL</a>
                             </div>
                         </div>
@@ -455,7 +455,7 @@
                                             <td>{{$t['nama_pekerjaan']}}</td>
                                             <?php else:?>
                                             <td>-</td>
-                                            <?php endif;?>                                            
+                                            <?php endif;?>
                                             <td class="actionTable">
                                                 <a class="editTersangka" data-url="{{URL('/pemberantasan/update_tersangka')}}" data-id="{{$t['tersangka_id']}}" data-api="gettersangka" style="cursor:pointer"><i class="fa fa-pencil f-18"></i></a>
                                                 <a class="button-delete deleteTersangka" data-parent="kasus" data-parent_id="{{$t['kasus_id']}}" data-url="tersangka" data-target="{{$t['tersangka_id']}}" data-api="gettersangka" style="cursor:pointer"><i class="fa fa-trash f-18"></i></a>

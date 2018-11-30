@@ -33,7 +33,7 @@
                             @endif
                             <form action="{{route('save_altdev_sinergitas')}}" class="form-horizontal" id="frm_add" method="post" enctype="multipart/form-data" autocomplete="on">
                                 <div class="form-body">
-                                    {{csrf_field()}}  
+                                    {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="tgl_pelaksanaan" class="col-md-3 col-sm-3 col-xs-12 control-label">Tanggal Kegiatan</label>
                                         <div class='col-md-6 col-sm-6 col-xs-12 input-group date datepicker-only'>
@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <label for="idpelaksana" class="col-md-3 col-sm-3 col-xs-12 control-label">Pelaksana</label>
                                         <div class="col-md-6">
-                                            <select name="idpelaksana" id="idpelaksana" class="form-control select2" tabindex="-1" aria-hidden="true" required> 
+                                            <select name="idpelaksana" id="idpelaksana" class="form-control select2" tabindex="-1" aria-hidden="true" required>
                                                 <option value="" {{(isset($data->idpelaksana) ? "" : 'selected=selected')}}> Pilih Pelaksana </option>
                                                     {!! dropdownPelaksana() !!}
                                             </select>
@@ -71,7 +71,7 @@
 
                                     <div class="form-group">
                                         <label for="kodesasaran" class="col-md-3 col-sm-3 col-xs-12 control-label">Instansi</label>
-                                        
+
                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                             <div class="radio">
                                                 @if($instansi)
@@ -120,7 +120,7 @@
                                             <input value="" id="panitia_monev" name="panitia_monev" type="text" class="form-control"  onkeydown="numeric_only(event,this)">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label for="jumlah_peserta" class="col-md-3 col-sm-3 col-xs-12 control-label">Jumlah Peserta</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -133,7 +133,7 @@
                                  <div class="form-actions fluid">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button type="submit" class="btn btn-success">KIRIM</button>
+                                            <button type="submit" class="btn btn-success">SIMPAN</button>
                                             <a href="{{route('altdev_sinergi')}}" class="btn btn-primary" type="button">BATAL</a>
                                         </div>
                                     </div>

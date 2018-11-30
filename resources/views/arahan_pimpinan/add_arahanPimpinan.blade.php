@@ -100,7 +100,7 @@
 							        <div class="">
 							            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 							            	@if($disabled == false)
-							                	<button type="submit" class="btn btn-success">KIRIM</button>
+							                	<button type="submit" class="btn btn-success">SIMPAN</button>
 											@endif
 							                <a href="{{route('arahan_pimpinan')}}" class="btn btn-primary" type="button">BATAL</a>
 							            </div>

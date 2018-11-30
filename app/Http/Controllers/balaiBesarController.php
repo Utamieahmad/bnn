@@ -482,7 +482,7 @@ class balaiBesarController extends Controller{
                 $this->data['instansi']  = [];
             }
 
-
+						// dd($this->data);
     		return view('balai_besar.magang.add_magang',$this->data);
     	}
     }
@@ -732,7 +732,7 @@ class balaiBesarController extends Controller{
     }
 
     public function downloadBalaibesar(Request $request){
-        
+
         $data = DB::table('balai_besar');
         if ($request->date_from != '') {
           $data->where('tanggal_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
@@ -770,7 +770,7 @@ class balaiBesarController extends Controller{
             } else {
               $result[$key]['Instansi/Jumlah Peserta'] = '-';
             }
-             
+
             $meta = json_decode($d->meta_materi,true);
             if(count($meta)){
               for($j = 0 ; $j < count($meta); $j++){
@@ -787,7 +787,7 @@ class balaiBesarController extends Controller{
         }
         $name = 'Export Data Balai Besar '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($result, $name);
-        
+
     }
 
     private function kelengkapan_balai_besar($id){

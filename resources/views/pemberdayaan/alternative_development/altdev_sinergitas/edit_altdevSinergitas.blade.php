@@ -25,7 +25,7 @@
                                 {{ $session['message'] }}
                             </div>
                         @endif
-                        
+
                         <div class="x_title">
                             <h2>Form Ubah Data Sinergi Direktorat Peran Serta Masyarakat</h2>
                             <div class="clearfix"></div>
@@ -34,8 +34,8 @@
                             <br />
                             <form action="{{route('update_altdev_sinergitas')}}" class="form-horizontal" id="frm_add" method="post" enctype="multipart/form-data" autocomplete="on">
                                 <div class="form-body">
-                                    <input type="hidden" name="id" value="{{$data->id}}"/>  
-                                    {{csrf_field()}}  
+                                    <input type="hidden" name="id" value="{{$data->id}}"/>
+                                    {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="tgl_pelaksanaan" class="col-md-3 col-sm-3 col-xs-12 control-label">Tanggal Kegiatan</label>
                                         <div class='col-md-6 col-sm-6 col-xs-12 input-group date datepicker-only'>
@@ -73,7 +73,7 @@
 
                                     <div class="form-group">
                                         <label for="kodesasaran" class="col-md-3 col-sm-3 col-xs-12 control-label">Instansi</label>
-                                        
+
                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                             <div class="radio">
                                                 @if($instansi)
@@ -122,7 +122,7 @@
                                             <input value="{{(isset($data->panitia_monev) ? $data->panitia_monev : '')}}" id="panitia_monev" name="panitia_monev" type="text" class="form-control" onkeydown="numeric_only(event,this)" >
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label for="jumlah_peserta" class="col-md-3 col-sm-3 col-xs-12 control-label">Jumlah Peserta</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -135,7 +135,7 @@
                                  <div class="form-actions fluid">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button type="submit" class="btn btn-success">KIRIM</button>
+                                            <button type="submit" class="btn btn-success">SIMPAN</button>
                                             <a href="{{route('altdev_sinergi')}}" class="btn btn-primary" type="button">BATAL</a>
                                         </div>
                                     </div>

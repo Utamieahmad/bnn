@@ -202,7 +202,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       </div>
 
       <div class="form-group">
-        <label class="control-label col-md-3">Kode Negara</label>
+        <label class="control-label col-md-3">Asal Negara</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
           <select name="kode_negara" class="form-control select2" style="width:100%">
             <option value=""> -- Pilih Negara -- </option>

@@ -273,7 +273,7 @@
           @endif
 
                     <div class="form-group">
-                      <label for="hasil_dicapai " class="col-md-3 control-label">Hasil yang dicapai</label>
+                      <label for="file_laporan " class="col-md-3 control-label">Hasil yang dicapai</label>
                       <div class="col-md-5">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="input-group input-large">
@@ -284,7 +284,7 @@
                             <span class="input-group-addon btn default btn-file">
                               <span class="fileinput-new"> Pilih Berkas </span>
                               <span class="fileinput-exists"> Ganti </span>
-                              <input type="file" name="hasil_dicapai "> </span>
+                              <input type="file" name="file_laporan"> </span>
                               <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Hapus </a>
                             </div>
                           </div>
@@ -301,7 +301,7 @@
                     <div class="form-actions fluid">
                       <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" class="btn btn-success">KIRIM</button>
+                          <button type="submit" class="btn btn-success">SIMPAN</button>
                           <a href="{{route('hukum_nonlitigasi')}}" class="btn btn-primary" type="button">BATAL</a>
                         </div>
                       </div>

@@ -80,7 +80,7 @@
 
                             <div class="form-group">
                                 <label for="lokasi_idkabkota" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi/Tempat Kegiatan</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12"> 
+                                <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="lokasi_idkabkota" id="lokasi_idkabkota" class="select2 form-control" placeholder="Pilih Kabupaten/Kota" tabindex="-1" aria-hidden="true">
                                         <option value="" {{(isset($data->lokasi_idkabkota) ? "" : 'selected=selected')}}> Pilih Kabupaten/Kota </option>
                                         {!! dropdownLokasiKabupaten($data->lokasi_idkabkota) !!}
@@ -105,11 +105,11 @@
                                                 }
                                             }
                                         }
-                                       
+
                                     @endphp
                                     @if($profesi_pelatihan)
                                         @foreach($profesi_pelatihan as $mkey=>$mvalue)
-                                            <label class="mt-checkbox col-md-9"> 
+                                            <label class="mt-checkbox col-md-9">
                                                 <input type="checkbox" value="{{$mkey}}" name="kode_pelatihan[]" {{ in_array($mkey,$pelatihan) ? 'checked=checked' : ''}}>
                                                 <span>{{$mvalue}} </span>
                                             </label>
@@ -123,9 +123,9 @@
                          <div class="form-actions fluid">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <button type="submit" class="btn btn-success">KIRIM</button>
+                                    <button type="submit" class="btn btn-success">SIMPAN</button>
                                     <a href="{{route('altdev_alih_profesi')}}" class="btn btn-primary" type="button">BATAL</a>
-                                    
+
                                 </div>
                             </div>
                         </div>
