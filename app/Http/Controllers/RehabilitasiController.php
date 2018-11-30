@@ -5001,7 +5001,7 @@ class RehabilitasiController extends Controller
 					$i = $i+1;
 				}
 
-				$name = 'Export Data PLRIP Kegiatan'.Carbon::now()->format('Y-m-d H:i:s');
+				$name = 'Export Data PLRKM Kegiatan'.Carbon::now()->format('Y-m-d H:i:s');
 				$this->printData($dataDocNSPK, $name);
 		}
 
@@ -5053,7 +5053,7 @@ class RehabilitasiController extends Controller
 					$i = $i+1;
 				}
 
-				$name = 'Export Data Informasi Lembaga Umum PLRKM'.Carbon::now()->format('Y-m-d H:i:s');
+				$name = 'Export Data Informasi Lembaga Umum Pasca'.Carbon::now()->format('Y-m-d H:i:s');
 	      $this->printData($dataDocNSPK, $name);
 		}
 
@@ -5096,7 +5096,7 @@ class RehabilitasiController extends Controller
 					$i = $i+1;
 				}
 
-				$name = 'Export Data Dokumen PLRKM NSPK'.Carbon::now()->format('Y-m-d H:i:s');
+				$name = 'Export Data Dokumen Pasca NSPK'.Carbon::now()->format('Y-m-d H:i:s');
 	      $this->printData($dataDocNSPK, $name);
 		}
 
@@ -5143,7 +5143,7 @@ class RehabilitasiController extends Controller
 					$i = $i+1;
 				}
 
-				$name = 'Export Data PLRIP Kegiatan'.Carbon::now()->format('Y-m-d H:i:s');
+				$name = 'Export Data Pasca Kegiatan'.Carbon::now()->format('Y-m-d H:i:s');
 				$this->printData($dataDocNSPK, $name);
 		}
 }
