@@ -4867,8 +4867,6 @@ class RehabilitasiController extends Controller
 	      $this->printData($dataDocNSPK, $name);
 		}
 
-
-
 		public function downloadPlrkmInfoUmum(Request $request){
 
 				$i = 1;
@@ -4958,5 +4956,194 @@ class RehabilitasiController extends Controller
 
 				$name = 'Export Data Dokumen PLRKM NSPK'.Carbon::now()->format('Y-m-d H:i:s');
 	      $this->printData($dataDocNSPK, $name);
+		}
+
+		public function downloadPlrkmKegiatan(Request $request){
+				$i = 1;
+				$response = array();
+
+				$qresults = DB::table('v_rehab_pelatihan');
+				// dd('from : '.$request->date_from.' to : '.$request->date_to);
+				if ($request->date_from != '') {
+						$qresults->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+				}
+				if ($request->date_to != '' ) {
+						$qresults->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+				}
+
+				$qresults  = $qresults->where(function ($query) use ($request) {
+						$query->where('kategori', '=', 'plrkm')->orWhere('kategori', '=', null);
+				});
+
+				$datas = $qresults->orderBy('created_at', 'desc')->get();
+				foreach ($datas as $row) {
+					$data['eventID']    = $row->id;
+					$data['nm_instansi']     = $row->nm_instansi;
+					$data['tema']   = $row->tema;
+					$data['nomor_sprint']   = $row->nomor_sprint;
+					$data['tgl_dilaksanakan_mulai'] = $row->tgl_dilaksanakan_mulai;
+					$data['tgl_dilaksanakan_selesai'] = $row->tgl_dilaksanakan_selesai;
+					$data['jumlah_peserta'] = $row->jumlah_peserta;
+					array_push($response, $data);
+				}
+
+				$dataDocNSPK = [];
+				foreach ($response as $key => $value) {
+					// dd($value['nama']);
+					// $kasusArray[$key]['No'] = $i;
+					$dataDocNSPK[$key]['No'] = $i;
+					$dataDocNSPK[$key]['Pelaksana'] = $value['nm_instansi'];
+					$dataDocNSPK[$key]['Judul'] = $value['tema'];
+					$dataDocNSPK[$key]['Nomor Surat Perintah'] = $value['nomor_sprint'];
+					$dataDocNSPK[$key]['Tanggal Mulai'] = $value['tgl_dilaksanakan_mulai'];
+					$dataDocNSPK[$key]['Tanggal Selesai'] = $value['tgl_dilaksanakan_selesai'];
+					$dataDocNSPK[$key]['Jumlah Peserta'] = $value['jumlah_peserta'];
+					$i = $i+1;
+				}
+
+				$name = 'Export Data PLRIP Kegiatan'.Carbon::now()->format('Y-m-d H:i:s');
+				$this->printData($dataDocNSPK, $name);
+		}
+
+
+
+
+
+		public function downloadPascaInfoUmum(Request $request){
+
+				$i = 1;
+				$response = array();
+
+				$qresults = DB::table('rehab_infoumumlembaga');
+				// dd('from : '.$request->date_from.' to : '.$request->date_to);
+	      if ($request->date_from != '') {
+	          $qresults->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+	      }
+	      if ($request->date_to != '' ) {
+	          $qresults->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+	      }
+
+				$qresults  = $qresults->where(function ($query) use ($request) {
+	          $query->where('kategori', '=', 'pasca')->orWhere('kategori', '=', null);
+				});
+
+				$datas = $qresults->orderBy('created_at', 'desc')->get();
+				foreach ($datas as $row) {
+	        $data['eventID']    = $row->id;
+	        $data['nama']     = $row->nama;
+	        $data['alamat']   = $row->alamat;
+	        $data['cp_nama']   = $row->cp_nama;
+					$data['cp_telp'] = $row->cp_telp;
+					$data['bentuk_layanan'] = ( $row->bentuk_layanan ? getBentukLayananPrint(json_decode($row->bentuk_layanan,true)) : '');//$row->bentuk_layanan;
+					$data['status'] = ( ($row->status == 'Y') ? 'Lengkap' : 'Tidak Lengkap');//$row->status;
+	        array_push($response, $data);
+	      }
+
+				$dataDocNSPK = [];
+				foreach ($response as $key => $value) {
+					// dd($value['nama']);
+	        // $kasusArray[$key]['No'] = $i;
+					$dataDocNSPK[$key]['No'] = $i;
+					$dataDocNSPK[$key]['Nama Lembaga'] = $value['nama'];
+					$dataDocNSPK[$key]['Alamat'] = $value['alamat'];
+					$dataDocNSPK[$key]['CP Nama'] = $value['cp_nama'];
+					$dataDocNSPK[$key]['CP Telp'] = $value['cp_telp'];
+					$dataDocNSPK[$key]['Bentuk Layanan'] = $value['bentuk_layanan'];
+					$dataDocNSPK[$key]['Status'] = $value['status'];
+					$i = $i+1;
+				}
+
+				$name = 'Export Data Informasi Lembaga Umum PLRKM'.Carbon::now()->format('Y-m-d H:i:s');
+	      $this->printData($dataDocNSPK, $name);
+		}
+
+		public function downloadPascaDocNSPK(Request $request){
+
+				$i = 1;
+				$response = array();
+
+				$qresults = DB::table('rehab_nspk');
+	      if ($request->date_from != '') {
+	          $qresults->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+	      }
+	      if ($request->date_to != '' ) {
+	          $qresults->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+	      }
+
+				$qresults  = $qresults->where(function ($query) use ($request) {
+	          $query->where('kategori', '=', 'pasca')->orWhere('kategori', '=', null);
+				});
+
+				$datas = $qresults->orderBy('created_at', 'desc')->get();
+				foreach ($datas as $row) {
+	        $data['eventID']    = $row->id;
+	        $data['tgl_pembuatan']     = $row->tgl_pembuatan;
+	        $data['nama_nspk']   = $row->nama_nspk;
+	        $data['nomor_nsdpk']   = $row->nomor_nsdpk;
+					$data['peruntukan'] = $row->peruntukan;
+					$data['status'] = ( ($row->status == 'Y') ? 'Lengkap' : 'Tidak Lengkap');
+	        array_push($response, $data);
+	      }
+
+				$dataDocNSPK = [];
+				foreach ($response as $key => $value) {
+					$dataDocNSPK[$key]['No'] = $i;
+					$dataDocNSPK[$key]['Tanggal Pengesahan'] = $value['tgl_pembuatan'];
+					$dataDocNSPK[$key]['Nama NSPK'] = $value['nama_nspk'];
+					$dataDocNSPK[$key]['No. NSPK'] = $value['nomor_nsdpk'];
+					$dataDocNSPK[$key]['Peruntukan'] = $value['peruntukan'];
+					$dataDocNSPK[$key]['Status'] = $value['status'];
+					$i = $i+1;
+				}
+
+				$name = 'Export Data Dokumen PLRKM NSPK'.Carbon::now()->format('Y-m-d H:i:s');
+	      $this->printData($dataDocNSPK, $name);
+		}
+
+		public function downloadPascaKegiatan(Request $request){
+				$i = 1;
+				$response = array();
+
+				$qresults = DB::table('v_rehab_pelatihan');
+				// dd('from : '.$request->date_from.' to : '.$request->date_to);
+				if ($request->date_from != '') {
+						$qresults->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+				}
+				if ($request->date_to != '' ) {
+						$qresults->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+				}
+
+				$qresults  = $qresults->where(function ($query) use ($request) {
+						$query->where('kategori', '=', 'pasca')->orWhere('kategori', '=', null);
+				});
+
+				$datas = $qresults->orderBy('created_at', 'desc')->get();
+				foreach ($datas as $row) {
+					$data['eventID']    = $row->id;
+					$data['nm_instansi']     = $row->nm_instansi;
+					$data['tema']   = $row->tema;
+					$data['nomor_sprint']   = $row->nomor_sprint;
+					$data['tgl_dilaksanakan_mulai'] = $row->tgl_dilaksanakan_mulai;
+					$data['tgl_dilaksanakan_selesai'] = $row->tgl_dilaksanakan_selesai;
+					$data['jumlah_peserta'] = $row->jumlah_peserta;
+					array_push($response, $data);
+				}
+
+				$dataDocNSPK = [];
+				foreach ($response as $key => $value) {
+					// dd($value['nama']);
+					// $kasusArray[$key]['No'] = $i;
+					$dataDocNSPK[$key]['No'] = $i;
+					$dataDocNSPK[$key]['Pelaksana'] = $value['nm_instansi'];
+					$dataDocNSPK[$key]['Judul'] = $value['tema'];
+					$dataDocNSPK[$key]['Nomor Surat Perintah'] = $value['nomor_sprint'];
+					$dataDocNSPK[$key]['Tanggal Mulai'] = $value['tgl_dilaksanakan_mulai'];
+					$dataDocNSPK[$key]['Tanggal Selesai'] = $value['tgl_dilaksanakan_selesai'];
+					$dataDocNSPK[$key]['Jumlah Peserta'] = $value['jumlah_peserta'];
+					$i = $i+1;
+				}
+
+				$name = 'Export Data PLRIP Kegiatan'.Carbon::now()->format('Y-m-d H:i:s');
+				$this->printData($dataDocNSPK, $name);
 		}
 }

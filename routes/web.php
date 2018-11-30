@@ -323,6 +323,10 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('/print_page_rehabilitasi/downloadPlripKegiatan','RehabilitasiController@downloadPlripKegiatan')->name("print_page_PlripKegiatan");
 		Route::post('/print_page_rehabilitasi/downloadPlrkmInfoUmum','RehabilitasiController@downloadPlrkmInfoUmum')->name("print_page_PlrkmInfoUmum");
 		Route::post('/print_page_rehabilitasi/downloadPlrkmDocNSPK','RehabilitasiController@downloadPlrkmDocNSPK')->name("print_page_PlrkmDocNSPK");
+		Route::post('/print_page_rehabilitasi/downloadPlrkmKegiatan','RehabilitasiController@downloadPlrkmKegiatan')->name("print_page_PlrkmKegiatan");
+		Route::post('/print_page_rehabilitasi/downloadPascaInfoUmum','RehabilitasiController@downloadPascaInfoUmum')->name("print_page_PascaInfoUmum");
+		Route::post('/print_page_rehabilitasi/downloadPascaDocNSPK','RehabilitasiController@downloadPascaDocNSPK')->name("print_page_PascaDocNSPK");
+		Route::post('/print_page_rehabilitasi/downloadPascaKegiatan','RehabilitasiController@downloadPascaKegiatan')->name("print_page_PascaKegiatan");
 	});
 
 
