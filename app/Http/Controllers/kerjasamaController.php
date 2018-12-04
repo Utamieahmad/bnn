@@ -818,6 +818,69 @@ class KerjasamaController extends Controller
         $name = 'Data Pertemuan '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
+    
+    public function downloadBilateral(Request $request){
+        $token = $request->session()->get('token');
+        $client = new Client();
+        $baseUrl = URL::to($this->urlapi());
+        
+        $data_request = DB::table('hukerkerjasama_perjanjianbilateral');             
+        if ($request->date_from != '') {
+            $data_request->whereDate('tgl_pelaksana', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->whereDate('tgl_pelaksana', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_pelaksana', 'desc')->get();         
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Jenis Kerja Sama'] = $value->kodejeniskerjasama;
+          $DataArray[$key]['Tanggal Pelaksanaan'] = date('d-m-Y', strtotime($value->tgl_pelaksana));
+          $DataArray[$key]['Tempat Pelaksanaan'] = $value->tempatpelaksana;
+          $DataArray[$key]['Lembaga Penyelenggara'] = $value->lembaga_penyelenggara;
+          
+          $list_negara = MainModel::getListNegara();
+//          dd($list_negara);
+          if($value->kodenegara != '' || $value->kodenegara != null){
+              foreach($list_negara as $p => $pvalue){                
+                  if($pvalue->kode == $value->kodenegara){
+                          $nama_negara = $pvalue->nama_negara;                  
+                      }                 
+                  }
+          }else{
+              $nama_negara = '';
+          }                    
+          
+          $DataArray[$key]['Negara Penyelenggara'] = $nama_negara;
+          
+          $DataArray[$key]['Institusi Penyelenggara'] = $value->institusi_penyelenggara;
+          $DataArray[$key]['Nama Kegiatan'] = $value->materi;
+          $DataArray[$key]['Jumlah Delegasi RI BNN'] = $value->jmlh_delegasi_bnn;
+          $DataArray[$key]['Jumlah Delegasi RI Kementerian Terkait'] = $value->jmlh_delegasi_client;
+                    
+//          dd($list_negara);
+          if($value->kodenegara_mitra != '' || $value->kodenegara_mitra != null){
+            foreach($list_negara as $p => $pvalue){                
+                  if($pvalue->kode == $value->kodenegara_mitra){
+                      $nama_negara_mitra = $pvalue->nama_negara;
+                      }
+                  }
+          }else{
+              $nama_negara_mitra = '';
+          }          
+          $DataArray[$key]['Negara Mitra'] = $nama_negara_mitra;
+          
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";          
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Download Data Pertemuan '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
 
     public function printKesepahaman(Request $request){
         $client = new Client();

@@ -248,12 +248,12 @@ class deputiCegahController extends Controller {
             'body' => $data_request
                 ]
         );
-//        dd($requestCegah);
-
+////        dd($requestCegah);
+//
         $datas = json_decode($requestCegah->getBody()->getContents(), true);
-//        dd($datas);
-//        print_r($datas);        
-//        exit();        
+////        dd($datas);
+////        print_r($datas);        
+////        exit();        
         if (($datas['status'] != 'error') && ($datas['code'] == 200)) {
             if(isset($datas['data'])){
                 $this->data['data_aktivitas'] = $datas['data'];
@@ -268,6 +268,9 @@ class deputiCegahController extends Controller {
             $this->data['data'] = [];
             $total_item = 0;
         }
+        //ini kalo server masih error
+//        $this->data['data_aktivitas'] = [];
+//        $total_item = 0;
 //        $this->data['delete_route'] = 'delete_kegiatan_pelatihan_plrkm';
         $this->data['path'] = $request->path();
         $filtering = false;

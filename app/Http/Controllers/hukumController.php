@@ -749,6 +749,96 @@ class HukumController extends Controller
         $name = 'Data Kegiatan Pembelaan Hukum (Pendampingan)'.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
+    
+    public function downloadPendampingan(Request $request){
+        $token = $request->session()->get('token');
+//        $client = new Client();
+//        $token = $request->session()->get('token');
+//        $baseUrl = URL::to($this->urlapi());
+////        $baseUrl = URL::to('/');
+//
+//        $get = $request->all();
+//        $kondisi = "";
+//        if(count($get)>0){
+//          foreach($get as $key=>$val){
+//            $kondisi .= $key.'='.$val.'&';
+//          }
+//          $kondisi = rtrim($kondisi,'&');
+//        }
+//
+//        $requestPrintData = $client->request('GET', $baseUrl.'/api/hukumpendampingan?'.$kondisi,
+//            [
+//                'headers' =>
+//                [
+//                    'Authorization' => 'Bearer '.$token
+//                ]
+//            ]
+//        );
+
+//        $PrintData = json_decode($requestPrintData->getBody()->getContents(), true);
+        
+        $data_request = DB::table('hukerhukum_pendampingan');             
+        if ($request->date_from != '') {
+            $data_request->whereDate('tgl_perkara', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->whereDate('tgl_perkara', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_perkara', 'desc')->get();
+//        dd($result);
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal Sidang'] = date('d-m-Y', strtotime($value->tgl_sidang));
+          $DataArray[$key]['Tempat Kejadian'] = $value->tempatsidang;
+          
+//          $datapropkab = $this->globalPropkab($token);   
+//          dd($datapropkab);
+//            foreach($datapropkab['data'] as $p => $pvalue){                                             
+//                foreach($pvalue as $pkey => $pname){
+//                    if($pkey == $d->tempatkejadian_idkabkota){
+//                        $tempat_kejadian = $pname;
+//                    }
+//                }                        
+//            }                   
+//          $DataArray[$key]['Lokasi Kegiatan'] = $value['tempatsidang_idprovinsi'];
+          
+          $DataArray[$key]['No Perka/Kasus'] = $value->nomor_perkara;
+          $DataArray[$key]['Tanggal Perka/Kasus'] = date('d-m-Y', strtotime($value->tgl_perkara));          
+          $DataArray[$key]['Jenis Kasus'] = $value->jenis_kasus;
+          $DataArray[$key]['Permasalahan Kasus'] = $value->permasalahan;
+//          $meta_didampingi = $value->meta_didampingi;
+//          $json = json_decode($meta_didampingi,true);
+//          dd($json);
+//          $dataInstansi = $this->globalinstansi(null, $token);
+//          foreach($dataInstansi as $row){
+//                if($row['id_instansi'] == $d->tempatkejadian_idprovinsi){
+//                    $instansi = $row['nm_instansi'];
+//                }
+//          }                
+//          $result[$key]['Identitas yang Didampingi'] = 'Satuan Kerja : '.$d->pejabat_skep_diganti."\n".
+//                                                       'Tanggal SKEP : '.($d->pejabat_tgl_skep_diganti ? date('d/m/Y',strtotime($d->pejabat_tgl_skep_diganti)) : '');             
+          $meta_pendamping_luar = json_decode($value->meta_pendamping_luar_bnn,true);
+//          dd($meta_pendamping_luar);
+          $merge = "";
+           if(count($meta_pendamping_luar)){
+               for($j = 0 ; $j < count($meta_pendamping_luar); $j++){
+                    $merge.= 'Nama : '.$meta_pendamping_luar[$j]['list_nama']."\n".
+                            'No Surat Kuasa : '.$meta_pendamping_luar[$j]['list_no_surat']."\n".
+                            'Kantor Hukum : '.$meta_pendamping_luar[$j]['list_kantor_hukum']."\n"."\n";
+               }
+           }           
+          $DataArray[$key]['Identitas Pendamping Luar BNN'] = $merge;
+          $DataArray[$key]['Sumber Anggaran'] = $value->sumberanggaran;
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
+          $i = $i +1;
+        }         
+        $data = $DataArray;
+        $name = 'Download Data Kegiatan Pembelaan Hukum (Pendampingan)'.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
 
     public function hukumPrapradilan(Request $request){
         //filter
@@ -1291,6 +1381,110 @@ class HukumController extends Controller
          //dd($DataArray);
         $data = $DataArray;
         $name = 'Data Kegiatan Pembelaan Hukum (Pra Peradilan)'.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+    
+    public function downloadPrapradilan(Request $request){
+        $token = $request->session()->get('token');
+        $data_request = DB::table('huker_hukumpraperadilan');             
+        if ($request->date_from != '') {
+            $data_request->whereDate('tgl_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->whereDate('tgl_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_mulai', 'desc')->get();
+//        dd($result);
+        //sampai sini
+        
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Tanggal Mulai'] = date('d-m-Y', strtotime($value->tgl_mulai));
+          $DataArray[$key]['Tanggal Selesai'] = date('d-m-Y', strtotime($value->tgl_selesai));
+          $DataArray[$key]['Tempat Kegiatan'] = $value->tempat_kegiatan;          
+          $DataArray[$key]['No. Permohonan Peradilan'] = $value->no_permohonan;
+//          dd($value->tgl_permohonan);
+          if($value->tgl_permohonan != '' || $value->tgl_permohonan != null){
+              $tgl_permohonan = date('d-m-Y', strtotime($value->tgl_permohonan));
+          }else{
+              $tgl_permohonan = '';
+          }
+          
+          $DataArray[$key]['Tanggal Permohonan Pra Peradilan'] = $tgl_permohonan;
+          $DataArray[$key]['Permasalahan Pra Peradilan'] = $value->permasalahan;
+          $DataArray[$key]['No Perkara'] = $value->no_perkara;
+          $DataArray[$key]['Tergugat'] = $value->tergugat;
+          $DataArray[$key]['Jenis Identitas'] = $value->jns_identitas_pemohon;
+          $DataArray[$key]['Nomor Identitas'] = $value->no_identitas_pemohon;
+          $DataArray[$key]['Nama'] = $value->nama_pemohon;
+          $DataArray[$key]['Tempat Lahir'] = $value->tempat_lahir_pemohon;
+          if($value->tgl_lahir_pemohon != '' || $value->tgl_lahir_pemohon != NULL){
+              $tanggal_lahir = date('d-m-Y', strtotime($value->tgl_lahir_pemohon));
+          }else{
+              $tanggal_lahir = '';
+          }
+          $DataArray[$key]['Tanggal Lahir'] = $tanggal_lahir;
+          $DataArray[$key]['Lokasi Pemohon'] = $value->lokasi_pemohon;
+          $DataArray[$key]['Alamat Pemohon'] = $value->alamat_pemohon;
+          $DataArray[$key]['Pekerjaan Pemohon'] = $value->pekerjaan_pemohon;
+          $DataArray[$key]['No Surat Kuasa'] = $value->no_surat_kuasa;
+          $DataArray[$key]['No Surat Perintah'] = $value->no_surat_perintah;
+          
+          $meta_ahli_hukum = json_decode($value->meta_ahli_hukum,true);
+          $merge_ahli_hukum = "";
+           if(count($meta_ahli_hukum)){
+               for($j = 0 ; $j < count($meta_ahli_hukum); $j++){
+                    $merge_ahli_hukum.= 'Nama : '.$meta_ahli_hukum[$j]['nama']."\n".
+                                        'No Surat Tugas : '.$meta_ahli_hukum[$j]['no_surat_tugas']."\n".
+                                        'Akademisi : '.$meta_ahli_hukum[$j]['akademisi']."\n"."\n";
+               }
+           }          
+          $DataArray[$key]['Identitas Ahli Hukum'] = $merge_ahli_hukum;
+          
+          $meta_sidang = json_decode($value->meta_sidang,true);
+//          dd($meta_sidang);
+          $merge_meta_sidang = "";
+           if(count($meta_sidang)){
+               for($j = 0 ; $j < count($meta_sidang); $j++){
+                   if(isset($meta_sidang[$j]['sidang'])){
+                       $sidang_ke = 'Sidang Ke : '.$meta_sidang[$j]['sidang'];
+                   }else{
+                       $sidang_ke = 'Sidang Ke : ';
+                   }
+                   if(isset($meta_sidang[$j]['tgl_sidang'])){                       
+//                       dd($asd);
+                       if($meta_sidang[$j]['tgl_sidang'] != '' || $meta_sidang[$j]['tgl_sidang'] != null){
+                        $tgl_sidang = 'Tanggal Sidang : '.date('d-m-Y', strtotime(str_replace('/', '-', $meta_sidang[$j]['tgl_sidang'])));
+                       }else{
+                           $tgl_sidang = 'Tanggal Sidang : ';
+                       }                       
+                   }else{
+                       $tgl_sidang = 'Tanggal Sidang : ';
+                   }
+                   if(isset($meta_sidang[$j]['note'])){
+                       $note = 'Note : '.$meta_sidang[$j]['note'];
+                   }else{
+                       $note = 'Note : ';
+                   }
+                    $merge_meta_sidang.= $sidang_ke."\n".
+                                        $tgl_sidang."\n".
+                                        $note."\n"."\n";
+               }
+           }          
+          $DataArray[$key]['Data Sidang'] = $merge_meta_sidang;
+                    
+          $DataArray[$key]['Sumber Anggaran'] = $value->sumberanggaran;
+          $DataArray[$key]['Hasil Akhir'] = $value->hasil_akhir;                    
+          $DataArray[$key]['Nama Pemohon'] = $value->nama_pemohon;
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Download Data Kegiatan Pembelaan Hukum (Pra Peradilan)'.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 
@@ -3100,6 +3294,47 @@ class HukumController extends Controller
         $name = 'Data Kegiatan Pembentukan Perka BNN '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
+    
+    public function downloadPerka(Request $request){
+        $token = $request->session()->get('token');
+        $data_request = DB::table('huker_hukumpembentukanperka');             
+        if ($request->date_from != '') {
+            $data_request->whereDate('tgl_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->whereDate('tgl_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_mulai', 'desc')->get();
+//        dd($result);        
+        
+        $DataArray = [];
+
+        $instansi = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Nama Perka'] = $value->nama_perka;
+          $DataArray[$key]['Bagian'] = (trim($value->bagian) == 'Penelahaan') ? 'Penelahaan' : ((trim($value->bagian) == 'Perancangan') ? 'Perancangan' : '') ;
+          $DataArray[$key]['Nomor Surat Perintah'] = $value->no_sprint;
+          $DataArray[$key]['Tanggal Pelaksanaan'] = date('d-m-Y', strtotime($value->tgl_mulai)) . ' - ' . date('d-m-Y', strtotime($value->tgl_selesai));
+          $instansi = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+//          dd($instansi);
+          foreach($instansi as $asd => $val){
+              if($val['id_instansi'] == $value->satker_inisiasi){
+                $nama_instansi = $val['nm_instansi'];
+              }
+          }                              
+          $DataArray[$key]['Satker Yang Menginisiasi'] = $nama_instansi;          
+          $DataArray[$key]['Sumber Anggaran'] = $value->sumberanggaran;          
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Download Data Kegiatan Pembentukan Perka BNN '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
 
     public function inputPerkaFinalisasi(Request $request){
         $baseUrl = URL::to($this->urlapi());
@@ -4665,6 +4900,76 @@ class HukumController extends Controller
          //dd($DataArray);
         $data = $DataArray;
         $name = 'Data Kegiatan Hukum Lainnya '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+    
+    public function downloadLainnya(Request $request){
+        $token = $request->session()->get('token');
+        $client = new Client();
+        $baseUrl = URL::to($this->urlapi());
+        
+        $data_request = DB::table('huker_hukumkegiatanlainnya');             
+        if ($request->date_from != '') {
+            $data_request->whereDate('tgl_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->whereDate('tgl_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_mulai', 'desc')->get();
+//        dd($result);                        
+
+        $instansi = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
+        $DataArray = [];        
+        
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Jenis Kegiatan'] = $value->jenis_kegiatan;
+          $DataArray[$key]['Bagian'] = (trim($value->bagian) == 'Penelahaan') ? 'Penelahaan' : ((trim($value->bagian) == 'Perancangan') ? 'Perancangan' : '') ;
+          $DataArray[$key]['Nomor Surat Perintah BNN'] = $value->no_sprint_kepala;
+          $DataArray[$key]['Tanggal Kegiatan'] = date('d-m-Y', strtotime($value->tgl_mulai)) . ' - ' . date('d-m-Y', strtotime($value->tgl_mulai));          
+          $DataArray[$key]['Tempat Kegiatan'] = $value->tempat_kegiatan;
+          
+          $datapropkab = $this->globalPropkab($token);   
+            foreach($datapropkab['data'] as $p => $pvalue){                                             
+                foreach($pvalue as $pkey => $pname){
+                    if($pkey == $value->lokasi_kegiatan){
+                        $tempat_kejadian = $pname;
+                    }
+                }                        
+            }          
+          $DataArray[$key]['Lokasi Kegiatan'] = $tempat_kejadian;
+          
+          $meta_narasumber = json_decode($value->meta_narasumber,true);
+//          dd($meta_narasumber);
+          $merge_narasumber = "";
+           if(count($meta_narasumber)){
+               for($j = 0 ; $j < count($meta_narasumber); $j++){
+                    $merge_narasumber.= 'Narasumber : '.$meta_narasumber[$j]['narasumber']."\n".                            
+                                        'Materi : '.$meta_narasumber[$j]['materi']."\n"."\n";
+               }
+           }          
+          $DataArray[$key]['Narasumber'] = $merge_narasumber;
+          
+          $meta_peserta = json_decode($value->meta_peserta,true);
+//          dd($meta_narasumber);
+          $merge_peserta = "";
+           if(count($meta_peserta)){
+               for($j = 0 ; $j < count($meta_peserta); $j++){
+                    $merge_peserta.= 'Nama Instansi : '.$meta_peserta[$j]['nama_instansi']."\n".                            
+                                     'Jumlah Peserta : '.$meta_peserta[$j]['jumlah_peserta']."\n"."\n";
+               }
+           }          
+          $DataArray[$key]['Peserta'] = $merge_peserta;
+                              
+          $DataArray[$key]['Sumber Anggaran'] = $value->sumberanggaran;
+          $DataArray[$key]['Tema'] = $value->tema;
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
+          $i = $i +1;
+        }
+         //dd($DataArray);
+        $data = $DataArray;
+        $name = 'Download Data Kegiatan Hukum Lainnya '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 

@@ -665,6 +665,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_pendampingan','hukumController@deleteHukumPendampingan')->name('delete_hukum_pendampingan');
 			Route::get('/print_hukum_pendampingan/{segment?}/{page?}','hukumController@printPendampingan')->name("print_hukum_pendampingan");
+                        Route::post('/download_hukum_pendampingan','hukumController@downloadPendampingan')->name("download_hukum_pendampingan");
 
 			Route::match(['get', 'post'], '/hukum_prapradilan/{page?}','hukumController@hukumPrapradilan')->name('hukum_prapradilan');
 			Route::get('/edit_hukum_prapradilan/{id}','hukumController@edithukumPrapradilan')->name('edit_hukum_prapradilan');
@@ -674,6 +675,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_prapradilan','hukumController@deleteHukumPrapradilan')->name('delete_hukum_prapradilan');
 			Route::get('/print_hukum_prapradilan/{segment?}/{page?}','hukumController@printPrapradilan')->name("print_hukum_prapradilan");
+                        Route::post('/download_hukum_prapradilan','hukumController@downloadPrapradilan')->name("download_hukum_prapradilan");
 
 			Route::match(['get', 'post'], '/hukum_perka/{page?}','hukumController@hukumPerka')->name('hukum_perka');
 			Route::get('/edit_hukum_perka/{id}','hukumController@edithukumPerka')->name('edit_hukum_perka');
@@ -683,6 +685,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_perka','hukumController@deletehukumPerka')->name('delete_hukum_perka');
 			Route::get('/print_hukum_perka/{segment?}/{page?}','hukumController@printPerka')->name("print_hukum_perka");
+                        Route::post('/download_hukum_perka','hukumController@downloadPerka')->name("download_hukum_perka");
 
 			Route::match(['get', 'post'], '/hukum_lainnya/{page?}','hukumController@hukumLainnya')->name('hukum_lainnya');
 			Route::get('/edit_hukum_lainnya/{id}','hukumController@edithukumLainnya')->name('edit_hukum_lainnya');
@@ -692,7 +695,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_lainnya','hukumController@deleteHukumLainnya')->name('delete_hukum_lainnya');
 			Route::get('/print_hukum_lainnya/{segment?}/{page?}','hukumController@printLainnya')->name("print_hukum_lainnya");
-
+                        Route::post('/download_hukum_lainnya','hukumController@downloadLainnya')->name("download_hukum_lainnya");
+                        
 			// Route::get('/hukum_rakor','hukumController@hukumRakor')->name('hukum_rakor');
 			// Route::get('/edit_hukum_rakor/{id}','hukumController@edithukumRakor')->name('edit_hukum_rakor');
 			// Route::get('/add_hukum_rakor','hukumController@addhukumRakor')->name('add_hukum_rakor');
@@ -731,6 +735,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_kerjasama_bilateral','kerjasamaController@deletekerjasamaBilateral')->name('delete_kerjasama_bilateral');
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printbilateral/{segment}/{page?}', 'kerjasamaController@printBilateral')->name('print_kerjasama_bilateral');
+                        Route::post('/download_kerjasama_bilateral','kerjasamaController@downloadBilateral')->name("download_kerjasama_bilateral");
 
 			Route::match(['get', 'post'], '/kerjasama_kesepemahaman/{page?}','kerjasamaController@kerjasamaKesepemahaman')->name('kerjasama_kesepemahaman');
 			Route::get('/edit_kerjasama_kesepemahaman/{id}','kerjasamaController@editkerjasamaKesepemahaman')->name('edit_kerjasama_kesepemahaman');
