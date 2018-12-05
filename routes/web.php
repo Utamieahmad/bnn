@@ -763,7 +763,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_kerjasama_monev','kerjasamaController@deletekerjasamaMonev')->name('delete_kerjasama_monev');
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printmonev/{segment}/{page?}', 'kerjasamaController@printMonev')->name('print_kerjasama_monev');
-
+                        Route::post('/download_kerjasama_monev','kerjasamaController@downloadMonev')->name("download_kerjasama_monev");
+                        
 			Route::match(['get', 'post'], 'kerjasama_lainnya/{page?}', 'kerjasamaController@kerjasamaLainnya')->name('kerjasama_lainnya');
 			Route::get('/edit_kerjasama_lainnya/{id}','kerjasamaController@editkerjasamaLainnya')->name('edit_kerjasama_lainnya');
 			Route::get('/add_kerjasama_lainnya','kerjasamaController@addkerjasamaLainnya')->name('add_kerjasama_lainnya');
@@ -772,6 +773,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_kerjasama_lainnya','kerjasamaController@deletekerjasamaLainnya')->name('delete_kerjasama_lainnya');;
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printlainnya/{segment}/{page?}', 'kerjasamaController@printLainnya')->name('print_kerjasama_lainnya');
+                        Route::post('/download_kerjasama_lainnya','kerjasamaController@downloadLainnya')->name("download_kerjasama_lainnya");
 
 		});
 	});
