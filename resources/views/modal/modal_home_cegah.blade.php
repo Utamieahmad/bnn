@@ -18,7 +18,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     <!-- Modal Body -->
     <div class="modal-body">
       <ul class="">
-        <li @php if(!in_array(49, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat Advokasi</span>
+        <li @php if(!in_array(49, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Direktorat Advokasi</span>
             <ul class="">
                 <li @php if(!in_array(51, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pencegahan/dir_advokasi/pendataan_koordinasi')}}">Kegiatan Rapat Koordinasi</a></li>
                 <li @php if(!in_array(52, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pencegahan/dir_advokasi/pendataan_jejaring')}}">Kegiatan Membangun Jejaring</a></li>
@@ -30,7 +30,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                 <li @php if(!in_array(59, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pencegahan/dir_advokasi/pendataan_sosialisasi')}}">Kegiatan KIE</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(50, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat Diseminasi Informasi</span>
+        <li @php if(!in_array(50, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold">Direktorat Diseminasi Informasi</span>
             <ul class="">
                 <li @php if(!in_array(60, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pencegahan/dir_diseminasi/pendataan_online')}}">Media Online</a></li>
                 <li @php if(!in_array(61, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pencegahan/dir_diseminasi/pendataan_penyiaran')}}">Media Penyiaran</a></li>

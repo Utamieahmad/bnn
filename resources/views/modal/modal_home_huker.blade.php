@@ -18,7 +18,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     <!-- Modal Body -->
     <div class="modal-body">
       <ul class="">
-        <li @php if(!in_array(78, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat Hukum</span>
+        <li @php if(!in_array(78, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Direktorat Hukum</span>
             <ul class="">
               <li @php if(!in_array(80, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('huker/dir_hukum/hukum_nonlitigasi')}}">Non Litigasi (Konsultasi)</a></li>
               <li @php if(!in_array(81, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('huker/dir_hukum/hukum_audiensi')}}">Audiensi (Konsultasi)</a></li>
@@ -28,7 +28,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
               <li @php if(!in_array(85, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('huker/dir_hukum/hukum_lainnya')}}">Kegiatan Lainnya</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(79, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat Kerja Sama</span>
+        <li @php if(!in_array(79, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Direktorat Kerja Sama</span>
             <ul class="">
               <li @php if(!in_array(88, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('huker/dir_kerjasama/kerjasama_bilateral')}}">Pertemuan</a></li>
               <li @php if(!in_array(89, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('huker/dir_kerjasama/kerjasama_kesepemahaman')}}">Nota Kesepahaman</a></li>

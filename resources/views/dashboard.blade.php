@@ -46,7 +46,7 @@
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
 	                                <div class="count text-center" style="top:85px !important;">
-										<h5>Sekretariat Utama</h5>
+										<h4>Sekretariat Utama</h4>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -67,7 +67,7 @@
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
 	                                <div class="count text-center" style="top:85px !important;">
-	                                    <h5>Inspektorat Utama</h5>
+	                                    <h4>Inspektorat Utama</h4>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -88,7 +88,7 @@
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
 	                            <div class="count text-center" style="top:85px !important;">
-									<h5>Pemberantasan</h5>
+									<h4>Pemberantasan</h4>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -106,7 +106,7 @@
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
 	                            <div class="count text-center" style="top:85px !important;">
-									<h5>Rehabilitasi</h5>
+									<h4>Rehabilitasi</h4>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -125,7 +125,7 @@
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
 	                            <div class="count text-center" style="top:85px !important;">
-									<h5>Pencegahan</h5>
+									<h4>Pencegahan</h4>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -143,7 +143,7 @@
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
 	                            <div class="count text-center" style="top:85px !important;">
-									<h5> Pemberdayaan Masyarakat</h5>
+									<h4> Pemberdayaan Masyarakat</h4>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -163,7 +163,7 @@
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
 	                                <div class="count text-center" style="top:85px !important;">
-										<h5>Hukum dan Kerjasama</h5>
+										<h4>Hukum dan Kerjasama</h4>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -183,7 +183,7 @@
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
 	                                <div class="count text-center" style="top:85px !important;">
-										<h5>Balai Besar</h5>
+										<h4>Balai Besar</h4>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -203,7 +203,7 @@
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
 	                                <div class="count text-center" style="top:85px !important;">
-										<h5>Balai Diklat</h5>
+										<h4>Balai Diklat</h4>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -222,7 +222,7 @@
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
 	                                <div class="count text-center" style="top:85px !important;">
-										<h5>Balai Laboratorium Narkoba</h5>
+										<h4>Balai Laboratorium Narkoba</h4>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -242,7 +242,7 @@
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
 	                            <div class="count text-center" style="top:85px !important;">
-									<h5>Puslitdatin</h5>
+									<h4>Puslitdatin</h4>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -260,7 +260,7 @@
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
 	                            <div class="count text-center" style="top:85px !important;">
-									<h5>Arahan Pimpinan</h5>
+									<h4>Arahan Pimpinan</h4>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -277,7 +277,7 @@
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
 	                            <div class="count text-center" style="top:85px !important;">
-									<h5>User Management</h5>
+									<h4>User Management</h4>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -294,7 +294,7 @@
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
 	                            <div class="count text-center" style="top:85px !important;">
-									<h5>Master Data</h5>
+									<h4>Master Data</h4>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -347,7 +347,7 @@
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
 	                                <div class="count text-center" style="top:85px !important;">
-										<h5> Keluar Aplikasi</h5>
+										<h4> Keluar Aplikasi</h4>
 	                                </div>
 	                            </div>
 	                        </div>

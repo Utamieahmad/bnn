@@ -485,13 +485,13 @@ body {
     border-right: 0 !important; }
 
 .tile-stats {
-  min-height: 120px; }
+  min-height: 150px; }
   .tile-stats .icon {
     top: 42px !important; }
   .tile-stats .count {
     top: 25px !important;
     margin: 0 10px 0 0 !important; }
-    .tile-stats .count h5 {
+    .tile-stats .count h4 {
       color: #272727 !important;
     }
     .tile-stats .count h5:hover {
@@ -500,7 +500,6 @@ body {
 
 .navbar.nav_title {
   height: 100px;
-  /* background-color: #28367d; */
   background-color: #5C91FE;
 }
   .navbar.nav_title a {
@@ -521,12 +520,11 @@ body {
   padding: 10px 15px 10px !important; }
 .nav.child_menu > li > a, .nav.side-menu > li > a {
   font-weight: 300 !important;
-  font-size: 16px; } /* edited 11px awal */
+  font-size: 16px; }
 .nav.side-menu > li.active, .nav.side-menu > li.current-page {
   border-right: 5px solid #e5d61d !important; }
   .nav.side-menu > li.active > a, .nav.side-menu > li.current-page > a {
     background: #dadada !important; 
-    /* background: #595c5e !important; */
   }
 
 .top_nav li a i {
@@ -545,13 +543,12 @@ body {
     border-bottom: none;
     margin-bottom: 0;
     background: #fff;
-    /* background: #1A3D70; */ } 
+   } 
   .nav_menu .nav.toggle {
     padding-top: 10px; }
   .nav_menu .nav.navbar-nav > li > a {
     color: #f7f7f7 !important; }
   .nav_menu.nav2 {
-    /* background: #081F45; */
     background: #fff;
     border-bottom: 0; }
     .nav_menu.nav2 .toggle a {
@@ -566,7 +563,6 @@ body {
 .nav-sm .nav.child_menu li.active {
   border-right: 5px solid #e6d61b !important; }
 .nav-sm ul.nav.child_menu {
-  /* background: #081F45 !important;  */
   background: #28367d !important;
 
 }
@@ -578,10 +574,8 @@ body {
 .sidebar-footer {
   padding: 0 0 0 !important;
   background: #5C91FE !important;
-  /* background: #191d25 !important; */
   border-top: 1px solid #3563AD !important; }
   .sidebar-footer a {
-    /*background: #081F45 !important;*/
     text-align: center !important;
     width: 100% !important;
     color: white; }
@@ -591,15 +585,14 @@ body {
   padding: 10px 5px 6px !important; }
 
 .x_panel {
-  /* background: rgba(255, 255, 255, 0.15) !important; */
-  background: rgb(92, 145, 254) !important;
+  background: rgb(66, 100, 168,.75) !important;
   border: none !important;
   border-radius: 5px !important;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
 
 .table-striped {
   /* background-color: rgba(255, 255, 255, 0.15); } */
-    background-color: rgba(33, 33, 33, 0.25);  }
+    background-color: rgba(33, 33, 33, 0.2);  }
   .table-striped > tbody > tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.15); }
 

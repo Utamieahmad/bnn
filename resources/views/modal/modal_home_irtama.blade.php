@@ -21,7 +21,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
           <li @php if(!in_array(117, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('irtama/audit/irtama_audit')}}">Laporan Hasil Audit</a></li>
           <li @php if(!in_array(118, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('irtama/ptl/irtama_ptl')}}">Pemantauan Tindak Lanjut</a></li>
           <li @php if(!in_array(119, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('irtama/riktu/irtama_riktu')}}">Audit dengan Tujuan Tertentu</a></li>
-          <li @php if(!in_array(120, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Reviu</span>
+          <li @php if(!in_array(120, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Reviu</span>
             <ul class="">
                 <li @php if(!in_array(126, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('irtama/reviu/irtama_lk')}}">Laporan Keuangan</a></li>
                 <li @php if(!in_array(127, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('irtama/reviu/irtama_rkakl')}}">Rencana Kerja Anggaran Kementerian/Lembaga</a></li>
