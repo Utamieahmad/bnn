@@ -926,6 +926,54 @@ class KerjasamaController extends Controller
         $name = 'Data Kegiatan Perjanjian Nota Kesepahaman '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
+    
+    public function downloadKesepahaman(Request $request){
+        $token = $request->session()->get('token');
+        $client = new Client();
+        $baseUrl = URL::to($this->urlapi());
+        
+        $data_request = DB::table('hukerkerjasama_notakesepahaman');             
+        if ($request->date_from != '') {
+            $data_request->whereDate('tgl_ttd', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->whereDate('tgl_ttd', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_ttd', 'desc')->get();     
+//        dd($result);
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['Jenis Kerja Sama'] = $value->jenis_kerjasama;
+          $DataArray[$key]['Instansi Mitra'] = $value->nama_instansi;
+          $DataArray[$key]['Nomor MOU/PKS'] = $value->nomor_sprint;
+          $DataArray[$key]['Tanggal TTD'] = date('d-m-Y', strtotime($value->tgl_ttd));
+          $DataArray[$key]['Tanggal Berakhir'] = date('d-m-Y', strtotime($value->tgl_berakhir));
+          $DataArray[$key]['Tempat Penandatanganan'] = $value->tempat_ttd;
+          $DataArray[$key]['Tema'] = $value->tema;
+          
+          $meta_ruanglingkup_kerjasama = json_decode($value->meta_ruanglingkup_kerjasama,true);
+          dd($meta_ruanglingkup_kerjasama);
+          $merge_narasumber = "";
+           if(count($meta_narasumber)){
+               for($j = 0 ; $j < count($meta_narasumber); $j++){
+                    $merge_narasumber.= 'Narasumber : '.$meta_narasumber[$j]['narasumber']."\n".                            
+                                        'Materi : '.$meta_narasumber[$j]['materi']."\n"."\n";
+               }
+           }          
+          $DataArray[$key]['Narasumber'] = $merge_narasumber;
+          
+          $DataArray[$key]['Status'] = ($value['status'] == 'Y') ? "Lengkap" : "Tidak Lengkap";
+
+          $i = $i +1;
+        }
+
+        $data = $DataArray;
+        $name = 'Data Kegiatan Perjanjian Nota Kesepahaman '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
 
     public function printLainnya(Request $request){
         $client = new Client();
