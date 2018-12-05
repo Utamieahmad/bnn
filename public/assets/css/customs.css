@@ -439,7 +439,8 @@ table.tile_info td p {
     margin-top: 2px;
     font-size: 10px;
     min-width: inherit;
-    color: #C4CFDA
+    color: #C4CFDA;
+    width: 1px;
 }
 
 .active a span.fa {
@@ -2251,6 +2252,8 @@ h4.graph_title {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
+    float: left;
+    height: 30px;
     -moz-osx-font-smoothing: grayscale
 }
 
@@ -5299,7 +5302,7 @@ button.btn-transparant {
 }
 
 .modalmenu {
-  font-size:16px;
+  font-size:14px;
   color: white !important; }
   .modalmenu:hover {
     color: yellow !important;

@@ -18,7 +18,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     <!-- Modal Body -->
     <div class="modal-body">
       <ul class="">
-        <li @php if(!in_array(95, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Bidang Litbang</span>
+        <li @php if(!in_array(95, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Bidang Litbang</span>
             <ul class="">
                 <li @php if(!in_array(98, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('puslitdatin/bidang_litbang/survey')}}">Survey</a></li>
                 <li @php if(!in_array(99, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('puslitdatin/bidang_litbang/survey_narkoba')}}">Survey Nasional Penyalahgunaan Narkoba</a></li>
@@ -26,7 +26,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                 <li @php if(!in_array(105, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('puslitdatin/bidang_litbang/riset_penyalahgunaan_narkoba')}}">Riset Operasional Penyalahgunaan Narkoba di Indonesia</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(96, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Bidang TIK</span>
+        <li @php if(!in_array(96, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Bidang TIK</span>
             <ul class="">
                 <li @php if(!in_array(106, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('puslitdatin/bidang_tik/pekerjaan_jaringan')}}">Pekerjaan Jaringan</a></li>
                 <li @php if(!in_array(107, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('puslitdatin/bidang_tik/pengecekan_jaringan')}}">Pengecekan dan Pemeliharaan Jaringan LAN</a></li>

@@ -281,12 +281,12 @@
                             </li>
                             <li @php if(!in_array(11, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Arahan Pimpinan" href="{{url('arahan/pimpinan/arahan_pimpinan')}}">
                               <!-- <i class="fa fa-id-badge"></i> -->
-                              <div class="fa"><img style="margin-left: -3px; height: 24px; width: 18px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/arahan_kepala_bnn.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; height: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/arahan_kepala_bnn.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: top;"> Arahan Pimpinan </span><span class=""></span></a>
                             <!--a style="vertical-align: top;"> Arahan Pimpinan </span><span class=""></span></a-->
                             </li>
                             <li @php if(!in_array(130, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="User Management" href="javascript:;">
-                              <i class="fa fa-home" style="font-size:24px"></i>
+                              <i class="fa fa-home" style="font-size:24px; color:#5C91FE"></i>
                               <!--div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/puslitdatin.png')}}" class="img-responsive"></div-->
                               <span class="sm-side" style="vertical-align: super;"> User Management </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
@@ -301,7 +301,7 @@
                                 </ul>
                             </li>
                             <li @php if(!in_array(131, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Master Data" href="javascript:;">
-                              <i class="fa fa-home" style="font-size:24px"></i>
+                              <i class="fa fa-home" style="font-size:24px; color:#5C91FE"></i>
                               <!--div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/puslitdatin.png')}}" class="img-responsive"></div-->
                               <span class="sm-side" style="vertical-align: super;"> Master Data </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">

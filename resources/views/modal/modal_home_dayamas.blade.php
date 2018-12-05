@@ -18,7 +18,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     <!-- Modal Body -->
     <div class="modal-body">
       <ul class="">
-        <li @php if(!in_array(65, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat Peran Serta Masyarakat</span>
+        <li @php if(!in_array(65, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Direktorat Peran Serta Masyarakat</span>
             <ul class="">
                 <li @php if(!in_array(67, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pemberdayaan/dir_masyarakat/pendataan_tes_narkoba')}}">Tes Narkoba</a></li>
                 <li @php if(!in_array(68, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pemberdayaan/dir_masyarakat/pendataan_anti_narkoba')}}">Pengembangan Kapasitas</a></li>
@@ -27,7 +27,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                 <li @php if(!in_array(72, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pemberdayaan/dir_masyarakat/rapat_kerja_pemetaan')}}">Rapat Kerja Pemetaan</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(66, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat Alternative Development</span>
+        <li @php if(!in_array(66, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Direktorat Alternative Development</span>
             <ul class="">
                 <li @php if(!in_array(73, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pemberdayaan/dir_alternative/altdev_lahan_ganja')}}">Alih Fungsi Lahan Ganja</a></li>
                 <li @php if(!in_array(74, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('pemberdayaan/dir_alternative/altdev_alih_profesi')}}">Alih Jenis Profesi/Usaha</a></li>
