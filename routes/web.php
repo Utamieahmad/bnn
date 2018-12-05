@@ -743,7 +743,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_kerjasama_kesepemahaman','kerjasamaController@inputkerjasamaKesepemahaman');
 			Route::post('/update_kerjasama_kesepemahaman','kerjasamaController@updatekerjasamaKesepemahaman');
 			Route::post('/delete_kerjasama_kesepahaman','kerjasamaController@deletekerjasamaKesepahaman')->name('delete_kerjasama_kesepahaman');
-
+                        Route::post('/download_kerjasama_kesepahaman','kerjasamaController@downloadKesepahaman')->name("download_kerjasama_kesepahaman");
+                        
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printkesepahaman/{segment}/{page?}', 'kerjasamaController@printKesepahaman')->name('print_kerjasama_nota');
 
