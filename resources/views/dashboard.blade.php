@@ -38,15 +38,15 @@
 												<a href="#" class="" data-toggle="modal" data-target="#modal_home_settama">
 	                        <div class="tile-stats">
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="icon m-center" style="top:30px !important; width: 50px;">
+	                                <div class="icon m-center" style="top:0 !important; width:90px;">
 	                                	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/sekretariat_utama.png')}}" class="img-responsive m-l-10"></span>
 
 	                                    <!-- <i class="fa fa-search" style="margin-left:-10px !important;"></i> -->
 	                                </div>
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="count text-center" style="top:68px !important;">
-	                                    <h5>SEKRETARIAT UTAMA</h5>
+	                                <div class="count text-center" style="top:85px !important;">
+										<h5>Sekretariat Utama</h5>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -59,15 +59,15 @@
 												<a href="#" class="" data-toggle="modal" data-target="#modal_home_irtama">
 	                        <div class="tile-stats">
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                                <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                                	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/inspektorat_utama.png')}}" class="img-responsive m-l-10"></span>
 
 	                                    <!-- <i class="fa fa-search" style="margin-left:-10px !important;"></i> -->
 	                                </div>
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="count text-center" style="top:68px !important;">
-	                                    <h5>INSPEKTORAT UTAMA</h5>
+	                                <div class="count text-center" style="top:85px !important;">
+	                                    <h5>Inspektorat Utama</h5>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -81,14 +81,14 @@
 										<a href="#" class="" data-toggle="modal" data-target="#modal_home_berantas">
 	                    <div class="tile-stats">
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                            <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                            	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/pemberantasan.png')}}" class="img-responsive m-l-10"></span>
 	                                <!-- <i class="fa fa-shield"></i> -->
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="count text-center" style="top:68px !important;">
-	                                <h5>PEMBERANTASAN</h5>
+	                            <div class="count text-center" style="top:85px !important;">
+									<h5>Pemberantasan</h5>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -99,14 +99,14 @@
 									<a href="#" class="" data-toggle="modal" data-target="#modal_home_rehab">
 										<div class="tile-stats">
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                            <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                            	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/rehabilitasi.png')}}" class="img-responsive m-l-10"></span>
 	                                <!-- <i class="fa fa-heartbeat c-grey"></i> -->
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="count text-center" style="top:68px !important;">
-	                                <h5>REHABILITASI</h5>
+	                            <div class="count text-center" style="top:85px !important;">
+									<h5>Rehabilitasi</h5>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -117,15 +117,15 @@
 	                <a href="#" class="" data-toggle="modal" data-target="#modal_home_cegah">
 	                    <div class="tile-stats">
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                            <div class="icon m-center" style="top:85px !important;top:0 !important; width: 90px;">
 	                            	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/pencegahan.png')}}" class="img-responsive m-l-10"></span>
 
 	                                <!-- <i class="fa fa-ban c-grey"></i> -->
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="count text-center" style="top:68px !important;">
-	                                <h5>PENCEGAHAN</h5>
+	                            <div class="count text-center" style="top:85px !important;">
+									<h5>Pencegahan</h5>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -136,14 +136,14 @@
 	                <a href="#" class="" data-toggle="modal" data-target="#modal_home_dayamas">
 	                    <div class="tile-stats">
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                            <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                            	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/pemberdayaan_masyarakat.png')}}" class="img-responsive m-l-10"></span>
 	                                <!-- <i class="fa fa-users c-grey"></i> -->
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="count text-center" style="top:68px !important;">
-	                                <h5>PEMBERDAYAAN MASYARAKAT</h5>
+	                            <div class="count text-center" style="top:85px !important;">
+									<h5> Pemberdayaan Masyarakat</h5>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -155,15 +155,15 @@
 	                    <a href="#" class="" data-toggle="modal" data-target="#modal_home_huker">
 	                        <div class="tile-stats">
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                                <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                                	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/hukum_kerjasama.png')}}" class="img-responsive m-l-10"></span>
 
 	                                    <!-- <i class="fa fa-balance-scale" style="margin-left:-10px !important;"></i> -->
 	                                </div>
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="count text-center" style="top:68px !important;">
-	                                    <h5>HUKUM DAN KERJASAMA</h5>
+	                                <div class="count text-center" style="top:85px !important;">
+										<h5>Hukum dan Kerjasama</h5>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -176,14 +176,14 @@
 	                    <a class="" href="{{url('/balai_besar/magang/data_magang')}}">
 	                        <div class="tile-stats">
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                                <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                                	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_besar.png')}}" class="img-responsive m-l-10"></span>
 	                                    <!-- <i class="fa fa-leanpub"></i> -->
 	                                </div>
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="count text-center" style="top:68px !important;">
-	                                    <h5>BALAI BESAR</h5>
+	                                <div class="count text-center" style="top:85px !important;">
+										<h5>Balai Besar</h5>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -196,14 +196,14 @@
 	                    <a class="" href="{{url('/balai_diklat/pendidikan/pendidikan_pelatihan')}}">
 	                        <div class="tile-stats">
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                                <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                                	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_diklat.png')}}" class="img-responsive m-l-10"></span>
 	                                    <!-- <i class="fa fa-leanpub"></i> -->
 	                                </div>
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="count text-center" style="top:68px !important;">
-	                                    <h5>BALAI DIKLAT</h5>
+	                                <div class="count text-center" style="top:85px !important;">
+										<h5>Balai Diklat</h5>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -215,14 +215,14 @@
 	                    <a href="{{url('/balai_lab/pengujian/berkas_sampel')}}">
 	                        <div class="tile-stats">
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="icon m-center" style="top:15px !important; width: 50px;">
+	                                <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                                	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_laboratorium.png')}}" class="img-responsive m-l-10"></span>
 	                                    <!-- <i class="fa fa-flask"></i> -->
 	                                </div>
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="count text-center" style="top:68px !important;">
-	                                    <h5>BALAI LABORATORIUM NARKOBA</h5>
+	                                <div class="count text-center" style="top:85px !important;">
+										<h5>Balai Laboratorium Narkoba</h5>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -235,14 +235,14 @@
 	                <a href="#" class="" data-toggle="modal" data-target="#modal_home_datin">
 	                    <div class="tile-stats">
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="icon m-center" style="top:20px !important; width: 50px;">
+	                            <div class="icon m-center" style="top:0 !important; width: 90px;">
 	                            	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/puslitdatin.png')}}" class="img-responsive m-l-10"></span>
 	                                <!-- <i class="fa fa-microchip"></i> -->
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="count text-center" style="top:68px !important;">
-	                                <h5>PUSLITDATIN</h5>
+	                            <div class="count text-center" style="top:85px !important;">
+									<h5>Puslitdatin</h5>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -253,14 +253,14 @@
 	                <a href="{{url('/arahan/pimpinan/arahan_pimpinan')}}">
 	                    <div class="tile-stats">
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="icon m-center" style="top:30px !important; width: 35px;">
-	                            	<span><img alt="Logo SIN-BNN" style="margin-top: -20px !important;" src="{{asset('assets/icon/arahan_kepala_bnn.png')}}" class="img-responsive m-l-10"></span>
+	                            <div class="icon m-center" style="top:0 !important; width: 90px;">
+	                            	<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/arahan_kepala_bnn.png')}}" class="img-responsive m-l-10"></span>
 	                                <!-- <i class="fa fa-id-badge"></i> -->
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="count text-center" style="top:68px !important;">
-	                                <h5>ARAHAN PIMPINAN</h5>
+	                            <div class="count text-center" style="top:85px !important;">
+									<h5>Arahan Pimpinan</h5>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -271,13 +271,13 @@
 	                <a href="#" class="" data-toggle="modal" data-target="#modal_home_user">
 	                    <div class="tile-stats">
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="icon m-center" style="top:30px !important; width: 35px;">
-	                            	<i class="fa fa-home" style="margin-top: -20px !important;"></i>
+	                            <div class="icon m-center" style="top:0 !important; width: 90px;">
+									<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/user_management.png')}}" class="img-responsive m-l-10"></span>
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="count text-center" style="top:68px !important;">
-	                                <h5>USER MANAGEMENT</h5>
+	                            <div class="count text-center" style="top:85px !important;">
+									<h5>User Management</h5>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -288,13 +288,13 @@
 	                <a href="#" class="" data-toggle="modal" data-target="#modal_home_master">
 	                    <div class="tile-stats">
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="icon m-center" style="top:30px !important; width: 35px;">
-	                            	<i class="fa fa-home" style="margin-top: -20px !important;"></i>
+	                            <div class="icon m-center" style="top:0 !important; width: 90px;">
+									<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/master_data.png')}}" class="img-responsive m-l-10"></span>
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-12 col-xs-12">
-	                            <div class="count text-center" style="top:68px !important;">
-	                                <h5>MASTER DATA</h5>
+	                            <div class="count text-center" style="top:85px !important;">
+									<h5>Master Data</h5>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -341,13 +341,13 @@
 	                    <a href="{{url('logout')}}">
 	                        <div class="tile-stats">
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="icon m-center" style="top:20px !important;">
-	                                    <i class="fa fa-power-off" style="margin-left:-5px !important;"></i>
+									<div class="icon m-center" style="top:0 !important; width: 90px;">
+										<span><img alt="Logo SIN-BNN" src="{{asset('assets/icon/exit.png')}}" class="img-responsive m-l-10"></span>
 	                                </div>
 	                            </div>
 	                            <div class="col-sm-12 col-xs-12">
-	                                <div class="count text-center" style="top:68px !important;">
-	                                    <h5>KELUAR APLIKASI</h5>
+	                                <div class="count text-center" style="top:85px !important;">
+										<h5> Keluar Aplikasi</h5>
 	                                </div>
 	                            </div>
 	                        </div>
