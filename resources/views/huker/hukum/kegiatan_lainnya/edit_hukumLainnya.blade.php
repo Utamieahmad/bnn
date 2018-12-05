@@ -323,7 +323,7 @@
      <div class="form-actions fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="submit" class="btn btn-success">KIRIM</button>
+                <button type="submit" class="btn btn-success">SIMPAN</button>
 				<a href="{{route('hukum_lainnya')}}" class="btn btn-primary" type="button">BATAL</a>
             </div>
         </div>

@@ -565,7 +565,7 @@ class narkotikaController extends Controller
         // dd($request->all());
 
         $client = new Client();
-        
+
         //generate image base64
         if($request->hasFile('foto1')){
             $filenameWithExt = $request->file('foto1')->getClientOriginalName();
@@ -614,7 +614,7 @@ class narkotikaController extends Controller
             $image3 = $request->input('foto3_old');
 //            $form_foto3 = '';
         }
-        
+
         $query = $client->request('PUT', $baseUrl.'/api/kasus/'.$id,
             [
                 'headers' =>
@@ -643,7 +643,7 @@ class narkotikaController extends Controller
                     'foto2' => $image2,
                     'foto3' => $image3,
                     'uraian_singkat' => $request->input('uraian_singkat'),
-                    'keterangan_lainnya' => $request->input('keterangan_lainnya'),                    
+                    'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                     //'kasus_kelompok' => $request->input('kelompokKasus'),
                     'meta_penyidik' => json_encode($request->input('penyidik')),
                     'updated_by' => $request->session()->get('id'),
@@ -694,7 +694,7 @@ class narkotikaController extends Controller
                                   'foto2' => $image2,
                                   'foto3' => $image3,
                                   'uraian_singkat' => $request->input('uraian_singkat'),
-                                  'keterangan_lainnya' => $request->input('keterangan_lainnya'),                                  
+                                  'keterangan_lainnya' => $request->input('keterangan_lainnya'),
                                   //'kasus_kelompok' => $request->input('kelompokKasus'),
                                   'meta_penyidik' => json_encode($request->input('penyidik')),
                                   'updated_by' => $request->session()->get('id'),
@@ -1195,7 +1195,7 @@ class narkotikaController extends Controller
         // dd($request->all());
         $fileName = "";
         $file_message = "";
-        if (  $request->file('file_laporan_kegiatan')) {
+        if ($request->file('file_laporan_kegiatan')) {
             $file       = $request->file('file_laporan_kegiatan');
             $fileName   = date('Y-m-d').'_'.date('H-i-s').'_'.$file->getClientOriginalName();
             $directory = 'Berantas/PemusnahanLadangGanja';
@@ -1209,10 +1209,23 @@ class narkotikaController extends Controller
             }catch(\Exception $e){
                 $file_message = "Dengan File gagal diupload.";
             }
-        }else{
-            $fileName = "";
-            $file_message = "";
+            $requestpemusnahanladang = $client->request('PUT', $baseUrl.'/api/pemusnahanladang/'.$id,
+                [
+                    'headers' =>
+                    [
+                        'Authorization' => 'Bearer '.$token
+                    ],
+                    'form_params' =>
+                    [
+                      'file_laporan_kegiatan' => $fileName
+                    ]
+                ]
+            );
         }
+        // else{
+        //     $fileName = "";
+        //     $file_message = "";
+        // }
 
         $requestpemusnahanladang = $client->request('PUT', $baseUrl.'/api/pemusnahanladang/'.$id,
             [
@@ -1234,8 +1247,8 @@ class narkotikaController extends Controller
                   'luas_lahan_ganja' => $request->input('luas_lahan_ganja'),
                   'nomor_sprint_pemusnahan' => $request->input('nomor_sprint_pemusnahan'),
                   'tgl_pemusnahan' => date('Y-m-d', strtotime(str_replace('/', '-', $request->input('tgl_pemusnahan')))),
-                  'luas_lahan_ganja_dimusnahkan' => $request->input('luas_lahan_ganja_dimusnahkan'),
-                  'file_laporan_kegiatan' => $fileName
+                  'luas_lahan_ganja_dimusnahkan' => $request->input('luas_lahan_ganja_dimusnahkan')
+                  // 'file_laporan_kegiatan' => $fileName
                 ]
             ]
         );
@@ -1573,7 +1586,7 @@ class narkotikaController extends Controller
     }
 
     public function downloadLadang(Request $request){
-      
+
       $pemusnahanladang = DB::table('v_berantas_pemusnahan_ladang');
       if ($request->date_from != '') {
           $pemusnahanladang->where('tgl_penyelidikan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));

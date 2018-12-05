@@ -36,6 +36,11 @@
 								</a>
 							@endif
 							</li>
+                                                        <li class="">
+							<a href="#" class="btn btn-lg btn-round btn-success" data-toggle="modal" data-target="#modal_report_excel" onClick="reportExcel(event,this)" data-url="{{url('huker/dir_kerjasama/download_kerjasama_bilateral')}}">
+									<i class="fa fa-file"></i> Excel
+								</a>
+							</li>
 							</ul>
 							<div class="clearfix"></div>
 						</div>
@@ -119,4 +124,5 @@
 
 	@include('modal.modal_delete_form')
   @include('modal.modal_input_nihil')
+  @include('modal.modal_report_excel')
 @endsection

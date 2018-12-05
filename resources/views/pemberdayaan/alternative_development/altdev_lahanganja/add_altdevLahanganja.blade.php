@@ -141,7 +141,7 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                            <input type="text" name="lokasi" class="form-control"/>
                                         </div>
-                                    </div>									
+                                    </div>
                                      <div class="form-group m-t-20">
                                         <label for="Lokasi" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi dan Kepemilikan Lahan</label>
                                         <div class="col-md-8 col-sm-8 col-xs-12 lokasi-alih-fungsi">
@@ -182,13 +182,13 @@
 									<div>&nbsp</div>
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 col-xs-12"  >Foto</label>
-										<div class="col-md-3 col-sm-3 col-xs-12">                                
+										<div class="col-md-3 col-sm-3 col-xs-12">
 											<img src="{{asset('assets/images/NoImage.gif')}}" id="blah" style="width:100%;height:150px;" />
 										</div>
-										<div class="col-md-3 col-sm-3 col-xs-12">                                
+										<div class="col-md-3 col-sm-3 col-xs-12">
 											<img src="{{asset('assets/images/NoImage.gif')}}" id="blah2" style="width:100%;height:150px;" />
 										</div>
-										<div class="col-md-3 col-sm-3 col-xs-12">                                
+										<div class="col-md-3 col-sm-3 col-xs-12">
 											<img src="{{asset('assets/images/NoImage.gif')}}" id="blah3" style="width:100%;height:150px;" />
 										</div>
 									</div>
@@ -207,7 +207,7 @@
                                 </div>
                                 <div class="form-actions fluid m-t-20">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button type="submit" class="btn btn-success">KIRIM</button>
+                                        <button type="submit" class="btn btn-success">SIMPAN</button>
                                         <a href="{{route('altdev_lahan_ganja')}}" class="btn btn-primary" type="button">BATAL</a>
                                     </div>
                                 </div>

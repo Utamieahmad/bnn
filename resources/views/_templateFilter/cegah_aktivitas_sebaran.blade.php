@@ -16,28 +16,28 @@
 
                     <div class="col-md-3 col-sm-3 col-md-12">
                         <label for="tipe" class="control-label">Pembuat</label>
-                        <input type="text" name="pembuat" class="form-control"/>
+                        <input type="text" name="pembuat" value="{{isset($filter) ? (isset($filter['userName']) ? $filter['userName'] : '') :''}}" class="form-control"/>
                     </div>
 
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Satker</label>
-                        <input class="form-control" name="satker" type="text"/>
+                        <input class="form-control" name="satker" value="{{isset($filter) ? (isset($filter['userSatker']) ? $filter['userSatker'] : '') :''}}" class="form-control" type="text"/>
                     </div>
 
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Wilayah</label>
-                        <input class="form-control" name="wilayah" type="text"/>
+                        <input class="form-control" name="wilayah" value="{{isset($filter) ? (isset($filter['userWilayah']) ? $filter['userWilayah'] : '') :''}}" type="text"/>
                     </div>
 
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Media</label>
-                        <input class="form-control" name="media" type="text"/>
+                        <input class="form-control" name="media" value="{{isset($filter) ? (isset($filter['nmmedia']) ? $filter['nmmedia'] : '') :''}}" type="text"/>
                     </div>
 
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Tanggal Mulai</label>
                         <div class="input-group date date_start row">
-                            <input type='text' name="tglactstart" class="form-control" value="{{isset($filter) ? (isset($filter['tglactstart']) ? $filter['tglactstart'] : '') :''}}"/>
+                            <input type='text' name="tglactStart" class="form-control" value="{{isset($filter) ? (isset($filter['tglactStart']) ? $filter['tglactStart'] : '') :''}}"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -46,7 +46,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Tanggal akhir</label>
                         <div class="input-group date date_start row">
-                            <input type='text' name="tglactend" class="form-control" value="{{isset($filter) ? (isset($filter['tglactend']) ? $filter['tglactend'] : '') :''}}"/>
+                            <input type='text' name="tglactEnd" class="form-control" value="{{isset($filter) ? (isset($filter['tglactEnd']) ? $filter['tglactEnd'] : '') :''}}"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -54,16 +54,16 @@
                     </div>                    
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Jumlah sebaran Mulai</label>
-                        <input class="form-control" name="jmlsebarstart" type="text"/>
+                        <input class="form-control" name="jmlsebarMin" value="{{isset($filter) ? (isset($filter['jmlsebarMin']) ? $filter['jmlsebarMin'] : '') :''}}" type="text"/>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Jumlah sebaran Akhir</label>
-                        <input class="form-control" name="jmlsebarend" type="text"/>
+                        <input class="form-control" name="jmlsebarMax" value="{{isset($filter) ? (isset($filter['jmlsebarMax']) ? $filter['jmlsebarMax'] : '') :''}}" type="text"/>
                     </div>                    
 
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">sasaran</label>
-                        <input class="form-control" name="sasaran" type="text"/>
+                        <input class="form-control" name="sasaran" value="{{isset($filter) ? (isset($filter['sasaran']) ? $filter['sasaran'] : '') :''}}" type="text"/>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Anggaran</label>
@@ -86,55 +86,25 @@
                     <div class="col-sm-3 col-md-3 col-xs-12">
                         <label for="tipe" class="control-label">&nbsp;</label>
                         <div class="m-t-3">
-                            <input type="submit" class="btn btn-action btn-search" value="Cari" name="cari" style="width: 239px;">
+                            <input type="submit" class="btn btn-action btn-primary" value="Cari" name="cari" style="width: 239px;">
                             <!--input type="submit" class="btn btn-success btn-search" value="Cari" name="cari" style="width: 499px;"-->
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-
         </div>    
     </form>
     <div class="m-b-20">
         <div class="m-b-20">
+            Catatan : <i>*Cetak PDF dan Excel tidak dapat melebihi 150 data</i><br>
             @if(isset($filter))
             @php
             $s = $filter;
 
             @endphp
             Menampilkan:
-            <i>
-                {{ isset($s['tipe']) ? (isset($key[$s['tipe']]) ?$key[$s['tipe']] .' = ': '')  : ''}}
-                @if( isset($s['tipe']))
-                @if( $s['tipe'] == 'periode')
-                {{isset($s['tgl_from']) ? $s['tgl_from'] : ''}}
-                {{isset($s['tgl_from']) && isset($s['tgl_to'])  ? '-' : ''}}
-                {{isset($s['tgl_to']) ?  $s['tgl_to'] .', ' : ', '}}
-                @elseif($s['tipe'] == 'pelaksana')
-                {{  ( isset($s['pelaksana'])  ? $s['pelaksana'] .', ' :  $s['pelaksana'] .', ') }}
-                @elseif($s['tipe'] == 'BrgBukti')
-                {{  ( isset($BrgBukti[$s['BrgBukti']])  ? $BrgBukti[$s['BrgBukti']] .', ' :  $s['BrgBukti'] .', ') }}
-                @elseif($s['tipe'] == 'status_kelengkapan')
-                {{( isset($s['status_kelengkapan'])  ?( ($s['status_kelengkapan'] == 'Y' ) ? 'Lengkap' .' ,' : 'Belum Lengkap'.' ,') :  '' )}}
-                @else
-                {{isset($s['keyword']) ? $s['keyword'] .', ' : ''}}
-                @endif
-                @else
-                {{isset($s['keyword']) ? $s['keyword'] .' = ': ''}}
-                @endif
-
-                Urutan =
-
-                @if(isset($s['order']))
-                @if($s['order'] == 'desc')
-                Bawah ke Atas   ,
-                @elseif($s['order'] == 'asc')
-                Atas ke bawah  ,
-                @else
-                Bawah ke Atas ,
-                @endif
-                @endif
+            <i>                
                 Jumlah Per Halaman =
                 @if(isset($s['limit']))
                 {{$s['limit']}}

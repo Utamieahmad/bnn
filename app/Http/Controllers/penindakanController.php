@@ -304,8 +304,8 @@ class penindakanController extends Controller
               "fisik_lohat_bahasa" => $request->input('fisik_lohat_bahasa'),
               "fisik_suku_ras" => $request->input('fisik_suku_ras'),
               "file_foto_tampak_depan" => $request->input('file_foto_tampak_depan'),
-              "file_foto_tampak_sampingkanan" => $request->input('file_foto_tampak_sampingkanan'),
-              "file_foto_tampak_sampingkiri" => $request->input('file_foto_tampak_sampingkiri'),
+              "file_foto_tampak_sampingkanan" => $request->input('file_foto_tampaksampingkanan'),
+              "file_foto_tampak_sampingkiri" => $request->input('file_foto_tampaksampingkiri'),
               // "file_laporan" => $request->input('file_laporan'),
               "id_instansi" => $request->input('id_instansi')
             ]
@@ -351,8 +351,8 @@ class penindakanController extends Controller
         "fisik_lohat_bahasa" => $request->input('fisik_lohat_bahasa'),
         "fisik_suku_ras" => $request->input('fisik_suku_ras'),
         "file_foto_tampak_depan" => $request->input('file_foto_tampak_depan'),
-        "file_foto_tampak_sampingkanan" => $request->input('file_foto_tampak_sampingkanan'),
-        "file_foto_tampak_sampingkiri" => $request->input('file_foto_tampak_sampingkiri'),
+        "file_foto_tampak_sampingkanan" => $request->input('file_foto_tampaksampingkanan'),
+        "file_foto_tampak_sampingkiri" => $request->input('file_foto_tampaksampingkiri'),
         // "file_laporan" => $request->input('file_laporan'),
         "id_instansi" => $request->input('id_instansi'));
 
@@ -395,9 +395,9 @@ class penindakanController extends Controller
             $result1 = json_decode($requestfile->getBody()->getContents(), true);
          }
 
-         if ($request->file('file_foto_tampak_sampingkiri') != ''){
-             $fileName = $inputId.'-'.$request->file('file_foto_tampak_sampingkiri')->getClientOriginalName();
-             $request->file('file_foto_tampak_sampingkiri')->storeAs('penindakanDanPengejaran', $fileName);
+         if ($request->file('file_foto_tampaksampingkiri') != ''){
+             $fileName = $inputId.'-'.$request->file('file_foto_tampaksampingkiri')->getClientOriginalName();
+             $request->file('file_foto_tampaksampingkiri')->storeAs('penindakanDanPengejaran', $fileName);
 
              $requestfile = $client->request('PUT', $baseUrl.'/api/dpo/'.$inputId,
                      [
@@ -413,9 +413,9 @@ class penindakanController extends Controller
              $result2 = json_decode($requestfile->getBody()->getContents(), true);
           }
 
-          if ($request->file('file_foto_tampak_sampingkanan') != ''){
-              $fileName = $inputId.'-'.$request->file('file_foto_tampak_sampingkanan')->getClientOriginalName();
-              $request->file('file_foto_tampak_sampingkanan')->storeAs('penindakanDanPengejaran', $fileName);
+          if ($request->file('file_foto_tampaksampingkanan') != ''){
+              $fileName = $inputId.'-'.$request->file('file_foto_tampaksampingkanan')->getClientOriginalName();
+              $request->file('file_foto_tampaksampingkanan')->storeAs('penindakanDanPengejaran', $fileName);
 
               $requestfile = $client->request('PUT', $baseUrl.'/api/dpo/'.$inputId,
                       [
@@ -612,8 +612,8 @@ class penindakanController extends Controller
             "fisik_lohat_bahasa" => $request->input('fisik_lohat_bahasa'),
             "fisik_suku_ras" => $request->input('fisik_suku_ras'),
             "file_foto_tampak_depan" => $request->input('file_foto_tampak_depan'),
-            "file_foto_tampak_sampingkanan" => $request->input('file_foto_tampak_sampingkanan'),
-            "file_foto_tampak_sampingkiri" => $request->input('file_foto_tampak_sampingkiri'),
+            "file_foto_tampak_sampingkanan" => $request->input('file_foto_tampaksampingkanan'),
+            "file_foto_tampak_sampingkiri" => $request->input('file_foto_tampaksampingkiri'),
             // "file_laporan" => $request->input('file_laporan'),
             "id_instansi" => $request->input('id_instansi')
           ]
@@ -660,8 +660,8 @@ class penindakanController extends Controller
       "fisik_lohat_bahasa" => $request->input('fisik_lohat_bahasa'),
       "fisik_suku_ras" => $request->input('fisik_suku_ras'),
       "file_foto_tampak_depan" => $request->input('file_foto_tampak_depan'),
-      "file_foto_tampak_sampingkanan" => $request->input('file_foto_tampak_sampingkanan'),
-      "file_foto_tampak_sampingkiri" => $request->input('file_foto_tampak_sampingkiri'),
+      "file_foto_tampak_sampingkanan" => $request->input('file_foto_tampaksampingkanan'),
+      "file_foto_tampak_sampingkiri" => $request->input('file_foto_tampaksampingkiri'),
       // "file_laporan" => $request->input('file_laporan'),
       "id_instansi" => $request->input('id_instansi'));
 
@@ -696,9 +696,9 @@ class penindakanController extends Controller
             $result1 = json_decode($requestfile->getBody()->getContents(), true);
          }
 
-         if ($request->file('file_foto_tampak_sampingkiri') != ''){
-             $fileName = $inputId.'-'.$request->file('file_foto_tampak_sampingkiri')->getClientOriginalName();
-             $request->file('file_foto_tampak_sampingkiri')->storeAs('penindakanDanPengejaran', $fileName);
+         if ($request->file('file_foto_tampaksampingkiri') != ''){
+             $fileName = $inputId.'-'.$request->file('file_foto_tampaksampingkiri')->getClientOriginalName();
+             $request->file('file_foto_tampaksampingkiri')->storeAs('penindakanDanPengejaran', $fileName);
 
              $requestfile = $client->request('PUT', $baseUrl.'/api/dpo/'.$inputId,
                      [
@@ -1000,10 +1000,10 @@ class penindakanController extends Controller
 
       $data = DB::table('v_berantas_dpo');
       if ($request->date_from != '') {
-          $data->where('created_date', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+          $data->whereDate('created_date', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
       }
       if ($request->date_to != '' ) {
-          $data->where('created_date', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+          $data->whereDate('created_date', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
       }
 
       $data = $data->orderBy('created_date', 'desc')->get();

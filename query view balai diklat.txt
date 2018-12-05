@@ -1,0 +1,5 @@
+CREATE OR REPLACE VIEW public.v_badiklat_kegiatan
+AS SELECT badiklat_kegiatan.*,
+    t2.nm_wilayah AS lokasi_kegiatan_namakabkota
+   FROM badiklat_kegiatan
+     LEFT JOIN tr_wilayah t2 ON badiklat_kegiatan.tempat_idkabkota = t2.id_wilayah;

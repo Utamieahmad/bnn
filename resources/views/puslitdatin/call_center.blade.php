@@ -46,6 +46,9 @@
                                   <a href="{{route('print_page_puslitdatin',['call_center',$kondisi])}}" class="btn btn-lg btn-round btn-dark">
                                     <i class="fa fa-print"></i> Cetak
                                   </a>
+                                  <a href="#" class="btn btn-lg btn-round btn-success" data-toggle="modal" data-target="#modal_report_excel" onClick="reportExcel(event,this)" data-url="{{url('puslitdatin/downloadcallcenter')}}">
+                                      <i class="fa fa-file"></i> Excel
+                                  </a>
                               </div>
                             <div class="clearfix"></div>
                              <div class="ln_solid"></div>
@@ -124,4 +127,5 @@
           </div>
 <!-- Add a comment to this line -->
        </div>
+@include('modal.modal_report_excel')
 @endsection

@@ -112,7 +112,7 @@
 
                                         <div class="form-group">
                                             <label for="lokasilahan_idkabkota" class="col-md-3 col-sm-3 col-xs-12 control-label">Lokasi Alih Fungsi Lahan (Kab/Kota)</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12"> 
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <select name="lokasilahan_idkabkota" id="lokasilahan_idkabkota" class="select2 form-control" placeholder="Pilih Kabupaten/Kota" tabindex="-1" aria-hidden="true">
                                                     <option value="" {{(isset($data->lokasilahan_idkabkota) ? "" : 'selected=selected')}}> Pilih Kabupaten/Kota </option>
                                                     {!! dropdownLokasiKabupaten($data->lokasilahan_idkabkota) !!}
@@ -222,7 +222,7 @@
                                 <div class="form-actions fluid">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button type="submit" class="btn btn-success">KIRIM</button>
+                                            <button type="submit" class="btn btn-success">SIMPAN</button>
                                             <a href="{{route('altdev_lahan_ganja')}}" class="btn btn-primary" type="button">BATAL</a>
                                         </div>
                                     </div>

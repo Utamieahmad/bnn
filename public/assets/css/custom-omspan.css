@@ -15,6 +15,12 @@
 .dt-up > tfoot > tr > td {
 	font-weight: bold !important;
 }
+.dt-hal3dipa > tbody > tr > td:nth-child(5),
+.dt-hal3dipa > tbody > tr > td:nth-child(6),
+.dt-hal3dipa > tbody > tr > td:nth-child(7) {
+	text-align: right !important;
+	padding-right: 5px;
+}
 /*.border_b {
 	border-bottom:1px #9aa2af !important;
 }*/
@@ -43,4 +49,7 @@
 }*/
 .x_panel {
 	background-color: rgba(255, 255, 255, 0.5) !important;
+}
+.hover {
+	background-color: #b7cde2;
 }

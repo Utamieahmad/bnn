@@ -19,7 +19,7 @@
                     {{csrf_field()}}
                     <input type="hidden" name="id" class="id" value=""/>
                     <input type="hidden" name="index" class="index" value=""/>
-                    
+
                     <div class="form-body">
                         <div class="form-group">
                             <label for="tgl_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Nama</label>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tgl_kegiatan" class="col-md-3 col-sm-3 col-xs-12 control-label">Profesi</label>
-                            <div class='col-md-9 col-sm-9 col-xs-12 input-group'> 
+                            <div class='col-md-9 col-sm-9 col-xs-12 input-group'>
                                 <div class="radio">
                                     @if($monev_profesi)
                                         @foreach($monev_profesi as $lkey=>$lvalue)
@@ -141,7 +141,7 @@
                     Data Peserta Berhasil Diperbarui
                 </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal" > Batal </button>
-                <button type="submit" class="btn btn-success" onClick="submit_modal_update(event,this,'modal_edit_form')"> Kirim </button>
+                <button type="submit" class="btn btn-success" onClick="submit_modal_update(event,this,'modal_edit_form')"> SIMPAN </button>
             </div>
         </div>
     </div>
