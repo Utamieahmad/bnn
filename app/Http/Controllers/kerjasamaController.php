@@ -954,24 +954,37 @@ class KerjasamaController extends Controller
           $DataArray[$key]['Tempat Penandatanganan'] = $value->tempat_ttd;
           $DataArray[$key]['Tema'] = $value->tema;
           
-          $meta_ruanglingkup_kerjasama = json_decode($value->meta_ruanglingkup_kerjasama,true);
-          dd($meta_ruanglingkup_kerjasama);
-          $merge_narasumber = "";
-           if(count($meta_narasumber)){
-               for($j = 0 ; $j < count($meta_narasumber); $j++){
-                    $merge_narasumber.= 'Narasumber : '.$meta_narasumber[$j]['narasumber']."\n".                            
-                                        'Materi : '.$meta_narasumber[$j]['materi']."\n"."\n";
+          $meta_ruanglingkup_kerjasama = json_decode($value->meta_ruanglingkup_kerjasama,true);          
+          $merge_ruanglingkup = "";
+           if(count($meta_ruanglingkup_kerjasama)){
+               $ke = 1;
+               for($j = 0 ; $j < count($meta_ruanglingkup_kerjasama); $j++){
+                    $merge_ruanglingkup.= 'Ruang lingkup kejasama ke '.$ke.' : '.$meta_ruanglingkup_kerjasama[$j]['list_isi']."\n"."\n";
+                    $ke++;
                }
            }          
-          $DataArray[$key]['Narasumber'] = $merge_narasumber;
+          $DataArray[$key]['Ruang Lingkup Kerja Sama'] = $merge_ruanglingkup;
           
-          $DataArray[$key]['Status'] = ($value['status'] == 'Y') ? "Lengkap" : "Tidak Lengkap";
+          $meta_unitkerja_pelaksana = json_decode($value->meta_unitkerja_pelaksana,true);         
+          $merge_unitkerja = "";
+           if(count($meta_unitkerja_pelaksana)){
+               $ke = 1;
+               for($j = 0 ; $j < count($meta_unitkerja_pelaksana); $j++){
+                    $merge_unitkerja.= 'Pelaksana ke '.$ke.' : '.$meta_unitkerja_pelaksana[$j]['list_isi']."\n";
+                    $ke++;
+               }
+           }          
+          $DataArray[$key]['Unit Kerja Pelaksana'] = $merge_unitkerja;
+          
+          $DataArray[$key]['Sumber Anggaran'] = $value->kode_sumberanggaran;
+          $DataArray[$key]['Keterangan'] = $value->keterangan;
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
 
           $i = $i +1;
         }
 
         $data = $DataArray;
-        $name = 'Data Kegiatan Perjanjian Nota Kesepahaman '.Carbon::now()->format('Y-m-d H:i:s');
+        $name = 'Download Data Kegiatan Perjanjian Nota Kesepahaman '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 
@@ -1017,6 +1030,53 @@ class KerjasamaController extends Controller
         $name = 'Data Kegiatan Kerjasama Lainnya '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
+    
+    public function downloadLainnya(Request $request){
+        $token = $request->session()->get('token');
+        $client = new Client();
+        $baseUrl = URL::to($this->urlapi());
+        
+        $data_request = DB::table('hukerkerjasama_lainnya');             
+        if ($request->date_from != '') {
+            $data_request->whereDate('tgl_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->whereDate('tgl_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tgl_pelaksanaan', 'desc')->get();             
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['No Surat Perintah'] = $value->no_sprint;
+          $DataArray[$key]['Nama Kegiatan'] = $value->nm_kegiatan;
+          $DataArray[$key]['Tanggal Pelaksanaan'] = date('d-m-Y', strtotime($value->tgl_pelaksanaan));
+          $DataArray[$key]['Tempat Pelaksanaan'] = $value->tempat_pelaksanaan;
+          $DataArray[$key]['Narasumber'] = $value->narasumber;
+          
+          $meta_peserta = json_decode($value->meta_peserta,true);          
+          
+          $merge_peserta = "";
+           if(count($meta_peserta)){               
+               for($j = 0 ; $j < count($meta_peserta); $j++){
+                    $merge_peserta.= 'Nama Instansi : '.$meta_peserta[$j]['list_nama_instansi']."\n".
+                                     'Alamat Instansi : '.$meta_peserta[$j]['list_alamat_instansi']."\n".
+                                     'Jumlah Peserta : '.$meta_peserta[$j]['list_jumlah_peserta']."\n"."\n";                    
+               }
+           }          
+          $DataArray[$key]['Peserta'] = $merge_peserta;
+          
+          $DataArray[$key]['Sumber Anggaran'] = $value->sumberanggaran;
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
+
+          $i = $i +1;
+        }
+
+        $data = $DataArray;
+        $name = 'Download Data Kegiatan Kerjasama Lainnya '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
 
     public function printMonev(Request $request){
         $client = new Client();
@@ -1060,6 +1120,41 @@ class KerjasamaController extends Controller
 
         $data = $DataArray;
         $name = 'Data Kegiatan Kerja Sama Monev '.Carbon::now()->format('Y-m-d H:i:s');
+        $this->printData($data, $name);
+    }
+    
+    public function downloadMonev(Request $request){
+        $token = $request->session()->get('token');
+        $client = new Client();
+        $baseUrl = URL::to($this->urlapi());
+        
+        $data_request = DB::table('hukerkerjasama_monev');             
+        if ($request->date_from != '') {
+            $data_request->whereDate('tanggal_pelaksanaan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        }
+        if ($request->date_to != '' ) {
+            $data_request->whereDate('tanggal_pelaksanaan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        }
+        $result = $data_request->orderBy('tanggal_pelaksanaan', 'desc')->get();     
+        
+        $DataArray = [];
+
+        $i = 1;
+        foreach ($result as $key => $value) {
+          $DataArray[$key]['No'] = $i;
+          $DataArray[$key]['No. Surat Perintah'] = $value->nomor_sprint;
+          $DataArray[$key]['Nama Kegiatan'] = $value->nama_kegiatan;
+          $DataArray[$key]['Tanggal Pelaksanaan'] = date('d-m-Y', strtotime($value->tanggal_pelaksanaan));
+          $DataArray[$key]['Tempat Pelaksanaan'] = $value->tempat_pelaksanaan;
+          $DataArray[$key]['Alamat Pelaksanaan Kegiatan'] = $value->lokasi_kegiatan;
+          $DataArray[$key]['Sumber Anggaran'] = $value->kodesumberanggaran;
+          $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
+
+          $i = $i +1;
+        }
+
+        $data = $DataArray;
+        $name = 'Download Data Kegiatan Kerja Sama Monev '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 
