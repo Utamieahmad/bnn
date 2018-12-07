@@ -204,7 +204,7 @@ class balaiBesarController extends Controller{
         }
         $this->data['jenis_kegiatan']  =$arr_kegiatan;
 
-        // $query = execute_api('/api/lookup/balai_besar_instansi','GET');
+        // $query = execute_api('api/lookup/balai_besar_instansi','GET');
 				$query= $client->request('GET', $baseUrl.'/api/lookup/balai_besar_instansi',
            [
                'headers' =>
@@ -707,7 +707,7 @@ class balaiBesarController extends Controller{
             }
             $this->data['jenis_kegiatan']  =$arr_kegiatan;
 
-            $query = execute_api('/api/lookup/balai_besar_instansi','GET');
+            $query = execute_api('api/lookup/balai_besar_instansi','GET');
             if($query['code'] == 200 && $query['status'] != 'error'){
                 $instansi  = $query['data'];
             }else{
@@ -743,7 +743,7 @@ class balaiBesarController extends Controller{
 
         $data = $data->orderBy('tanggal_mulai', 'desc')->get();
 
-        $query = execute_api('/api/lookup/balai_besar_instansi','GET');
+        $query = execute_api('api/lookup/balai_besar_instansi','GET');
         if($query['code'] == 200 && $query['status'] != 'error'){
             $instansi  = $query['data'];
         }else{

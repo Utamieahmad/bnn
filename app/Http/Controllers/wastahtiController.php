@@ -1475,7 +1475,7 @@ class wastahtiController extends Controller
 
     // $page = 'page='.$request->current_page;
     // $id_wil = $request->session()->get('wilayah');
-    $inteljaringan = execute_api('/api/pemusnahan'.$kondisi, 'GET');
+    $inteljaringan = execute_api('api/pemusnahan'.$kondisi, 'GET');
     $limit = config('app.limit');
     $start_number = ($limit * ($request->page -1 )) + 1;
     $result = [];
@@ -1657,7 +1657,7 @@ class wastahtiController extends Controller
 
     // $page = 'page='.$request->current_page;
     // $id_wil = $request->session()->get('wilayah');
-    $inteljaringan = execute_api('/api/tahanan'.$kondisi, 'GET');
+    $inteljaringan = execute_api('api/tahanan'.$kondisi, 'GET');
     $limit = config('app.limit');
     $start_number = ($limit * ($request->page -1 )) + 1;
     $result = [];
