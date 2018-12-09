@@ -492,4 +492,35 @@ class arahanController extends Controller
             $status_kelengkapan=false;
           }
     }
+
+    public function downloadArahan(Request $request){
+    
+      $data = DB::table('v_arahan_pimpinan');
+      if ($request->date_from != '') {
+        $data->where('tgl_arahan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_arahan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_arahan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $satker = json_decode($value->satker);
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Arahan'] = ( $value->tgl_arahan ? date('d/m/Y',strtotime($value->tgl_arahan)) : '');
+            $result[$key]['Satker'] = $satker->nama_satker ;
+            $result[$key]['Tanggal Kadaluarsa'] = ( $value->tgl_kadaluarsa ? date('d/m/Y',strtotime($value->tgl_kadaluarsa)) : '');
+            $result[$key]['Judul Arahan'] = $value->judul_arahan;
+            $result[$key]['Isi Arahan'] =$value->isi_arahan;
+            
+            $i = $i +1;
+          }
+        $name = 'Export Arahan Pimpinan '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
 }

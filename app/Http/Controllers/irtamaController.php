@@ -6345,7 +6345,7 @@ class irtamaController extends Controller
     public function ajaxIrtamaRekomendasi(Request $request,$id){
       $tipe = $request->tipe;
       $tipe = ucfirst($tipe);
-      $query = execute_api('/api/irtamalharekomendasi/'.$id,'GET');
+      $query = execute_api('api/irtamalharekomendasi/'.$id,'GET');
       $params = [];
       if(($query['status'] != 'error') && ($query['code'] == 200) ){
         $params = $query['data'];
@@ -6430,7 +6430,7 @@ class irtamaController extends Controller
       if ($request->ajax()) {
         $id = $request->id;
         if($id){
-            $data_request = execute_api('/api/rikturiksus/'.$id,'DELETE');
+            $data_request = execute_api('api/rikturiksus/'.$id,'DELETE');
 
             $this->form_params['delete_id'] = $id;
             $trail['audit_menu'] = 'Inspektorat Utama - Audit dengan Tujuan Tertentu';
@@ -6457,7 +6457,7 @@ class irtamaController extends Controller
       if ($request->ajax()) {
         $id = $request->id;
         if($id){
-            $data_request = execute_api('/api/irtamasosialisasi/'.$id,'DELETE');
+            $data_request = execute_api('api/irtamasosialisasi/'.$id,'DELETE');
             $this->form_params['delete_id'] = $id;
             $trail['audit_menu'] = 'Inspektorat Utama - Sosialisasi';
             $trail['audit_event'] = 'delete';

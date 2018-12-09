@@ -55,14 +55,14 @@ class SettamaController extends Controller
     		if(($datas->code == 200) && ($datas->status != 'error') ){
     			//pelaksana bagian
     			$id_settama_lookup = $datas->data[0]->id_settama_lookup;
-				$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
+				$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
 				if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 		        	$this->data['bagian'] = $request_bagian->data;
 				}else {
 				    $this->data['bagian'] = [];
 				}
 
-				$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
+				$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
 
        if ($d->anggaran_id != '') {
           $this->data['data_anggaran'] = $this->globalGetAnggaran($request->session()->get('token'), $d->anggaran_id);
@@ -494,7 +494,7 @@ class SettamaController extends Controller
                     ];
         $filter_parameter['javascript'] = 'onChange=showPeriode(this)';
         $filter_parameter['route'] = $request->route()->getName();
-        $request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/2','GET');
+        $request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/2','GET');
 		if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
         	$this->data['kegiatan'] = $request_kegiatan->data;
 		}else {
@@ -552,14 +552,14 @@ class SettamaController extends Controller
     		if(($datas->code == 200) && ($datas->status != 'error') ){
     			//pelaksana bagian
     			$id_settama_lookup = $datas->data[0]->id_settama_lookup;
-				$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
+				$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
 				if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 		        	$this->data['bagian'] = $request_bagian->data;
 				}else {
 				    $this->data['bagian'] = [];
 				}
 
-				$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
+				$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
 
 		       if ($d->anggaran_id != '') {
 		          $this->data['data_anggaran'] = $this->globalGetAnggaran($request->session()->get('token'), $d->anggaran_id);
@@ -737,14 +737,14 @@ class SettamaController extends Controller
 		    }else{
 		        $this->data['pelaksana'] = [];
 		    }
-			$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent=2','GET');
+			$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent=2','GET');
 
 			if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 	        	$this->data['bagian'] = $request_bagian->data;
 			}else {
 			    $this->data['bagian'] = [];
 			}
-			$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/2','GET');
+			$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/2','GET');
 			if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
 	        	$this->data['kegiatan'] = $request_kegiatan->data;
 			}else {
@@ -1123,7 +1123,7 @@ class SettamaController extends Controller
     		$this->data['data'] = [];
     	}
 
-    	$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/2','GET');
+    	$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/2','GET');
 		if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
         	$this->data['kegiatan'] = $request_kegiatan->data;
 		}else {
@@ -1172,7 +1172,7 @@ class SettamaController extends Controller
     		if(($datas->code == 200) && ($datas->status != 'error') ){
     			//pelaksana bagian
     			$id_settama_lookup = $datas->data[0]->id_settama_lookup;
-				$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
+				$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
 				if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 		        	$this->data['bagian'] = $request_bagian->data;
 				}else {
@@ -1182,7 +1182,7 @@ class SettamaController extends Controller
 	       if ($d->anggaran_id != '') {
 	          $this->data['data_anggaran'] = $this->globalGetAnggaran($request->session()->get('token'), $d->anggaran_id);
 	       }
-				$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
+				$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
 				if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
 		        	$this->data['kegiatan'] = $request_kegiatan->data;
 				}else {
@@ -1360,14 +1360,14 @@ class SettamaController extends Controller
 		        $this->data['pelaksana'] = [];
 		    }
 
-			$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent=1','GET');
+			$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent=1','GET');
 			if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 	        	$this->data['bagian'] = $request_bagian->data;
 			}else {
 			    $this->data['bagian'] = [];
 			}
 
-			$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/1','GET');
+			$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/1','GET');
 			if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
 	        	$this->data['kegiatan'] = $request_kegiatan->data;
 			}else {
@@ -1951,7 +1951,7 @@ class SettamaController extends Controller
 	        $filtering = false;
 	        $this->data['kondisi'] = $current_page;
 	      }
-	    $request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/2','GET');
+	    $request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/2','GET');
 		if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
         	$this->data['kegiatan'] = $request_kegiatan->data;
 		}else {
@@ -1975,14 +1975,14 @@ class SettamaController extends Controller
     		if(($datas->code == 200) && ($datas->status != 'error') ){
     			//pelaksana bagian
     			$id_settama_lookup = $datas->data[0]->id_settama_lookup;
-				$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
+				$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
 				if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 		        	$this->data['bagian'] = $request_bagian->data;
 				}else {
 				    $this->data['bagian'] = [];
 				}
 
-				$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
+				$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
 
        if ($d->anggaran_id != '') {
           $this->data['data_anggaran'] = $this->globalGetAnggaran($request->session()->get('token'), $d->anggaran_id);
@@ -2160,14 +2160,14 @@ class SettamaController extends Controller
 		    }else{
 		        $this->data['pelaksana'] = [];
 		    }
-			$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent=4','GET');
+			$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent=4','GET');
 			;
 			if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 	        	$this->data['bagian'] = $request_bagian->data;
 			}else {
 			    $this->data['bagian'] = [];
 			}
-				$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/4','GET');
+				$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/4','GET');
 				if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
 		        	$this->data['kegiatan'] = $request_kegiatan->data;
 				}else {
@@ -2506,7 +2506,7 @@ class SettamaController extends Controller
 			$this->data['filter'] = $this->selected;
 		}
 
-		$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/2','GET');
+		$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/2','GET');
 		if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
         	$this->data['kegiatan'] = $request_kegiatan->data;
 		}else {
@@ -2578,14 +2578,14 @@ class SettamaController extends Controller
     		if(($datas->code == 200) && ($datas->status != 'error') ){
     			//pelaksana bagian
     			$id_settama_lookup = $datas->data[0]->id_settama_lookup;
-				$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
+				$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent='.$id_settama_lookup,'GET');
 				if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 		        	$this->data['bagian'] = $request_bagian->data;
 				}else {
 				    $this->data['bagian'] = [];
 				}
 
-				$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
+				$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/'.$id_settama_lookup,'GET');
 
 				if ($d->anggaran_id != '') {
 					$this->data['data_anggaran'] = $this->globalGetAnggaran($request->session()->get('token'), $d->anggaran_id);
@@ -2797,13 +2797,13 @@ class SettamaController extends Controller
 		    }else{
 		        $this->data['pelaksana'] = [];
 	    	}
-			$request_bagian = execute_api_json('/api/pelaksana_bagian?type=pelaksana&id_lookup_parent=3','GET');
+			$request_bagian = execute_api_json('api/pelaksana_bagian?type=pelaksana&id_lookup_parent=3','GET');
 			if(($request_bagian->code == 200) && ($request_bagian->status != 'error') ){
 	        	$this->data['bagian'] = $request_bagian->data;
 			}else {
 			    $this->data['bagian'] = [];
 			}
-			$request_kegiatan = execute_api_json('/api/settama_jenis_kegiatan/3','GET');
+			$request_kegiatan = execute_api_json('api/settama_jenis_kegiatan/3','GET');
 			if(($request_kegiatan->code == 200) && ($request_kegiatan->status != 'error') ){
 	        	$this->data['kegiatan'] = $request_kegiatan->data;
 			}else {

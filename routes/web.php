@@ -1207,6 +1207,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_arahan_pimpinan','arahanController@deletearahanPimpinan')->name('delete_arahan_pimpinan');
 		});
 		Route::get('print_arahan_pimpinan/{page?}','arahanController@printPage')->name('print_arahan_pimpinan');
+		Route::post('/downloadarahan', 'arahanController@downloadArahan');
 	});
 
 	Route::group(['prefix'=>'master'],function(){

@@ -242,7 +242,7 @@ class intelijenController extends Controller
 
 
 		$id_jaringan = $request->id;
-		$data_lkn = execute_api('/api/inteljaringan/'.$id_jaringan,'GET');
+		$data_lkn = execute_api('api/inteljaringan/'.$id_jaringan,'GET');
 		$token = $request->session()->get('token');
 		$id = "";
 		if($data_lkn['status'] != 'error' && $data_lkn['code'] == 200){
@@ -254,47 +254,47 @@ class intelijenController extends Controller
 			return redirect('pemberantasan/dir_intelijen/add_pendataan_jaringan')->with('message',$this->messages);
 		}
 
-		$LKN = execute_api('/api/kasus/'.$id,'GET');
+		$LKN = execute_api('api/kasus/'.$id,'GET');
 
 
 
 
 		// $jenisKasus = $this->globalJnsKasus($token);
 
-		$tersangka = execute_api('/api/gettersangka/'.$id,'GET');
+		$tersangka = execute_api('api/gettersangka/'.$id,'GET');
 
-		$brgBuktiNarkotika = execute_api('/api/getbbnarkotika/'.$id,'GET');
+		$brgBuktiNarkotika = execute_api('api/getbbnarkotika/'.$id,'GET');
 
-		$brgBuktiPrekursor = execute_api('/api/getbbprekursor/'.$id,'GET');
+		$brgBuktiPrekursor = execute_api('api/getbbprekursor/'.$id,'GET');
 
-		$brgBuktiAsetBarang = execute_api('/api/getbbaset/'.$id,'POST',['jenis' => 'ASET_BARANG']);
+		$brgBuktiAsetBarang = execute_api('api/getbbaset/'.$id,'POST',['jenis' => 'ASET_BARANG']);
 
-		$brgBuktiAsetTanah = execute_api('/api/getbbaset/'.$id,'POST',['jenis' => 'ASET_TANAH']);
+		$brgBuktiAsetTanah = execute_api('api/getbbaset/'.$id,'POST',['jenis' => 'ASET_TANAH']);
 
-		$brgBuktiAsetBangunan = execute_api('/api/getbbaset/'.$id,'POST',['jenis' => 'ASET_BANGUNAN']);
+		$brgBuktiAsetBangunan = execute_api('api/getbbaset/'.$id,'POST',['jenis' => 'ASET_BANGUNAN']);
 
-		$brgBuktiAsetLogam = execute_api('/api/getbbaset/'.$id,'POST',['jenis' => 'ASET_LOGAMMULIA']);
+		$brgBuktiAsetLogam = execute_api('api/getbbaset/'.$id,'POST',['jenis' => 'ASET_LOGAMMULIA']);
 
-		$brgBuktiAsetUang = execute_api('/api/getbbaset/'.$id,'POST',['jenis' => 'ASET_UANGTUNAI']);
+		$brgBuktiAsetUang = execute_api('api/getbbaset/'.$id,'POST',['jenis' => 'ASET_UANGTUNAI']);
 
-		$brgBuktiAsetRekening = execute_api('/api/getbbaset/'.$id,'POST',['jenis' => 'ASET_REKENING']);
+		$brgBuktiAsetRekening = execute_api('api/getbbaset/'.$id,'POST',['jenis' => 'ASET_REKENING']);
 
-		$brgBuktiAsetSurat = execute_api('/api/getbbaset/'.$id,'POST',['jenis' => 'ASET_SURATBERHARGA']);
+		$brgBuktiAsetSurat = execute_api('api/getbbaset/'.$id,'POST',['jenis' => 'ASET_SURATBERHARGA']);
 
-		$brgBuktiNonNarkotika = execute_api('/api/getbbnonnarkotika/'.$id,'GET');
-
-
-
-		$jenisBrgBuktiNarkotika = execute_api('/api/jnsbrgbukti/','POST',['jenis' => ['01', '02' ]]);
-
-		$jenisBrgBuktiPrekursor = execute_api('/api/jnsbrgbukti/','POST',['jenis' => ['06']]);
-
-		$satuan = execute_api('/api/getsatuan/','GET');
-
-		$propkab = execute_api('/api/getpropkab/','GET');
+		$brgBuktiNonNarkotika = execute_api('api/getbbnonnarkotika/'.$id,'GET');
 
 
-		$requestWilayah =execute_api('/api/propinsi','GET');
+
+		$jenisBrgBuktiNarkotika = execute_api('api/jnsbrgbukti/','POST',['jenis' => ['01', '02' ]]);
+
+		$jenisBrgBuktiPrekursor = execute_api('api/jnsbrgbukti/','POST',['jenis' => ['06']]);
+
+		$satuan = execute_api('api/getsatuan/','GET');
+
+		$propkab = execute_api('api/getpropkab/','GET');
+
+
+		$requestWilayah =execute_api('api/propinsi','GET');
 
 		if( ($requestWilayah['status'] != 'error') && ($requestWilayah['code'] == 200)){
 			$wilayah_list = 	$requestWilayah['data'];
@@ -305,7 +305,7 @@ class intelijenController extends Controller
 		if($LKN['data']['kasus_tkp_idprovinsi'] == "kosong" || $LKN['data']['kasus_tkp_idprovinsi'] == ""){
 				$kotaKab = "kosong";
 		} else {
-			$requestFilterWilayah = execute_api('/api/filterwilayah/'.$LKN['data']['kasus_tkp_idprovinsi'],'GET');
+			$requestFilterWilayah = execute_api('api/filterwilayah/'.$LKN['data']['kasus_tkp_idprovinsi'],'GET');
 			if($requestFilterWilayah['status'] != 'error' && $requestFilterWilayah['code'] == 200){
 				$kotaKab = 	$requestFilterWilayah['data'];
 			}else{
@@ -941,7 +941,7 @@ class intelijenController extends Controller
 
 		public function getDetailTersangka(Request $request){
 			$id = $request->id;
-			$tersangka = execute_api('/api/getDetailTersangka/'.$id,'GET');
+			$tersangka = execute_api('api/getDetailTersangka/'.$id,'GET');
 			if(($tersangka['code'] == 200) && ($tersangka['code'] != 'error') ){
 				$jenis_kelamin = config('lookup.jenis_kelamin');
 				$pendidikan_akhir = config('lookup.pendidikan_akhir');
