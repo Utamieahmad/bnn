@@ -41,7 +41,7 @@ class MasyarakatController extends Controller
       }
       /*filter */
       $this->data['instansi'] = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
-      $sasaran = execute_api('/api/lookup/sasaran','GET');
+      $sasaran = execute_api('api/lookup/sasaran','GET');
       if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
         $this->data['sasaran']=$sasaran['data'];
       }else{
@@ -195,7 +195,7 @@ class MasyarakatController extends Controller
       $client = new Client();
       $baseUrl = URL::to('/');
 
-      $sasaran = execute_api('/api/lookup/sasaran','GET');
+      $sasaran = execute_api('api/lookup/sasaran','GET');
       if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
         $this->data['sasaran']=$sasaran['data'];
       }else{
@@ -265,7 +265,7 @@ class MasyarakatController extends Controller
      }
 
 
-      $sasaran = execute_api('/api/lookup/sasaran','GET');
+      $sasaran = execute_api('api/lookup/sasaran','GET');
       if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
         $this->data['sasaran']=$sasaran['data'];
       }else{
@@ -1253,7 +1253,7 @@ class MasyarakatController extends Controller
 
         $this->data['start_number'] =$start_number;
         $this->data['title'] = "psmpelatihan";
-        $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+        $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
         if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
           $this->data['sasaran'] = $requestSasaran['data'];
         }else{
@@ -1279,7 +1279,7 @@ class MasyarakatController extends Controller
         $requestPropinsiKabupaten = $client->request('GET', $baseUrl.'/api/getpropkab');
         $propkab = json_decode($requestPropinsiKabupaten->getBody()->getContents(), true);
 
-        $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+        $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
         if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
           $this->data['sasaran'] = $requestSasaran['data'];
         }else{
@@ -1333,7 +1333,7 @@ class MasyarakatController extends Controller
           $this->data['data_detail'] = [];
         }
         // exit();
-        $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+        $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
         if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
           $this->data['sasaran'] = $requestSasaran['data'];
         }else{
@@ -2779,7 +2779,7 @@ class MasyarakatController extends Controller
         $this->data['route'] = $request->route()->getName();
 
         /*data filter*/
-        $sasaran = execute_api('/api/lookup/sasaran','GET');
+        $sasaran = execute_api('api/lookup/sasaran','GET');
         if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
           $this->data['sasaran']=$sasaran['data'];
         }else{
@@ -2825,7 +2825,7 @@ class MasyarakatController extends Controller
           $this->data['data'] = [];
       }
       $this->data['breadcrumps'] = breadcrump_rapat_kerja($request->route()->getName());
-      $sasaran = execute_api('/api/lookup/sasaran','GET');
+      $sasaran = execute_api('api/lookup/sasaran','GET');
       if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
         $this->data['sasaran']=$sasaran['data'];
       }else{
@@ -2909,7 +2909,7 @@ class MasyarakatController extends Controller
 
       }else{
         $this->data['breadcrumps'] = breadcrump_rapat_kerja($request->route()->getName());
-        $sasaran = execute_api('/api/lookup/sasaran','GET');
+        $sasaran = execute_api('api/lookup/sasaran','GET');
         if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
           $this->data['sasaran']=$sasaran['data'];
         }else{
@@ -3148,7 +3148,7 @@ class MasyarakatController extends Controller
         $this->data['route'] = $request->route()->getName();
 
         /*data filter*/
-        $sasaran = execute_api('/api/lookup/sasaran','GET');
+        $sasaran = execute_api('api/lookup/sasaran','GET');
         if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
           $this->data['sasaran']=$sasaran['data'];
         }else{
@@ -3195,7 +3195,7 @@ class MasyarakatController extends Controller
           $this->data['data'] = [];
       }
       $this->data['breadcrumps'] = breadcrump_rapat_kerja($request->route()->getName());
-      $sasaran = execute_api('/api/lookup/sasaran','GET');
+      $sasaran = execute_api('api/lookup/sasaran','GET');
       if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
         $this->data['sasaran']=$sasaran['data'];
       }else{
@@ -3279,7 +3279,7 @@ class MasyarakatController extends Controller
 
       }else{
         $this->data['breadcrumps'] = breadcrump_rapat_kerja($request->route()->getName());
-        $sasaran = execute_api('/api/lookup/sasaran','GET');
+        $sasaran = execute_api('api/lookup/sasaran','GET');
         if( ($sasaran['code'] == 200) && ( $sasaran ['status'] != 'error')){
           $this->data['sasaran']=$sasaran['data'];
         }else{
@@ -3527,7 +3527,7 @@ class MasyarakatController extends Controller
        if($data_request->code == 200 && $data_request->status != 'error'){
           $data = $data_request->data;
           $i = $start_number;
-          $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+          $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
           if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
             $this->data['sasaran'] = $requestSasaran['data'];
           }else{
@@ -3558,7 +3558,7 @@ class MasyarakatController extends Controller
          if($data_request->code == 200 && $data_request->status != 'error'){
             $data = $data_request->data;
             $i = $start_number;
-            $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+            $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
             if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
               $this->data['sasaran'] = $requestSasaran['data'];
             }else{
@@ -3589,7 +3589,7 @@ class MasyarakatController extends Controller
           if($data_request->code == 200 && $data_request->status != 'error'){
             $data = $data_request->data;
             $i = $start_number;
-            $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+            $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
             if( ($requestSasaran['code'] == 200) && ( $requestSasaran ['status'] != 'error')){
               $this->data['sasaran']=$requestSasaran['data'];
             }else{
@@ -3613,7 +3613,7 @@ class MasyarakatController extends Controller
           if($data_request->code == 200 && $data_request->status != 'error'){
             $data = $data_request->data;
             $i = $start_number;
-            $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+            $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
             if( ($requestSasaran['code'] == 200) && ( $requestSasaran ['status'] != 'error')){
               $this->data['sasaran']=$requestSasaran['data'];
             }else{
@@ -3637,7 +3637,7 @@ class MasyarakatController extends Controller
           if($data_request->code == 200 && $data_request->status != 'error'){
             $data = $data_request->data;
             $i = $start_number;
-            $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+            $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
             if( ($requestSasaran['code'] == 200) && ( $requestSasaran ['status'] != 'error')){
               $this->data['sasaran']=$requestSasaran['data'];
             }else{

@@ -20,14 +20,14 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       <ul class="">
         <li @php if(!in_array(134, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/instansi')}}">Master Instansi<span class="fa"></span></a>
         </li>
-        <li @php if(!in_array(135, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Master Wilayah</span>
+        <li @php if(!in_array(135, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Master Wilayah</span>
             <ul class="">
                 <li @php if(!in_array(140, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/propinsi')}}">Master Propinsi</a></li>
                 <li @php if(!in_array(141, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/kota')}}">Master Kota/Kabupaten</a></li>
                 <!--li><a href="{{url('master/kecamatan')}}">Master Kecamatan</a></li-->
             </ul>
         </li>
-        <li  @php if(!in_array(136, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Master Kasus</span>
+        <li  @php if(!in_array(136, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Master Kasus</span>
             <ul class="">
                 <li @php if(!in_array(142, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/jeniskasus')}}">Master Jenis Kasus</a></li>
                 <li @php if(!in_array(143, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/jenisbarbuk')}}">Master Jenis Barang Bukti</a></li>
@@ -35,7 +35,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                 <li @php if(!in_array(145, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/satuan')}}">Master Satuan</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(137, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Master Media</span>
+        <li @php if(!in_array(137, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Master Media</span>
             <ul class="">
                 <li @php if(!in_array(146, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/mediaonline')}}">Master Media Online</a></li>
                 <li @php if(!in_array(147, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/mediasosial')}}">Master Media Sosial</a></li>
@@ -43,13 +43,13 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                 <li @php if(!in_array(149, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/mediaruang')}}">Master Media Luar Ruang</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(138, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Master Settama</span>
+        <li @php if(!in_array(138, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Master Settama</span>
             <ul class="">
                 <li @php if(!in_array(150, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/bagian')}}">Master Bagian</a></li>
                 <li @php if(!in_array(151, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/kegiatan')}}">Master Kegiatan</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(139, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Master Dayamas</span>
+        <li @php if(!in_array(139, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Master Dayamas</span>
             <ul class="">
                 <li @php if(!in_array(152, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('master/komoditi')}}">Master Komoditi</a></li>
             </ul>

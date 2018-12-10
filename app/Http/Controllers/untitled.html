@@ -2457,7 +2457,7 @@ class CaseController extends Controller
        if($data_request->code == 200 && $data_request->status != 'error'){
           $data = $data_request->data;
           $i = $start_number;
-          $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+          $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
           if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
             $this->data['sasaran'] = $requestSasaran['data'];
           }else{
@@ -2488,7 +2488,7 @@ class CaseController extends Controller
          if($data_request->code == 200 && $data_request->status != 'error'){
             $data = $data_request->data;
             $i = $start_number;
-            $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+            $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
             if($requestSasaran['code'] == 200 && $requestSasaran['status'] != 'error'){
               $this->data['sasaran'] = $requestSasaran['data'];
             }else{
@@ -2519,7 +2519,7 @@ class CaseController extends Controller
           if($data_request->code == 200 && $data_request->status != 'error'){ 
             $data = $data_request->data;
             $i = $start_number;
-            $requestSasaran = execute_api('/api/lookup/jenis_sasaran','GET');
+            $requestSasaran = execute_api('api/lookup/jenis_sasaran','GET');
             if( ($requestSasaran['code'] == 200) && ( $requestSasaran ['status'] != 'error')){
               $this->data['sasaran']=$requestSasaran['data'];
             }else{

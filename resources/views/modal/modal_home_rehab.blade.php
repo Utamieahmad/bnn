@@ -18,21 +18,21 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     <!-- Modal Body -->
     <div class="modal-body">
       <ul class="">
-        <li @php if(!in_array(29, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat PLRIP</span>
+        <li @php if(!in_array(29, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Direktorat PLRIP</span>
             <ul class="">
                 <li @php if(!in_array(32, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('rehabilitasi/dir_plrip/informasi_lembaga_umum_plrip')}}">Informasi Umum Lembaga Rehabilitasi Instansi Pemerintah</a></li>
                 <li @php if(!in_array(34, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('rehabilitasi/dir_plrip/dokumen_nspk_plrip')}}">Dokumen NSPK</a></li>
                 <li @php if(!in_array(35, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('rehabilitasi/dir_plrip/kegiatan_pelatihan_plrip')}}">Kegiatan</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(30, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat PLRKM</span>
+        <li @php if(!in_array(30, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Direktorat PLRKM</span>
             <ul class="">
                 <li @php if(!in_array(37, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('rehabilitasi/dir_plrkm/informasi_lembaga_umum_plrkm')}}">Informasi Umum Lembaga Rehabilitasi Komponen Masyarakat</a></li>
                 <li @php if(!in_array(39, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('rehabilitasi/dir_plrkm/dokumen_nspk_plrkm')}}">Dokumen NSPK</a></li>
                 <li @php if(!in_array(40, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('rehabilitasi/dir_plrkm/kegiatan_pelatihan_plrkm')}}">Kegiatan</a></li>
             </ul>
         </li>
-        <li @php if(!in_array(31, $menu))  echo 'style="display:none;"'; @endphp><span style="color:white; font-size:16px;">Direktorat Pascarehabilitasi</span>
+        <li @php if(!in_array(31, $menu))  echo 'style="display:none;"'; @endphp style="margin: 15px 0px"><span style="color:white; font-size:16px; font-weight:bold;">Direktorat Pascarehabilitasi</span>
             <ul class="">
                 <li @php if(!in_array(45, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('rehabilitasi/dir_pasca/informasi_lembaga_umum_pascarehabilitasi')}}">Informasi Umum Lembaga</a></li>
                 <li @php if(!in_array(46, $menu))  echo 'style="display:none;"'; @endphp><a class="modalmenu" href="{{url('rehabilitasi/dir_pasca/dokumen_nspk_pascarehabilitasi')}}">Dokumen NSPK</a></li>

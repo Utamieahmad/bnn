@@ -71,23 +71,23 @@ class deputiCegahController extends Controller {
             } else {
                 $array5 = array();
             }
-            if (isset($_GET['jmlsebarstart'])) {
-                $array6 = array('jmlsebarstart' => $_GET['jmlsebarstart']);
+            if (isset($_GET['jmlsebarMin'])) {
+                $array6 = array('jmlsebarMin' => $_GET['jmlsebarMin']);
             } else {
                 $array6 = array();
             }
-            if (isset($_GET['jmlsebarend'])) {
-                $array7 = array('jmlsebarend' => $_GET['jmlsebarend']);
+            if (isset($_GET['jmlsebarMax'])) {
+                $array7 = array('jmlsebarMax' => $_GET['jmlsebarMax']);
             } else {
                 $array7 = array();
             }
-            if (isset($_GET['tglactstart'])) {
-                $array8 = array('tglactstart' => $_GET['tglactstart']);
+            if (isset($_GET['tglactStart'])) {
+                $array8 = array('tglactStart' => $_GET['tglactStart']);
             } else {
                 $array8 = array();
             }
-            if (isset($_GET['tglactend'])) {
-                $array9 = array('tglactend' => $_GET['tglactend']);
+            if (isset($_GET['tglactEnd'])) {
+                $array9 = array('tglactEnd' => $_GET['tglactEnd']);
             } else {
                 $array9 = array();
             }
@@ -117,7 +117,7 @@ class deputiCegahController extends Controller {
             if (count($get) > 0) {
                 foreach ($get as $key => $value) {
                     $kondisi .= "&" . $key . '=' . $value;
-                    if (($key == 'tglactstart') || ($key == 'tglactend')) {
+                    if (($key == 'tglactStart') || ($key == 'tglactEnd')) {
                         if ($value) {
                             $value = date('d/m/Y', strtotime($value));
                         } else {
@@ -169,30 +169,30 @@ class deputiCegahController extends Controller {
             } else {
                 $array6 = array();
             }
-            $sebaran_from = trim($request->jmlsebarstart);
+            $sebaran_from = trim($request->jmlsebarMin);
             if ($sebaran_from != '') {
-                $array7 = array('jmlsebarstart' => $sebaran_from);
+                $array7 = array('jmlsebarMin' => $sebaran_from);
             } else {
                 $array7 = array();
             }
-            $sebaran_to = trim($request->jmlsebarend);
+            $sebaran_to = trim($request->jmlsebarMax);
             if ($sebaran_to != '') {
-                $array8 = array('jmlsebarend' => $sebaran_to);
+                $array8 = array('jmlsebarMax' => $sebaran_to);
             } else {
                 $array8 = array();
             }
-            $start_from = trim($request->tglactstart);
+            $start_from = trim($request->tglactStart);
             if ($start_from != '') {
                 $start_from = date('Y-m-d', strtotime(str_replace('/', '-', $start_from)));
-                $array9 = array('tglactstart' => $start_from);
+                $array9 = array('tglactStart' => $start_from);
             } else {
                 $array9 = array();
             }
-            $start_to = trim($request->tglactend);
+            $start_to = trim($request->tglactEnd);
             if ($start_to != '') {
                 $start_to = str_replace('/', '-', $start_to);
                 $start_to = date('Y-m-d', strtotime($start_to));
-                $array10 = array('tglactend' => $start_to);
+                $array10 = array('tglactEnd' => $start_to);
             } else {
                 $array10 = array();
             }
@@ -210,7 +210,7 @@ class deputiCegahController extends Controller {
             $result_data_array2 = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10, $array13, $array14);
             foreach ($result_data_array2 as $key => $value) {
                 $kondisi .= "&" . $key . '=' . $value;
-                if (($key == 'tglactstart') || ($key == 'tglactend')) {
+                if (($key == 'tglactStart') || ($key == 'tglactEnd')) {
                     if ($value) {
                         $value = date('d/m/Y', strtotime($value));
                     } else {
@@ -248,20 +248,29 @@ class deputiCegahController extends Controller {
             'body' => $data_request
                 ]
         );
-//        dd($requestCegah);
-
+////        dd($requestCegah);
+//
         $datas = json_decode($requestCegah->getBody()->getContents(), true);
-//        print_r($datas);        
-//        exit();        
+////        dd($datas);
+////        print_r($datas);        
+////        exit();        
         if (($datas['status'] != 'error') && ($datas['code'] == 200)) {
-            $this->data['data_aktivitas'] = $datas['data'];
-            $total_item = $datas['pagination']['totalpage'] * $this->limit;
+            if(isset($datas['data'])){
+                $this->data['data_aktivitas'] = $datas['data'];
+                $total_item = $datas['pagination']['totalpage'] * $this->limit;
+            }else{
+                $this->data['data_aktivitas'] = [];
+                $total_item = 0;
+            }            
             //total data
 //            dd($datas['pagination']['count']);
         } else {
             $this->data['data'] = [];
             $total_item = 0;
         }
+        //ini kalo server masih error
+//        $this->data['data_aktivitas'] = [];
+//        $total_item = 0;
 //        $this->data['delete_route'] = 'delete_kegiatan_pelatihan_plrkm';
         $this->data['path'] = $request->path();
         $filtering = false;
@@ -295,8 +304,8 @@ class deputiCegahController extends Controller {
         $array3 = array('actstat' => $actstat);
         $tglactstart = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from)));
         $tglactend = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to)));
-        $array4 = array('tglactstart' => $tglactstart);
-        $array5 = array('tglactend' => $tglactend);
+        $array4 = array('tglactStart' => $tglactstart);
+        $array5 = array('tglactEnd' => $tglactend);
         $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5);
         $data_request = json_encode($result_data_array);
 //        dd($data_request);
@@ -373,8 +382,8 @@ class deputiCegahController extends Controller {
         $array3 = array('actstat' => $actstat);
         $tglactstart = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from)));
         $tglactend = date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to)));
-        $array4 = array('tglactstart' => $tglactstart);
-        $array5 = array('tglactend' => $tglactend);
+        $array4 = array('tglactStart' => $tglactstart);
+        $array5 = array('tglactEnd' => $tglactend);
         $result_data_array = array_merge($array1, $array2, $array3, $array4, $array5);
         $data_request = json_encode($result_data_array);
 //        dd($data_request);
@@ -471,23 +480,23 @@ class deputiCegahController extends Controller {
         } else {
             $array5 = array();
         }
-        if (isset($_GET['jmlsebarstart'])) {
-            $array6 = array('jmlsebarstart' => $_GET['jmlsebarstart']);
+        if (isset($_GET['jmlsebarMin'])) {
+            $array6 = array('jmlsebarMin' => $_GET['jmlsebarMin']);
         } else {
             $array6 = array();
         }
-        if (isset($_GET['jmlsebarend'])) {
-            $array7 = array('jmlsebarend' => $_GET['jmlsebarend']);
+        if (isset($_GET['jmlsebarMax'])) {
+            $array7 = array('jmlsebarMax' => $_GET['jmlsebarMax']);
         } else {
             $array7 = array();
         }
-        if (isset($_GET['tglactstart'])) {
-            $array8 = array('tglactstart' => $_GET['tglactstart']);
+        if (isset($_GET['tglactStart'])) {
+            $array8 = array('tglactStart' => $_GET['tglactStart']);
         } else {
             $array8 = array();
         }
-        if (isset($_GET['tglactend'])) {
-            $array9 = array('tglactend' => $_GET['tglactend']);
+        if (isset($_GET['tglactEnd'])) {
+            $array9 = array('tglactEnd' => $_GET['tglactEnd']);
         } else {
             $array9 = array();
         }                
@@ -595,23 +604,23 @@ class deputiCegahController extends Controller {
         } else {
             $array5 = array();
         }
-        if (isset($_GET['jmlsebarstart'])) {
-            $array6 = array('jmlsebarstart' => $_GET['jmlsebarstart']);
+        if (isset($_GET['jmlsebarMin'])) {
+            $array6 = array('jmlsebarMin' => $_GET['jmlsebarMin']);
         } else {
             $array6 = array();
         }
-        if (isset($_GET['jmlsebarend'])) {
-            $array7 = array('jmlsebarend' => $_GET['jmlsebarend']);
+        if (isset($_GET['jmlsebarMax'])) {
+            $array7 = array('jmlsebarMax' => $_GET['jmlsebarMax']);
         } else {
             $array7 = array();
         }
-        if (isset($_GET['tglactstart'])) {
-            $array8 = array('tglactstart' => $_GET['tglactstart']);
+        if (isset($_GET['tglactStart'])) {
+            $array8 = array('tglactStart' => $_GET['tglactStart']);
         } else {
             $array8 = array();
         }
-        if (isset($_GET['tglactend'])) {
-            $array9 = array('tglactend' => $_GET['tglactend']);
+        if (isset($_GET['tglactEnd'])) {
+            $array9 = array('tglactEnd' => $_GET['tglactEnd']);
         } else {
             $array9 = array();
         }                

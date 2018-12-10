@@ -3936,8 +3936,6 @@ class PuslidatinController extends Controller
         }
     }
 
-
-
     private function kelengkapan_pekerjaanjaringan($id){
       $status_kelengkapan = true;
         try{
@@ -4002,147 +4000,6 @@ class PuslidatinController extends Controller
         $status_kelengkapan=false;
       }
     }
-
-
-    // private function kelengkapan_pengecekanjaringan($id){
-    //   $status_kelengkapan = true;
-    //     try{
-    //         $columns = ['ket_baik_jaringan',
-    //                     'ket_tdk_baik_jaringan',
-    //                     'ket_baik_ip',
-    //                     'ket_tdk_baik_ip',
-    //                     'ket_baik_ping',
-    //                     'ket_tdk_baik_ping',
-    //                     'ket_baik_switch',
-    //                     'ket_tdk_baik_switch',
-    //                     'ket_baik_manageable',
-    //                     'ket_tdk_baik_manageable',
-    //                     'ket_baik_kabel',
-    //                     'ket_tdk_baik_kabel',
-    //                     'ket_baik_wireless',
-    //                     'ket_tdk_baik_wireless',
-    //                     'cek_jaringan',
-    //                     'cek_ip',
-    //                     'cek_ping',
-    //                     'cek_switch',
-    //                     'cek_kabel',
-    //                     'cek_wireless',
-    //                     'cek_manageable'
-    //                   ];
-    //         $column2 = [
-    //           'tgl_mulai','tgl_selesai','tempatkejadian_idprovinsi','meta_aktivitas','meta_tim'
-    //         ];
-
-    //         // $query = DB::table('datin_pengecekan_jaringan')->where('id',$id)
-    //         //           ->select('tgl_mulai','tgl_selesai','tempatkejadian_idprovinsi','cek_jaringan','ket_baik_jaringan','ket_tdk_baik_jaringan','cek_ip','ket_baik_ip','ket_tdk_baik_ip','cek_ping','ket_baik_ping','ket_tdk_baik_ping','cek_switch','ket_baik_switch','ket_tdk_baik_switch','cek_manageable','ket_baik_manageable','ket_tdk_baik_manageable','cek_kabel','ket_baik_kabel','ket_tdk_baik_kabel','cek_wireless','ket_baik_wireless','ket_tdk_baik_wireless','meta_pengguna','meta_tim');
-
-    //       $query = DB::table('datin_pengecekan_jaringan')->where('id',$id)
-    //                   ->select('tgl_mulai','tgl_selesai','tempatkejadian_idprovinsi','meta_aktivitas','meta_tim');
-    //         if($query->count() > 0 ){
-    //             $result = $query->first();
-    //             // if($result->cek_jaringan == 'baik'){
-    //             //   if(!$result->ket_baik_jaringan){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_baik_jaringan){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_jaringan == 'tdk_baik'){
-    //             //   if(!$result->ket_tdk_baik_jaringan){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_tdk_baik_jaringan){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_ip == 'baik'){
-    //             //   if(!$result->ket_baik_ip){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_baik_ip){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_ip == 'tdk_baik'){
-    //             //   if(!$result->ket_tdk_baik_ip){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_tdk_baik_ip){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_ping == 'baik'){
-    //             //   if(!$result->ket_baik_ping){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_baik_ping){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_ping == 'tdk_baik'){
-    //             //   if(!$result->ket_tdk_baik_ping){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_tdk_baik_ping){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_switch == 'baik'){
-    //             //   if(!$result->ket_baik_switch){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_baik_switch){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_switch == 'tdk_baik'){
-    //             //   if(!$result->ket_tdk_baik_switch){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_tdk_baik_switch){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_manageable == 'baik'){
-    //             //   if(!$result->ket_baik_manageable){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_baik_manageable){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_manageable == 'tdk_baik'){
-    //             //   if(!$result->ket_tdk_baik_manageable){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_tdk_baik_manageable){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_kabel == 'baik'){
-    //             //   if(!$result->ket_baik_kabel){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_baik_kabel){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_kabel == 'tdk_baik'){
-    //             //   if(!$result->ket_tdk_baik_kabel){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_tdk_baik_kabel){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_wireless == 'baik'){
-    //             //   if(!$result->ket_baik_wireless){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_baik_wireless){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             // }elseif($result->cek_wireless == 'tdk_baik'){
-    //             //   if(!$result->ket_tdk_baik_wireless){
-    //             //     $status_kelengkapan = false;
-    //             //   }else if($result->ket_tdk_baik_wireless){
-    //             //     $status_kelengkapan = true;
-    //             //   }
-    //             }else{
-    //               foreach($column2 as $col => $c){
-    //                 if(!$result->$c){
-    //                   $status_kelengkapan== false;
-    //                   break;
-    //                 }
-    //               }
-    //             }
-
-    //         }
-    //         if($status_kelengkapan== true){
-    //             $kelengkapan = execute_api_json('api/pengecekanjaringan/'.$id,'PUT',['status'=>'Y']);
-    //         }else{
-    //             $kelengkapan = execute_api_json('api/pengecekanjaringan/'.$id,'PUT',['status'=>'N']);
-    //         }
-    //     }catch(\Exception $e){
-    //       $status_kelengkapan=false;
-    //     }
-    // }
 
     private function kelengkapan_pengadaanemail($id){
       $status_kelengkapan = true;
@@ -4327,4 +4184,402 @@ class PuslidatinController extends Controller
         // $this->data['data_call_center'] = $query ;
         // return view('puslitdatin.call_center',$this->data);
     }
+
+    public function downloadSurvey(Request $request){
+    
+      $data = DB::table('v_datin_research_survey_penyalahguna');
+      if ($request->date_from != '') {
+        $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('created_at', 'desc')->get();
+
+        $prop = [];
+        $propinsi = execute_api_json('api/propinsi/','get');
+        if($propinsi->code == 200 && $propinsi->status != 'error'){
+            foreach ($propinsi->data as $p) {
+                $prop[$p->id_wilayah] = $p->nm_wilayah;
+             }
+
+        }
+
+        $jenisBB = [];
+        $brgbukti = execute_api('api/jnsbrgbukti','post');
+        if($brgbukti['code'] == 200 && $brgbukti['status'] != 'error'){
+            foreach ($brgbukti['data'] as $keygrup => $value) {
+                foreach ($value as $key => $val) {
+                    $jenisBB[$key] = $val;
+                }
+             }
+        }
+
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Input'] = ( $value->created_at ? date('d/m/Y',strtotime($value->created_at)) : '');
+            $result[$key]['Judul'] = $value->judul_penelitian;
+            $result[$key]['Kelompok'] = $value->kelompok_survey;
+            $result[$key]['Tahun Pelaksanaan'] = $value->tahun;
+            $result[$key]['Jumlah Responden'] = ' '.$value->jumlah_responden;
+            $result[$key]['Angka Prevalensi'] = $value->angka_prevalensi;
+            $result[$key]['Angka Absolut'] = $value->angka_absolut;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_narkoba;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= (isset($jenisBB[$meta[$j]['jenis_narkoba']]) ? $jenisBB[$meta[$j]['jenis_narkoba']] : '').' ('.$meta[$j]['jenis_narkoba'].')';
+                        $peserta .= "\n";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Narkoba/jmlh Orang']= $peserta;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_data_provinsi;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= 'provinsi : '.(isset($prop[$meta[$j]['id_provinsi']]) ? $prop[$meta[$j]['id_provinsi']] : '').', prevalensi :'.$meta[$j]['list_prevalensi'].', absolut :'.$meta[$j]['list_absolut'];
+                        $peserta .= "\n";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Data Per Propinsi']= $peserta;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Survey '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadSurveyNarkoba(Request $request){
+    
+      $data = DB::table('datin_survey_penyalahguna_narkoba');
+      if ($request->date_from != '') {
+        $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('created_at', 'desc')->get();
+
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Input'] = ( $value->created_at ? date('d/m/Y',strtotime($value->created_at)) : '');
+            $result[$key]['Tahun Pelaksanaan'] = $value->tahun;
+            $result[$key]['Jumlah Populasi'] = $value->jumlah_populasi;
+            $result[$key]['Jumlah Responden'] = ' '.$value->jumlah_responden;
+            $result[$key]['Angka Prevalensi'] = $value->angka_prevalensi_thn1;
+            $result[$key]['Angka Absolut'] = $value->angka_absolut_thn1;
+            $result[$key]['Proyeksi Prevalensi tahun+1'] = $value->prevalensi_thn1;
+            $result[$key]['Proyeksi Prevalensi tahun+2'] = $value->prevalensi_thn2;
+            $result[$key]['Proyeksi Prevalensi tahun+3'] = $value->prevalensi_thn3;
+            $result[$key]['Proyeksi Prevalensi tahun+4'] = $value->prevalensi_thn4;
+            $result[$key]['Proyeksi Prevalensi tahun+5'] = $value->prevalensi_thn5;
+            $result[$key]['Angka Kematian'] = $value->angka_kematian;
+            $result[$key]['Kerugian Ekonomi'] = $value->kerugian_thn1;
+            $result[$key]['Proyeksi kerugian tahun+1'] = $value->proyeksi_thn1;
+            $result[$key]['Proyeksi kerugian tahun+2'] = $value->proyeksi_thn2;
+            $result[$key]['Proyeksi kerugian tahun+3'] = $value->proyeksi_thn3;
+            $result[$key]['Proyeksi kerugian tahun+4'] = $value->proyeksi_thn4;
+            $result[$key]['Proyeksi kerugian tahun+5'] = $value->proyeksi_thn5;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Survey Penyalahguna Narkoba'.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadSurveyKetergantungan(Request $request){
+    
+      $data = DB::table('datin_survey_penyalahguna_ketergantungan');
+      if ($request->date_from != '') {
+        $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('created_at', 'desc')->get();
+
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Input'] = ( $value->created_at ? date('d/m/Y',strtotime($value->created_at)) : '');
+            $result[$key]['Tahun Pelaksanaan'] = $value->tahun;
+            $result[$key]['Kategori'] = $value->kategori;
+            $result[$key]['Angka Prevalensi'] = $value->angka_prevalensi_thn1;
+            $result[$key]['Angka Absolut'] = $value->angka_absolut_thn1;
+            $result[$key]['Proyeksi Prevalensi tahun+1'] = $value->prevalensi_thn1;
+            $result[$key]['Proyeksi Prevalensi tahun+2'] = $value->prevalensi_thn2;
+            $result[$key]['Proyeksi Prevalensi tahun+3'] = $value->prevalensi_thn3;
+            $result[$key]['Proyeksi Prevalensi tahun+4'] = $value->prevalensi_thn4;
+            $result[$key]['Proyeksi Prevalensi tahun+5'] = $value->prevalensi_thn5;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Survey Penyalahguna Narkoba Ketergantungan '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadRiset(Request $request){
+    
+      $data = DB::table('datin_research_riset');
+      if ($request->date_from != '') {
+        $data->whereDate('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->whereDate('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('created_at', 'desc')->get();
+
+        $prop = [];
+        $propinsi = execute_api_json('api/propinsi/','get');
+        if($propinsi->code == 200 && $propinsi->status != 'error'){
+            foreach ($propinsi->data as $p) {
+                $prop[$p->id_wilayah] = $p->nm_wilayah;
+             }
+
+        }
+
+        $jenisBB = [];
+        $brgbukti = execute_api('api/jnsbrgbukti','post');
+        if($brgbukti['code'] == 200 && $brgbukti['status'] != 'error'){
+            foreach ($brgbukti['data'] as $keygrup => $value) {
+                foreach ($value as $key => $val) {
+                    $jenisBB[$key] = $val;
+                }
+             }
+        }
+
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal Input'] = ( $value->created_at ? date('d/m/Y',strtotime($value->created_at)) : '');
+            $result[$key]['Tahun Pelaksanaan'] = $value->tahun;
+            $result[$key]['Judul'] = $value->judul;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_lokasi;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= (isset($prop[$meta[$j]['propinsi']]) ? $prop[$meta[$j]['propinsi']] : '');
+                        $peserta .= "\n";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Lokasi']= $peserta;
+
+            $result[$key]['Jumlah Responden'] = ' '.$value->jumlah_responden;
+            $result[$key]['Hasil Riset'] = $value->hasil_riset;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Riset '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadPekerjaan(Request $request){
+    
+      $data = DB::table('v_datin_pekerjaan_jaringan');
+      if ($request->date_from != '') {
+        $data->where('tgl_pelaporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_pelaporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_pelaporan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Jenis Kegiatan'] = $value->jenis_kegiatan;
+            $result[$key]['Tanggal Pelaporan'] = ( $value->tgl_pelaporan ? date('d/m/Y',strtotime($value->tgl_pelaporan)) : '');
+            $result[$key]['Pelapor'] = $value->nama_pelapor;
+            $result[$key]['Satuan Kerja'] = $value->nm_instansi;
+            $result[$key]['Penerima Laporan'] = $value->penerima_laporan;
+            $result[$key]['Waktu Pengerjaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : '').' - '.( $value->tgl_selesai ? date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+            $result[$key]['Penanggung Jawab'] = $value->penanggung_jawab;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_teknisi;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= $meta[$j];
+                        $peserta .= "\n";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Teknisi']= $peserta;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_permasalahan;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= 'masalah : '.$meta[$j]['masalah'].', tindak lanjut : '.$meta[$j]['tindak_lajut'].', hasil : '.$meta[$j]['hasil'];
+                        $peserta .= "\n";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Permasalahan']= $peserta;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Pekerjaan Jaringan '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadPengecekan(Request $request){
+    
+      $data = DB::table('v_datin_pengecekan_jaringan');
+      if ($request->date_from != '') {
+        $data->where('tgl_mulai', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_mulai', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_mulai', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Waktu Pengerjaan'] = ( $value->tgl_mulai ? date('d/m/Y',strtotime($value->tgl_mulai)) : '').' - '.( $value->tgl_selesai ? date('d/m/Y',strtotime($value->tgl_selesai)) : '');
+            $result[$key]['Satuan Kerja'] = $value->nm_instansi;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_tim;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= $meta[$j]['penanggung_jawab'].' / '.$meta[$j]['teknisi'];
+                        $peserta .= "\n";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Penanggung Jawab/Teknisi']= $peserta;
+
+            $peserta = "";
+            $meta_peserta = $value->meta_aktivitas;
+            if($meta_peserta){
+                $meta = json_decode($meta_peserta,true);
+                if(count($meta) > 0 ){
+                    for($j = 0 ; $j < count($meta); $j ++ ){
+                        $peserta .= 'Pengguna : '.$meta[$j]['nama_pengguna'].', Cek Perangkat : '.$meta[$j]['cek_jaringan'].', Cek IP : '.$meta[$j]['cek_ip'].', Cek Ping : '.$meta[$j]['cek_ping'].', Cek Switch : '.$meta[$j]['cek_switch'].', Cek Manageable : '.$meta[$j]['cek_manageable'].', Cek Kabel : '.$meta[$j]['cek_kabel'].', Cek Wireless : '.$meta[$j]['cek_wireless'];
+                        $peserta .= "\n";
+                    }
+                    $peserta = rtrim($peserta);
+                }
+            }
+            $result[$key]['Aktivitas']= $peserta;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Pengecekan Jaringan '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadEmail(Request $request){
+    
+      $data = DB::table('v_datin_pengadaan_email');
+      if ($request->date_from != '') {
+        $data->where('tgl_pelaporan', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->where('tgl_pelaporan', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('tgl_pelaporan', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal'] = ( $value->tgl_pelaporan ? date('d/m/Y',strtotime($value->tgl_pelaporan)) : '');
+            $result[$key]['Satuan Kerja'] = $value->nm_instansi;
+            $result[$key]['Nama'] = $value->nomor_nota_dinas;
+            $result[$key]['Email'] = $value->email;
+            $result[$key]['Kuota'] = $value->jenis_kuota;
+            $result[$key]['Status Aktif'] = $value->status_aktif;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Pembuatan Email BNN '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
+    public function downloadCallCenter(Request $request){
+    
+      $data = DB::table('soa_callcenter_disposisi');
+      if ($request->date_from != '') {
+        $data->whereDate('waktuterima', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+      }
+      if ($request->date_to != '' ) {
+        $data->whereDate('waktuterima', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+      }
+
+      $data = $data->orderBy('waktuterima', 'desc')->get();
+      // dd($pemusnahanladang);
+      $result = [];
+      $i = 1;
+          foreach($data as $key=>$value){
+            $result[$key]['No'] = $i;
+            $result[$key]['Tanggal'] = ( $value->waktuterima ? date('d/m/Y',strtotime($value->waktuterima)) : '');
+            $result[$key]['Pengirim'] = $value->pengirim;
+            $result[$key]['Penerima'] = $value->penerima;
+            $result[$key]['Subject'] = $value->subjek;
+            $result[$key]['Isi Konten'] = ' '.$value->konten;
+
+            $i = $i +1;
+          }
+        $name = 'Export Data Call Center '.date('Y-m-d H:i:s');
+
+          $this->printData($result, $name);
+      
+    }
+
 }

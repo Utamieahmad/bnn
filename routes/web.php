@@ -321,6 +321,12 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('/print_page_rehabilitasi/downloadPlrip','RehabilitasiController@downloadPlrip')->name("print_page_rehabilitasi");
 		Route::post('/print_page_rehabilitasi/downloadPlripDocNSPK','RehabilitasiController@downloadPlripDocNSPK')->name("print_page_PlripDocNSPK");
 		Route::post('/print_page_rehabilitasi/downloadPlripKegiatan','RehabilitasiController@downloadPlripKegiatan')->name("print_page_PlripKegiatan");
+		Route::post('/print_page_rehabilitasi/downloadPlrkmInfoUmum','RehabilitasiController@downloadPlrkmInfoUmum')->name("print_page_PlrkmInfoUmum");
+		Route::post('/print_page_rehabilitasi/downloadPlrkmDocNSPK','RehabilitasiController@downloadPlrkmDocNSPK')->name("print_page_PlrkmDocNSPK");
+		Route::post('/print_page_rehabilitasi/downloadPlrkmKegiatan','RehabilitasiController@downloadPlrkmKegiatan')->name("print_page_PlrkmKegiatan");
+		Route::post('/print_page_rehabilitasi/downloadPascaInfoUmum','RehabilitasiController@downloadPascaInfoUmum')->name("print_page_PascaInfoUmum");
+		Route::post('/print_page_rehabilitasi/downloadPascaDocNSPK','RehabilitasiController@downloadPascaDocNSPK')->name("print_page_PascaDocNSPK");
+		Route::post('/print_page_rehabilitasi/downloadPascaKegiatan','RehabilitasiController@downloadPascaKegiatan')->name("print_page_PascaKegiatan");
 	});
 
 
@@ -468,7 +474,7 @@ Route::group(['middleware' => ['auth']], function () {
                     Route::match(['get', 'post'],'/newpdfaktivitassebaran/{page?}','deputiCegahController@newPdfAktivitasSebaran')->name('newpdf_aktivitasSebaran');
                     Route::match(['get', 'post'],'/newexcelaktivitassebaran/{page?}','deputiCegahController@newExcelAktivitasSebaran')->name('newexcel_aktivitasSebaran');
                     Route::post('/printaktivitassebaran', 'deputiCegahController@printExcelAktivitas');
-                    Route::post('/pdfaktivitassebaran', 'deputiCegahController@printPdfAktivitas');                    
+                    Route::post('/pdfaktivitassebaran', 'deputiCegahController@printPdfAktivitas');
                 });
 	});
 
@@ -659,6 +665,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_pendampingan','hukumController@deleteHukumPendampingan')->name('delete_hukum_pendampingan');
 			Route::get('/print_hukum_pendampingan/{segment?}/{page?}','hukumController@printPendampingan')->name("print_hukum_pendampingan");
+                        Route::post('/download_hukum_pendampingan','hukumController@downloadPendampingan')->name("download_hukum_pendampingan");
 
 			Route::match(['get', 'post'], '/hukum_prapradilan/{page?}','hukumController@hukumPrapradilan')->name('hukum_prapradilan');
 			Route::get('/edit_hukum_prapradilan/{id}','hukumController@edithukumPrapradilan')->name('edit_hukum_prapradilan');
@@ -668,6 +675,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_prapradilan','hukumController@deleteHukumPrapradilan')->name('delete_hukum_prapradilan');
 			Route::get('/print_hukum_prapradilan/{segment?}/{page?}','hukumController@printPrapradilan')->name("print_hukum_prapradilan");
+                        Route::post('/download_hukum_prapradilan','hukumController@downloadPrapradilan')->name("download_hukum_prapradilan");
 
 			Route::match(['get', 'post'], '/hukum_perka/{page?}','hukumController@hukumPerka')->name('hukum_perka');
 			Route::get('/edit_hukum_perka/{id}','hukumController@edithukumPerka')->name('edit_hukum_perka');
@@ -677,6 +685,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_perka','hukumController@deletehukumPerka')->name('delete_hukum_perka');
 			Route::get('/print_hukum_perka/{segment?}/{page?}','hukumController@printPerka')->name("print_hukum_perka");
+                        Route::post('/download_hukum_perka','hukumController@downloadPerka')->name("download_hukum_perka");
 
 			Route::match(['get', 'post'], '/hukum_lainnya/{page?}','hukumController@hukumLainnya')->name('hukum_lainnya');
 			Route::get('/edit_hukum_lainnya/{id}','hukumController@edithukumLainnya')->name('edit_hukum_lainnya');
@@ -686,7 +695,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','hukumController@view');
 			Route::post('/delete_hukum_lainnya','hukumController@deleteHukumLainnya')->name('delete_hukum_lainnya');
 			Route::get('/print_hukum_lainnya/{segment?}/{page?}','hukumController@printLainnya')->name("print_hukum_lainnya");
-
+                        Route::post('/download_hukum_lainnya','hukumController@downloadLainnya')->name("download_hukum_lainnya");
+                        
 			// Route::get('/hukum_rakor','hukumController@hukumRakor')->name('hukum_rakor');
 			// Route::get('/edit_hukum_rakor/{id}','hukumController@edithukumRakor')->name('edit_hukum_rakor');
 			// Route::get('/add_hukum_rakor','hukumController@addhukumRakor')->name('add_hukum_rakor');
@@ -725,6 +735,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_kerjasama_bilateral','kerjasamaController@deletekerjasamaBilateral')->name('delete_kerjasama_bilateral');
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printbilateral/{segment}/{page?}', 'kerjasamaController@printBilateral')->name('print_kerjasama_bilateral');
+                        Route::post('/download_kerjasama_bilateral','kerjasamaController@downloadBilateral')->name("download_kerjasama_bilateral");
 
 			Route::match(['get', 'post'], '/kerjasama_kesepemahaman/{page?}','kerjasamaController@kerjasamaKesepemahaman')->name('kerjasama_kesepemahaman');
 			Route::get('/edit_kerjasama_kesepemahaman/{id}','kerjasamaController@editkerjasamaKesepemahaman')->name('edit_kerjasama_kesepemahaman');
@@ -732,7 +743,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/input_kerjasama_kesepemahaman','kerjasamaController@inputkerjasamaKesepemahaman');
 			Route::post('/update_kerjasama_kesepemahaman','kerjasamaController@updatekerjasamaKesepemahaman');
 			Route::post('/delete_kerjasama_kesepahaman','kerjasamaController@deletekerjasamaKesepahaman')->name('delete_kerjasama_kesepahaman');
-
+                        Route::post('/download_kerjasama_kesepahaman','kerjasamaController@downloadKesepahaman')->name("download_kerjasama_kesepahaman");
+                        
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printkesepahaman/{segment}/{page?}', 'kerjasamaController@printKesepahaman')->name('print_kerjasama_nota');
 
@@ -751,7 +763,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_kerjasama_monev','kerjasamaController@deletekerjasamaMonev')->name('delete_kerjasama_monev');
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printmonev/{segment}/{page?}', 'kerjasamaController@printMonev')->name('print_kerjasama_monev');
-
+                        Route::post('/download_kerjasama_monev','kerjasamaController@downloadMonev')->name("download_kerjasama_monev");
+                        
 			Route::match(['get', 'post'], 'kerjasama_lainnya/{page?}', 'kerjasamaController@kerjasamaLainnya')->name('kerjasama_lainnya');
 			Route::get('/edit_kerjasama_lainnya/{id}','kerjasamaController@editkerjasamaLainnya')->name('edit_kerjasama_lainnya');
 			Route::get('/add_kerjasama_lainnya','kerjasamaController@addkerjasamaLainnya')->name('add_kerjasama_lainnya');
@@ -760,6 +773,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_kerjasama_lainnya','kerjasamaController@deletekerjasamaLainnya')->name('delete_kerjasama_lainnya');;
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printlainnya/{segment}/{page?}', 'kerjasamaController@printLainnya')->name('print_kerjasama_lainnya');
+                        Route::post('/download_kerjasama_lainnya','kerjasamaController@downloadLainnya')->name("download_kerjasama_lainnya");
 
 		});
 	});
@@ -957,6 +971,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::group(['prefix'=>'puslitdatin'],function(){
 		Route::match(['get','post'],'/call_center/{page?}','PuslidatinController@CallCenter')->name('call_center');
+		Route::post('/downloadcallcenter', 'PuslidatinController@downloadCallCenter');
+
 		Route::group(['prefix'=>'bidang_litbang'],function(){
 			Route::match(['get','post'],'/survey/{page?}','PuslidatinController@survey')->name('survey');
 			Route::get('/edit_survey/{id}','PuslidatinController@editSurvey')->name('edit_survey');
@@ -964,6 +980,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_survey','PuslidatinController@addSurvey');
 			Route::post('/update_survey','PuslidatinController@updateSurvey');
 			Route::post('/delete_survey','PuslidatinController@deleteSurvey')->name('delete_survey');
+			Route::post('/downloadsurvey', 'PuslidatinController@downloadSurvey');
 
 			Route::match(['get','post'],'/survey_narkoba/{page?}','PuslidatinController@surveyNarkoba')->name('survey_narkoba');
 			Route::get('/edit_survey_narkoba/{id}','PuslidatinController@editSurveyNarkoba')->name('edit_survey_narkoba');
@@ -971,6 +988,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_survey_narkoba','PuslidatinController@addSurveyNarkoba');
 			Route::post('/update_survey_narkoba','PuslidatinController@updateSurveyNarkoba')->name('update_survey_narkoba');
 			Route::post('/delete_survey_narkoba','PuslidatinController@deleteSurveyNarkoba')->name('delete_survey_narkoba');
+			Route::post('/downloadsurveynarkoba', 'PuslidatinController@downloadSurveyNarkoba');
 
 			Route::match(['get','post'],'/survey_narkoba_ketergantungan/{page?}','PuslidatinController@surveyNarkobaKetergantungan')->name('survey_narkoba_ketergantungan');
 			Route::get('/edit_survey_narkoba_ketergantungan/{id}','PuslidatinController@editSurveyNarkobaKetergantungan')->name('edit_survey_narkoba_ketergantungan');
@@ -978,6 +996,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_survey_narkoba_ketergantungan','PuslidatinController@addSurveyNarkobaKetergantungan');
 			Route::post('/update_survey_narkoba_ketergantungan','PuslidatinController@updateSurveyNarkobaKetergantungan')->name('update_survey_narkoba_ketergantungan');
 			Route::post('/delete_survey_narkoba_ketergantungan','PuslidatinController@deleteSurveyNarkobaKetergantungan')->name('delete_survey_narkoba_ketergantungan');
+			Route::post('/downloadsurveyketergantungan', 'PuslidatinController@downloadSurveyKetergantungan');
 
 			Route::match(['get','post'],'/riset_penyalahgunaan_narkoba/{page?}','PuslidatinController@risetPenyalahgunaanNarkoba')->name('riset_penyalahgunaan_narkoba');
 			Route::get('/edit_riset_penyalahgunaan_narkoba/{id}','PuslidatinController@editRisetPenyalahgunaanNarkoba')->name('edit_riset_penyalahgunaan_narkoba');
@@ -985,6 +1004,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_riset_penyalahgunaan_narkoba','PuslidatinController@addRisetPenyalahgunaanNarkoba');
 			Route::post('/update_riset_penyalahgunaan_narkoba','PuslidatinController@updateRisetPenyalahgunaanNarkoba');
 			Route::post('/delete_riset_penyalahgunaan_narkoba','PuslidatinController@deleteRisetPenyalahgunaanNarkoba')->name('delete_riset_penyalahgunaan_narkoba');
+			Route::post('/downloadriset', 'PuslidatinController@downloadRiset');
 
 			Route::get('/penyalahgunasetahun_pakai/{page?}','PuslidatinController@PenyalahgunaSetahunPakai')->name('penyalahgunasetahun_pakai');
 			Route::get('/edit_penyalahgunasetahun_pakai/{id}','PuslidatinController@editPenyalahgunaSetahunPakai')->name('edit_penyalahgunasetahun_pakai');;
@@ -1051,6 +1071,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_pekerjaan_jaringan','PuslidatinController@addPekerjaanJaringan');
 			Route::post('/update_pekerjaan_jaringan','PuslidatinController@updatePekerjaanJaringan')->name("update_pekerjaan_jaringan");
 			Route::post('/delete_pekerjaan_jaringan','PuslidatinController@deletePekerjaanJaringan')->name("delete_pekerjaan_jaringan");
+			Route::post('/downloadpekerjaan', 'PuslidatinController@downloadPekerjaan');
 
 			Route::match(['get','post'],'/pengecekan_jaringan/{page?}','PuslidatinController@PengecekanJaringan')->name('pengecekan_jaringan');
 			Route::get('/edit_pengecekan_jaringan/{id}','PuslidatinController@editPengecekanJaringan')->name('edit_pengecekan_jaringan');
@@ -1058,6 +1079,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_pengecekan_jaringan','PuslidatinController@addPengecekanJaringan');
 			Route::post('/update_pengecekan_jaringan','PuslidatinController@updatePengecekanJaringan')->name('update_pengecekan_jaringan');
 			Route::post('/delete_pengecekan_jaringan','PuslidatinController@deletePengecekanJaringan')->name("delete_pengecekan_jaringan");
+			Route::post('/downloadpengecekan', 'PuslidatinController@downloadPengecekan');
 
 			Route::match(['get','post'],'/pengadaan_email/{page?}','PuslidatinController@PengadaanEmail')->name('pengadaan_email');
 			Route::get('/edit_pengadaan_email/{id}','PuslidatinController@editPengadaanEmail')->name('edit_pengadaan_email');
@@ -1065,6 +1087,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/save_pengadaan_email','PuslidatinController@addPengadaanEmail')->name('save_pengadaan_email');
 			Route::post('/update_pengadaan_email','PuslidatinController@updatePengadaanEmail')->name('update_pengadaan_email');
 			Route::post('/delete_pengadaan_email','PuslidatinController@deletePengadaanEmail')->name("delete_pengadaan_email");
+			Route::post('/downloademail', 'PuslidatinController@downloadEmail');
 
 			Route::get('/print_page/{segment?}/{page?}','PuslidatinController@printPage');
 
@@ -1184,6 +1207,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_arahan_pimpinan','arahanController@deletearahanPimpinan')->name('delete_arahan_pimpinan');
 		});
 		Route::get('print_arahan_pimpinan/{page?}','arahanController@printPage')->name('print_arahan_pimpinan');
+		Route::post('/downloadarahan', 'arahanController@downloadArahan');
 	});
 
 	Route::group(['prefix'=>'master'],function(){

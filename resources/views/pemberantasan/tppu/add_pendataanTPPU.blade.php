@@ -256,7 +256,7 @@
 								<div class="ln_solid"></div>
 								<div class="form-group">
 									<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-										<button type="submit" class="btn btn-success">KIRIM</button>
+										<button type="submit" class="btn btn-success">SIMPAN</button>
 										<a href="{{route('pendataan_tppu')}}" class="btn btn-primary" type="button">BATAL</a>
 									</div>
 								</div>

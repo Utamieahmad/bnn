@@ -966,7 +966,7 @@ class penindakanController extends Controller
 
       // $page = 'page='.$request->current_page;
       // $id_wil = $request->session()->get('wilayah');
-      $inteljaringan = execute_api('/api/dpo'.$kondisi, 'GET');
+      $inteljaringan = execute_api('api/dpo'.$kondisi, 'GET');
       $limit = config('app.limit');
       $start_number = ($limit * ($request->page -1 )) + 1;
       $result = [];
@@ -1000,10 +1000,10 @@ class penindakanController extends Controller
 
       $data = DB::table('v_berantas_dpo');
       if ($request->date_from != '') {
-          $data->where('created_date', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+          $data->whereDate('created_date', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
       }
       if ($request->date_to != '' ) {
-          $data->where('created_date', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+          $data->whereDate('created_date', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
       }
 
       $data = $data->orderBy('created_date', 'desc')->get();

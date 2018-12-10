@@ -37,7 +37,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Tanggal Mulai</label>
                         <div class="input-group date date_start row">
-                            <input type='text' name="tglactstart" class="form-control" value="{{isset($filter) ? (isset($filter['tglactstart']) ? $filter['tglactstart'] : '') :''}}"/>
+                            <input type='text' name="tglactStart" class="form-control" value="{{isset($filter) ? (isset($filter['tglactStart']) ? $filter['tglactStart'] : '') :''}}"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -46,7 +46,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Tanggal akhir</label>
                         <div class="input-group date date_start row">
-                            <input type='text' name="tglactend" class="form-control" value="{{isset($filter) ? (isset($filter['tglactend']) ? $filter['tglactend'] : '') :''}}"/>
+                            <input type='text' name="tglactEnd" class="form-control" value="{{isset($filter) ? (isset($filter['tglactEnd']) ? $filter['tglactEnd'] : '') :''}}"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -54,11 +54,11 @@
                     </div>                    
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Jumlah sebaran Mulai</label>
-                        <input class="form-control" name="jmlsebarstart" value="{{isset($filter) ? (isset($filter['jmlsebarstart']) ? $filter['jmlsebarstart'] : '') :''}}" type="text"/>
+                        <input class="form-control" name="jmlsebarMin" value="{{isset($filter) ? (isset($filter['jmlsebarMin']) ? $filter['jmlsebarMin'] : '') :''}}" type="text"/>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <label for="tipe" class="control-label">Jumlah sebaran Akhir</label>
-                        <input class="form-control" name="jmlsebarend" value="{{isset($filter) ? (isset($filter['jmlsebarend']) ? $filter['jmlsebarend'] : '') :''}}" type="text"/>
+                        <input class="form-control" name="jmlsebarMax" value="{{isset($filter) ? (isset($filter['jmlsebarMax']) ? $filter['jmlsebarMax'] : '') :''}}" type="text"/>
                     </div>                    
 
                     <div class="col-md-3 col-sm-3 col-xs-12">

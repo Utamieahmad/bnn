@@ -12,9 +12,9 @@
         });
     });
 
-    $(document).ready(function () {
-        $('#datatableCegah').DataTable();
-    });
+//    $(document).ready(function () {
+//        $('#datatableCegah').DataTable();
+//    });
 </script>
 <div class="right_col" role="main">
     <div class="m-t-40">
@@ -79,7 +79,8 @@
                         @endif                        
                         <!--div style="overflow-x:auto;"-->
                         @include('_templateFilter.cegah_aktivitas_sebaran')
-                        <div id="printableArea">
+                        <div id="printableArea" class="tableprint">
+                            <div id="tabelact">
                             <table id="datatableCegah" class="table table-striped dt-responsive nowrap text-left" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -133,7 +134,8 @@
                                     </tr>              
                                     @endif
                                 </tbody>
-                            </table>                            
+                            </table>
+                            </div>
                         </div>
                         <!--/div-->
                         @if(count($data_aktivitas) > 0)
@@ -146,15 +148,26 @@
     </div>
 </div>
 <script>
-    function printDiv(divName) {
+    function printDiv(divName) {        
         var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-
-        window.print();
-
-        document.body.innerHTML = originalContents;
+        var originalContents = document.body.innerHTML;        
+//        document.body.innerHTML = printContents;
+//        alert("Sucsess print Out");
+        var w = window.open();
+        w.document.write($('#tabelact').html()); //only part of the page to print, using jquery
+        w.document.close(); //this seems to be the thing doing the trick
+//        w.focus();
+        w.print();
+        w.close();
+//        window.open();
+//        wndow.focus();        
+//        window.print();
+//        setTimeout(function () { window.close(); }, 100);
+//        w.close();
+//        window.close();
+//        document.body.innerHTML = originalContents;
+//        alert("Sucsess print Out");
+//alert('success print out');
     }
 </script>
 

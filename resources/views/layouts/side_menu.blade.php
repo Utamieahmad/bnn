@@ -13,7 +13,7 @@
                         <img src="{{$img}}" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
-                        <span>Selamat Datang,</span>
+                        <!-- <span>Selamat Datang,</span> -->
                         <h2>{{ucwords(Request::session()->get('nama_pegawai'))}}</h2>
                         <span>{{ucwords(Request::session()->get('user_group'))}}</span>
                     </div>
@@ -28,11 +28,11 @@
                     <div class="menu_section">
                         <ul class="nav side-menu">
                           @php $menu = Session::get("menu"); @endphp
-                            <li><a data-toggle="tooltip" data-placement="right" title="Beranda" href="{{URL('/')}}"><i class="fa fa-home" style="font-size:24px"></i><span class="sm-side" style="vertical-align: super;"> Beranda </span><span class=""></span></a>
+                            <li><a data-toggle="tooltip" data-placement="right" title="Beranda" href="{{URL('/')}}"><i class="fa fa-home" style="font-size:24px; color:#5C91FE"></i><span class="sm-side" style="vertical-align: super;"> Beranda </span><span class=""></span></a>
                             </li>
                             <li @php if(!in_array(111, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Sekretariat Utama" href="javascript:;">
                               <!-- <i class="fa fa-microchip" > -->
-                                <div class="fa"><img style="margin-left: -1px; width: 20px; height: 18px" alt="Logo SIN-BNN" src="{{asset('assets/icon/sekretariat_utama.png')}}" class="img-responsive"></div>
+                                <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/sekretariat_utama.png')}}" class="img-responsive"></div>
                               </i><span class="sm-side" style="vertical-align: super;"> Sekretariat Utama </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                   <li @php if(!in_array(112, $menu))  echo 'style="display:none;"'; @endphp>
@@ -51,7 +51,7 @@
                             </li>
                             <li @php if(!in_array(7, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Inspektorat Utama" href="javascript:;">
                               <!-- <i class="fa fa-search"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/inspektorat_utama.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/inspektorat_utama.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Inspektorat Utama </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li @php if(!in_array(117, $menu))  echo 'style="display:none;"'; @endphp><a href="{{url('irtama/audit/irtama_audit')}}">Laporan Hasil Audit</a></li>
@@ -75,7 +75,7 @@
 
                             <li @php if(!in_array(2, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Pemberantasan" href="javascript:;">
                               <!-- <i class="fa fa-shield"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/pemberantasan.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/pemberantasan.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Pemberantasan </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li @php if(!in_array(12, $menu))  echo 'style="display:none;"'; @endphp><a href="javascript:;">Direktorat Narkotika<span class="fa fa-chevron-down"></span></a>
@@ -121,7 +121,7 @@
                             </li>
                             <li @php if(!in_array(3, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Rehabilitasi" href="javascript:;">
                               <!-- <i class="fa fa-heartbeat"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/rehabilitasi.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/rehabilitasi.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Rehabilitasi </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li @php if(!in_array(29, $menu))  echo 'style="display:none;"'; @endphp><a href="javascript:;">Direktorat PLRIP<span class="fa fa-chevron-down"></span></a>
@@ -149,7 +149,7 @@
                             </li>
                             <li @php if(!in_array(4, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Pencegahan" href="javascript:;">
                               <!-- <i class="fa fa-ban"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/pencegahan.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/pencegahan.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Pencegahan </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                   <li @php if(!in_array(49, $menu))  echo 'style="display:none;"'; @endphp><a href="javascript:;">Direktorat Advokasi<span class="fa fa-chevron-down"></span></a>
@@ -181,7 +181,7 @@
                             </li>
                             <li @php if(!in_array(5, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Pemberdayaan Masyarakat" href="javascript:;">
                               <!-- <i class="fa fa-users"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/pemberdayaan_masyarakat.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/pemberdayaan_masyarakat.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Pemberdayaan Masyarakat </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                   <li @php if(!in_array(65, $menu))  echo 'style="display:none;"'; @endphp><a href="javascript:;">Direktorat Peran Serta Masyarakat<span class="fa fa-chevron-down"></span></a>
@@ -207,7 +207,7 @@
                             </li>
                             <li @php if(!in_array(6, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Hukum dan Kerja Sama" href="javascript:;">
                               <!-- <i class="fa fa-balance-scale"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/hukum_kerjasama.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/hukum_kerjasama.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Hukum dan Kerja Sama </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                   <li @php if(!in_array(78, $menu))  echo 'style="display:none;"'; @endphp><a href="javascript:;">Direktorat Hukum<span class="fa fa-chevron-down"></span></a>
@@ -233,7 +233,7 @@
                             <li @php if(!in_array(109, $menu))  echo 'style="display:none;"'; @endphp>
                               <a data-toggle="tooltip" data-placement="right" title="Balai Besar" href="javascript:;">
                                 <!-- <i class="fa fa-leanpub"></i> -->
-                                <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_besar.png')}}" class="img-responsive"></div>
+                                <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_besar.png')}}" class="img-responsive"></div>
                                 <span class="sm-side" style="vertical-align: super;"> Balai Besar </span><span class="fa fa-chevron-down"></span></a>
                                <ul class="nav child_menu">
                                     <li @php if(!in_array(110, $menu))  echo 'style="display:none;"'; @endphp><a href="{{route('data_magang')}}">Magang</a></li>
@@ -241,7 +241,7 @@
                             </li>
                             <li @php if(!in_array(8, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Balai Diklat" href="javascript:;">
                               <!-- <i class="fa fa-leanpub"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_diklat.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_diklat.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Balai Diklat </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li @php if(!in_array(93, $menu))  echo 'style="display:none;"'; @endphp><a href="{{url('balai_diklat/pendidikan/pendidikan_pelatihan')}}">Pendidikan dan Pelatihan</a></li>
@@ -249,7 +249,7 @@
                             </li>
                             <li @php if(!in_array(9, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Balai Laboratorium Narkoba" href="javascript:;">
                               <!-- <i class="fa fa-flask"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_laboratorium.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/balai_laboratorium.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Balai Laboratorium Narkoba </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li @php if(!in_array(94, $menu))  echo 'style="display:none;"'; @endphp><a href="{{route('berkas_sampel')}}">Berkas Sampel</a></li>
@@ -257,7 +257,7 @@
                             </li>
                             <li @php if(!in_array(10, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Puslitdatin" href="javascript:;">
                               <!-- <i class="fa fa-microchip"></i> -->
-                              <div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/puslitdatin.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; width: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/puslitdatin.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: super;"> Puslitdatin </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                   <li @php if(!in_array(95, $menu))  echo 'style="display:none;"'; @endphp><a href="javascript:;">Bidang Litbang<span class="fa fa-chevron-down"></span></a>
@@ -281,12 +281,12 @@
                             </li>
                             <li @php if(!in_array(11, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Arahan Pimpinan" href="{{url('arahan/pimpinan/arahan_pimpinan')}}">
                               <!-- <i class="fa fa-id-badge"></i> -->
-                              <div class="fa"><img style="margin-left: -3px; height: 24px; width: 18px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/arahan_kepala_bnn.png')}}" class="img-responsive"></div>
+                              <div class="fa"><img style="margin-left: -3px; height: 30px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/arahan_kepala_bnn.png')}}" class="img-responsive"></div>
                               <span class="sm-side" style="vertical-align: top;"> Arahan Pimpinan </span><span class=""></span></a>
                             <!--a style="vertical-align: top;"> Arahan Pimpinan </span><span class=""></span></a-->
                             </li>
                             <li @php if(!in_array(130, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="User Management" href="javascript:;">
-                              <i class="fa fa-home" style="font-size:24px"></i>
+                              <i class="fa fa-home" style="font-size:24px; color:#5C91FE"></i>
                               <!--div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/puslitdatin.png')}}" class="img-responsive"></div-->
                               <span class="sm-side" style="vertical-align: super;"> User Management </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
@@ -301,7 +301,7 @@
                                 </ul>
                             </li>
                             <li @php if(!in_array(131, $menu))  echo 'style="display:none;"'; @endphp><a data-toggle="tooltip" data-placement="right" title="Master Data" href="javascript:;">
-                              <i class="fa fa-home" style="font-size:24px"></i>
+                              <i class="fa fa-home" style="font-size:24px; color:#5C91FE"></i>
                               <!--div class="fa"><img style="margin-left: -1px; width: 20px;" alt="Logo SIN-BNN" src="{{asset('assets/icon/puslitdatin.png')}}" class="img-responsive"></div-->
                               <span class="sm-side" style="vertical-align: super;"> Master Data </span><span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">

@@ -394,20 +394,20 @@ table.tile_info td p {
 }
 
 .profile_info {
-    padding: 25px 10px 10px;
+    padding: 25px 10px 10px; /* awal padding: 25px 10px 10px; */
     width: 65%;
     float: left
 }
 
 .profile_info span {
-    font-size: 13px;
+    font-size: 16px;
     line-height: 30px;
-    color: #BAB8B8
+    color: #5C91FE
 }
 
 .profile_info h2 {
-    font-size: 14px;
-    color: #ECF0F1;
+    font-size: 16px;
+    color: #5C91FE;
     margin: 0;
     font-weight: 300
 }
@@ -439,7 +439,8 @@ table.tile_info td p {
     margin-top: 2px;
     font-size: 10px;
     min-width: inherit;
-    color: #C4CFDA
+    color: #C4CFDA;
+    width: 1px;
 }
 
 .active a span.fa {
@@ -486,7 +487,7 @@ table.tile_info td p {
 }
 
 body .container.body .right_col {
-    background: #F7F7F7
+    background: #fff;
 }
 
 .nav-md .container.body .right_col {
@@ -497,7 +498,7 @@ body .container.body .right_col {
 .nav_title {
     width: 230px;
     float: left;
-    background: #2A3F54;
+    /* background: #2A3F54; */
     border-radius: 0;
     height: 57px
 }
@@ -697,7 +698,12 @@ body {
     float: left;
     display: block
 }
-
+.pull-right {
+    background: linear-gradient(90deg,#2193b0,#6dd5ed);
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+}
 .page-title .title_right .pull-right {
     margin: 10px 0
 }
@@ -874,8 +880,9 @@ a:visited {
 
 .top_nav .navbar-right {
     margin: 0;
-    width: 70%;
-    float: right
+    width: 85%;
+    float: right;
+    border-bottom: 2px solid rgba(94,145,254,.3);
 }
 
 .top_nav .navbar-right li {
@@ -929,7 +936,7 @@ a:visited {
 }
 
 .nav.side-menu>li>a:hover {
-    color: #F2F5F7!important
+    color: #272727 !important;
 }
 
 .nav.side-menu>li>a:hover,
@@ -952,7 +959,7 @@ a:visited {
 }
 
 .nav-md ul.nav.child_menu li:before {
-    background: #425668;
+    background: #dadada;
     bottom: auto;
     content: "";
     height: 8px;
@@ -966,7 +973,7 @@ a:visited {
 }
 
 .nav-md ul.nav.child_menu li:after {
-    border-left: 1px solid #425668;
+    border-left: 1px solid #dadada;
     bottom: 0;
     content: "";
     left: 27px;
@@ -982,14 +989,15 @@ a:visited {
 
 .nav.child_menu>li>a,
 .nav.side-menu>li>a {
-    color: #E7E7E7;
+    color: #272727;
     font-weight: 500
 }
 
 .nav li li.current-page a,
 .nav.child_menu li li a.active,
 .nav.child_menu li li a:hover {
-    color: #fff
+    color: #272727;
+    background: #ddd;
 }
 
 .nav.child_menu li li.active,
@@ -1022,9 +1030,9 @@ a:visited {
 }
 
 .nav.side-menu>li.active>a {
-    text-shadow: rgba(0, 0, 0, .25) 0 -1px 0;
+    /* text-shadow: rgba(0, 0, 0, .25) 0 -1px 0; */
     background: linear-gradient(#334556, #2C4257), #2A3F54;
-    box-shadow: rgba(0, 0, 0, .25) 0 1px 0, inset rgba(255, 255, 255, .16) 0 1px 0
+    /* box-shadow: rgba(0, 0, 0, .25) 0 1px 0, inset rgba(255, 255, 255, .16) 0 1px 0 */
 }
 
 .navbar-brand,
@@ -1106,7 +1114,7 @@ a:visited {
 }
 
 .nav.child_menu>li>a {
-    color: rgba(255, 255, 255, .75);
+    /* color: rgba(255, 255, 255, .75); */
     font-size: 12px;
     padding: 9px
 }
@@ -2042,7 +2050,7 @@ span.right {
     padding: 5px 0 0;
     position: fixed;
     width: 230px;
-    background: #2A3F54;
+    background: #5C91FE;
     z-index: 999
 }
 
@@ -2053,12 +2061,12 @@ span.right {
     font-size: 17px;
     display: block;
     float: left;
-    background: #172D44;
+    /*background: #172D44;*/
     cursor: pointer
 }
 
 .sidebar-footer a:hover {
-    background: #425567
+    background: #5C91FE
 }
 
 .tile_count {
@@ -2244,6 +2252,8 @@ h4.graph_title {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
+    float: left;
+    height: 30px;
     -moz-osx-font-smoothing: grayscale
 }
 
@@ -2251,7 +2261,7 @@ h4.graph_title {
     position: relative;
     display: block;
     margin-bottom: 12px;
-    border: 1px solid #E4E4E4;
+    /* border: 1px solid #E4E4E4; */
     -webkit-border-radius: 5px;
     overflow: hidden;
     padding-bottom: 5px;
@@ -2259,8 +2269,12 @@ h4.graph_title {
     -moz-border-radius: 5px;
     -moz-background-clip: padding;
     border-radius: 5px;
-    background: #FFF;
-    transition: all .3s ease-in-out
+    /* background: #FFF; */
+    transition: all .3s ease-in-out;
+}
+
+.tile-stats:hover {
+    color:#5C91FE !important;
 }
 
 .tile-stats:hover .icon i {
@@ -2305,6 +2319,12 @@ h4.graph_title {
     font-weight: 700;
     line-height: 1.65857
 }
+
+.tile-stats .count:hover {
+    color:#5C91FE !important;
+}
+
+
 
 .tile-stats .count,
 .tile-stats h3,
@@ -5282,7 +5302,7 @@ button.btn-transparant {
 }
 
 .modalmenu {
-  font-size:16px;
+  font-size:14px;
   color: white !important; }
   .modalmenu:hover {
     color: yellow !important;

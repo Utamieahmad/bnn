@@ -126,16 +126,16 @@
                                     <img src="data:image/png;base64,{{$data_razia['data']['foto1']}}" id="blah" style="width:100%;height:150px;" />
                                 @else
                                     <img src="{{asset('assets/images/NoImage.gif')}}" id="blah" style="width:100%;height:150px;" />
-                                @endif                                
+                                @endif
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12">                                
+                            <div class="col-md-3 col-sm-3 col-xs-12">
                                 @if ($data_razia['data']['foto2'])
                                     <img src="data:image/png;base64,{{$data_razia['data']['foto2']}}" id="blah2" style="width:100%;height:150px;" />
                                 @else
                                     <img src="{{asset('assets/images/NoImage.gif')}}" id="blah2" style="width:100%;height:150px;" />
                                 @endif
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12">                                
+                            <div class="col-md-3 col-sm-3 col-xs-12">
                                 @if ($data_razia['data']['foto3'])
                                     <img src="data:image/png;base64,{{$data_razia['data']['foto3']}}" id="blah3" style="width:100%;height:150px;" />
                                 @else
@@ -143,7 +143,7 @@
                                 @endif
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  >&nbsp;</label>
                             <div class="col-md-3 col-sm-3 col-xs-12">
@@ -162,7 +162,7 @@
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button type="submit" class="btn btn-success">KIRIM</button>
+                                <button type="submit" class="btn btn-success">SIMPAN</button>
                                 <a href="{{route('razia')}}" class="btn btn-primary" type="button">BATAL</a>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 </div>

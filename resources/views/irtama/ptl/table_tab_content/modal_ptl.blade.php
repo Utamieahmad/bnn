@@ -112,7 +112,7 @@
           
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary confirm  btn-confirm"> Kirim</button>
+              <button type="submit" class="btn btn-primary confirm  btn-confirm"> SIMPAN</button>
             </div>
           </div>
 
