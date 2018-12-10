@@ -16,6 +16,7 @@
         <link href="{{asset('assets/css/custom.css') }}" rel="stylesheet">
         <link href="{{asset('assets/css/customs.css') }}" rel="stylesheet">
         <link href="{{asset('assets/css/custom-omspan.css') }}" rel="stylesheet">
+        <link href="{{asset('assets/css/loading.css') }}" rel="stylesheet">
         <script>
     		var TOKEN = '{{Request::session()->get('token')}}';
     		var SOA_URL = '{{config('app.url_soa')}}';
