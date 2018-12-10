@@ -1,8 +1,12 @@
 $('document').ready(function(){
+	hideLoading();
+	$('[data-toggle="tooltip"]').tooltip();
+	
 	$('#menu_toggle').click();
 	showHide();
 	
 	$('.dt-omspan').on('click', '.detail_up', function () {
+		showLoading();
 		console.log(TOKEN);
 		console.log($('#periode').val());
 		console.log($(this).attr('kd_instansi'));
@@ -24,6 +28,7 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
+				hideLoading();
                 console.log(data);
 				if(data.code=='200') {
 					$('.div_up').show();
@@ -31,6 +36,7 @@ $('document').ready(function(){
 					var row = "";
 					var tepat = 0;
 					var terlambat = 0;
+					var no = 1;
 					$('.dt-up tbody').html("");
 					for (i = 0;i < data.data.length;i++) {
 						var gu = data.data[i].outstanding - data.data[i].nilai_total
@@ -43,18 +49,18 @@ $('document').ready(function(){
 							terlambat++;
 						}
 						row += "<tr>"+
-                            "<td>"+i+"</td>"+
-                            "<td>"+data.data[i].kdsatker+"</td>"+
-                            "<td>"+data.data[i].instansiName+"</td>"+
-                            "<td>"+data.data[i].sumber_dana+"</td>"+
-                            "<td>"+data.data[i].jenis+"</td>"+
-                            "<td>"+data.data[i].tanggal+"</td>"+
-                            "<td>"+data.data[i].tanggal_diff+"</td>"+
-                            "<td>"+convertToRupiah(data.data[i].nilai_total)+"</td>"+
-                            "<td>"+convertToRupiah(data.data[i].outstanding)+"</td>"+
-                            "<td>"+convertToRupiah(gu)+"</td>"+
-                            "<td>"+Math.round((gu/data.data[i].outstanding) * 100)+"</td>"+
-                            "<td>"+data.data[i].status+"</td>";
+                            "<td class='border_btm'>"+ no++ +"</td>"+
+                            "<td class='border_btm'>"+data.data[i].kdsatker+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].instansiName+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].sumber_dana+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].jenis+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].tanggal+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].tanggal_diff+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(data.data[i].nilai_total)+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(data.data[i].outstanding)+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(gu)+"</td>"+
+                            "<td class='border_btm'>"+Math.round((gu/data.data[i].outstanding) * 100)+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].status+"</td></tr>";
 					}
 					$('.dt-up tbody').html(row);
 					$('.jml_tepat').html(tepat);
@@ -69,12 +75,14 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
 	});
 	
 	$('.dt-omspan').on('click', '.detail_dkon', function () {
+		showLoading();
 		if($('#periode').val() == '') {
 			alert('Periode tidak ditemukan');
 			return false;
@@ -93,7 +101,7 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
-                //console.log(data);
+				hideLoading();
 				if(data.code=='200') {
 					$('.div_kontrak').show();
 					$('.div_rekap').hide();
@@ -101,11 +109,11 @@ $('document').ready(function(){
 					var tepat = 0;
 					var terlambat = 0;
 					var k = 1;
+					var no = 1;
 					var total = 0;
 					var persen = 0;
 					$('.dt-kontrak tbody').html("");
 					for (i = 0;i < parseInt($('#periode').val());i++) {
-						//console.log(i);
 						for (j = 0;j < data.data.length;j++) {
 							if(('0'+k).slice(-2) == data.data[j].periode) {
 								if(data.data[j].status != '-') {
@@ -117,27 +125,22 @@ $('document').ready(function(){
 								}
 							}
 						}
-						//console.log(tepat);
-						//console.log(terlambat);
 						total = tepat + terlambat;
 						if(total != 0) {
 							persen = (tepat/total) *100;
 							row += "<tr>"+
-								"<td>"+k+"</td>"+
-								"<td>"+data.data[0].kdsatker+"</td>"+
-								"<td>"+data.data[0].instansiName+"</td>"+
-								"<td></td>"+
-								"<td>"+('0'+k).slice(-2)+"</td>"+
-								"<td>"+tepat+"</td>"+
-								"<td>"+terlambat+"</td>"+
-								"<td>"+convertToRupiah(total)+"</td>"+
-								"<td>"+parseFloat(persen).toFixed(2)+"</td>"+
-								"<td></td>";
+								"<td class='border_btm'>"+ no++ +"</td>"+
+								"<td class='border_btm'>"+data.data[0].kdsatker+"</td>"+
+								"<td class='border_btm'>"+data.data[0].instansiName+"</td>"+
+								"<td class='border_btm'></td>"+
+								"<td class='border_btm'>"+('0'+k).slice(-2)+"</td>"+
+								"<td class='border_btm'>"+tepat+"</td>"+
+								"<td class='border_btm'>"+terlambat+"</td>"+
+								"<td class='border_btm'>"+convertToRupiah(total)+"</td>"+
+								"<td class='border_btm'>"+parseFloat(persen).toFixed(2)+"</td>"+
+								"<td class='border_btm'></td></tr>";
 						}
 						k++;
-						//tepat = 0;
-						//terlambat = 0;
-						//total = 0;
 						persen = 0;
 					}
 					$('.dt-kontrak tbody').html(row);
@@ -149,12 +152,14 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
 	});
 	
 	$('.dt-omspan').on('click', '.detail_revisi', function () {
+		showLoading();
 		if($('#periode').val() == '') {
 			alert('Periode tidak ditemukan');
 			return false;
@@ -172,6 +177,7 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
+				hideLoading();
                 console.log(data);
 				if(data.code=='200') {
 					$('.div_revisi').show();
@@ -184,12 +190,12 @@ $('document').ready(function(){
 							rev = 1;
 						}
 						row += "<tr>"+
-                            "<td>"+i+"</td>"+
-                            "<td>"+data.data[i].periode+"</td>"+
-                            "<td>"+data.data[i].kdsatker+"</td>"+
-                            "<td>"+data.data[i].total_revisi+"</td>"+
-                            "<td></td>"+
-                            "<td></td>";
+                            "<td class='border_btm'>"+i+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].periode+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].kdsatker+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].total_revisi+"</td>"+
+                            "<td class='border_btm'></td>"+
+                            "<td class='border_btm'></td></tr>";
 					}
 					if(rev != 0) {						
 						$('.dt-revisi tbody').html(row);
@@ -204,12 +210,14 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
 	});
 	
 	$('.dt-omspan').on('click', '.detail_retur', function () {
+		showLoading();
 		if($('#periode').val() == '') {
 			alert('Periode tidak ditemukan');
 			return false;
@@ -227,12 +235,14 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
+				hideLoading();
                 console.log(data);
 				if(data.code=='200') {
 					$('.div_retur').show();
 					$('.div_rekap').hide();
 					var row = "";
 					var persen = 0;
+					var no = 1;
 					$('.dt-retur tbody').html("");
 					for (i = 0;i < data.data.length;i++) {
 						if(data.data[i].jml_sp2d != 0) {
@@ -241,15 +251,15 @@ $('document').ready(function(){
 							persen = 0;
 						}
 						row += "<tr>"+
-                            "<td>"+i+"</td>"+
-                            "<td>"+data.data[i].kdsatker+"</td>"+
-                            "<td>"+data.data[i].instansiName+"</td>"+
-                            "<td></td>"+
-                            "<td>"+data.data[i].periode+"</td>"+
-                            "<td>"+data.data[i].jml_retur+"</td>"+
-                            "<td>"+data.data[i].jml_sp2d+"</td>"+
-                            "<td>"+parseFloat(persen).toFixed(2)+"</td>"+
-                            "<td>"+parseFloat(100 - persen).toFixed(2)+"</td>";
+                            "<td class='border_btm'>"+ no++ +"</td>"+
+                            "<td class='border_btm'>"+data.data[i].kdsatker+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].instansiName+"</td>"+
+                            "<td class='border_btm'></td>"+
+                            "<td class='border_btm'>"+data.data[i].periode+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].jml_retur+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].jml_sp2d+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(persen).toFixed(2)+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(100 - persen).toFixed(2)+"</td></tr>";
 					}
 					$('.dt-retur tbody').html(row);
 				} else {
@@ -258,12 +268,14 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
 	});
 	
 	$('.dt-omspan').on('click', '.detail_renkas', function () {
+		showLoading();
 		if($('#periode').val() == '') {
 			alert('Periode tidak ditemukan');
 			return false;
@@ -281,6 +293,7 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
+				hideLoading();
                 console.log(data);
 				if(data.code=='200') {
 					$('.div_renkas').show();
@@ -310,30 +323,18 @@ $('document').ready(function(){
 							persen = (tepat/total) *100;
 						}
 						row += "<tr>"+
-                            "<td>"+k+"</td>"+
-                            "<td>"+data.data[0].kdsatker+"</td>"+
-                            "<td>"+('0'+k).slice(-2)+"</td>"+
-                            "<td>"+tepat+"</td>"+
-                            "<td>"+terlambat+"</td>"+
-                            "<td>"+convertToRupiah(total)+"</td>"+
-                            "<td>"+parseFloat(persen).toFixed(2)+"</td>";
+                            "<td class='border_btm'>"+k+"</td>"+
+                            "<td class='border_btm'>"+data.data[0].kdsatker+"</td>"+
+                            "<td class='border_btm'>"+('0'+k).slice(-2)+"</td>"+
+                            "<td class='border_btm'>"+tepat+"</td>"+
+                            "<td class='border_btm'>"+terlambat+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(total)+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(persen).toFixed(2)+"</td></tr>";
 						k++;
 						total = 0;
 						persen = 0;
 					}
 					
-					//for (i = 0;i < parseInt($('#periode').val());i++) {
-					//	no++;
-					//	if($('#periode').val() == data.data[i].kdsatker)
-					//	row += "<tr>"+
-                    //        "<td>"+no+"</td>"+
-                    //        "<td>"+data.data[i].kdsatker+"</td>"+
-                    //        "<td>0"+no+"</td>"+
-                    //        "<td></td>"+
-                    //        "<td></td>"+
-                    //        "<td></td>"+
-                    //        "<td></td>";
-					//}
 					$('.dt-renkas tbody').html(row);
 				} else {
 					$('.div_renkas').show();
@@ -343,12 +344,14 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
 	});
 	
 	$('.dt-omspan').on('click', '.detail_spm', function () {
+		showLoading();
 		if($('#periode').val() == '') {
 			alert('Periode tidak ditemukan');
 			return false;
@@ -366,6 +369,7 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
+				hideLoading();
                 console.log(data);
 				if(data.code=='200') {
 					$('.div_spm').show();
@@ -378,7 +382,6 @@ $('document').ready(function(){
 					var nilai = 100;
 					$('.dt-spm tbody').html("");
 					for (i = 0;i <data.data.length;i++) {
-						
 						total_salah += data.data[i].akumulasi_salah;
 						total_spm += data.data[i].total_spm;
 						
@@ -387,14 +390,14 @@ $('document').ready(function(){
 							nilai = 100-persen;
 						}
 						row += "<tr>"+
-                            "<td>"+ no++ +"</td>"+
-                            "<td>"+data.data[i].kdsatker+"</td>"+
-                            "<td>"+data.data[i].instansiName+"</td>"+
-                            "<td>"+ data.data[i].periode +"</td>"+
-                            "<td>"+total_salah+"</td>"+
-                            "<td>"+total_spm+"</td>"+
-                            "<td>"+convertToRupiah(persen)+"</td>"+
-                            "<td>"+convertToRupiah(nilai)+"</td>";
+                            "<td class='border_btm'>"+ no++ +"</td>"+
+                            "<td class='border_btm'>"+data.data[i].kdsatker+"</td>"+
+                            "<td class='border_btm'>"+data.data[i].instansiName+"</td>"+
+                            "<td class='border_btm'>"+ data.data[i].periode +"</td>"+
+                            "<td class='border_btm'>"+total_salah+"</td>"+
+                            "<td class='border_btm'>"+total_spm+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(persen)+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(nilai)+"</td></tr>";
 					}
 					$('.dt-spm tbody').html(row);
 				} else {
@@ -405,12 +408,14 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
 	});
 	
 	$('.dt-omspan').on('click', '.detail_hal3dipa', function () {
+		showLoading();
 		if($('#periode').val() == '') {
 			alert('Periode tidak ditemukan');
 			return false;
@@ -428,6 +433,7 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
+				hideLoading();
                 console.log(data);
 				if(data.code=='200') {
 					$('.div_hal3dipa').show();
@@ -435,23 +441,59 @@ $('document').ready(function(){
 					$('.dt-hal3dipa tbody').html("");
 					var no = 0;
 					var row = "";
-					var key_ren = "";
+					var real = 0;
+					var deviasi = 0;
+					var deviasi_persen = 0;
+					var akum_deviasi = 0;
+					var rata_deviasi = 0;
+					var rata_deviasi1 = 0;
+					var nilai_akhir = 0;
 					for (i = 0;i < parseInt($('#periode').val());i++) {
 						no++;
-						key_ren = "ren_"+('0'+no).slice(-2);
+						
+						for (j = 0;j < data.realisasi.length;j++) {
+							if(('0'+no).slice(-2) == data.realisasi[j].periode) {
+								real = data.realisasi[j].jumlahRealisasi;
+							}
+						}
+						deviasi = Math.abs(real - data.data[0]["ren_" + no.toString().padStart(2, '0')]);
+						if(data.data[0]["ren_" + no.toString().padStart(2, '0')] != 0) {							
+							deviasi_persen = (deviasi / data.data[0]["ren_" + no.toString().padStart(2, '0')]) * 100;
+						} else {
+							deviasi_persen = 0;
+						}
+						akum_deviasi = deviasi_persen + akum_deviasi;
+						rata_deviasi = akum_deviasi / no;
+						if(no == 1) {
+							if(rata_deviasi != 0) {
+								rata_deviasi1 = rata_deviasi;
+							} else {
+								rata_deviasi1 = 100;
+							}
+						}
+						nilai_akhir = rata_deviasi1 - rata_deviasi;
+						console.log(nilai_akhir);
+						if(nilai_akhir < 0) {
+							nilai_akhir = 0;
+						}
 						row += "<tr>"+
-                            "<td>"+no+"</td>"+
-                            "<td>"+data.data[0].kdsatker+"</td>"+
-                            "<td>"+data.data[0].instansiName+"</td>"+
-                            "<td></td>"+
-                            "<td>0"+no+"</td>"+
-                            "<td>"+data.data[0]["ren_" + no.toString().padStart(2, '0')]+"</td>"+
-                            "<td></td>"+
-                            "<td></td>"+
-                            "<td></td>"+
-                            "<td></td>"+
-                            "<td></td>"+
-                            "<td></td>";
+                            "<td class='border_btm'>"+no+"</td>"+
+                            "<td class='border_btm'>"+data.data[0].kdsatker+"</td>"+
+                            "<td class='border_btm'>"+data.data[0].instansiName+"</td>"+
+                            "<td class='border_btm'></td>"+
+                            "<td class='border_btm'>"+('0'+no).slice(-2)+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(data.data[0]["ren_" + no.toString().padStart(2, '0')])+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(real)+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(deviasi)+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(deviasi_persen).toFixed(2)+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(akum_deviasi).toFixed(2)+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(rata_deviasi).toFixed(2)+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(nilai_akhir).toFixed(2)+"</td></tr>";
+						real = 0;
+						deviasi = 0;
+						deviasi_persen = 0;
+						rata_deviasi = 0;
+						nilai_akhir = 0;
 					}
 					$('.dt-hal3dipa tbody').html(row);
 				} else {
@@ -460,12 +502,14 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
 	});
 	
 	$('.dt-omspan').on('click', '.detail_tagih', function () {
+		showLoading();
 		if($('#periode').val() == '') {
 			alert('Periode tidak ditemukan');
 			return false;
@@ -483,6 +527,7 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
+				hideLoading();
                 console.log(data);
 				if(data.code=='200') {
 					$('.div_tagihan').show();
@@ -512,16 +557,14 @@ $('document').ready(function(){
 							persen = (tepat/total) *100;
 						}
 						row += "<tr>"+
-                            "<td>"+k+"</td>"+
-                            "<td>"+data.data[0].kdsatker+"</td>"+
-                            "<td>"+('0'+k).slice(-2)+"</td>"+
-                            "<td>"+tepat+"</td>"+
-                            "<td>"+terlambat+"</td>"+
-                            "<td>"+convertToRupiah(total)+"</td>"+
-                            "<td>"+parseFloat(persen).toFixed(2)+"</td>";
+                            "<td class='border_btm'>"+k+"</td>"+
+                            "<td class='border_btm'>"+data.data[0].kdsatker+"</td>"+
+                            "<td class='border_btm'>"+('0'+k).slice(-2)+"</td>"+
+                            "<td class='border_btm'>"+tepat+"</td>"+
+                            "<td class='border_btm'>"+terlambat+"</td>"+
+                            "<td class='border_btm'>"+convertToRupiah(total)+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(persen).toFixed(2)+"</td></tr>";
 						k++;
-						//tepat = 0;
-						//terlambat = 0;
 						total = 0;
 						persen = 0;
 					}
@@ -534,12 +577,14 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
 	});
 	
 	$('.dt-omspan').on('click', '.detail_realisasi', function () {
+		showLoading();
 		if($('#periode').val() == '') {
 			alert('Periode tidak ditemukan');
 			return false;
@@ -557,6 +602,7 @@ $('document').ready(function(){
 				periode : $('#periode').val()
 			},
 			success: function(data) {
+				hideLoading();
                 console.log(data);
 				if(data.code=='200') {
 					$('.div_realisasi').show();
@@ -573,9 +619,6 @@ $('document').ready(function(){
 							if(('0'+k).slice(-2) == data.data[j].periode) {
 								realisasi += data.data[j].jumlahRealisasi;
 							}
-							//else {
-							//	realisasi = 0;
-							//}
 						}
 						if(data.pagu != 0) {
 							persen = (realisasi/data.pagu) * 100;
@@ -583,23 +626,22 @@ $('document').ready(function(){
 						if(parseInt(k) <= 3) {
 							triwulan = 15;
 						} else if(parseInt(k) > 3 && parseInt(k) <=6) {
-							triwulan = 45;
+							triwulan = 40;
 						} else if(parseInt(k) > 6 && parseInt(k) <=9) {
 							triwulan = 60;
 						} else {
 							triwulan = 90;
 						}
 						row += "<tr>"+
-                            "<td>"+k+"</td>"+
-                            "<td>"+data.data[0].kdSatker+"</td>"+
-							"<td></td>"+
-                            "<td>"+('0'+k).slice(-2)+"</td>"+
-                            "<td>"+data.pagu+"</td>"+
-                            "<td>"+realisasi+"</td>"+
-                            "<td>"+parseFloat(persen).toFixed(2)+"</td>"+
-                            "<td>"+Math.round(persen/triwulan *100)+"</td>";
+                            "<td class='border_btm'>"+k+"</td>"+
+                            "<td class='border_btm'>"+data.data[0].kdSatker+"</td>"+
+							"<td class='border_btm'></td>"+
+                            "<td class='border_btm'>"+('0'+k).slice(-2)+"</td>"+
+                            "<td class='border_btm'>"+data.pagu+"</td>"+
+                            "<td class='border_btm'>"+realisasi+"</td>"+
+                            "<td class='border_btm'>"+parseFloat(persen).toFixed(2)+"</td>"+
+                            "<td class='border_btm'>"+Math.round(persen/triwulan *100)+"</td></tr>";
 						k++;
-						//realisasi = 0;
 						persen = 0;
 					}
 					$('.dt-realisasi tbody').html(row);
@@ -611,6 +653,75 @@ $('document').ready(function(){
 				}
 			},
             error: function(e) {
+				hideLoading();
+				console.log('error '+JSON.stringify(e));
+			}
+		});
+	});
+	
+	$('.dt-omspan').on('click', '.detail_rekon', function () {
+		showLoading();
+		if($('#periode').val() == '') {
+			alert('Periode tidak ditemukan');
+			return false;
+		}
+		if($(this).attr('kd_instansi') == '') {
+			alert('Kode satker tidak ditemukan');
+			return false;
+		}
+		$.ajax({
+			type: "post",
+			url: BASE_URL + '/omspan/getrekon',
+			data: {
+				_token: $('#_token').val(),
+				kdSatker : $(this).attr('kd_instansi'),
+				periode : $('#periode').val()
+			},
+			success: function(data) {
+				hideLoading();
+                console.log(data);
+				if(data.code=='200') {
+					$('.div_rekon').show();
+					$('.div_rekap').hide();
+					var row = "";
+					var k = 1;
+					var bulan = "";
+					var tanggal = "";
+					var status = "TIDAK ADA DATA";
+					$('.dt-rekon tbody').html("");
+					for (i = 0;i < parseInt($('#periode').val());i++) {
+						
+						for (j = 0;j < data.data.length;j++) {
+							if(('0'+k).slice(-2) == data.data[j].periode) {
+								bulan = data.data[j].periode;
+								tanggal = data.data[j].tanggal_upload;
+								status = data.data[j].status;
+							}
+						}
+						
+						row += "<tr>"+
+                            "<td class='border_btm'>"+k+"</td>"+
+                            "<td class='border_btm'>"+data.data[0].kdsatker+"</td>"+
+                            "<td class='border_btm'>"+data.data[0].instansiName+"</td>"+
+                            "<td class='border_btm'>"+data.data[0].kdkppn+"</td>"+
+                            "<td class='border_btm'>"+bulan+"</td>"+
+                            "<td class='border_btm'>"+tanggal+"</td>"+
+                            "<td class='border_btm'>"+status+"</td></tr>";
+						k++;
+						bulan = "";
+						tanggal = "";
+						status = "TIDAK ADA DATA";
+					}
+					$('.dt-rekon tbody').html(row);
+				} else {
+					$('.div_rekon').show();
+					$('.div_rekap').hide();
+					$('.dt-rekon tbody').html('<tr><td colspan="7" align="center">No Data Found</td></tr>');
+					alert(data.status);
+				}
+			},
+            error: function(e) {
+				hideLoading();
 				console.log('error '+JSON.stringify(e));
 			}
 		});
@@ -644,5 +755,13 @@ $('document').ready(function(){
 		$('.div_hal3dipa').hide();
 		$('.div_kontrak').hide();
 		$('.div_rekap').show();
+	}
+	function showLoading() {
+		$('#loader-wrapper').show();
+		$('.main_container').addClass('pagx');
+	}
+	function hideLoading() {
+		$('#loader-wrapper').hide();
+		$('.main_container').removeClass('pagx');
 	}
 })

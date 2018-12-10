@@ -3,6 +3,9 @@
 
 @section('content')
 	<div class="right_col" role="main">
+		<div id="loader-wrapper">
+			<div id="loader"></div>
+		</div>
 		<div class="m-t-40">
 			<!--div class="page-title">
 				<div class="">
@@ -19,14 +22,15 @@
 					<div class="x_panel">
 						<div class="div_rekap">
 						<div class="x_title">
-							<h2 class="test_hover">Indikator Pelaksanaan Anggaran</h2>
+							<h2>Indikator Pelaksanaan Anggaran</h2>
 						</div>
 						<div class="x_content">
+						<h6>Sampai Dengan {{$periode_name}}</h6>
 							<table id="datatable-responsive" class="table table-bordered dt-omspan nowrap table-hover-cells" cellspacing="0" width="100%">
 								<thead>
 									<tr>
 										<th>No</th>
-										<th>Kode Dept</th>
+										<th>Kode KPPN</th>
 										<th>Kode Satker</th>
 										<th>Uraian Satker</th>
 										<th>Keterangan</th>
@@ -53,26 +57,26 @@
 									@endphp
 									@foreach ($rekap as $row)
 										<tr>
-											<td rowspan="3">{{$i++}}</td>
-											<td rowspan="3"></td>
-											<td rowspan="3">{{trim($row['kd_satker'])}}</td>
-											<td rowspan="3">{{$row['instansi_name']}}</td>
-											<td class="no_border">Nilai</td>
-											<td class="no_border on_hover detail_up" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['up'],2)}}</td>
-											<td class="no_border on_hover detail_dkon" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['dkon'],2)}}</td>
-											<td class="no_border on_hover detail_spm"  kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['spm'],2)}}</td>
-											<td class="no_border on_hover detail_retur" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['retur'],2)}}</td>
-											<td class="no_border on_hover detail_hal3dipa" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['hal3dipa'],2)}}</td>
-											<td class="no_border on_hover detail_revisi" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['revisi'],2)}}</td>
-											<td class="no_border on_hover detail_tagih" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['ptagih'],2)}}</td>
-											<td class="no_border">{{round($row['rekon'],2)}}</td>
-											<td class="no_border on_hover detail_renkas" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['renkas'],2)}}</td>
-											<td class="no_border on_hover detail_realisasi" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['nilai_realisasi'],2)}}</td>
-											<td class="no_border">0</td>
-											<td class="no_border">0</td>
-											<td rowspan="3">{{$row['na_up'] + $row['na_dkon']+ $row['na_spm'] + $row['na_retur'] + $row['na_revisi'] + $row['na_ptagih'] + $row['na_rekon'] + $row['na_renkas']+ $row['na_realisasi']}}</td>
-											<td rowspan="3">{{$row['bobot_up'] + $row['bobot_dkon'] + $row['bobot_spm'] + $row['bobot_retur'] + $row['bobot_revisi'] + $row['bobot_ptagih'] + $row['bobot_rekon'] + $row['bobot_renkas'] + $row['bobot_realisasi']}}</td>
-											<td rowspan="3">{{round(($row['na_up'] + $row['na_dkon']+ $row['na_spm'] + $row['na_retur'] + $row['na_revisi'] + $row['na_ptagih'] + $row['na_rekon'] + $row['na_renkas']+ $row['na_realisasi']) / (($row['bobot_up'] + $row['bobot_dkon'] + $row['bobot_spm'] + $row['bobot_retur'] + $row['bobot_revisi'] + $row['bobot_ptagih'] + $row['bobot_rekon'] + $row['bobot_renkas'] + $row['bobot_realisasi']) / 90),2)}}</td>
+											<td rowspan="3" class="border_btm">{{$i++}}</td>
+											<td rowspan="3" class="border_btm"></td>
+											<td rowspan="3" class="border_btm">{{trim($row['kd_satker'])}}</td>
+											<td rowspan="3" class="border_btm">{{$row['instansi_name']}}</td>
+											<td>Nilai</td>
+											<td class="on_hover detail_up" data-toggle="tooltip" title="Klik untuk lihat detail pengelolaan UP" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['up'],2)}}</td>
+											<td class="on_hover detail_dkon" data-toggle="tooltip" title="Klik untuk lihat detail data Kontrak" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['dkon'],2)}}</td>
+											<td class="on_hover detail_spm" data-toggle="tooltip" title="Klik untuk lihat detail kesalahan SPM" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['spm'],2)}}</td>
+											<td class="on_hover detail_retur" data-toggle="tooltip" title="Klik untuk lihat detail Retur SP2D" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['retur'],2)}}</td>
+											<td class="on_hover detail_hal3dipa" data-toggle="tooltip" title="Klik untuk lihat detail Hal III Dipa" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['hal3dipa'],2)}}</td>
+											<td class="on_hover detail_revisi" data-toggle="tooltip" title="Klik untuk lihat detail Revisi Dipa" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['revisi'],2)}}</td>
+											<td class="on_hover detail_tagih" data-toggle="tooltip" title="Klik untuk lihat detail Penyelesaian Tagihan" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['ptagih'],2)}}</td>
+											<td class="on_hover detail_rekon" data-toggle="tooltip" title="Klik untuk lihat detail Rekon LPJ" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['rekon'],2)}}</td>
+											<td class="on_hover detail_renkas" data-toggle="tooltip" title="Klik untuk lihat detail Renkas" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['renkas'],2)}}</td>
+											<td class="on_hover detail_realisasi" data-toggle="tooltip" title="Klik untuk lihat detail Realisasi" kd_instansi = "{{trim($row['kd_satker'])}}">{{round($row['nilai_realisasi'],2)}}</td>
+											<td class="">0</td>
+											<td class="">0</td>
+											<td class="border_btm" rowspan="3">{{$row['na_up'] + $row['na_dkon']+ $row['na_spm'] + $row['na_retur'] + $row['na_3dipa'] + $row['na_revisi'] + $row['na_ptagih'] + $row['na_rekon'] + $row['na_renkas']+ $row['na_realisasi']}}</td>
+											<td class="border_btm" rowspan="3">{{$row['bobot_up'] + $row['bobot_dkon'] + $row['bobot_spm'] + $row['bobot_retur'] + $row['bobot_3dipa'] + $row['bobot_revisi'] + $row['bobot_ptagih'] + $row['bobot_rekon'] + $row['bobot_renkas'] + $row['bobot_realisasi']}}</td>
+											<td class="border_btm" rowspan="3">{{round(($row['na_up'] + $row['na_dkon']+ $row['na_spm'] + $row['na_retur'] + $row['na_3dipa'] + $row['na_revisi'] + $row['na_ptagih'] + $row['na_rekon'] + $row['na_renkas']+ $row['na_realisasi']) / (($row['bobot_up'] + $row['bobot_dkon'] + $row['bobot_spm'] + $row['bobot_retur'] + $row['bobot_3dipa'] + $row['bobot_revisi'] + $row['bobot_ptagih'] + $row['bobot_rekon'] + $row['bobot_renkas'] + $row['bobot_realisasi']) / 90),2)}}</td>
 										</tr>
 										<tr>
 											<td>Bobot(%)</td>
@@ -80,7 +84,7 @@
 											<td>{{$row['bobot_dkon']}}</td>
 											<td>{{$row['bobot_spm']}}</td>
 											<td>{{$row['bobot_retur']}}</td>
-											<td></td>
+											<td>{{$row['bobot_3dipa']}}</td>
 											<td>{{$row['bobot_revisi']}}</td>
 											<td>{{$row['bobot_ptagih']}}</td>
 											<td>{{$row['bobot_rekon']}}</td>
@@ -90,19 +94,19 @@
 											<td>0</td>
 										</tr>
 										<tr>
-											<td>Nilai Akhir</td>
-											<td>{{$row['na_up']}}</td>
-											<td>{{$row['na_dkon']}}</td>
-											<td>{{$row['na_spm']}}</td>
-											<td>{{$row['na_retur']}}</td>
-											<td></td>
-											<td>{{$row['na_revisi']}}</td>
-											<td>{{$row['na_ptagih']}}</td>
-											<td>{{$row['na_rekon']}}</td>
-											<td>{{$row['na_renkas']}}</td>
-											<td>{{$row['na_realisasi']}}</td>
-											<td>0</td>
-											<td>0</td>
+											<td class="border_btm td_bold">Nilai Akhir</td>
+											<td class="border_btm td_bold">{{$row['na_up']}}</td>
+											<td class="border_btm td_bold">{{$row['na_dkon']}}</td>
+											<td class="border_btm td_bold">{{$row['na_spm']}}</td>
+											<td class="border_btm td_bold">{{$row['na_retur']}}</td>
+											<td class="border_btm td_bold">{{$row['na_3dipa']}}</td>
+											<td class="border_btm td_bold">{{$row['na_revisi']}}</td>
+											<td class="border_btm td_bold">{{$row['na_ptagih']}}</td>
+											<td class="border_btm td_bold">{{$row['na_rekon']}}</td>
+											<td class="border_btm td_bold">{{$row['na_renkas']}}</td>
+											<td class="border_btm td_bold">{{$row['na_realisasi']}}</td>
+											<td class="border_btm td_bold">0</td>
+											<td class="border_btm td_bold">0</td>
 										</tr>
 									@endforeach
 								</tbody>
@@ -116,7 +120,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-up nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-up nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -137,20 +141,20 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="11">Jumlah Tepat</td>
-											<td class="jml_tepat"></td>
+											<td colspan="11" class="border_btm td_bold">Jumlah Tepat</td>
+											<td class="border_btm td_bold jml_tepat"></td>
 										</tr>
 										<tr>
-											<td colspan="11">Jumlah Terlambat</td>
-											<td class="jml_terlambat"></td>
+											<td colspan="11" class="border_btm td_bold">Jumlah Terlambat</td>
+											<td class="border_btm td_bold jml_terlambat"></td>
 										</tr>
 										<tr>
-											<td colspan="11">Total</td>
-											<td class="total"></td>
+											<td colspan="11" class="border_btm td_bold">Total</td>
+											<td class="border_btm td_bold total"></td>
 										</tr>
 										<tr>
-											<td colspan="11">Persen</td>
-											<td class="total_persen"></td>
+											<td colspan="11" class="border_btm td_bold">Persen</td>
+											<td class="border_btm td_bold total_persen"></td>
 										</tr>
 									</tfoot>
 								</table>
@@ -163,7 +167,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-kontrak nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-kontrak nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -190,7 +194,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-spm nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-spm nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -215,7 +219,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-retur nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-retur nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -241,7 +245,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-hal3dipa nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-hal3dipa nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -270,7 +274,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-revisi nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-revisi nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -293,7 +297,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-tagihan nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-tagihan nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -317,7 +321,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-rekon nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-rekon nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -341,7 +345,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-renkas nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-renkas nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -365,7 +369,7 @@
 							</div>
 							<div class="x_content">
 								<button type="button" class="btn btn-success button-sm btn_kembali">Kembali</button>
-								<table class="table table-bordered dt-realisasi nowrap" cellspacing="0" width="100%" style="color: black !important;">
+								<table class="table table-bordered dt-realisasi nowrap" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<th>No</th>

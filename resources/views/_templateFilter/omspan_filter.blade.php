@@ -1,16 +1,18 @@
 <div class="">
-  <form class="form-group filter" action="{{isset($route) ? route($route) : ''}}" method="post">
+	<form class="form-group filter" action="{{isset($route) ? route($route) : ''}}" method="post">
+	<div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>
     <div class="row">
       {{csrf_field()}}
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="row">
-        
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label for="kode_satker" class="control-label">Kode Satker</label>
 			<input class="form-control" name="kode_satker" value="" />
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 keyword div-wrap">
-            <label for="periode" class="control-label">Bulan</label>
+            <label for="periode" class="control-label">Sampai Dengan</label>
             <select class="form-control select2"  name="periode">
               <option value="01">Januari</option>
               <option value="02">Februari</option>

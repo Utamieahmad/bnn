@@ -1284,7 +1284,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::group(['prefix'=>'omspan'],function(){
 		Route::match(['get','post'],'/omspan','omspanController@omspan')->name('omspan');
-		//Route::get('getpengelolaanup/{kdsatker}/{periode}', 'omspanController@getpengelolaanup')->name('getpengelolaanup');
 		Route::match(['get','post'],'/getpengelolaanup','omspanController@getpengelolaanup')->name('getpengelolaanup');
 		Route::match(['get','post'],'/getdatakontrak','omspanController@getdatakontrak')->name('getdatakontrak');
 		Route::match(['get','post'],'/getretur','omspanController@getretur')->name('getretur');
@@ -1294,6 +1293,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::match(['get','post'],'/getrevisi','omspanController@getrevisi')->name('getrevisi');
 		Route::match(['get','post'],'/gettagihan','omspanController@gettagihan')->name('gettagihan');
 		Route::match(['get','post'],'/getrealisasi','omspanController@getrealisasi')->name('getrealisasi');
+		Route::match(['get','post'],'/getrekon','omspanController@getrekon')->name('getrekon');
 	});
 
 });

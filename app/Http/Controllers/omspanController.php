@@ -19,25 +19,21 @@ class omspanController extends Controller
 	public $data;
 	public function omspan(Request $request){
 		$client = new Client();
-
+		
 		if($request->isMethod('post')) {
 			$get = $request->all();
-			
 			if($get['periode']) {
 				$filter = $get['periode'];
 				$filter2 = $get['periode'];
 				$filter3 = '';
-				$filter4 = intval($get['periode']);
 				$filterRealisasi = '';
 				if($get['kode_satker']) {
 					$filter = $get['kode_satker'] . '/' . $get['periode'];
 					$filter2 = $get['periode'] . '/' . $get['kode_satker'];
 					$filter3 = '/' . $get['kode_satker'];
-					$filter4 = $get['kode_satker'] . '/' . intval($get['periode']);
 					$filterRealisasi = $get['kode_satker'];
 				}
 				
-				//$req_data_satker = $client->request('GET','http://10.210.84.13:8080/masterdata/api/view/list/satker'.$filter3);
 				$req_data_satker = $client->request('GET','http://10.210.84.13:8080/satker/view/data/satker'.$filter3);
 				$data_satker = json_decode($req_data_satker->getBody()->getContents(), true);
                 
@@ -53,7 +49,7 @@ class omspanController extends Controller
 				$req_pen_tagihan = $client->request('GET', config('app.url_soakemenkeu').'kemajuan/'.$filter);
 				$pen_tagihan = json_decode($req_pen_tagihan->getBody()->getContents(), true);
 				
-				$req_rekon = $client->request('GET', config('app.url_soakemenkeu').'rekonLPJ/'.$filter4);
+				$req_rekon = $client->request('GET', 'http://10.210.84.13:8080/kemenkeunew/api/data/rekonLPJ/'.$filter);
 				$rekon = json_decode($req_rekon->getBody()->getContents(), true);
 				
 				$req_renkas = $client->request('GET', config('app.url_soakemenkeu').'renkas/'.$filter);
@@ -96,9 +92,17 @@ class omspanController extends Controller
 				$realisasi_count = 0;
 				$triwulan = "";
 				$rencana = 0;
+				$real_3dipa = 0;
 				$deviasi = 0;
 				$deviasi_persen = 0;
 				$akumulasi_deviasi = 0;
+				$periode_dev = 0;
+				$periode_dev2 = 0;
+				$rata_deviasi = 0;
+				$rata_deviasi1 = 0;
+				$na_deviasi = 0;
+				$arr_rencana = [];
+				$arr_realisasi = [];
 				foreach($data_satker['data'] as $key => $row) {
 
 					//***Rekap Data Pengelolaan UP***\\
@@ -362,7 +366,7 @@ class omspanController extends Controller
 					if(intval($get['periode']) <= 3) {
 						$triwulan = 15;
 					} else if(intval($get['periode']) > 3 && intval($get['periode']) <=6) {
-						$triwulan = 45;
+						$triwulan = 40;
 					} else if(intval($get['periode']) > 6 && intval($get['periode']) <=9) {
 						$triwulan = 60;
 					} else {
@@ -380,31 +384,78 @@ class omspanController extends Controller
 						$data_satker['data'][$key]['na_realisasi'] = 0;
 					}
 					
-					////***Rekap Hal III Dipa***\\
-					//foreach($hal_3dipa['data'] as $dipa) {
-					//	if(trim($row['kd_satker']) == $dipa['kdsatker']) {
-					//		$rencana = $dipa['ren_'.$get['periode']];
-					//	}
-					//}
-					//$data_satker['data'][$key]['hal3dipa_ren'] = $rencana;
-					//
-					//foreach($realisasi['data'] as $realis) {
-					//	if(trim($row['kd_satker']) == $realis['kdsatker']) {
-					//		$deviasi = $realis['jumlahRealisasi'] - $rencana
-					//		$akumulasi_deviasi +=
-					//	}
-					//}
 					
+					foreach($hal_3dipa['data'] as $dipa) {
+						if(trim($row['kd_satker']) == $dipa['kdsatker']) {
+							$arr_rencana = $dipa;
+						}
+					}
+					foreach($realisasi['data'] as $kr => $realis) {
+						if(trim($row['kd_satker']) == $realis['kdSatker']) {
+							$arr_realisasi[$kr] = $realis;
+						}
+					}
+					$arr_rencana['realisasi'] = $arr_realisasi;
 					
-					$data_satker['data'][$key]['hal3dipa'] = 0;
-					$rencana = 0;
+					for($a = 0; $a < intval($get['periode']); $a++) {
+						$periode_dev++;
+						foreach($arr_rencana['realisasi'] as $rl) {
+							if(str_pad($periode_dev, 2, '0', STR_PAD_LEFT) == $rl['periode']) {
+								$real_3dipa = $rl['jumlahRealisasi'];
+							}
+						}
+						$deviasi = abs($real_3dipa - $arr_rencana['ren_'.str_pad($periode_dev, 2, '0', STR_PAD_LEFT)]);
+						if($arr_rencana['ren_'.str_pad($periode_dev, 2, '0', STR_PAD_LEFT)] != 0) {									
+							$deviasi_persen = ($deviasi / $arr_rencana['ren_'.str_pad($periode_dev, 2, '0', STR_PAD_LEFT)]) * 100;
+						} else {
+							$deviasi_persen = 0;
+						}
+						$akumulasi_deviasi = $deviasi_persen + $akumulasi_deviasi;
+						$rata_deviasi = $akumulasi_deviasi / $periode_dev;
+						if($periode_dev == 1) {
+							if($rata_deviasi != 0) {								
+								$rata_deviasi1 = $rata_deviasi;
+							} else {
+								$rata_deviasi1 = 100;
+							}
+						}
+						$na_deviasi = $rata_deviasi1 - $rata_deviasi;
+						if($na_deviasi < 0 ) {
+							$na_deviasi = 0;
+						}
+						
+						$data_satker['data'][$key]['hal3dipa'] = $na_deviasi;
+						
+						if($data_satker['data'][$key]['hal3dipa'] == 0) {
+							$data_satker['data'][$key]['bobot_3dipa'] = 0;
+						} else {
+							$data_satker['data'][$key]['bobot_3dipa'] = 5;
+						}
+						if($data_satker['data'][$key]['bobot_3dipa'] != 0) {
+							$data_satker['data'][$key]['na_3dipa'] = round((round($data_satker['data'][$key]['hal3dipa'],2) * ($data_satker['data'][$key]['bobot_3dipa']/100)),2);
+						} else {
+							$data_satker['data'][$key]['na_3dipa'] = 0;
+						}
+						
+						$real_3dipa = 0;
+						$deviasi = 0;
+						$deviasi_persen = 0;
+						$rata_deviasi = 0;
+						$na_deviasi = 0;
+					}
+					$akumulasi_deviasi = 0;
+					$periode_dev = 0;
+					$real_3dipa = 0;
+					$deviasi = 0;
+					$deviasi_persen = 0;
+					$rata_deviasi = 0;
+					$na_deviasi = 0;
+					$arr_rencana = [];
+					$arr_realisasi = [];
 				}
-				//echo "<pre>";
-				//print_r($data_satker);
-				//echo "</pre>";
-				//die;
 				$this->data['rekap'] = $data_satker['data'];
 				$this->data['periode'] = $get['periode'];
+				$this->data['periode_name'] = $this->getperiode($get['periode']);
 				return view('omspan.view', $this->data);
 			}
 		}
@@ -513,6 +564,16 @@ class omspanController extends Controller
 			$req_hal3dipa = $client->request('GET', config('app.url_soakemenkeu').'hal_tiga_dipa/'.$kdSatker);
 			$data = json_decode($req_hal3dipa->getBody()->getContents(), true);
 			
+			$params['headers'] = ['Content-Type' => 'application/json', 'Accept' => 'application/json'];
+			$params['body'] = '{ "KD_SATKER" : "'.$kdSatker.'", "TAHUN" : "'.date("Y").'", "PERIODE" : "'.$periode.'" }';
+			$req_realisasi = $client->request('POST', 'http://10.210.84.13:8080/monevgar/api/realisasi/getBySatkerPeriode', $params);
+			$realisasi = json_decode($req_realisasi->getBody()->getContents(), true);
+			if($data['code'] == '200') {
+				if($realisasi['code'] == '200') {
+					$data['realisasi'] = $realisasi['data'];
+				}
+			}
+			
 			return $data;
         } catch(\Exception $e) {
 			return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
@@ -554,9 +615,9 @@ class omspanController extends Controller
 		try {
 				
 			$kdSatker = $request['kdSatker'];
-			$periode = intval($request['periode']);
+			$periode = $request['periode'];
 			
-			$req_rekon = $client->request('GET', config('app.url_soakemenkeu').'rekonLPJ/'.$kdSatker.'/'.$periode);
+			$req_rekon = $client->request('GET', 'http://10.210.84.13:8080/kemenkeunew/api/data/rekonLPJ/'.$kdSatker.'/'.$periode);
 			$data = json_decode($req_rekon->getBody()->getContents(), true);
 			
 			return $data;
@@ -589,5 +650,50 @@ class omspanController extends Controller
         } catch(\Exception $e) {
 			return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
         }
+	}
+	
+	public function getperiode($kd = null) {
+		$periode = '';
+		switch ($kd) {
+			case "01":
+				$periode = "Januari";
+				break;
+			case "02":
+				$periode = "Februari";
+				break;
+			case "03":
+				$periode = "Maret";
+				break;
+			case "04":
+				$periode = "April";
+				break;
+			case "05":
+				$periode = "Mei";
+				break;
+			case "06":
+				$periode = "Juni";
+				break;
+			case "07":
+				$periode = "Juli";
+				break;
+			case "08":
+				$periode = "Agustus";
+				break;
+			case "09":
+				$periode = "September";
+				break;
+			case "10":
+				$periode = "Oktober";
+				break;
+			case "11":
+				$periode = "November";
+				break;
+			case "12":
+				$periode = "Desember";
+				break;
+			default:
+				echo "-";
+		}
+		return $periode;
 	}
 }
