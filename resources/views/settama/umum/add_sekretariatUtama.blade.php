@@ -221,6 +221,9 @@
                                     </div>
                                     <span class="error"></span>
                                 </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <label for="file_laporan" class="control-label"><span>(Extension File : PDF)</span></label>                                    
+                                </div>
                             </div>
                             </div>
 

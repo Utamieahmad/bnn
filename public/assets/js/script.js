@@ -3935,3 +3935,11 @@ function reportExcel(ev,e){
   $('#form_report_excel').attr('action', url);
   // $('#modal_report_excel').modal('show');
 }
+
+function reportPdf(ev,e){
+  var url  = $(e).data('url');
+  console.log(url);
+
+  $('#form_report_pdf').attr('action', url);
+  // $('#modal_report_excel').modal('show');
+}

@@ -402,8 +402,8 @@ class deputiCegahController extends Controller {
         } else {
             $totalData = 10;
         }
-        if ($totalData >= 500) {
-            $limit = 50;
+        if ($totalData >= 150) {
+            $limit = 150;
         } else {
             $limit = $totalData;
         }

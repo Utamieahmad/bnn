@@ -38,7 +38,7 @@
                                     <i class="fa fa-print"></i> Print Out
                                 </a>
                             </li>                            
-                            <li class="">
+                            <!--li class="">
                                 <a href="{{URL('/pencegahan/dep_cegah/newpdfaktivitassebaran?'.$forprint)}}" class="btn btn-lg btn-round btn-danger">
                                     <i class="fa fa-file-pdf-o"></i> PDF
                                 </a>
@@ -47,17 +47,17 @@
                                 <a href="{{URL('/pencegahan/dep_cegah/newexcelaktivitassebaran?'.$forprint)}}" class="btn btn-lg btn-round btn-success">
                                     <i class="fa fa-file-excel-o"></i> Excel
                                 </a>
-                            </li>
-                            <!--li class="">
+                            </li-->
+                            <li class="">
                                 <a href="#" class="btn btn-lg btn-round btn-danger" data-toggle="modal" data-target="#modal_report_excel" onClick="reportExcel(event, this)" data-url="{{URL('/pencegahan/dep_cegah/pdfaktivitassebaran')}}">
                                     <i class="fa fa-file-pdf-o"></i> PDF
                                 </a>
-                            </li-->
-                            <!--li class="">
+                            </li>
+                            <li class="">
                                 <a href="#" class="btn btn-lg btn-round btn-success" data-toggle="modal" data-target="#modal_report_excel" onClick="reportExcel(event, this)" data-url="{{URL('/pencegahan/dep_cegah/printaktivitassebaran')}}">
                                     <i class="fa fa-file-excel-o"></i> Excel
                                 </a>
-                            </li-->
+                            </li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
