@@ -1,35 +1,257 @@
-/*body.nav-sm {
+.dt-omspan {
+	color: white;
 	font-size: 11px !important;
-}*/
-.dt-omspan, .dt-up {
-	color: black;
-	font-size: 11px !important;
+}
+.dt-up {
+	color: white;
+	font-size: 14px !important;
+}
+.dt-omspan > thead > tr,
+.dt-up > thead > tr,
+.dt-kontrak > thead > tr,
+.dt-spm > thead > tr,
+.dt-retur > thead > tr,
+.dt-hal3dipa > thead > tr,
+.dt-revisi > thead > tr,
+.dt-rekon > thead > tr,
+.dt-renkas > thead > tr,
+.dt-tagihan > thead > tr,
+.dt-realisasi > thead > tr {
+	background-color: #73879c;
+}
+
+.dt-up > thead > tr > th:nth-child(1),
+.dt-up > thead > tr > th:nth-child(2),
+.dt-up > thead > tr > th:nth-child(3),
+.dt-up > thead > tr > th:nth-child(4),
+.dt-up > thead > tr > th:nth-child(5),
+.dt-up > thead > tr > th:nth-child(6),
+.dt-up > thead > tr > th:nth-child(7),
+.dt-up > thead > tr > th:nth-child(8),
+.dt-up > thead > tr > th:nth-child(9),
+.dt-up > thead > tr > th:nth-child(10),
+.dt-up > tbody > tr > td:nth-child(1),
+.dt-up > tbody > tr > td:nth-child(2),
+.dt-up > tbody > tr > td:nth-child(3),
+.dt-up > tbody > tr > td:nth-child(4),
+.dt-up > tbody > tr > td:nth-child(5),
+.dt-up > tbody > tr > td:nth-child(6),
+.dt-up > tbody > tr > td:nth-child(7),
+.dt-up > tbody > tr > td:nth-child(8),
+.dt-up > tbody > tr > td:nth-child(9),
+.dt-up > tbody > tr > td:nth-child(10) {
+	padding: 10px !important;
 }
 .dt-up > tbody > tr > td:nth-child(7),
 .dt-up > tbody > tr > td:nth-child(8),
 .dt-up > tbody > tr > td:nth-child(9),
 .dt-up > tbody > tr > td:nth-child(10) {
 	text-align: right !important;
-	padding-right: 5px;
+	padding-right: 10px;
 }
 .dt-up > tfoot > tr > td {
 	font-weight: bold !important;
 }
+
+.dt-kontrak > thead > tr > th:nth-child(1),
+.dt-kontrak > thead > tr > th:nth-child(2),
+.dt-kontrak > thead > tr > th:nth-child(3),
+.dt-kontrak > thead > tr > th:nth-child(4),
+.dt-kontrak > thead > tr > th:nth-child(5),
+.dt-kontrak > thead > tr > th:nth-child(6),
+.dt-kontrak > thead > tr > th:nth-child(7),
+.dt-kontrak > thead > tr > th:nth-child(8),
+.dt-kontrak > thead > tr > th:nth-child(9),
+.dt-kontrak > thead > tr > th:nth-child(10),
+.dt-kontrak > tbody > tr > td:nth-child(1),
+.dt-kontrak > tbody > tr > td:nth-child(2),
+.dt-kontrak > tbody > tr > td:nth-child(3),
+.dt-kontrak > tbody > tr > td:nth-child(4),
+.dt-kontrak > tbody > tr > td:nth-child(5),
+.dt-kontrak > tbody > tr > td:nth-child(6),
+.dt-kontrak > tbody > tr > td:nth-child(7),
+.dt-kontrak > tbody > tr > td:nth-child(8),
+.dt-kontrak > tbody > tr > td:nth-child(9),
+.dt-kontrak > tbody > tr > td:nth-child(10) {
+	padding: 10px !important;
+}
+.dt-spm > thead > tr > th:nth-child(1),
+.dt-spm > thead > tr > th:nth-child(2),
+.dt-spm > thead > tr > th:nth-child(3),
+.dt-spm > thead > tr > th:nth-child(4),
+.dt-spm > thead > tr > th:nth-child(5),
+.dt-spm > thead > tr > th:nth-child(6),
+.dt-spm > thead > tr > th:nth-child(7),
+.dt-spm > thead > tr > th:nth-child(8),
+.dt-spm > tbody > tr > td:nth-child(1),
+.dt-spm > tbody > tr > td:nth-child(2),
+.dt-spm > tbody > tr > td:nth-child(3),
+.dt-spm > tbody > tr > td:nth-child(4),
+.dt-spm > tbody > tr > td:nth-child(5),
+.dt-spm > tbody > tr > td:nth-child(6),
+.dt-spm > tbody > tr > td:nth-child(7),
+.dt-spm > tbody > tr > td:nth-child(8) {
+	padding: 10px !important;
+}
+.dt-retur > thead > tr > th:nth-child(1),
+.dt-retur > thead > tr > th:nth-child(2),
+.dt-retur > thead > tr > th:nth-child(3),
+.dt-retur > thead > tr > th:nth-child(4),
+.dt-retur > thead > tr > th:nth-child(5),
+.dt-retur > thead > tr > th:nth-child(6),
+.dt-retur > thead > tr > th:nth-child(7),
+.dt-retur > thead > tr > th:nth-child(8),
+.dt-retur > thead > tr > th:nth-child(9),
+.dt-retur > tbody > tr > td:nth-child(1),
+.dt-retur > tbody > tr > td:nth-child(2),
+.dt-retur > tbody > tr > td:nth-child(3),
+.dt-retur > tbody > tr > td:nth-child(4),
+.dt-retur > tbody > tr > td:nth-child(5),
+.dt-retur > tbody > tr > td:nth-child(6),
+.dt-retur > tbody > tr > td:nth-child(7),
+.dt-retur > tbody > tr > td:nth-child(8),
+.dt-retur > tbody > tr > td:nth-child(9) {
+	padding: 10px !important;
+}
+.dt-rekon > thead > tr > th:nth-child(1),
+.dt-rekon > thead > tr > th:nth-child(2),
+.dt-rekon > thead > tr > th:nth-child(3),
+.dt-rekon > thead > tr > th:nth-child(4),
+.dt-rekon > thead > tr > th:nth-child(5),
+.dt-rekon > thead > tr > th:nth-child(6),
+.dt-rekon > thead > tr > th:nth-child(7),
+.dt-rekon > tbody > tr > td:nth-child(1),
+.dt-rekon > tbody > tr > td:nth-child(2),
+.dt-rekon > tbody > tr > td:nth-child(3),
+.dt-rekon > tbody > tr > td:nth-child(4),
+.dt-rekon > tbody > tr > td:nth-child(5),
+.dt-rekon > tbody > tr > td:nth-child(6),
+.dt-rekon > tbody > tr > td:nth-child(7) {
+	padding: 10px !important;
+}
+
+.dt-tagihan > thead > tr > th:nth-child(1),
+.dt-tagihan > thead > tr > th:nth-child(2),
+.dt-tagihan > thead > tr > th:nth-child(3),
+.dt-tagihan > thead > tr > th:nth-child(4),
+.dt-tagihan > thead > tr > th:nth-child(5),
+.dt-tagihan > thead > tr > th:nth-child(6),
+.dt-tagihan > thead > tr > th:nth-child(7),
+.dt-tagihan > tbody > tr > td:nth-child(1),
+.dt-tagihan > tbody > tr > td:nth-child(2),
+.dt-tagihan > tbody > tr > td:nth-child(3),
+.dt-tagihan > tbody > tr > td:nth-child(4),
+.dt-tagihan > tbody > tr > td:nth-child(5),
+.dt-tagihan > tbody > tr > td:nth-child(6),
+.dt-tagihan > tbody > tr > td:nth-child(7) {
+	padding: 10px !important;
+}
+.dt-renkas > thead > tr > th:nth-child(1),
+.dt-renkas > thead > tr > th:nth-child(2),
+.dt-renkas > thead > tr > th:nth-child(3),
+.dt-renkas > thead > tr > th:nth-child(4),
+.dt-renkas > thead > tr > th:nth-child(5),
+.dt-renkas > thead > tr > th:nth-child(6),
+.dt-renkas > thead > tr > th:nth-child(7),
+.dt-renkas > tbody > tr > td:nth-child(1),
+.dt-renkas > tbody > tr > td:nth-child(2),
+.dt-renkas > tbody > tr > td:nth-child(3),
+.dt-renkas > tbody > tr > td:nth-child(4),
+.dt-renkas > tbody > tr > td:nth-child(5),
+.dt-renkas > tbody > tr > td:nth-child(6),
+.dt-renkas > tbody > tr > td:nth-child(7) {
+	padding: 10px !important;
+}
+.dt-renkas > thead > tr > th:nth-child(1),
+.dt-renkas > thead > tr > th:nth-child(2),
+.dt-renkas > thead > tr > th:nth-child(3),
+.dt-renkas > thead > tr > th:nth-child(4),
+.dt-renkas > thead > tr > th:nth-child(5),
+.dt-renkas > thead > tr > th:nth-child(6),
+.dt-renkas > thead > tr > th:nth-child(7),
+.dt-renkas > thead > tr > th:nth-child(8),
+.dt-renkas > tbody > tr > td:nth-child(1),
+.dt-renkas > tbody > tr > td:nth-child(2),
+.dt-renkas > tbody > tr > td:nth-child(3),
+.dt-renkas > tbody > tr > td:nth-child(4),
+.dt-renkas > tbody > tr > td:nth-child(5),
+.dt-renkas > tbody > tr > td:nth-child(6),
+.dt-renkas > tbody > tr > td:nth-child(7),
+.dt-renkas > tbody > tr > td:nth-child(8) {
+	padding: 10px !important;
+}
+.dt-revisi > thead > tr > th:nth-child(1),
+.dt-revisi > thead > tr > th:nth-child(2),
+.dt-revisi > thead > tr > th:nth-child(3),
+.dt-revisi > thead > tr > th:nth-child(4),
+.dt-revisi > thead > tr > th:nth-child(5),
+.dt-revisi > thead > tr > th:nth-child(6),
+.dt-revisi > tbody > tr > td:nth-child(1),
+.dt-revisi > tbody > tr > td:nth-child(2),
+.dt-revisi > tbody > tr > td:nth-child(3),
+.dt-revisi > tbody > tr > td:nth-child(4),
+.dt-revisi > tbody > tr > td:nth-child(5),
+.dt-revisi > tbody > tr > td:nth-child(6) {
+	padding: 10px !important;
+}
+
+.dt-hal3dipa > thead > tr > th:nth-child(1),
+.dt-hal3dipa > thead > tr > th:nth-child(2),
+.dt-hal3dipa > thead > tr > th:nth-child(3),
+.dt-hal3dipa > thead > tr > th:nth-child(4),
+.dt-hal3dipa > thead > tr > th:nth-child(5),
+.dt-hal3dipa > thead > tr > th:nth-child(6),
+.dt-hal3dipa > thead > tr > th:nth-child(7),
+.dt-hal3dipa > thead > tr > th:nth-child(8),
+.dt-hal3dipa > thead > tr > th:nth-child(9),
+.dt-hal3dipa > thead > tr > th:nth-child(10),
+.dt-hal3dipa > thead > tr > th:nth-child(11),
+.dt-hal3dipa > thead > tr > th:nth-child(12),
+.dt-hal3dipa > tbody > tr > td:nth-child(1),
+.dt-hal3dipa > tbody > tr > td:nth-child(2),
+.dt-hal3dipa > tbody > tr > td:nth-child(3),
+.dt-hal3dipa > tbody > tr > td:nth-child(4),
 .dt-hal3dipa > tbody > tr > td:nth-child(5),
 .dt-hal3dipa > tbody > tr > td:nth-child(6),
-.dt-hal3dipa > tbody > tr > td:nth-child(7) {
-	text-align: right !important;
-	padding-right: 5px;
+.dt-hal3dipa > tbody > tr > td:nth-child(7),
+.dt-hal3dipa > tbody > tr > td:nth-child(8),
+.dt-hal3dipa > tbody > tr > td:nth-child(9),
+.dt-hal3dipa > tbody > tr > td:nth-child(10),
+.dt-hal3dipa > tbody > tr > td:nth-child(11),
+.dt-hal3dipa > tbody > tr > td:nth-child(12) {
+	padding: 10px !important;
 }
-/*.border_b {
-	border-bottom:1px #9aa2af !important;
-}*/
 
-/*.x_content {
-	color: #000 !important;
-}*/
-.no_border {
-	border-bottom: none !important;
+.dt-hal3dipa > tbody > tr > td:nth-child(6),
+.dt-hal3dipa > tbody > tr > td:nth-child(7),
+.dt-hal3dipa > tbody > tr > td:nth-child(8) {
+	text-align: right !important;
+}
+
+.dt-realisasi > thead > tr > th:nth-child(1),
+.dt-realisasi > thead > tr > th:nth-child(2),
+.dt-realisasi > thead > tr > th:nth-child(3),
+.dt-realisasi > thead > tr > th:nth-child(4),
+.dt-realisasi > thead > tr > th:nth-child(5),
+.dt-realisasi > thead > tr > th:nth-child(6),
+.dt-realisasi > thead > tr > th:nth-child(7),
+.dt-realisasi > thead > tr > th:nth-child(8),
+.dt-realisasi > tbody > tr > td:nth-child(1),
+.dt-realisasi > tbody > tr > td:nth-child(2),
+.dt-realisasi > tbody > tr > td:nth-child(3),
+.dt-realisasi > tbody > tr > td:nth-child(4),
+.dt-realisasi > tbody > tr > td:nth-child(5),
+.dt-realisasi > tbody > tr > td:nth-child(6),
+.dt-realisasi > tbody > tr > td:nth-child(7),
+.dt-realisasi > tbody > tr > td:nth-child(8) {
+	padding: 10px !important;
+}
+.border_btm {
+	border-bottom: 1px solid #ddd !important;
+}
+.td_bold {
+	font-weight: bold;
+	background-color: #5e8491;
 }
 .table > thead > tr > th {
     padding: 5px !important;
@@ -40,15 +262,27 @@
 	vertical-align: middle !important;
 }
 .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
-    border: 1px solid #767676 !important;
-	/*color: black !important;*/
+    border: 0px;
 	font-size: 11px !important;
 }
-/*.dt-omspan tbody tr td {
-	padding: 3px !important;
-}*/
-.x_panel {
-	background-color: rgba(255, 255, 255, 0.5) !important;
+.table-bordered {
+	border: none;
+}
+.table-bordered>thead>tr {
+	border-bottom: 2px solid #ddd;
+}
+.dt-omspan > tbody > tr,
+.dt-up > tbody > tr,
+.dt-kontrak > tbody > tr,
+.dt-spm > tbody > tr,
+.dt-retur > tbody > tr,
+.dt-hal3dipa > tbody > tr,
+.dt-revisi > tbody > tr,
+.dt-rekon > tbody > tr,
+.dt-renkas > tbody > tr,
+.dt-tagihan > tbody > tr,
+.dt-realisasi > tbody > tr {
+	background-color: #648d9b;
 }
 .hover {
 	background-color: #b7cde2;

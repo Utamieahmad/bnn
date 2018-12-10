@@ -16,10 +16,7 @@
         <link href="{{asset('assets/css/green.css') }}" rel="stylesheet">
         <link href="{{asset('assets/css/custom.css') }}" rel="stylesheet">
         <link href="{{asset('assets/css/customs.css') }}" rel="stylesheet">
-        <!-- <link href="{{asset('/assets/css/jquery.dataTables.min.css')}}" rel="stylesheet"/> -->
-        <!-- <link href="{{asset('/assets/css/datatables.min.css')}}" rel="stylesheet"/> -->
-        <!-- <link href="{{asset('/assets/DataTables-1.10.16/css/jquery.dataTables.min.css')}}" rel="stylesheet"/> -->
-        <!-- <link href="{{asset('/assets/DataTables-1.10.16/css/dataTables.bootstrap.min.css')}}" rel="stylesheet"/> -->
+        <link href="{{asset('assets/css/loading.css') }}" rel="stylesheet">
         <script>
     		var TOKEN = '{{Request::session()->get('token')}}';
     		var SOA_URL = '{{config('app.url_soa')}}';
@@ -188,6 +185,7 @@
         <script src="{{asset('assets/js/custom.js') }}"> </script>
         <!-- <script src="{{asset('assets/js/custom.min.js') }}"> </script> -->
         <script src="{{asset('assets/js/script.js') }}"> </script>
+        <script src="{{asset('assets/js/loadingwheel.js') }}"> </script>
 
     </footer>
 </html>
