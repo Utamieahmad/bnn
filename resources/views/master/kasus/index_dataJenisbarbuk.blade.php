@@ -57,7 +57,7 @@
 											<td> {{$d['kd_jnsbrgbukti']}}</td>
 											<td> {{$d['nm_jnsbrgbukti']}}</td>
 											<td>
-												<a @php if(!in_array(143, Session::get("canedit")))  echo 'style="display:none;"'; @endphp id="edit{{$d['kd_jnsbrgbukti']}}" onclick="edit_datadetail({{$d['kd_jnsbrgbukti']}});" data-url="{{URL('/master/update_jenisbarbuk')}}" data-id="{{$d['kd_jnsbrgbukti']}}" data-nama="{{$d['nm_jnsbrgbukti']}}" >
+												<a @php if(!in_array(143, Session::get("canedit")))  echo 'style="display:none;"'; @endphp id="edit{{$d['kd_jnsbrgbukti']}}" onclick="edit_datadetail('{{$d['kd_jnsbrgbukti']}}');" data-url="{{URL('/master/update_jenisbarbuk')}}" data-id="{{$d['kd_jnsbrgbukti']}}" data-nama="{{$d['nm_jnsbrgbukti']}}" >
 												<i class="fa fa-pencil"></i></a>
 												<button @php if(!in_array(143, Session::get("candelete")))  echo 'style="display:none;"'; @endphp type="button" class="btn btn-primary button-action" onClick="delete_form(event,this)" data-target="{{$d['kd_jnsbrgbukti']}}" ><i class="fa fa-trash"></i></button>
 				                            </td>
