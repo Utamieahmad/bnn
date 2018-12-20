@@ -288,6 +288,29 @@ class UserManagementController extends Controller {
             );
             $resultUser = json_decode($requestUser->getBody()->getContents(), true);
 
+
+            //LDAP
+            $client = new Client();
+            
+            $requestCreate = $client->request('POST', config('app.url_ldap').'/sso/users/create',
+              [
+              'headers' =>
+                [
+                'Content-Type' => 'application/json'
+                ],
+              'body' =>json_encode(
+                [
+                "userName" => $request->input('email'),
+                "password" => 'sin123',
+                "displayName" => '-',
+                "nip" => '0'
+                ])
+              ]
+            );
+            $ldapCreate = json_decode($requestCreate->getBody()->getContents(), true);
+            //LDAP
+
+
             $this->form_params = array('email' => $request->input('email'),
                 'group_id' => $group_id,
                 'wilayah_id' => $wil,

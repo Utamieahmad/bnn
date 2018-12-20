@@ -30,7 +30,7 @@ class LoginAPIController extends Controller
         $tomorrow = $d->format('Y-m-d H:i:s');
         $token    = str_random(255);
 
-        //begin LDAP
+        //LDAP
         $client = new Client();
         $requestLogin = $client->request('POST', config('app.url_ldap').'/sso/users/login',
           [
@@ -51,7 +51,7 @@ class LoginAPIController extends Controller
           return response()->json(Json::loginresponse(null, 'Error', "Email/Password salah"));
         }
 
-        //end of LDAP
+        //LDAP
 
 
         $u = View_users::where('email', $request->email)->first();
