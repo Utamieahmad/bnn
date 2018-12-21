@@ -333,10 +333,11 @@ table.tile_info td p {
 }
 
 .nav-sm .nav.side-menu li a i {
-    font-size: 25px!important;
+    font-size: 20px!important;
     text-align: center;
-    width: 100%!important;
-    margin-bottom: 5px
+    /*width: 100%!important;*/
+    margin-bottom: 5px;
+    margin-left: -3px;
 }
 
 .nav-sm ul.nav.child_menu {
