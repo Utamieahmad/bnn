@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="modal_report_excel" tabindex="-1" role="dialog"
+<div class="modal fade" id="form_report_pdf" tabindex="-1" role="dialog"
 aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content modal-color">
@@ -11,7 +11,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       <span class="sr-only">Close</span>
     </button>
     <h4 class="modal-title c-white" id="myModalLabel">
-      Report Data By Date
+      Report PDF
     </h4>
   </div>
   <!-- Modal Body -->

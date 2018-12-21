@@ -2059,7 +2059,7 @@ class HukumController extends Controller
         $this->printData($data, $name);
     }
     
-    public function downloadNonlitigasi(Request $request){        
+    public function downloadNonlitigasi(Request $request){                
 //        $client = new Client();
 //        $token = $request->session()->get('token');
 //        $baseUrl = URL::to($this->urlapi());
@@ -2091,24 +2091,66 @@ class HukumController extends Controller
         }
         $result = $data_request->orderBy('tgl_mulai', 'desc')->get();
                         
-        // dd($pemusnahanladang);
+        // dd($pemusnahanladang);        
+        $list_instansi = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));        
+        $list_propkabs = $this->globalPropkab($request->session()->get('token'));
+        $list_propkab = $list_propkabs['data'];
+        
         $DataArray = [];
-
-        $i = 1;
+        $i = 1;        
         foreach ($result as $key => $value) {
           $DataArray[$key]['No'] = $i;
+          
+          foreach ($list_instansi as $asd => $val) {
+              if($val['id_instansi'] == $value->pelaksana){
+                  $nama_instansi = $val['nm_instansi'];
+              }
+          }                    
+          $DataArray[$key]['Pelaksana'] = $nama_instansi;
+          
           $DataArray[$key]['Jenis Kegiatan'] = $value->jenis_kegiatan;
-          $DataArray[$key]['Tema'] = $value->tema;
           $DataArray[$key]['No Sprint Kepala'] = $value->no_sprint_kepala;
-          $DataArray[$key]['No Sprint Deputi'] = $value->no_sprint_deputi;
+          $DataArray[$key]['No Sprint Deputi'] = $value->no_sprint_deputi;          
           $DataArray[$key]['Tanggal Mulai'] = date('d-m-Y', strtotime($value->tgl_mulai));
           $DataArray[$key]['Tanggal Selesai'] = date('d-m-Y', strtotime($value->tgl_selesai));
+          $DataArray[$key]['Tema Kegiatan'] = $value->tema;          
+          
+          $meta_narasumber = json_decode($value->meta_narasumber,true);                              
+          $merge_narasumber = "";
+           if(count($meta_narasumber)){               
+               for($j = 0 ; $j < count($meta_narasumber); $j++){
+                    $merge_narasumber.= 'Narasumber : '.$meta_narasumber[$j]['Narasumber']."\n".
+                                        'Materi : '.$meta_narasumber[$j]['materi']."\n"."\n";                                        
+               }
+           }          
+          $DataArray[$key]['Narasumber'] = $merge_narasumber;
+          
+          $meta_peserta = json_decode($value->meta_peserta,true);                                        
+          $merge_peserta = "";
+           if(count($meta_peserta)){               
+               for($j = 0 ; $j < count($meta_peserta); $j++){
+                    $merge_peserta.= 'Instansi : '.$meta_peserta[$j]['nama_instansi']."\n".
+                                     'Jumlah Peserta : '.$meta_peserta[$j]['jumlah_peserta']."\n"."\n";                                        
+               }
+           }          
+          $DataArray[$key]['Peserta'] = $merge_peserta;
+                    
+          $DataArray[$key]['Tempat Kegiatan'] = $value->tempat_kegiatan;          
+          foreach($list_propkab as $keyGroup => $jenis ){              
+              foreach($jenis as $aaa => $resp){
+                  if($aaa == $value->lokasi_kegiatan){
+                      $lokasi_kegiatan = $resp;
+                  }
+              }
+          }                    
+          $DataArray[$key]['Lokasi Kegiatan'] = $lokasi_kegiatan;
+          $DataArray[$key]['Sumber Anggaran'] = $value->sumberanggaran;
           $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
           $i = $i +1;
         }
          //dd($DataArray);
         $data = $DataArray;
-        $name = 'Download Data Kegiatan Konsultasi Hukum (Non Litigasi) '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+        $name = 'Download Data Kegiatan Konsultasi Hukum (Non Litigasi) '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 
@@ -2674,7 +2716,8 @@ class HukumController extends Controller
         $DataArray = [];
 
         $instansi = $this->globalinstansi($request->session()->get('wilayah'), $request->session()->get('token'));
-
+        $list_propkabs = $this->globalPropkab($request->session()->get('token'));
+        $list_propkab = $list_propkabs['data'];
         //Display nama instansi di tabel - Tommy
 
         $nm_instansi = array();
@@ -2691,12 +2734,34 @@ class HukumController extends Controller
           $DataArray[$key]['Tempat Kegiatan'] = $value->tempat_kegiatan;
           $DataArray[$key]['Tanggal Mulai'] = date('d-m-y', strtotime($value->tgl_mulai));
           $DataArray[$key]['Tanggal Selesai'] = date('d-m-y', strtotime($value->tgl_selesai));
+          $meta_peserta = json_decode($value->meta_peserta,true);                                                  
+          $merge_peserta = "";
+           if(count($meta_peserta)){               
+               for($j = 0 ; $j < count($meta_peserta); $j++){
+                    $merge_peserta.= 'Instansi : '.$meta_peserta[$j]['list_nama_instansi']."\n".
+                                     'Jumlah Peserta : '.$meta_peserta[$j]['list_jumlah_peserta']."\n"."\n";                                        
+               }
+           }          
+          $DataArray[$key]['Peserta'] = $merge_peserta;
+          if($value->lokasi_kegiatan_idkabkota != '' || $value->lokasi_kegiatan_idkabkota != null){
+              foreach($list_propkab as $keyGroup => $jenis ){              
+                  foreach($jenis as $aaa => $resp){
+                      if($aaa == $value->lokasi_kegiatan_idkabkota){
+                          $lokasi_kegiatan = $resp;
+                      }
+                  }
+              }                    
+          }else{
+              $lokasi_kegiatan = '';
+          }
+          $DataArray[$key]['Lokasi Kegiatan'] = $lokasi_kegiatan;
+          $DataArray[$key]['Sumber Anggaran'] = $value->sumberanggaran;
           $DataArray[$key]['Status'] = ($value->status == 'Y') ? "Lengkap" : "Tidak Lengkap";
           $i = $i +1;
         }
          //dd($DataArray);
         $data = $DataArray;
-        $name = 'Download Data Kegiatan Konsultasi Hukum (Audiensi) '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+        $name = 'Download Data Kegiatan Konsultasi Hukum (Audiensi) '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 

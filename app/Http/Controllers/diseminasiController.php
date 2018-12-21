@@ -2636,10 +2636,10 @@ class diseminasiController extends Controller
 
       $data = DB::table('v_cegahdiseminfo_mediaonline');
       if ($request->date_from != '') {
-        $data->where('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        $data->whereDate('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
       }
       if ($request->date_to != '' ) {
-        $data->where('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        $data->whereDate('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
       }
 
       if ($request->session()->get('wilayah') != '') {
@@ -2742,10 +2742,10 @@ class diseminasiController extends Controller
 
       $data = DB::table('v_cegahdiseminfo_mediapenyiaran');
       if ($request->date_from != '') {
-        $data->where('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        $data->whereDate('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
       }
       if ($request->date_to != '' ) {
-        $data->where('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        $data->whereDate('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
       }
 
       if ($request->session()->get('wilayah') != '') {
@@ -2861,10 +2861,10 @@ class diseminasiController extends Controller
 
       $data = DB::table('v_cegahdiseminfo_mediacetak');
       if ($request->date_from != '') {
-        $data->where('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        $data->whereDate('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
       }
       if ($request->date_to != '' ) {
-        $data->where('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        $data->whereDate('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
       }
 
       if ($request->session()->get('wilayah') != '') {
@@ -2981,10 +2981,10 @@ class diseminasiController extends Controller
 
       $data = DB::table('v_cegahdiseminfo_mediakonvensional');
       if ($request->date_from != '') {
-        $data->where('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
+        $data->whereDate('waktu_publish', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_from))));
       }
       if ($request->date_to != '' ) {
-        $data->where('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
+        $data->whereDate('waktu_publish', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $request->date_to))));
       }
 
       if ($request->session()->get('wilayah') != '') {

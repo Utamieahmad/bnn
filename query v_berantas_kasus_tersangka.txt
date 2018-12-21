@@ -1,0 +1,124 @@
+drop view v_berantas_kasus_tersangka;
+
+CREATE OR REPLACE VIEW public.v_berantas_kasus_tersangka
+AS SELECT
+	A .tersangka_id,
+	A .kasus_id,
+	A .tersangka_nama,
+	A .tersangka_alamat,
+	A .kode_jenis_kelamin,
+	sex.lookup_name AS nama_jenis_kelamin,
+	A .tersangka_tempat_lahir,
+	A .tersangka_usia,
+	A .kode_kelompok_usia,
+	kelompok_usia.lookup_name AS nama_kelompok_usia,
+	A .tersangka_tanggal_lahir,
+	A .kode_pendidikan_akhir,
+	pendidikan.lookup_name AS nama_pendidikan_akhir,
+	A .kode_pekerjaan,
+	pekerjaan.lookup_title AS nama_pekerjaan,
+	A .kode_warga_negara,
+	warga_negara.lookup_name AS nama_warga_negara,
+	A .kode_peran_tersangka,
+	tr_peran.nm_peran AS nama_peran,
+	A .created_by,
+	A .create_date,
+	A .updated_by,
+	A .update_date,
+	A .no_identitas,
+	A .kode_negara,
+	kd_negara.nama_negara,
+	negara.nm_negara AS nama_negara_old,
+	A .kode_jenisidentitas,
+	A .alamatktp_idprovinsi,
+	A .alamatktp_idkabkota,
+	A .alamatktp_kodepos,
+	A .alamatdomisili,
+	A .alamatdomisili_idprovinsi,
+	A .alamatdomisili_idkabkota,
+	A .alamatdomisili_kodepos,
+	A .alamatlainnya,
+	A .alamatlainnya_idprovinsi,
+	A .alamatlainnya_idkabkota,
+	A .alamatlainnya_kodepos,
+	jenis_identitas.lookup_name AS nama_jenis_identitas,
+	A .pasal,
+	A .tersangka_nama_alias,
+	A .deleted_at,
+	pekerjaan_lengkap.nm_kerja	
+FROM
+(
+	(
+		(
+			(
+				(
+					(
+						(
+							(
+								(
+									(
+										berantas_kasus_tersangka A
+										LEFT JOIN sin_lookup_values sex ON (
+											(
+												(A .kode_jenis_kelamin) :: TEXT = (sex.lookup_value) :: TEXT
+											)
+										)
+									)
+									LEFT JOIN sin_lookup_values kelompok_usia ON (
+										(
+											(A .kode_kelompok_usia) :: TEXT = (kelompok_usia.lookup_value) :: TEXT
+										)
+									)
+								)
+								LEFT JOIN sin_lookup_values pendidikan ON (
+									(
+										(A .kode_pendidikan_akhir) :: TEXT = (pendidikan.lookup_value) :: TEXT
+									)
+								)
+							)
+							LEFT JOIN sin_lookup_values pekerjaan ON (
+								(
+									(A .kode_pekerjaan) :: TEXT = (pekerjaan.lookup_value) :: TEXT
+								)
+							)
+						)
+						LEFT JOIN sin_lookup_values warga_negara ON (
+							(
+								(A .kode_warga_negara) :: TEXT = (warga_negara.lookup_value) :: TEXT
+							)
+						)
+					)
+					LEFT JOIN sin_lookup_values jenis_identitas ON (
+						(
+							(A .kode_jenisidentitas) :: TEXT = (
+								jenis_identitas.lookup_value
+							) :: TEXT
+						)
+					)
+				)
+				LEFT JOIN tr_peran ON (
+					(
+						(A .kode_peran_tersangka) :: bpchar = tr_peran.kd_peran
+					)
+				)
+			)
+			LEFT JOIN tr_negara negara ON (
+				(
+					(A .kode_negara) :: bpchar = negara.kd_negara
+				)
+			)
+		)
+		LEFT JOIN tr_kodenegara kd_negara ON (
+				(
+					(A .kode_negara) :: bpchar = kd_negara.kode
+				)
+			)
+		)
+		LEFT JOIN tr_pekerjaan pekerjaan_lengkap ON (
+			(
+				(A .kode_pekerjaan) :: TEXT = (
+					pekerjaan_lengkap.singkatan
+				) :: TEXT
+			)
+		)
+	);

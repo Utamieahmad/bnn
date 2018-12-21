@@ -763,7 +763,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_kerjasama_monev','kerjasamaController@deletekerjasamaMonev')->name('delete_kerjasama_monev');
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printmonev/{segment}/{page?}', 'kerjasamaController@printMonev')->name('print_kerjasama_monev');
-
+                        Route::post('/download_kerjasama_monev','kerjasamaController@downloadMonev')->name("download_kerjasama_monev");
+                        
 			Route::match(['get', 'post'], 'kerjasama_lainnya/{page?}', 'kerjasamaController@kerjasamaLainnya')->name('kerjasama_lainnya');
 			Route::get('/edit_kerjasama_lainnya/{id}','kerjasamaController@editkerjasamaLainnya')->name('edit_kerjasama_lainnya');
 			Route::get('/add_kerjasama_lainnya','kerjasamaController@addkerjasamaLainnya')->name('add_kerjasama_lainnya');
@@ -772,6 +773,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_kerjasama_lainnya','kerjasamaController@deletekerjasamaLainnya')->name('delete_kerjasama_lainnya');;
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printlainnya/{segment}/{page?}', 'kerjasamaController@printLainnya')->name('print_kerjasama_lainnya');
+                        Route::post('/download_kerjasama_lainnya','kerjasamaController@downloadLainnya')->name("download_kerjasama_lainnya");
 
 		});
 	});
@@ -1205,6 +1207,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_arahan_pimpinan','arahanController@deletearahanPimpinan')->name('delete_arahan_pimpinan');
 		});
 		Route::get('print_arahan_pimpinan/{page?}','arahanController@printPage')->name('print_arahan_pimpinan');
+		Route::post('/downloadarahan', 'arahanController@downloadArahan');
 	});
 
 	Route::group(['prefix'=>'master'],function(){
@@ -1305,7 +1308,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::group(['prefix'=>'omspan'],function(){
 		Route::match(['get','post'],'/omspan','omspanController@omspan')->name('omspan');
-		//Route::get('getpengelolaanup/{kdsatker}/{periode}', 'omspanController@getpengelolaanup')->name('getpengelolaanup');
 		Route::match(['get','post'],'/getpengelolaanup','omspanController@getpengelolaanup')->name('getpengelolaanup');
 		Route::match(['get','post'],'/getdatakontrak','omspanController@getdatakontrak')->name('getdatakontrak');
 		Route::match(['get','post'],'/getretur','omspanController@getretur')->name('getretur');
@@ -1315,6 +1317,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::match(['get','post'],'/getrevisi','omspanController@getrevisi')->name('getrevisi');
 		Route::match(['get','post'],'/gettagihan','omspanController@gettagihan')->name('gettagihan');
 		Route::match(['get','post'],'/getrealisasi','omspanController@getrealisasi')->name('getrealisasi');
+		Route::match(['get','post'],'/getrekon','omspanController@getrekon')->name('getrekon');
 	});
 
 });

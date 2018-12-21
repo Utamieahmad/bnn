@@ -97,7 +97,7 @@
     </form>
     <div class="m-b-20">
         <div class="m-b-20">
-            Catatan : <i>*Cetak PDF dan Excel tidak dapat melebihi 150 data</i><br>
+            Catatan : <i>*Cetak PDF tidak dapat melebihi 150 data dan Cetak Excel tidak dapat melebihi 500 data</i><br>
             @if(isset($filter))
             @php
             $s = $filter;

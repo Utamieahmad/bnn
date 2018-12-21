@@ -966,7 +966,7 @@ class penindakanController extends Controller
 
       // $page = 'page='.$request->current_page;
       // $id_wil = $request->session()->get('wilayah');
-      $inteljaringan = execute_api('/api/dpo'.$kondisi, 'GET');
+      $inteljaringan = execute_api('api/dpo'.$kondisi, 'GET');
       $limit = config('app.limit');
       $start_number = ($limit * ($request->page -1 )) + 1;
       $result = [];

@@ -7,6 +7,8 @@ vendor/
 
 storage/framework/
 
+public/upload/
+
 composer\.lock
 
 nbproject/

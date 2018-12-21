@@ -252,6 +252,29 @@ class AuthenticationController extends Controller
         } else {
             $request->session()->put('satker_simpeg', null);
         }
+
+        //LDAP
+        $client = new Client();
+        
+        $requestChange = $client->request('POST', config('app.url_ldap').'/sso/users/modify',
+          [
+          'headers' =>
+            [
+            'Content-Type' => 'application/json'
+            ],
+          'body' =>json_encode(
+            [
+            "userName" => Auth::user()->email,
+            "displayName" => $simpeg['data']['nama'],
+            "nip" => $nip
+            ])
+          ]
+        );
+        $ldapChange = json_decode($requestChange->getBody()->getContents(), true);
+        
+        //LDAP
+
+
         $requestStoreNip = $client->request('PUT', $baseUrl.'/api/users/'.Auth::user()->user_id,
         [
           'headers' =>
@@ -292,6 +315,29 @@ class AuthenticationController extends Controller
         $request->session()->put('nama_pegawai', $request->input('nama_pegawai'));
         $request->session()->put('jabatan_pegawai', $request->input('jabatan_pegawai'));
         Auth::attempt($credential);
+
+        //LDAP
+        $client = new Client();
+        
+        $requestChange = $client->request('POST', config('app.url_ldap').'/sso/users/modify',
+          [
+          'headers' =>
+            [
+            'Content-Type' => 'application/json'
+            ],
+          'body' =>json_encode(
+            [
+            "userName" => Auth::user()->email,
+            "displayName" => $request->input('nama_pegawai'),
+            "nip" => "0"
+            ])
+          ]
+        );
+        $ldapChange = json_decode($requestChange->getBody()->getContents(), true);
+        
+        //LDAP
+
+
         $requestStoreNip = $client->request('PUT', $baseUrl.'/api/users/'.Auth::user()->user_id,
         [
           'headers' =>
