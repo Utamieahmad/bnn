@@ -561,7 +561,7 @@ public function globalPemusnahanDetail($token, $id)
 }
 
 public function globalinstansi($wilayah, $token)
-{        
+{
   $client = new Client();
   $baseUrl = URL::to('/');
   $requestInstansi = $client->request('POST', $baseUrl.'/api/instansi',
@@ -623,7 +623,7 @@ public function globalJnsKasus($token)
 
 public function getLogin($email, $password)
 {
-  $baseUrl = URL::to('/');
+  $baseUrl = URL::to(config('app.url_api_local'));
   $client = new Client();
   // dd($client);
   $requestLogin = $client->request('POST', $baseUrl.'/api/login',

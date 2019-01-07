@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Transformers\Json;
 use Hash;
 use Validator;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class UserAPIController extends Controller
 {
@@ -175,7 +177,30 @@ class UserAPIController extends Controller
         ]);
         if (!$validator->fails()) {
             $users = Rbac_users::where('user_id', $request->user_id)->first();
-            if (Hash::check($request->old_password, $users->password)){
+
+            //LDAP
+            $client = new Client();
+            
+            $requestChange = $client->request('POST', config('app.url_ldap').'/sso/changepass',
+              [
+              'headers' =>
+                [
+                'Content-Type' => 'application/json'
+                ],
+              'body' =>json_encode(
+                [
+                "userName" => $users->email,
+                "oldPassword" => $request->old_password,
+                "newPassword" => $request->new_password
+                ])
+              ]
+            );
+            $ldapChange = json_decode($requestChange->getBody()->getContents(), true);
+            
+            //LDAP
+
+            // if (Hash::check($request->old_password, $users->password)){
+            if($ldapChange['code']==200){
                 try {
                     Rbac_users::where('user_id', $request->user_id)->update(['password' => Hash::make($request->new_password)]);
                     return response()->json(Json::response(null, 'sukses', "Password berhasil diubah"));
@@ -186,6 +211,7 @@ class UserAPIController extends Controller
             } else {
                 return response()->json(Json::response(null, 'error', "Password lama salah"));
             }
+
         }else{
             return response()->json(Json::response(null, 'error', $validator->errors()->all()));
         }
@@ -202,7 +228,28 @@ class UserAPIController extends Controller
         ]);
         if (!$validator->fails()) {
             $users = Rbac_users::where('user_id', $request->user_id)->first();
+            //LDAP
+            $client = new Client();
+            
+            $requestChange = $client->request('POST', config('app.url_ldap').'/sso/changepass/set',
+              [
+              'headers' =>
+                [
+                'Content-Type' => 'application/json'
+                ],
+              'body' =>json_encode(
+                [
+                "userName" => $users->email,
+                "newPassword" => $request->new_password
+                ])
+              ]
+            );
+            $ldapChange = json_decode($requestChange->getBody()->getContents(), true);
+            
+            //LDAP
+
             // if (Hash::check($request->old_password, $users->password)){
+            if($ldapChange['code']==200){
                 try {
                     Rbac_users::where('user_id', $request->user_id)->update(['password' => Hash::make($request->new_password)]);
                     return response()->json(Json::response(null, 'sukses', "Password berhasil diubah"));
@@ -210,9 +257,9 @@ class UserAPIController extends Controller
                     return response()->json(Json::response(null, 'error', $e->getMessage()), 200);
 
                 }
-            // } else {
-            //     return response()->json(Json::response(null, 'error', "Password lama salah"));
-            // }
+            } else {
+                return response()->json(Json::response(null, 'error', "Password lama salah"));
+            }
         }else{
             return response()->json(Json::response(null, 'error', $validator->errors()->all()));
         }

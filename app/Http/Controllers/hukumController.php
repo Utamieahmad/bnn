@@ -2150,7 +2150,7 @@ class HukumController extends Controller
         }
          //dd($DataArray);
         $data = $DataArray;
-        $name = 'Download Data Kegiatan Konsultasi Hukum (Non Litigasi) '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+        $name = 'Download Data Kegiatan Konsultasi Hukum (Non Litigasi) '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 
@@ -2761,7 +2761,7 @@ class HukumController extends Controller
         }
          //dd($DataArray);
         $data = $DataArray;
-        $name = 'Download Data Kegiatan Konsultasi Hukum (Audiensi) '.date('d-m-Y', strtotime($request->date_from)). ' - ' . date('d-m-Y', strtotime($request->date_to));
+        $name = 'Download Data Kegiatan Konsultasi Hukum (Audiensi) '.Carbon::now()->format('Y-m-d H:i:s');
         $this->printData($data, $name);
     }
 

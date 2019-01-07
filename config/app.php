@@ -277,5 +277,6 @@ return [
     'url_soakemenkeu' => 'http://10.210.84.13:8080/kemenkeu/api/data/',//'url_soakemenkeu' => 'http://103.3.70.167:8080/kemenkeu/api/data/',
     'url_api_local' => env('URL_API_LOCAL', 'http://localhost/bnn_api/public'),
     'email_bnn' => '@bnn.go.id',
+    'url_ldap' => env('URL_LDAP', 'http://10.210.84.11:7004'),
     /*api balai lab*/
 ];
