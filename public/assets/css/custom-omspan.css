@@ -17,7 +17,7 @@
 .dt-renkas > thead > tr,
 .dt-tagihan > thead > tr,
 .dt-realisasi > thead > tr {
-	background-color: #73879c;
+	background-color: #5a6f96;
 }
 
 .dt-up > thead > tr > th:nth-child(1),
@@ -251,7 +251,7 @@
 }
 .td_bold {
 	font-weight: bold;
-	background-color: #5e8491;
+	background-color: #536487;
 }
 .table > thead > tr > th {
     padding: 5px !important;
@@ -282,7 +282,8 @@
 .dt-renkas > tbody > tr,
 .dt-tagihan > tbody > tr,
 .dt-realisasi > tbody > tr {
-	background-color: #648d9b;
+	/*background-color: #648d9b;*/
+	background-color: #61769f;
 }
 .hover {
 	background-color: #b7cde2;

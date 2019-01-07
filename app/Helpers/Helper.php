@@ -2230,6 +2230,8 @@ function breadcrumps($route){
 		}else if($route == "add_settama_perencanaan"){
 			$ul .= '<li><a href="'.route('settama_perencanaan').'">Biro Perencanaan Sekretariat Utama</a></li>';
 			$ul .= '<li class="active">Tambah</li>';
+		}else if($route == "omspan"){
+			$ul .= '<li class="active"><a href="'.route('omspan').'">Indikator Pelaksanaan Anggaran</a></li>';
 		}
 		$ul .= '</ul>';
 	}else{

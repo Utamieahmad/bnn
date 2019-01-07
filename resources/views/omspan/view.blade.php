@@ -1,5 +1,5 @@
 @extends('layouts.omspan_layout')
-@section('title', ' Omspan')
+@section('title', 'Indikator Pelaksanaan Anggaran')
 
 @section('content')
 	<div class="right_col" role="main">
@@ -7,11 +7,11 @@
 			<div id="loader"></div>
 		</div>
 		<div class="m-t-40">
-			<!--div class="page-title">
+			<div class="page-title">
 				<div class="">
 					{!! (isset($breadcrumps) ? $breadcrumps : '') !!}
 				</div>
-			</div-->
+			</div>
 
 			<div class="clearfix"></div>
 
@@ -22,7 +22,7 @@
 					<div class="x_panel">
 						<div class="div_rekap">
 						<div class="x_title">
-							<h2>Indikator Pelaksanaan Anggaran</h2>
+							<h2>Data Indikator Pelaksanaan Anggaran</h2>
 						</div>
 						<div class="x_content">
 						<h6>Sampai Dengan {{$periode_name}}</h6>
@@ -58,7 +58,7 @@
 									@foreach ($rekap as $row)
 										<tr>
 											<td rowspan="3" class="border_btm">{{$i++}}</td>
-											<td rowspan="3" class="border_btm"></td>
+											<td rowspan="3" class="border_btm">{{trim($row['kd_kppn'])}}</td>
 											<td rowspan="3" class="border_btm">{{trim($row['kd_satker'])}}</td>
 											<td rowspan="3" class="border_btm">{{$row['instansi_name']}}</td>
 											<td>Nilai</td>

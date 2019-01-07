@@ -71,7 +71,7 @@
                         <div class="nav_menu nav2">
                             <nav>
                                 <div class="nav toggle">
-                                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                                    <a id="menu_toggle"><img src="{{url('assets/icon/swipe.png')}}" style="height:30px !important"/></a>
                                 </div>
 
                                 <div class="nav navbar-nav navbar-right">

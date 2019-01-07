@@ -453,14 +453,17 @@ class omspanController extends Controller
 					$arr_rencana = [];
 					$arr_realisasi = [];
 				}
+				$this->data['breadcrumps'] = breadcrumps($request->route()->getName());
+				$this->data['title'] = "Indikator Pelaksanaan Anggaran";
 				$this->data['rekap'] = $data_satker['data'];
 				$this->data['periode'] = $get['periode'];
 				$this->data['periode_name'] = $this->getperiode($get['periode']);
 				return view('omspan.view', $this->data);
 			}
 		}
-
-		return view('omspan.index');
+		$this->data['breadcrumps'] = breadcrumps($request->route()->getName());
+		$this->data['title'] = "Indikator Pelaksanaan Anggaran";
+		return view('omspan.index', $this->data);
 	}
 		
 	public function getpengelolaanup(Request $request) {
