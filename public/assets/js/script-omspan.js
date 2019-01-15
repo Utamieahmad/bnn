@@ -403,7 +403,7 @@ $('document').ready(function(){
 				} else {
 					$('.div_spm').show();
 					$('.div_rekap').hide();
-					$('.dt-spm tbody').html('<tr><td colspan="7" align="center">No Data Found</td></tr>');
+					$('.dt-spm tbody').html('<tr><td colspan="8" align="center">No Data Found</td></tr>');
 					alert(data.status);
 				}
 			},
@@ -453,7 +453,7 @@ $('document').ready(function(){
 						
 						for (j = 0;j < data.realisasi.length;j++) {
 							if(('0'+no).slice(-2) == data.realisasi[j].periode) {
-								real = data.realisasi[j].jumlahRealisasi;
+								real = data.realisasi[j].jumlah_realisasi;
 							}
 						}
 						deviasi = Math.abs(real - data.data[0]["ren_" + no.toString().padStart(2, '0')]);
@@ -617,7 +617,7 @@ $('document').ready(function(){
 						
 						for (j = 0;j < data.data.length;j++) {
 							if(('0'+k).slice(-2) == data.data[j].periode) {
-								realisasi += data.data[j].jumlahRealisasi;
+								realisasi += data.data[j].jumlah_realisasi;
 							}
 						}
 						if(data.pagu != 0) {
@@ -634,8 +634,8 @@ $('document').ready(function(){
 						}
 						row += "<tr>"+
                             "<td class='border_btm'>"+k+"</td>"+
-                            "<td class='border_btm'>"+data.data[0].kdSatker+"</td>"+
-							"<td class='border_btm'></td>"+
+                            "<td class='border_btm'>"+data.data[0].kdsatker+"</td>"+
+							"<td class='border_btm'>"+data.data[0].kppn+"</td>"+
                             "<td class='border_btm'>"+('0'+k).slice(-2)+"</td>"+
                             "<td class='border_btm'>"+data.pagu+"</td>"+
                             "<td class='border_btm'>"+realisasi+"</td>"+
