@@ -85,8 +85,8 @@
 												@endif </td>
 									<td>
 										<a href="{{url('pencegahan/dir_diseminasi/edit_pendataan_online/'.$d['id'])}}"><i class="fa fa-pencil"></i></a>
-										<button data-url='{{$titledel}}' type="button" class="btn btn-primary button-delete" data-target="{{$d['id']}}" ><i class="fa fa-trash"></i></button>
-
+										{{--<button data-url='{{$titledel}}' type="button" class="btn btn-primary button-delete" data-target="{{$d['id']}}" ><i class="fa fa-trash"></i></button>--}}
+										<button type="button" class="btn btn-primary button-delete-form" data-target="{{$d['id']}}" onClick="delete_form(event,this)"><i class="fa fa-trash"></i></button>
 									</td>
 								</tr>
 								@php $i = $i+1; @endphp
@@ -124,7 +124,7 @@
 	</div>
 </div>
 
-<div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+{{--<div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 
@@ -168,7 +168,8 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>--}}
+@include('modal.modal_delete_form')
 @include('modal.modal_input_nihil')
-  @include('modal.modal_report_excel')
+@include('modal.modal_report_excel')
 @endsection

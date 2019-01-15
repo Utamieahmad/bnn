@@ -142,6 +142,7 @@ class diseminasiController extends Controller
 
     $user_id = Auth::user()->user_id;
     $detail = MainModel::getUserDetail($user_id);
+    $this->data['delete_route']  = 'delete_pendataan_online';
     $this->data['data_detail'] = $detail;
     $this->data['path'] = $request->path();
     $this->data['page'] = $page;
@@ -529,7 +530,7 @@ class diseminasiController extends Controller
           'uraian_singkat' => $request->input('uraian_singkat'),
           'foto1' => $image1,
           'foto2' => $image2,
-          'foto3' => $image3,   
+          'foto3' => $image3,
         ]
       ]
     );
@@ -725,6 +726,7 @@ class diseminasiController extends Controller
 
     $user_id = Auth::user()->user_id;
     $detail = MainModel::getUserDetail($user_id);
+    $this->data['delete_route']  = 'delete_pendataan_penyiaran';
     $this->data['data_detail'] = $detail;
     $this->data['path'] = $request->path();
     $this->data['page'] = $page;
@@ -914,7 +916,7 @@ class diseminasiController extends Controller
           'jumlah' => $request->input('jumlah'),
           'foto1' => $image1,
           'foto2' => $image2,
-          'foto3' => $image3,   
+          'foto3' => $image3,
         ]
       ]
           );
@@ -1124,7 +1126,7 @@ class diseminasiController extends Controller
             'jumlah' => $request->input('jumlah'),
             'foto1' => $image1,
             'foto2' => $image2,
-            'foto3' => $image3,   
+            'foto3' => $image3,
           ]
         ]
       );
@@ -1328,6 +1330,7 @@ class diseminasiController extends Controller
 
     $user_id = Auth::user()->user_id;
     $detail = MainModel::getUserDetail($user_id);
+    $this->data['delete_route']  = 'delete_pendataan_cetak';
     $this->data['data_detail'] = $detail;
     $this->data['path'] = $request->path();
     $this->data['page'] = $page;
@@ -1921,6 +1924,7 @@ class diseminasiController extends Controller
 
     $user_id = Auth::user()->user_id;
     $detail = MainModel::getUserDetail($user_id);
+    $this->data['delete_route']  = 'delete_pendataan_konvensional';
     $this->data['data_detail'] = $detail;
     $this->data['path'] = $request->path();
     $this->data['page'] = $page;
@@ -3159,5 +3163,112 @@ class diseminasiController extends Controller
     }
   }
 
+  public function deletependataanOnline(Request $request){
+    $id = $request->input('id');
+      if ($request->ajax()) {
+          if($id){
+              $id = $request->id;
+              $data_request = execute_api('api/disemonline/'.$id,'DELETE');
+              $this->form_params['delete_id'] = $id;
+              $trail['audit_menu'] = 'Pencegahan - Direktorat Alternative Development - Media Online';
+              $trail['audit_event'] = 'delete';
+              $trail['audit_value'] = json_encode($this->form_params);
+              $trail['audit_url'] = $request->url();
+              $trail['audit_ip_address'] = $request->ip();
+              $trail['audit_user_agent'] = $request->userAgent();
+              $trail['audit_message'] = $data_request['comment'];
+              $trail['created_at'] = date("Y-m-d H:i:s");
+              $trail['created_by'] = $request->session()->get('id');
+
+              $qtrail = $this->inputtrail($request->session()->get('token'),$trail);
+
+              return $data_request;
+          }else{
+              $data_request =['status'=>'error','messages'=>'Data Desiminasi Media Online Gagal Dihapus'];
+              return $data_request;
+          }
+      }
+  }
+
+  public function deletependataanPenyiaran(Request $request){
+    $id = $request->input('id');
+      if ($request->ajax()) {
+          if($id){
+              $id = $request->id;
+              $data_request = execute_api('api/disempenyiaran/'.$id,'DELETE');
+              $this->form_params['delete_id'] = $id;
+              $trail['audit_menu'] = 'Pencegahan - Direktorat Alternative Development - Media Penyiaran';
+              $trail['audit_event'] = 'delete';
+              $trail['audit_value'] = json_encode($this->form_params);
+              $trail['audit_url'] = $request->url();
+              $trail['audit_ip_address'] = $request->ip();
+              $trail['audit_user_agent'] = $request->userAgent();
+              $trail['audit_message'] = $data_request['comment'];
+              $trail['created_at'] = date("Y-m-d H:i:s");
+              $trail['created_by'] = $request->session()->get('id');
+
+              $qtrail = $this->inputtrail($request->session()->get('token'),$trail);
+
+              return $data_request;
+          }else{
+              $data_request =['status'=>'error','messages'=>'Data Desiminasi Media Penyiaran Gagal Dihapus'];
+              return $data_request;
+          }
+      }
+  }
+
+  public function deletependataanCetak(Request $request){
+    $id = $request->input('id');
+      if ($request->ajax()) {
+          if($id){
+              $id = $request->id;
+              $data_request = execute_api('api/disemcetak/'.$id,'DELETE');
+              $this->form_params['delete_id'] = $id;
+              $trail['audit_menu'] = 'Pencegahan - Direktorat Alternative Development - Media Cetak';
+              $trail['audit_event'] = 'delete';
+              $trail['audit_value'] = json_encode($this->form_params);
+              $trail['audit_url'] = $request->url();
+              $trail['audit_ip_address'] = $request->ip();
+              $trail['audit_user_agent'] = $request->userAgent();
+              $trail['audit_message'] = $data_request['comment'];
+              $trail['created_at'] = date("Y-m-d H:i:s");
+              $trail['created_by'] = $request->session()->get('id');
+
+              $qtrail = $this->inputtrail($request->session()->get('token'),$trail);
+
+              return $data_request;
+          }else{
+              $data_request =['status'=>'error','messages'=>'Data Desiminasi Media Cetak Gagal Dihapus'];
+              return $data_request;
+          }
+      }
+  }
+
+  public function deletependataanKonvensional(Request $request){
+    $id = $request->input('id');
+      if ($request->ajax()) {
+          if($id){
+              $id = $request->id;
+              $data_request = execute_api('api/disemkonven/'.$id,'DELETE');
+              $this->form_params['delete_id'] = $id;
+              $trail['audit_menu'] = 'Pencegahan - Direktorat Alternative Development - Media Konvensional';
+              $trail['audit_event'] = 'delete';
+              $trail['audit_value'] = json_encode($this->form_params);
+              $trail['audit_url'] = $request->url();
+              $trail['audit_ip_address'] = $request->ip();
+              $trail['audit_user_agent'] = $request->userAgent();
+              $trail['audit_message'] = $data_request['comment'];
+              $trail['created_at'] = date("Y-m-d H:i:s");
+              $trail['created_by'] = $request->session()->get('id');
+
+              $qtrail = $this->inputtrail($request->session()->get('token'),$trail);
+
+              return $data_request;
+          }else{
+              $data_request =['status'=>'error','messages'=>'Data Desiminasi Media Konvensional Gagal Dihapus'];
+              return $data_request;
+          }
+      }
+  }
 
 }

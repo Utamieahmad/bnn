@@ -2882,7 +2882,7 @@ class MasyarakatController extends Controller
           $anggaran = '';
         }
         $form_params['anggaran_id'] = $anggaran;
-        $query = execute_api_json('/api/rapatKerjaPemetaan','POST',$form_params);
+        $query = execute_api_json('api/rapatKerjaPemetaan','POST',$form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Peran Serta Masyarakat - Rapat Kerja Pemetaan';
         $trail['audit_event'] = 'post';
@@ -2890,7 +2890,7 @@ class MasyarakatController extends Controller
         $trail['audit_url'] = $request->url();
         $trail['audit_ip_address'] = $request->ip();
         $trail['audit_user_agent'] = $request->userAgent();
-        $trail['audit_message'] = $query->comment;
+        $trail['audit_message'] = isset($query->comment) ? $query->comment : '';
         $trail['created_at'] = date("Y-m-d H:i:s");
         $trail['created_by'] = $request->session()->get('id');
 
@@ -2969,7 +2969,7 @@ class MasyarakatController extends Controller
           $anggaran = '';
         }
 
-        $query = execute_api_json('/api/rapatKerjaPemetaan/'.$id,'PUT',$form_params);
+        $query = execute_api_json('api/rapatKerjaPemetaan/'.$id,'PUT',$form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Peran Serta Masyarakat - Rapat Kerja Pemetaan';
         $trail['audit_event'] = 'put';
@@ -3252,7 +3252,7 @@ class MasyarakatController extends Controller
           $anggaran = '';
         }
         $form_params['anggaran_id'] = $anggaran;
-        $query = execute_api_json('/api/rapatKerjaPemetaan','POST',$form_params);
+        $query = execute_api_json('api/rapatKerjaPemetaan','POST',$form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Rapat Kerja Pemetaan';
         $trail['audit_event'] = 'post';
@@ -3338,7 +3338,7 @@ class MasyarakatController extends Controller
           $anggaran = '';
         }
 
-        $query = execute_api_json('/api/rapatKerjaPemetaan/'.$id,'PUT',$form_params);
+        $query = execute_api_json('api/rapatKerjaPemetaan/'.$id,'PUT',$form_params);
 
         $trail['audit_menu'] = 'Pemberdayaan Masyarakat - Direktorat Alternative Development - Rapat Kerja Pemetaan';
         $trail['audit_event'] = 'put';

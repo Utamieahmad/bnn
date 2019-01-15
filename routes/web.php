@@ -428,6 +428,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_online','diseminasiController@updatependataanOnline');
 			Route::get('/add_pendataan_online','diseminasiController@addpendataanOnline')->name('add_pendataan_online');
 			Route::post('/input_pendataan_online','diseminasiController@inputpendataanOnline');
+			Route::post('/delete_pendataan_online','diseminasiController@deletependataanOnline')->name('delete_pendataan_online');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printonline', 'diseminasiController@printOnline');
 			Route::post('/downloadonline', 'diseminasiController@downloadOnline');
@@ -437,6 +438,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_penyiaran','diseminasiController@updatependataanPenyiaran');
 			Route::get('/add_pendataan_penyiaran','diseminasiController@addpendataanPenyiaran')->name('add_pendataan_penyiaran');
 			Route::post('/input_pendataan_penyiaran','diseminasiController@inputpendataanPenyiaran');
+			Route::post('/delete_pendataan_penyiaran','diseminasiController@deletependataanPenyiaran')->name('delete_pendataan_penyiaran');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printpenyiaran', 'diseminasiController@printPenyiaran');
 			Route::post('/downloadpenyiaran', 'diseminasiController@downloadPenyiaran');
@@ -446,6 +448,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_cetak','diseminasiController@updatependataanCetak');
 			Route::get('/add_pendataan_cetak','diseminasiController@addpendataanCetak')->name('add_pendataan_cetak');
 			Route::post('/input_pendataan_cetak','diseminasiController@inputpendataanCetak');
+			Route::post('/delete_pendataan_cetak','diseminasiController@deletependataanCetak')->name('delete_pendataan_cetak');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printcetak', 'diseminasiController@printCetak');
 			Route::post('/downloadcetak', 'diseminasiController@downloadCetak');
@@ -455,6 +458,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_pendataan_konvensional','diseminasiController@updatependataanKonvensional');
 			Route::get('/add_pendataan_konvensional','diseminasiController@addpendataanKonvensional')->name('add_pendataan_konvensional');
 			Route::post('/input_pendataan_konvensional','diseminasiController@inputpendataanKonvensional');
+			Route::post('/delete_pendataan_konvensional','diseminasiController@deletependataanKonvensional')->name('delete_pendataan_konvensional');
 			Route::get('/view','diseminasiController@view');
 			Route::get('/printkonvensional', 'diseminasiController@printKonvensional');
 			Route::post('/downloadkonvensional', 'diseminasiController@downloadKonvensional');
@@ -696,7 +700,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/delete_hukum_lainnya','hukumController@deleteHukumLainnya')->name('delete_hukum_lainnya');
 			Route::get('/print_hukum_lainnya/{segment?}/{page?}','hukumController@printLainnya')->name("print_hukum_lainnya");
                         Route::post('/download_hukum_lainnya','hukumController@downloadLainnya')->name("download_hukum_lainnya");
-                        
+
 			// Route::get('/hukum_rakor','hukumController@hukumRakor')->name('hukum_rakor');
 			// Route::get('/edit_hukum_rakor/{id}','hukumController@edithukumRakor')->name('edit_hukum_rakor');
 			// Route::get('/add_hukum_rakor','hukumController@addhukumRakor')->name('add_hukum_rakor');
@@ -744,7 +748,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/update_kerjasama_kesepemahaman','kerjasamaController@updatekerjasamaKesepemahaman');
 			Route::post('/delete_kerjasama_kesepahaman','kerjasamaController@deletekerjasamaKesepahaman')->name('delete_kerjasama_kesepahaman');
                         Route::post('/download_kerjasama_kesepahaman','kerjasamaController@downloadKesepahaman')->name("download_kerjasama_kesepahaman");
-                        
+
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printkesepahaman/{segment}/{page?}', 'kerjasamaController@printKesepahaman')->name('print_kerjasama_nota');
 
@@ -764,7 +768,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/view','kerjasamaController@view');
 			Route::get('/printmonev/{segment}/{page?}', 'kerjasamaController@printMonev')->name('print_kerjasama_monev');
                         Route::post('/download_kerjasama_monev','kerjasamaController@downloadMonev')->name("download_kerjasama_monev");
-                        
+
 			Route::match(['get', 'post'], 'kerjasama_lainnya/{page?}', 'kerjasamaController@kerjasamaLainnya')->name('kerjasama_lainnya');
 			Route::get('/edit_kerjasama_lainnya/{id}','kerjasamaController@editkerjasamaLainnya')->name('edit_kerjasama_lainnya');
 			Route::get('/add_kerjasama_lainnya','kerjasamaController@addkerjasamaLainnya')->name('add_kerjasama_lainnya');
