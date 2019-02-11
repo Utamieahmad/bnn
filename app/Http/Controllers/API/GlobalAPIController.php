@@ -241,11 +241,13 @@ class GlobalAPIController extends Controller
                                       ['kd_jnsinst', '=', '11'],
                                       ['wil_id_wilayah', '=', $request->wilayah],
                                   ])
+                         ->whereNull('deleted_at')
                          ->orderBy('posisi')
                          ->get();
             } else {
                 $data = DB::table('v_instansi')
                          ->where('kd_jnsinst', '11')
+                         ->whereNull('deleted_at')
                          ->orderBy('posisi')
                          ->get();
             }
